@@ -8,7 +8,7 @@ This repository contains the paper, evaluation framework, and benchmark results 
 
 Pavel Shpagin
 
-> We present SupportBot, a technical support system that continuously mines structured problem-solution cases from community chat streams and retrieves from them to generate grounded responses. SupportBot introduces a dual-RAG architecture that separates confirmed solutions (SCRAG) from unconfirmed recommendations (RCRAG), enabling confidence-tiered retrieval with a promotion mechanism. On SupportBench, SupportBot achieves a Score of 7.8/10 with 100% precision and 93% recall, outperforming a chunked-RAG baseline (+35%) while using .
+> We present SupportBot, a technical support system that continuously mines structured problem-solution cases from community chat streams and retrieves from them to generate grounded responses. SupportBot introduces a dual-RAG architecture that separates confirmed solutions (SCRAG) from unconfirmed recommendations (RCRAG), enabling confidence-tiered retrieval with a promotion mechanism. On SupportBench, SupportBot achieves a Score of 8.5/10 with 93% precision and 100% recall, outperforming a chunked-RAG baseline by 22%.
 
 - **Paper PDF**: [`paper/main.pdf`](paper/main.pdf)
 - **LaTeX source**: [`paper/main.tex`](paper/main.tex)
@@ -34,7 +34,7 @@ SupportBench results on Ardupilot-UA (900 history / 100 live messages):
 
 | System | Score | Quality | Precision | Recall | Cost / 100 msgs |
 |--------|-------|---------|-----------|--------|------------------|
-| **SupportBot** | **7.8** | **8.4** | **100%** | 93% | **$0.40** |
+| **SupportBot** | **8.5** | **8.5** | **93%** | **100%** | **$0.40** |
 | Chunked-RAG | 6.3 | 7.2 | 86% | 88% | $0.62 |
 
 - **Score**: quality x recall (0-10)
