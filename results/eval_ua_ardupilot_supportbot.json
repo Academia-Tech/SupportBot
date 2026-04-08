@@ -1,0 +1,142 @@
+{
+  "benchmark": "SupportBench",
+  "version": "2.0",
+  "system": "supportbot",
+  "dataset": "ua_ardupilot",
+  "meta": {
+    "pretty_name": "Ardupilot-UA",
+    "lang": "uk",
+    "domain": "uav_drone_systems",
+    "history_size": 180,
+    "live_size": 20,
+    "offset": 0
+  },
+  "eval_version": "v2_chunked",
+  "score": 7.43,
+  "quality": 7.43,
+  "precision": 1.0,
+  "recall": 1.0,
+  "quality_breakdown": {
+    "correctness": 10,
+    "helpfulness": 7.29,
+    "specificity": 8,
+    "necessity": 7.29,
+    "sourcing": 4.57
+  },
+  "counts": {
+    "history_msgs": 180,
+    "live_msgs": 20,
+    "cases_indexed": 130,
+    "responded": 7,
+    "escalated": 0,
+    "skipped": 13,
+    "redundant": 0,
+    "missed": 0
+  },
+  "timing": {
+    "ingest_s": 299.4,
+    "process_s": 419.7,
+    "judge_s": 69.9,
+    "total_s": 788.9
+  },
+  "cost": {
+    "input_tokens": 38687,
+    "output_tokens": 1136,
+    "total_tokens": 39823,
+    "cost_usd": 0.0597,
+    "by_model": {
+      "gemini-2.5-pro": {
+        "input": 38687,
+        "output": 1136
+      }
+    }
+  },
+  "responses": [
+    {
+      "msg_id": "tg_ua_ardupilot_6469",
+      "msg_text": "Хтось може порадити, як розташовувати модуль ГПС на дроні, щоб була мінімально наводок",
+      "bot_text": "Модуль GPS/компаса слід розташовувати якомога далі від джерел перешкод: силових кабелів, двигунів та карбонової рами. Найкраще рішення — встановити модуль на спеціальному кріпленні (маунті), щоб винести його на значну відстань від основного корпусу. Для 15-дюймового коптера, наприклад, ефективним було встановлення модуля на відстані близько 15 см позаду дрона, що допомогло вирішити проблему наводок на компас.\n\nhttps://pavelshpagin.github.io/SupportBot/case/cb28dd0845cd.html\nhttps://pavelshpagin.github.io/SupportBot/case/dbf7883d88b9.html",
+      "correctness": 10,
+      "helpfulness": 9,
+      "specificity": 8,
+      "necessity": 10,
+      "sourcing": 5,
+      "quality": 8.4,
+      "reasoning": "The bot provides correct, standard advice for placing a GPS module to avoid interference. It gives a concrete example which is helpful. The sourcing is weak because the links are to internal, non-public case logs, not verifiable documentation."
+    },
+    {
+      "msg_id": "tg_ua_ardupilot_6472",
+      "msg_text": "А як можна його екранувати?",
+      "bot_text": "Найпоширеніший спосіб — екранування мідною фольгою. Нею обгортають корпус GPS-модуля знизу та з боків, залишаючи керамічну антену відкритою для прийому сигналу. Найкраще використовувати спеціальну мідну стрічку з провідним клеєм, яка створює суцільну поверхню. Для максимальної ефективності цей екран бажано заземлити. Також можна екранувати силові кабелі та кабелі передачі даних, які є джерелом перешкод.",
+      "correctness": 10,
+      "helpfulness": 10,
+      "specificity": 10,
+      "necessity": 10,
+      "sourcing": 3,
+      "quality": 8.6,
+      "reasoning": "The bot gives a perfect, detailed, and technically accurate explanation of how to shield a GPS module with copper foil in response to a direct user question. This is an excellent response, though it lacks any sourcing."
+    },
+    {
+      "msg_id": "tg_ua_ardupilot_6474",
+      "msg_text": "Який гпс?",
+      "bot_text": "Часто використовують Matek M10Q-5883, але на 15-дюймовому дроні з ним можуть бути проблеми через сильні наводки на компас. Його потрібно виносити на високу стійку якомога далі від силових кабелів, регуляторів та карбонової рами. \n\nЯк альтернативу можна розглянути модулі з кращим захистом від перешкод або ті, що використовують CAN-шину, наприклад Matek M10-L4-3100.\n\nhttps://pavelshpagin.github.io/SupportBot/case/cb28dd0845cd.html (Секція: Рекомендація — не підтверджено)",
+      "correctness": 10,
+      "helpfulness": 6,
+      "specificity": 8,
+      "necessity": 3,
+      "sourcing": 6,
+      "quality": 6.6,
+      "reasoning": "The bot responded to a question a helper asked the user ('Which GPS?'). It shouldn't have responded at all. However, its guess about the user's hardware (Matek M10Q) and the associated problems was correct and relevant to the overall conversation, making it accidentally helpful. The response was unnecessary and should be considered redundant."
+    },
+    {
+      "msg_id": "tg_ua_ardupilot_6475",
+      "msg_text": "Matek M10Q. Але з ГПС все ок, проблема в компасі і з наводками на нього",
+      "bot_text": "З Matek M10Q це поширена проблема. Навіть після винесення модуля на стійку, наводки можуть залишатися. Обов'язково виконайте процедуру \"Compass/Motor calibration\" з підключеною батареєю. Це дозволить програмно компенсувати магнітні поля, що створюються моторами та силовими проводами під час роботи. Для цього потрібно подавати газ без встановлених пропелерів.\n\nЯкщо це не допоможе, розгляньте заміну на компас з кращим захистом, наприклад, на базі чіпа RM3100.\n\nhttps://pavelshpagin.github.io/SupportBot/case/cb28dd0845cd.html (Секція: Y)\nhttps://pavelshpagin.github.io/SupportBot/case/41bf47e7a494.html (Секція: Y)\nhttps://pavelshpagin.github.io/SupportBot/case/dbf7883d88b9.html (Секція: Y)\nhttps://ardupilot.org/copter/docs/common-compass-setup-advanced.html#compassmot-compensation-for-interference-from-the-power-wires-escs-and-motors",
+      "correctness": 10,
+      "helpfulness": 10,
+      "specificity": 10,
+      "necessity": 9,
+      "sourcing": 9,
+      "quality": 9.6,
+      "reasoning": "This is an outstanding response. After the user confirms their hardware (Matek M10Q) and problem (compass interference), the bot provides the exact, correct ArduPilot-specific solution ('Compass/Motor calibration') and links directly to the official documentation for the procedure. It also suggests a valid hardware alternative (RM3100)."
+    },
+    {
+      "msg_id": "tg_ua_ardupilot_6478",
+      "msg_text": "Уверх чи назад",
+      "bot_text": "Головне — максимальна відстань від джерел перешкод: силових кабелів, регуляторів, моторів та відеопередавача. Зазвичай, встановлення \"вгору\" на стійці є найефективнішим, оскільки це виводить модуль з площини рами, де сконцентровані основні джерела наводок. Розташування \"назад\" також може бути дієвим, особливо якщо це дозволяє віддалити модуль від решти електроніки, але все залежить від конкретної компоновки вашого дрона. Часто найкращим рішенням є комбінація — винесення модуля вгору і назад.",
+      "correctness": 10,
+      "helpfulness": 8,
+      "specificity": 7,
+      "necessity": 10,
+      "sourcing": 3,
+      "quality": 7.6,
+      "reasoning": "The bot correctly explains the general principles of why moving a GPS module 'up' is often better than 'back'. However, a human helper immediately provides a more practical, context-aware answer, which suggests the bot's advice, while technically sound, was too generic for the situation."
+    },
+    {
+      "msg_id": "tg_ua_ardupilot_6480",
+      "msg_text": "А те що він буде на рівні моторів не вплине?",
+      "bot_text": "Так, вплине. Мотори є сильним джерелом магнітних перешкод через постійні магніти в них та магнітні поля, що виникають під час роботи.\n\nХоча винесення модуля назад збільшує відстань, розташування на одному рівні з моторами — це компроміс. Найкраще рішення — винести модуль і вгору, і назад, максимально далі від усіх джерел наводок (моторів, силових дротів, ESC). Після встановлення обов'язково зробіть Compass/Motor calibration, щоб перевірити рівень перешкод.",
+      "correctness": 10,
+      "helpfulness": 5,
+      "specificity": 7,
+      "necessity": 8,
+      "sourcing": 3,
+      "quality": 6.6,
+      "reasoning": "The bot correctly states that motors are a source of interference. However, a human helper immediately contradicts the bot's implication by saying 'No' (i.e., 'it won't be a problem in practice'). The bot's technically correct but rigid answer creates confusion and an argument with a human helper."
+    },
+    {
+      "msg_id": "tg_ua_ardupilot_6481",
+      "msg_text": "Ні",
+      "bot_text": "Мотори та силові лінії є одним з основних джерел магнітних перешкод для компаса. Це пов'язано з великими струмами, що протікають по дротах, та постійними магнітами в самих моторах. Саме для компенсації цього впливу в ArduPilot існує процедура калібрування Compass/Motor.",
+      "correctness": 10,
+      "helpfulness": 3,
+      "specificity": 6,
+      "necessity": 1,
+      "sourcing": 3,
+      "quality": 4.6,
+      "reasoning": "This response is redundant and unhelpful. The bot is arguing with a human helper who gave a one-word contradictory answer. Instead of de-escalating or ignoring it, the bot doubles down on its technical explanation. This is poor conversational practice and should not have been sent."
+    }
+  ],
+  "missed_questions": [],
+  "redundant_responses": []
+}

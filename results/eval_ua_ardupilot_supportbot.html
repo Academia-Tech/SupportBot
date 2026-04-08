@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SupportBench — Ardupilot-UA — supportbot</title>
+<style>
+@import url('https://rsms.me/inter/inter.css');
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',system-ui,sans-serif;background:#0d1117;padding:24px;color:#c9d1d9;font-size:13px;line-height:1.5}
+h1{font-size:20px;margin-bottom:4px;color:#f0f6fc}
+h2{font-size:16px;margin:24px 0 8px;color:#58a6ff}
+.meta{color:#8b949e;font-size:12px;margin-bottom:16px}
+.summary{background:#161b22;border:1px solid #30363d;border-radius:8px;padding:16px;margin-bottom:20px}
+.summary table{border-collapse:collapse;width:100%}
+.summary th,.summary td{padding:4px 10px;text-align:right;border-bottom:1px solid #21262d;font-size:12px}
+.summary th{text-align:left;color:#8b949e;font-weight:600}
+.winner{color:#3fb950;font-weight:700}
+.section-label{background:#1f2937;color:#58a6ff;padding:6px 16px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;border-bottom:1px solid #30363d}
+.msg{padding:6px 16px;border-bottom:1px solid #1c2128;display:flex;gap:10px;font-size:12px}
+.msg:hover{background:#1c2128}
+.msg-idx{min-width:30px;color:#484f58;font-size:10px;text-align:right;padding-top:2px}
+.msg-sender{min-width:80px;font-size:10px;color:#8b949e;font-weight:600;flex-shrink:0}
+.msg-body{flex:1;word-break:break-word}
+.msg-ts{font-size:9px;color:#484f58;margin-left:8px}
+.bot-row{background:#0d2137;border-left:3px solid #58a6ff}
+.bot-label{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;padding:1px 5px;border-radius:3px;display:inline-block;margin-bottom:2px;background:#58a6ff;color:#0d1117}
+.score-badge{font-size:10px;color:#8b949e;margin-top:2px}
+.score-badge b{font-weight:700;color:#f0f6fc}
+.dims{font-size:9px;color:#484f58}
+.missed-row{background:#2d1b1b;border-left:3px solid #f85149}
+.missed-label{font-size:9px;font-weight:700;padding:1px 5px;border-radius:3px;background:#f85149;color:#fff}
+.escalated-row{background:#2d2400;border-left:3px solid #d29922}
+.escalated-label{font-size:9px;font-weight:700;padding:1px 5px;border-radius:3px;background:#d29922;color:#0d1117}
+.redundant-row{background:#1b2d2b;border-left:3px solid #3fb950}
+.filter-bar{margin:12px 0;display:flex;gap:8px;flex-wrap:wrap}
+.filter-bar label{font-size:11px;color:#8b949e;cursor:pointer}
+.filter-bar input{margin-right:3px}
+.collapsed .msg-history{display:none}
+#toggle-history{cursor:pointer;background:#21262d;color:#58a6ff;border:1px solid #30363d;padding:4px 12px;border-radius:6px;font-size:11px;margin-bottom:12px}
+</style>
+</head><body>
+<h1>SupportBench — Ardupilot-UA — supportbot</h1>
+<p class="meta">Ardupilot-UA | supportbot | 180 history / 20 live | Score: 7.43</p>
+
+<div class="summary"><table>
+<tr><th>Metric</th><th>Value</th></tr>
+<tr><td style="text-align:left">Score (quality x recall)</td><td class="winner">7.43</td></tr>
+<tr><td style="text-align:left">Quality</td><td>7.43</td></tr>
+<tr><td style="text-align:left">Precision</td><td>100.0%</td></tr>
+<tr><td style="text-align:left">Recall</td><td>100.0%</td></tr>
+<tr><td style="text-align:left">correctness</td><td>10.00</td></tr>
+<tr><td style="text-align:left">helpfulness</td><td>7.29</td></tr>
+<tr><td style="text-align:left">specificity</td><td>8.00</td></tr>
+<tr><td style="text-align:left">necessity</td><td>7.29</td></tr>
+<tr><td style="text-align:left">sourcing</td><td>4.57</td></tr>
+<tr><td style="text-align:left">Responded / Escalated / Skipped</td><td>7 / 0 / 13</td></tr>
+<tr><td style="text-align:left">Cases indexed</td><td>130</td></tr>
+<tr><td style="text-align:left">Missed / Redundant</td><td>0 / 0</td></tr>
+<tr><td style="text-align:left">Cost</td><td>$0.0597</td></tr>
+</table></div>
+<button id="toggle-history" onclick="document.getElementById('messages').classList.toggle('collapsed')">Toggle History (900 msgs)</button>
+<div id="messages">
+<div class="section-label">History (ingested for case extraction)</div>
+<div class="msg-history">
+<div class="msg"><div class="msg-idx">0</div><div class="msg-sender">user_4a102</div><div class="msg-body">Доброго вечора всім 
+Є таке питання
+У мене на matek h743 зламався барометр
+Тепер взагалі не вмикається польотник, не хоче підключатись до мішн пленера 
+З ним щось іще можна накалдувати, чи це вже на смітник(я не вмію паяти настільки малі компоненти)?</div><div class="msg-ts">1760678040000</div></div>
+<div class="msg"><div class="msg-idx">1</div><div class="msg-sender">user_2dfa1</div><div class="msg-body">Зі спідібі 405v3 точно не ррацює</div><div class="msg-ts">1760679193000</div></div>
+<div class="msg"><div class="msg-idx">2</div><div class="msg-sender">user_b44d4</div><div class="msg-body">Барометр повинен легко замінюватись. Є спеціалісти, котрі його замінять</div><div class="msg-ts">1760680687000</div></div>
+<div class="msg"><div class="msg-idx">3</div><div class="msg-sender">user_68581</div><div class="msg-body">Барометр Readytosky GY-63 на датчику тиску MS5611 високоточний: ціна, опис, характеристики https://share.google/CiNcMDBBn2ePO5S8q</div><div class="msg-ts">1760682742000</div></div>
+<div class="msg"><div class="msg-idx">4</div><div class="msg-sender">user_68581</div><div class="msg-body">Перевірено, працює, тільки старий здуйте</div><div class="msg-ts">1760682786000</div></div>
+<div class="msg"><div class="msg-idx">5</div><div class="msg-sender">user_68581</div><div class="msg-body">Хоча шось, не так, коли бара поломана до мішки підключаеться, та пише помилку, може ще шось бути</div><div class="msg-ts">1760683094000</div></div>
+<div class="msg"><div class="msg-idx">6</div><div class="msg-sender">user_4a102</div><div class="msg-body">Два рази підключилась, написала це, і сдохла с кінцями</div><div class="msg-ts">1760683137000</div></div>
+<div class="msg"><div class="msg-idx">7</div><div class="msg-sender">user_4a102</div><div class="msg-body">Може бара закоротила і щось за собою потягнула?</div><div class="msg-ts">1760683170000</div></div>
+<div class="msg"><div class="msg-idx">8</div><div class="msg-sender">user_68581</div><div class="msg-body">Треба здути феном, тільки обережно!!</div><div class="msg-ts">1760684437000</div></div>
+<div class="msg"><div class="msg-idx">9</div><div class="msg-sender">user_3cc6b</div><div class="msg-body">Панове 
+Порадьте будь ласка ЕСЦ 4в1 100А на АМ32</div><div class="msg-ts">1760684527000</div></div>
+<div class="msg"><div class="msg-idx">10</div><div class="msg-sender">user_ad81d</div><div class="msg-body">Ні</div><div class="msg-ts">1760689476000</div></div>
+<div class="msg"><div class="msg-idx">11</div><div class="msg-sender">user_ad81d</div><div class="msg-body">🤷
+
+[Відео: 6278.mp4 — The video displays a disassembled multirotor drone, likely a quadcopter or hexacopter, laid across a car seat. The drone features a carbon fiber frame. Several Electronic Speed Controllers (ESCs) are visible on the arms, covered in black braided sleeving. A radio controller, partially identified as &quot;Radiomaster ZORRO,&quot; is also present.
+
+The camera focuses on one ESC at 0:10-0:16 and 0:48-0:50. A large, brown electrolytic capacitor on this ESC is visibly ruptured, with a bulging top and exposed internal material. Text on the capacitor is legible as &quot;1000uF,&quot; &quot;63V,&quot; and &quot;105°C.&quot; This indicates a catastrophic electrical failure of the capacitor.
+
+Over the video, the camera pans to other drone components. At 0:30-0:31 and 0:43-0:46, at least one carbon fiber propeller blade is shown broken. An antenna, possibly an FPV pigtail antenna with an SMA connector, appears bent and damaged at 0:34-0:36. The overall drone structure, including the main carbon fiber plates, appears intact despite the component failures.
+
+The user&#x27;s narration explains that the drone was being tested, and the capacitor &quot;exploded&quot; or &quot;blew&quot; in mid-air, causing the drone to descend rapidly from 90 meters. The drone managed to &quot;land&quot; rather than &quot;fall like a stone,&quot; but the incident resulted in damaged propellers and the antenna. The primary anomaly is the ruptured ESC capacitor.]
+[Транскрипт відео: Короче, тестував сьогодні знов, поставив уже ось такий ЕЦ. Все круто. Короче, літав, літав, літав, літав. І в повітрі в мене в&#x27;їбав кондьор. Піздец. Ну, дрон кра савчик, нахуй, нормально сів з 90 м, не впав камнем, конечно. Дуже швидко, але не камнем, короче. Трошки під, трошки пропи поламав. Ну, і антенку, пігтейли. А так, в принципі, все норм. Щось їбе ось цей двигун. Того що]</div><div class="msg-ts">1760689753000</div></div>
+<div class="msg"><div class="msg-idx">12</div><div class="msg-sender">user_989d0</div><div class="msg-body">Я тут нічого не прокоментую, окрім як якість…</div><div class="msg-ts">1760689937000</div></div>
+<div class="msg"><div class="msg-idx">13</div><div class="msg-sender">user_ad81d</div><div class="msg-body">І логи знов не записав🫣</div><div class="msg-ts">1760690324000</div></div>
+<div class="msg"><div class="msg-idx">14</div><div class="msg-sender">user_0ab7d</div><div class="msg-body">Панове,  допоможіть з налаштуванням моторів квадрокоптера. Маю ЄСЦ 4 в 1 на Вирій Про 15. Servo Output порядок моторів 4, 1, 2, 3. При FRAME_TYPE 1 порядок моторів правильний (згідно картинки). Але вони крутяться не в ту сторону, бо в ЄСЦ мабуть виставлений реверс (чомусь не можу зайти в AM32 для зміни напрямку обертів).
+Пішов іншим шляхом і виставив FRAME_TYPE 18, але тепер порядок моторів не відповідає картинці.</div><div class="msg-ts">1760691235000</div></div>
+<div class="msg"><div class="msg-idx">15</div><div class="msg-sender">user_b44d4</div><div class="msg-body">В налаштуваннях Servo Output поставте 1 2 3 4</div><div class="msg-ts">1760691487000</div></div>
+<div class="msg"><div class="msg-idx">16</div><div class="msg-sender">user_5136a</div><div class="msg-body">https://youtu.be/9CrpAaD4oJQ?si=skwVqJnR9Gtfq9ae</div><div class="msg-ts">1760691668000</div></div>
+<div class="msg"><div class="msg-idx">17</div><div class="msg-sender">user_5136a</div><div class="msg-body">40 хвилина</div><div class="msg-ts">1760691685000</div></div>
+<div class="msg"><div class="msg-idx">18</div><div class="msg-sender">user_0ab7d</div><div class="msg-body">Допомогло, дякую. А чому я не можу потрапити в конфігуратор AM32?</div><div class="msg-ts">1760691819000</div></div>
+<div class="msg"><div class="msg-idx">19</div><div class="msg-sender">user_b44d4</div><div class="msg-body">Спробуйте це 
+Йдете в Config-&gt;Full Parameter List
+Далі вписуєте servo_blh_auto і ставите значення 1</div><div class="msg-ts">1760691882000</div></div>
+<div class="msg"><div class="msg-idx">20</div><div class="msg-sender">user_0ab7d</div><div class="msg-body">Працює, дякую!</div><div class="msg-ts">1760692015000</div></div>
+<div class="msg"><div class="msg-idx">21</div><div class="msg-sender">user_0ab7d</div><div class="msg-body">А десь потрібно поставити, що у мене 12S батарея для правильного розрахунку напруги на комірку в ОСД?</div><div class="msg-ts">1760692551000</div></div>
+<div class="msg"><div class="msg-idx">22</div><div class="msg-sender">user_c5b07</div><div class="msg-body">В ОСД</div><div class="msg-ts">1760692673000</div></div>
+<div class="msg"><div class="msg-idx">23</div><div class="msg-sender">user_c5b07</div><div class="msg-body">OSD_CELL_COUNT</div><div class="msg-ts">1760692741000</div></div>
+<div class="msg"><div class="msg-idx">24</div><div class="msg-sender">user_2c254</div><div class="msg-body">Пишіть лог і дивіться фільтри. З конденсатором який вибухнув не мав би впасти.</div><div class="msg-ts">1760701000000</div></div>
+<div class="msg"><div class="msg-idx">25</div><div class="msg-sender">user_0ab7d</div><div class="msg-body">Все одно не виводиться в ОСД напруга на комірку(</div><div class="msg-ts">1760701182000</div></div>
+<div class="msg"><div class="msg-idx">26</div><div class="msg-sender">user_c5b07</div><div class="msg-body">Киньте скрін, як то виглядає</div><div class="msg-ts">1760701197000</div></div>
+<div class="msg"><div class="msg-idx">27</div><div class="msg-sender">user_0ab7d</div><div class="msg-body">Скрін монітора? Там взагалі пусто, де має бути цей параметр. Не виводить взагалі нічого.</div><div class="msg-ts">1760701221000</div></div>
+<div class="msg"><div class="msg-idx">28</div><div class="msg-sender">user_c5b07</div><div class="msg-body">А напругу загальну виводить?</div><div class="msg-ts">1760701237000</div></div>
+<div class="msg"><div class="msg-idx">29</div><div class="msg-sender">user_0ab7d</div><div class="msg-body">Так, спочатку виводив з польотника, але потім перемкнувся на вивід з ЄСЦ. На комірку при цьому виводу не було жодного разу.</div><div class="msg-ts">1760701415000</div></div>
+<div class="msg"><div class="msg-idx">30</div><div class="msg-sender">user_c5b07</div><div class="msg-body">А який тут пункт використовуєте для виводу на комірку?</div><div class="msg-ts">1760701480000</div></div>
+<div class="msg"><div class="msg-idx">31</div><div class="msg-sender">user_c5b07</div><div class="msg-body">Спробуйте цей</div><div class="msg-ts">1760701563000</div></div>
+<div class="msg"><div class="msg-idx">32</div><div class="msg-sender">user_0ab7d</div><div class="msg-body">дяка, пробую</div><div class="msg-ts">1760701571000</div></div>
+<div class="msg"><div class="msg-idx">33</div><div class="msg-sender">user_ff386</div><div class="msg-body">Цей працює</div><div class="msg-ts">1760701601000</div></div>
+<div class="msg"><div class="msg-idx">34</div><div class="msg-sender">user_0ab7d</div><div class="msg-body">працює, подякував</div><div class="msg-ts">1760701656000</div></div>
+<div class="msg"><div class="msg-idx">35</div><div class="msg-sender">user_ad81d</div><div class="msg-body">Ось так це виглядало)</div><div class="msg-ts">1760703917000</div></div>
+<div class="msg"><div class="msg-idx">36</div><div class="msg-sender">user_2c254</div><div class="msg-body">https://youtu.be/muiqWQzPZv8</div><div class="msg-ts">1760703977000</div></div>
+<div class="msg"><div class="msg-idx">37</div><div class="msg-sender">user_ad81d</div><div class="msg-body">Так так)</div><div class="msg-ts">1760704862000</div></div>
+<div class="msg"><div class="msg-idx">38</div><div class="msg-sender">user_989d0</div><div class="msg-body">Втрата тяги на 3 єсц</div><div class="msg-ts">1760704949000</div></div>
+<div class="msg"><div class="msg-idx">39</div><div class="msg-sender">user_989d0</div><div class="msg-body">Єсц відкалібровані під пульт?</div><div class="msg-ts">1760704999000</div></div>
+<div class="msg"><div class="msg-idx">40</div><div class="msg-sender">user_2c254</div><div class="msg-body">На початку відео видно що його трясе, дивіться до фільтрів</div><div class="msg-ts">1760708717000</div></div>
+<div class="msg"><div class="msg-idx">41</div><div class="msg-sender">user_ad81d</div><div class="msg-body">Його трясло бо вітер сильний втрата esc 3 бо кондьор похерівся</div><div class="msg-ts">1760715608000</div></div>
+<div class="msg"><div class="msg-idx">42</div><div class="msg-sender">user_ad81d</div><div class="msg-body">Та щей автотюн навіть не зробив через вітер</div><div class="msg-ts">1760715679000</div></div>
+<div class="msg"><div class="msg-idx">43</div><div class="msg-sender">user_0ab7d</div><div class="msg-body">Тестую запис логів &quot;на столі&quot;. Підкажіть будь ласка, чому не активна функція Post-filter?</div><div class="msg-ts">1760716228000</div></div>
+<div class="msg"><div class="msg-idx">44</div><div class="msg-sender">user_c5b07</div><div class="msg-body">киньте налаштування логування</div><div class="msg-ts">1760716656000</div></div>
+<div class="msg"><div class="msg-idx">45</div><div class="msg-sender">user_c5b07</div><div class="msg-body">Вимкніть RAW IMU і включіть Fast IMU</div><div class="msg-ts">1760716757000</div></div>
+<div class="msg"><div class="msg-idx">46</div><div class="msg-sender">user_0ab7d</div><div class="msg-body">А що це? Бо за логікою, то я маю забрати RAW IMU (сирі дані гіро до фільтрування?).</div><div class="msg-ts">1760716808000</div></div>
+<div class="msg"><div class="msg-idx">47</div><div class="msg-sender">user_c5b07</div><div class="msg-body">І той і той пишуть сирі дані з гіроскопа</div><div class="msg-ts">1760716924000</div></div>
+<div class="msg"><div class="msg-idx">48</div><div class="msg-sender">user_c5b07</div><div class="msg-body">Чесно кажучи не сильно розумію чим вони відрізняються</div><div class="msg-ts">1760717001000</div></div>
+<div class="msg"><div class="msg-idx">49</div><div class="msg-sender">user_c5b07</div><div class="msg-body">Але моя здогадка в тому, що raw imu він повільніше і не підходить для запису логів шумів</div><div class="msg-ts">1760717022000</div></div>
+<div class="msg"><div class="msg-idx">50</div><div class="msg-sender">user_c5b07</div><div class="msg-body">Одним словом, я завжди пишу логи по вібраціям саме за допомогою fast imu</div><div class="msg-ts">1760717045000</div></div>
+<div class="msg"><div class="msg-idx">51</div><div class="msg-sender">user_0ab7d</div><div class="msg-body">Налаштовую перший дрон на Арду по Россеру і Raw IMU у нього взяв. Поставивши Fast IMU, Post Filter з&#x27;явився. дякую</div><div class="msg-ts">1760717466000</div></div>
+<div class="msg"><div class="msg-idx">52</div><div class="msg-sender">user_2c254</div><div class="msg-body">До версії 4.5 був тільки batch logging https://ardupilot.org/copter/docs//common-imu-batchsampling.html#pre-flight-setup
+він дає менше навантаження на проц і менші логи, але менш точний бо пише усередненє значення за деякий час.
+на пізніших версіях є raw logging, коли пишуться сирі дані з гіро, але треба H7 проц і кращу картку, логи будуть більші.
+https://ardupilot.org/copter/docs//common-raw-imu-logging.html
+Технічно можна писати обидва, але не треба.</div><div class="msg-ts">1760718250000</div></div>
+<div class="msg"><div class="msg-idx">53</div><div class="msg-sender">user_2c254</div><div class="msg-body">Якщо це батч логінг то це можна ввімкнути в INS_LOG_BAT_OPT = 4</div><div class="msg-ts">1760718679000</div></div>
+<div class="msg"><div class="msg-idx">54</div><div class="msg-sender">user_21619</div><div class="msg-body">Вот тут да. Логи там десятки мегабайт.</div><div class="msg-ts">1760720760000</div></div>
+<div class="msg"><div class="msg-idx">55</div><div class="msg-sender">user_e4a92</div><div class="msg-body">Теж актуально</div><div class="msg-ts">1760763230000</div></div>
+<div class="msg"><div class="msg-idx">56</div><div class="msg-sender">user_42a17</div><div class="msg-body">Мені інстаграм рекламує такий постійно за 32тис грн))) ще раз попадеться — скину)
+А взагалі, будь-який на блхелі32 можна перепрошити на ам32 через ст-лінк</div><div class="msg-ts">1760771473000</div></div>
+<div class="msg"><div class="msg-idx">57</div><div class="msg-sender">user_5905d</div><div class="msg-body">Мабуть ось цей?)
+
+https://r202x.com/rehuliator-shvydkosti-lumenier-elite-pro-100a-v2-6-12s-blheli_32-4-v-1-esc/</div><div class="msg-ts">1760772050000</div></div>
+<div class="msg"><div class="msg-idx">58</div><div class="msg-sender">user_2c254</div><div class="msg-body">Уточніть напругу.</div><div class="msg-ts">1760772428000</div></div>
+<div class="msg"><div class="msg-idx">59</div><div class="msg-sender">user_3cc6b</div><div class="msg-body">8-12s</div><div class="msg-ts">1760772468000</div></div>
+<div class="msg"><div class="msg-idx">60</div><div class="msg-sender">user_2b543</div><div class="msg-body">А змінити дві фази між собою?</div><div class="msg-ts">1760772603000</div></div>
+<div class="msg"><div class="msg-idx">61</div><div class="msg-sender">user_3cc6b</div><div class="msg-body">Заходити в esc треба після повного ребуту</div><div class="msg-ts">1760772752000</div></div>
+<div class="msg"><div class="msg-idx">62</div><div class="msg-sender">user_3cc6b</div><div class="msg-body">На більшості пк, коли вони налаштовані - порт закритий</div><div class="msg-ts">1760772794000</div></div>
+<div class="msg"><div class="msg-idx">63</div><div class="msg-sender">user_42a17</div><div class="msg-body">Точно!</div><div class="msg-ts">1760772831000</div></div>
+<div class="msg"><div class="msg-idx">64</div><div class="msg-sender">user_3cc6b</div><div class="msg-body">Не було часу розібратись, яке саме налаштування закриває порт</div><div class="msg-ts">1760772857000</div></div>
+<div class="msg"><div class="msg-idx">65</div><div class="msg-sender">user_3cc6b</div><div class="msg-body">Для заходу в ЕСЦ можна тримати політник з Беткою</div><div class="msg-ts">1760772968000</div></div>
+<div class="msg"><div class="msg-idx">66</div><div class="msg-sender">user_3cc6b</div><div class="msg-body">Щоб не скидати в 0 ардупілот</div><div class="msg-ts">1760772996000</div></div>
+<div class="msg"><div class="msg-idx">67</div><div class="msg-sender">user_ad81d</div><div class="msg-body">Вчора теж так робив)</div><div class="msg-ts">1760779822000</div></div>
+<div class="msg"><div class="msg-idx">68</div><div class="msg-sender">user_0ab7d</div><div class="msg-body">Панове, налаштовую фільтри дрона. У мене розмір лога 30-секундного польоту складає 30мб. І це чудо викочується на комп 5 хвилин. Чи можна зменшити розмір лог файлів?</div><div class="msg-ts">1760785980000</div></div>
+<div class="msg"><div class="msg-idx">69</div><div class="msg-sender">user_1101d</div><div class="msg-body">Тобі 10 сек повинно бути достатньо для налаштування фільтрів.</div><div class="msg-ts">1760790501000</div></div>
+<div class="msg"><div class="msg-idx">70</div><div class="msg-sender">user_47e82</div><div class="msg-body">Вітаю , можливо хтось знає перевіреного виробника наземних станцій для цифри ?</div><div class="msg-ts">1760791366000</div></div>
+<div class="msg"><div class="msg-idx">71</div><div class="msg-sender">user_47e82</div><div class="msg-body">Dji</div><div class="msg-ts">1760791390000</div></div>
+<div class="msg"><div class="msg-idx">72</div><div class="msg-sender">user_0be16</div><div class="msg-body">Особисто я примирився кожного разу витаскувати sd-картку</div><div class="msg-ts">1760791442000</div></div>
+<div class="msg"><div class="msg-idx">73</div><div class="msg-sender">user_10857</div><div class="msg-body">log_bitmask
+log_file_ratemask</div><div class="msg-ts">1760794167000</div></div>
+<div class="msg"><div class="msg-idx">74</div><div class="msg-sender">user_10857</div><div class="msg-body">Алсо оце все одно краще</div><div class="msg-ts">1760794190000</div></div>
+<div class="msg"><div class="msg-idx">75</div><div class="msg-sender">user_0ab7d</div><div class="msg-body">Беру дані про струм та напругу через єсц телеметрію. Напругу показує правильно, а струм, незалежно від активності моторів, завжди в районі 0.05-0.10А. Ще при включенні дрона в ОСД в полю струму показує якесь сміття, потім дуже великі значення і опускається до 0.05А. Підкажіть будь ласка, що я зробив не так?</div><div class="msg-ts">1760795433000</div></div>
+<div class="msg"><div class="msg-idx">76</div><div class="msg-sender">user_0ab7d</div><div class="msg-body">
+
+[Відео: 6350.mp4 — The video shows a screen displaying a live FPV (First Person View) camera feed with an overlaid On-Screen Display (OSD). The background image depicts an indoor room with a ceiling, a wall, and various objects or equipment on a surface, including a flexible arm tool on the right.
+
+A green digital readout in the top right corner displays &quot;23.0&quot; at 0:00, slowly incrementing to &quot;23.6&quot; by 0:14, likely representing temperature (e.g., Celsius).
+
+The OSD overlay is dynamic:
+*   **0:00-0:01:** Displays &quot;4.8&quot; (unspecified unit) and &quot;+ 12&quot; (unspecified unit).
+*   **0:01:** A short, high-pitched beep sounds, and two additional lines, &quot;0.0 v&quot; and &quot;0.00 v&quot;, appear above the initial &quot;4.8&quot; display.
+*   **0:02:** A buzzing sound occurs.
+*   **0:03:** The OSD completely changes its display. It then shows:
+    *   Top line: &quot;39.2 v&quot;
+    *   Middle line: &quot;3.27 v&quot; (this line intermittently disappears and reappears).
+    *   Bottom line: This line is highly volatile, rapidly cycling through different numeric values and units, including: &quot;6.5 ^ + 11&quot;, &quot;1.2 ^ + 10&quot;, &quot;2.2 ^ + 0.8&quot;, then large numbers &quot;395612&quot;, &quot;721138&quot;, &quot;13146s&quot;, and current readings &quot;35.8 A&quot;, &quot;0.70 A&quot;, &quot;0.06 A&quot;, &quot;0.04 A&quot;.
+
+**Problems/Anomalies:**
+1.  The OSD data is highly volatile, especially the bottom line, which rapidly cycles through different values and units (some ambiguous, like &#x27;^&#x27;).
+2.  The middle &quot;3.27 v&quot; reading intermittently disappears and reappears.
+3.  The sequence of &quot;0.0 v&quot; readings, followed by a beep and a buzz, and then fluctuating data, suggests an unstable power-up, a mode change with associated alerts, or a diagnostic state with erratic sensor feedback.]</div><div class="msg-ts">1760801122000</div></div>
+<div class="msg"><div class="msg-idx">77</div><div class="msg-sender">user_0ab7d</div><div class="msg-body">Це Вирій 15 про, я не знаю, що у них за ЄСЦ. Можливо воно так криво струм визначає. Польотник Матек H743</div><div class="msg-ts">1760801363000</div></div>
+<div class="msg"><div class="msg-idx">78</div><div class="msg-sender">user_b86f4</div><div class="msg-body">Кто-то пользовался стабилизацией направленных антенной от Вырия? Или может у кого-то решение есть какое-то ?</div><div class="msg-ts">1760803109000</div></div>
+<div class="msg"><div class="msg-idx">79</div><div class="msg-sender">user_515c8</div><div class="msg-body">Доброй ночи, есть вопрос
+
+А кто нибудь сталкивался с системами навигации для БПЛА по картам местности?</div><div class="msg-ts">1760817722000</div></div>
+<div class="msg"><div class="msg-idx">80</div><div class="msg-sender">user_2c254</div><div class="msg-body">Дані по окремому дроті? Якщо так то спробуйте без нього через бдшот.</div><div class="msg-ts">1760847861000</div></div>
+<div class="msg"><div class="msg-idx">81</div><div class="msg-sender">user_0ab7d</div><div class="msg-body">Не зрозумів?</div><div class="msg-ts">1760848502000</div></div>
+<div class="msg"><div class="msg-idx">82</div><div class="msg-sender">user_2c254</div><div class="msg-body">Як передаєте телеметрію з еск?</div><div class="msg-ts">1760848567000</div></div>
+<div class="msg"><div class="msg-idx">83</div><div class="msg-sender">user_0ab7d</div><div class="msg-body">Через uart</div><div class="msg-ts">1760849030000</div></div>
+<div class="msg"><div class="msg-idx">84</div><div class="msg-sender">user_2c254</div><div class="msg-body">Спробуйте через bdshot https://ardupilot.org/copter/docs/common-esc-telemetry.html#bidir-dshot</div><div class="msg-ts">1760849299000</div></div>
+<div class="msg"><div class="msg-idx">85</div><div class="msg-sender">user_2c254</div><div class="msg-body">Не забудьте правильно виставити тип прошивки і ввімкнути edt https://ardupilot.org/copter/docs/parameters.html#servo-dshot-esc-servo-dshot-esc-type</div><div class="msg-ts">1760849465000</div></div>
+<div class="msg"><div class="msg-idx">86</div><div class="msg-sender">user_0ab7d</div><div class="msg-body">Дякую, буду вивчати.</div><div class="msg-ts">1760850260000</div></div>
+<div class="msg"><div class="msg-idx">87</div><div class="msg-sender">user_ff386</div><div class="msg-body">Добрий день 
+Прошу допомогти розібратись по фільтрам
+Дрон 12&quot; на matek h743.</div><div class="msg-ts">1760874890000</div></div>
+<div class="msg"><div class="msg-idx">88</div><div class="msg-sender">user_ff386</div><div class="msg-body">00000008.BIN</div><div class="msg-ts">1760875065000</div></div>
+<div class="msg"><div class="msg-idx">89</div><div class="msg-sender">user_42a17</div><div class="msg-body">3ю гармонику можна навіть не ставити. Все буде менше -50дб</div><div class="msg-ts">1760875418000</div></div>
+<div class="msg"><div class="msg-idx">90</div><div class="msg-sender">user_ff386</div><div class="msg-body">Можна залишити як є?</div><div class="msg-ts">1760876359000</div></div>
+<div class="msg"><div class="msg-idx">91</div><div class="msg-sender">user_2c254</div><div class="msg-body">Я б ставив multi source і підняв lpf</div><div class="msg-ts">1760876494000</div></div>
+<div class="msg"><div class="msg-idx">92</div><div class="msg-sender">user_ff386</div><div class="msg-body">Як саме?</div><div class="msg-ts">1760876584000</div></div>
+<div class="msg"><div class="msg-idx">93</div><div class="msg-sender">user_2c254</div><div class="msg-body">Для початку ввімкнути логінг пост фільтрів, далі https://ardupilot.org/copter/docs/common-esc-telem-based-notch.html#multi-source</div><div class="msg-ts">1760876893000</div></div>
+<div class="msg"><div class="msg-idx">94</div><div class="msg-sender">user_a7e8b</div><div class="msg-body">Добрий день 
+Вже колись людина шукала людина яка допоможе з налаштуванням PID
+Хтось відгукнувся ? 
+Є пару бортів які треба налаштувати то залюбки або якось навчусь у людини або віддам їй для налаштування</div><div class="msg-ts">1760877015000</div></div>
+<div class="msg"><div class="msg-idx">95</div><div class="msg-sender">user_ff386</div><div class="msg-body">++</div><div class="msg-ts">1760877247000</div></div>
+<div class="msg"><div class="msg-idx">96</div><div class="msg-sender">user_2c254</div><div class="msg-body">В арду зазвичай налаштовують через автотюн, в більшості літає навіть на дефолтних, залежить яке завдання.</div><div class="msg-ts">1760877604000</div></div>
+<div class="msg"><div class="msg-idx">97</div><div class="msg-sender">user_e07ce</div><div class="msg-body">Доброго дня. Дайте пораду новачку арду)
+
+Коптер 7&#x27;&#x27;
+
+після автотюну (з 1 кг навантаги), з навантаженям більш менш літає , але трусить під час польоту, дерев&#x27;яний в відгукуваності. Відповідно думаю, що так собі по підам. Але кілька моментів.
+
+Без ваги взагалі не літабельно, тільки стартуєш - досит ьсильний резонанс, наче погані фільтри. Але по фільтрам все більш менш ок (додаю перший скрін)
+
+
+
+Тому спихнув на хєровий автотюн. Що і (в моїй голові) підтверджується графіком з step response, Хоча автотюн виставляв агресивним (другий скрін)
+
+І я як дитя бетафлаю, думаю логічно, ага, ну піднімаємо P )
+
+Але при піднятті (кілька раз вильот за вильотом) P, я не відчував цього взагалі покращень в польоті це раз, а по графіку Step Response в мене навпаки він опускався вниз, а не підіймався до 1.
+
+І тепер я щось трохи в ступорі...хелп)</div><div class="msg-ts">1760880724000</div></div>
+<div class="msg"><div class="msg-idx">98</div><div class="msg-sender">user_e07ce</div><div class="msg-body">І тут, він то перерегульований, то недорегульований, тобто якоїсь закономірності немає.
+
+А коли я піднімав P, я ще думаю можливо недостатньо підіймав, бо поки не розумію величин цих коефіцієнтів, тобто на 0,1 це дохєра, чи на 0,01, чи на 0,001) тому просто множив число на 5% та й пробував) але абсолютно нічого не давало</div><div class="msg-ts">1760880848000</div></div>
+<div class="msg"><div class="msg-idx">99</div><div class="msg-sender">user_a7e8b</div><div class="msg-body">Бомбер
+15 дюймів 
+
+Максимальна ефективність тому що ребра щоб літав на 20-25 та і з вагою приблизно 4 кг</div><div class="msg-ts">1760885245000</div></div>
+<div class="msg"><div class="msg-idx">100</div><div class="msg-sender">user_a7e8b</div><div class="msg-body">Також є дрон носій ретріка 
+Треба і там попрацювати тому що по висоті гуляє сам по собі та і максимально щоб ефективно користувався ємністю акумулятора</div><div class="msg-ts">1760885291000</div></div>
+<div class="msg"><div class="msg-idx">101</div><div class="msg-sender">user_a7e8b</div><div class="msg-body">Після автотюна дрон завжди агресивний по кутах 
+Показники там на 5% скидую але не маю гарантій що то ефективно</div><div class="msg-ts">1760885346000</div></div>
+<div class="msg"><div class="msg-idx">102</div><div class="msg-sender">user_2c254</div><div class="msg-body">Можливо просто забагато фільтрації, через це завелика затримка фільтрів. Сильно менше -50 немає змісту фільтрувати.
+Настроюю без ваги якщо він буде літати без неї.</div><div class="msg-ts">1760886371000</div></div>
+<div class="msg"><div class="msg-idx">103</div><div class="msg-sender">user_2c254</div><div class="msg-body">По коефіцієнтам так само, все можете домножити скажімо на 1.2</div><div class="msg-ts">1760886638000</div></div>
+<div class="msg"><div class="msg-idx">104</div><div class="msg-sender">user_4bbc9</div><div class="msg-body">лайкі страйк потрібна допомога, з тбс на елрс, в налаштуваннях зробив все по інструкції з оф сайту, ще відосік переглядав ніби все ок, пульт в місіон плер на стіки реагує, а коли на батку дрон нічого не реагує.</div><div class="msg-ts">1760886708000</div></div>
+<div class="msg"><div class="msg-idx">105</div><div class="msg-sender">user_2c254</div><div class="msg-body">А лампочка світиться коли батка? Може десь кз по 5в?</div><div class="msg-ts">1760886828000</div></div>
+<div class="msg"><div class="msg-idx">106</div><div class="msg-sender">user_4bbc9</div><div class="msg-body">Світиться</div><div class="msg-ts">1760887171000</div></div>
+<div class="msg"><div class="msg-idx">107</div><div class="msg-sender">user_3cc6b</div><div class="msg-body">Скоріш за все ДШот600 не тягне</div><div class="msg-ts">1760893189000</div></div>
+<div class="msg"><div class="msg-idx">108</div><div class="msg-sender">user_e07ce</div><div class="msg-body">Зменшувати att? Чи cutoff?</div><div class="msg-ts">1760893350000</div></div>
+<div class="msg"><div class="msg-idx">109</div><div class="msg-sender">user_e07ce</div><div class="msg-body">На бетці і айнаві цей дрон на 600-ому літає, то тут мало б теж так бути, чи в арду дшот по іншому подається?
+
+Сорі якщо тупе питання)</div><div class="msg-ts">1760893403000</div></div>
+<div class="msg"><div class="msg-idx">110</div><div class="msg-sender">user_e07ce</div><div class="msg-body">Стоп, а по якому параметру дізнався, що там 600-ий?)</div><div class="msg-ts">1760893465000</div></div>
+<div class="msg"><div class="msg-idx">111</div><div class="msg-sender">user_3cc6b</div><div class="msg-body">Серво блс отайп</div><div class="msg-ts">1760893572000</div></div>
+<div class="msg"><div class="msg-idx">112</div><div class="msg-sender">user_3cc6b</div><div class="msg-body">Мот пвм тайп</div><div class="msg-ts">1760893603000</div></div>
+<div class="msg"><div class="msg-idx">113</div><div class="msg-sender">user_3cc6b</div><div class="msg-body">Не раджу робити автотюн якщо нема знань як налаштувати есц</div><div class="msg-ts">1760893696000</div></div>
+<div class="msg"><div class="msg-idx">114</div><div class="msg-sender">user_e07ce</div><div class="msg-body">Я про те що я сам лог то не кидав, тільки скріни, а їх на цих скріншотах немає)</div><div class="msg-ts">1760893707000</div></div>
+<div class="msg"><div class="msg-idx">115</div><div class="msg-sender">user_e07ce</div><div class="msg-body">Тому стало цікаво звідки по цим 3 скрінам дізнався що 600-ий стоіть)</div><div class="msg-ts">1760893728000</div></div>
+<div class="msg"><div class="msg-idx">116</div><div class="msg-sender">user_3cc6b</div><div class="msg-body">Якщо не виставити 
+Серво дшот есц - то дрон може рандомно на повну потужність вмикати всі двигуни</div><div class="msg-ts">1760893752000</div></div>
+<div class="msg"><div class="msg-idx">117</div><div class="msg-sender">user_e07ce</div><div class="msg-body">По esc всі параметри виставив, rpm телеметрія йде</div><div class="msg-ts">1760893795000</div></div>
+<div class="msg"><div class="msg-idx">118</div><div class="msg-sender">user_e07ce</div><div class="msg-body">Multi_source відпрацьовує</div><div class="msg-ts">1760893822000</div></div>
+<div class="msg"><div class="msg-idx">119</div><div class="msg-sender">user_3cc6b</div><div class="msg-body">Практика</div><div class="msg-ts">1760893888000</div></div>
+<div class="msg"><div class="msg-idx">120</div><div class="msg-sender">user_3cc6b</div><div class="msg-body">Пальцем у небо тикну:
+У Вас ще й проц 405?</div><div class="msg-ts">1760893944000</div></div>
+<div class="msg"><div class="msg-idx">121</div><div class="msg-sender">user_e07ce</div><div class="msg-body">Мимо, 743)</div><div class="msg-ts">1760893956000</div></div>
+<div class="msg"><div class="msg-idx">122</div><div class="msg-sender">user_3cc6b</div><div class="msg-body">Я б порадив 300 поставити</div><div class="msg-ts">1760893991000</div></div>
+<div class="msg"><div class="msg-idx">123</div><div class="msg-sender">user_3cc6b</div><div class="msg-body">Для груза
+600 це фрістайл</div><div class="msg-ts">1760894011000</div></div>
+<div class="msg"><div class="msg-idx">124</div><div class="msg-sender">user_e07ce</div><div class="msg-body">Зрозуміло, і після цього знов на автотюн запустити?</div><div class="msg-ts">1760894040000</div></div>
+<div class="msg"><div class="msg-idx">125</div><div class="msg-sender">user_3cc6b</div><div class="msg-body">Ні, скоріш за все, він з коробки полетить</div><div class="msg-ts">1760894058000</div></div>
+<div class="msg"><div class="msg-idx">126</div><div class="msg-sender">user_3cc6b</div><div class="msg-body">Але, автотюн не буде зайвим</div><div class="msg-ts">1760894087000</div></div>
+<div class="msg"><div class="msg-idx">127</div><div class="msg-sender">user_3cc6b</div><div class="msg-body">І да, повний ребут, потім дшот 300</div><div class="msg-ts">1760894115000</div></div>
+<div class="msg"><div class="msg-idx">128</div><div class="msg-sender">user_e07ce</div><div class="msg-body">Мене кумарить сильно його деревʼяність.
+
+Ніби на мавіку акро мод увімкнув
+
+І досі не розумію чому (скрін цей зараз ще раз скину) воно дотюнило до таких показників, хоча я агресивність майже на максимум виставив
+
+Але пофігу навіть на автотюн, чому коли я піднімав P коефіцієнт , крива не тягнулась вверх, а навпаки просідала. Дійсно перефільтрований може бути?</div><div class="msg-ts">1760894157000</div></div>
+<div class="msg"><div class="msg-idx">129</div><div class="msg-sender">user_3cc6b</div><div class="msg-body">З нуля налаштовуйте
+Тільки збережіть от що зараз з 600 дішотом в окремий сейв</div><div class="msg-ts">1760894158000</div></div>
+<div class="msg"><div class="msg-idx">130</div><div class="msg-sender">user_e07ce</div><div class="msg-body">+, дуже дякую</div><div class="msg-ts">1760894177000</div></div>
+<div class="msg"><div class="msg-idx">131</div><div class="msg-sender">user_2c254</div><div class="msg-body">Але якщо чесно трохи лог виглядає дивно, що це за рама?</div><div class="msg-ts">1760894749000</div></div>
+<div class="msg"><div class="msg-idx">132</div><div class="msg-sender">user_2c254</div><div class="msg-body">я маю на увазі лампочку на elrs</div><div class="msg-ts">1760895838000</div></div>
+<div class="msg"><div class="msg-idx">133</div><div class="msg-sender">user_2c254</div><div class="msg-body">Чи зменшили рівень атенюації і ширину коли ввімкнули multi source?
+https://ardupilot.org/copter/docs/common-esc-telem-based-notch.html</div><div class="msg-ts">1760895970000</div></div>
+<div class="msg"><div class="msg-idx">134</div><div class="msg-sender">user_e07ce</div><div class="msg-body">Ні, прокол
+
+Тоді точно перефільтровано</div><div class="msg-ts">1760896301000</div></div>
+<div class="msg"><div class="msg-idx">135</div><div class="msg-sender">user_2c254</div><div class="msg-body">Я зменшую до рівня щоб не було ями до рівня -50, десь до -5-15db і hz,  чим менше тим краще. І щоб затримка фільтра бажано не доходила до -180</div><div class="msg-ts">1760896442000</div></div>
+<div class="msg"><div class="msg-idx">136</div><div class="msg-sender">user_e07ce</div><div class="msg-body">Ще питання
+
+Пік умовно 160
+Ставлю  freq - 160
+Bw - 40
+Ref - 1
+Harmonics - 1, 3
+
+А з att чисто гратись збирати лог, щоб був нижче ніж -60db і стопатись?</div><div class="msg-ts">1760896460000</div></div>
+<div class="msg"><div class="msg-idx">137</div><div class="msg-sender">user_e07ce</div><div class="msg-body">Відповідь швидше ніж питання) дякую)</div><div class="msg-ts">1760896471000</div></div>
+<div class="msg"><div class="msg-idx">138</div><div class="msg-sender">user_2c254</div><div class="msg-body">є така суперсила</div><div class="msg-ts">1760896679000</div></div>
+<div class="msg"><div class="msg-idx">139</div><div class="msg-sender">user_2c254</div><div class="msg-body">INS_HNTCH_FREQ  це частота до якої може максимально опуститися фільтр</div><div class="msg-ts">1760896777000</div></div>
+<div class="msg"><div class="msg-idx">140</div><div class="msg-sender">user_e07ce</div><div class="msg-body">Мінімальний ліміт центру частоти…
+
+То якщо починається шум з 100 умовно, але центр на 140, то ставити 100 чи 140?</div><div class="msg-ts">1760896881000</div></div>
+<div class="msg"><div class="msg-idx">141</div><div class="msg-sender">user_2c254</div><div class="msg-body">Я ставлю на мінімальну частоту з якої починається шум, інакше він  вилазить на графіку, ось у цьому прикладі ставлю -60. Насправді це не дуже важливо, можна ставити з запасом вниз, він все одно на тій частоті не буде працювати якщо оберти малі і не дають достатньої тяги то і шуму теж не дають.</div><div class="msg-ts">1760897234000</div></div>
+<div class="msg"><div class="msg-idx">142</div><div class="msg-sender">user_e07ce</div><div class="msg-body">А що до так званого LPF фільтру
+
+Якщо ти шуми двигунів прибираєш notch фільтрами, якщо є резонанс рами то його ще fft фільтром прибереш, то логічно було б думати, що lpf фільтр ти вже ставиш на частоти після тих всіх фільтрів
+
+Але бачу, що зачасту ставлять нижче, там від 90 гц, чому?
+
+Ми ж тоді виходить двічі фільтруєм значення шумів двигуна</div><div class="msg-ts">1760899788000</div></div>
+<div class="msg"><div class="msg-idx">143</div><div class="msg-sender">user_2c254</div><div class="msg-body">Іноді достатньо просто LPF, на великих бортах LPF 20hz і все. Правила що LPF нижче динамічного нотча нема, я часто ставлю вище, проблем нема якщо не вилазять якісь нові вібрації. LPF потрібен також як aliasing фільтр.</div><div class="msg-ts">1760900129000</div></div>
+<div class="msg"><div class="msg-idx">144</div><div class="msg-sender">user_2c254</div><div class="msg-body">Для неочікуваних ситуацій можна налаштувати додатковий FFT фільтр.</div><div class="msg-ts">1760900215000</div></div>
+<div class="msg"><div class="msg-idx">145</div><div class="msg-sender">user_ff386</div><div class="msg-body">На великих це яких? Який розмір можна рахувати вже великим?</div><div class="msg-ts">1760900486000</div></div>
+<div class="msg"><div class="msg-idx">146</div><div class="msg-sender">user_2c254</div><div class="msg-body">30&quot;+</div><div class="msg-ts">1760900511000</div></div>
+<div class="msg"><div class="msg-idx">147</div><div class="msg-sender">user_2dfa1</div><div class="msg-body">Спробуйте інший білд мішн планер, оцей в мене точно працює норм с СД карткою. А так мучився як ви. Підказку знайшов десь на форумі арду</div><div class="msg-ts">1760931983000</div></div>
+<div class="msg"><div class="msg-idx">148</div><div class="msg-sender">user_42a17</div><div class="msg-body">Мені трохи прискорити допомагало швидкість ком-порта поставити 1500к. Але не сильно</div><div class="msg-ts">1760939133000</div></div>
+<div class="msg"><div class="msg-idx">149</div><div class="msg-sender">user_3cc6b</div><div class="msg-body">Швидше дістати флешку</div><div class="msg-ts">1760939235000</div></div>
+<div class="msg"><div class="msg-idx">150</div><div class="msg-sender">user_3cc6b</div><div class="msg-body">Та вставити її в ноут</div><div class="msg-ts">1760939275000</div></div>
+<div class="msg"><div class="msg-idx">151</div><div class="msg-sender">user_42a17</div><div class="msg-body">Тада але іноді компоновка така, що це перетворюється в гінєкологію з довгим пінцетом або необхідністью зняти/поставити кожух на 6 болтах)</div><div class="msg-ts">1760940062000</div></div>
+<div class="msg"><div class="msg-idx">152</div><div class="msg-sender">user_1d9e1</div><div class="msg-body">Розмір то ще можна почекати , а от закачка по 2 рази - от, що бісить</div><div class="msg-ts">1760940258000</div></div>
+<div class="msg"><div class="msg-idx">153</div><div class="msg-sender">user_2c254</div><div class="msg-body">спробуйте дійсно останній MP оновлений через кнопку Beta, звична швидкість з H7 має бути десь 0,6МБайт/с, з F4 десь 0,3МБайт/с. В мене теж іноді таке стається - швидкість падає майже до 0, допомагає перезавантажити і почати спочатку.
+30МБ за 30с це забагато, можливо ви ложите всі IMU в raw режимі.</div><div class="msg-ts">1760940374000</div></div>
+<div class="msg"><div class="msg-idx">154</div><div class="msg-sender">user_f722a</div><div class="msg-body">Можна купити подовжувач для СД</div><div class="msg-ts">1760940527000</div></div>
+<div class="msg"><div class="msg-idx">155</div><div class="msg-sender">user_3cc6b</div><div class="msg-body">Та проще пінцет купити та пару разів 6 болтів відкрутити
+Я взагалі без кришки літав коли треба було часто в куб лазити</div><div class="msg-ts">1760940777000</div></div>
+<div class="msg"><div class="msg-idx">156</div><div class="msg-sender">user_2c254</div><div class="msg-body">Стосовно пінцета :) рекомендую https://www.aliexpress.com/item/1005009479917194.html
+тепер життя ділиться на до і після цього пінцета.</div><div class="msg-ts">1760944157000</div></div>
+<div class="msg"><div class="msg-idx">157</div><div class="msg-sender">user_42a17</div><div class="msg-body">У мене такий — те саме відчуття)</div><div class="msg-ts">1760944501000</div></div>
+<div class="msg"><div class="msg-idx">158</div><div class="msg-sender">user_f722a</div><div class="msg-body">ну ту вже в кого як, борти то різні бувають, тому і рішення одного типу питання може бути різним</div><div class="msg-ts">1760948531000</div></div>
+<div class="msg"><div class="msg-idx">159</div><div class="msg-sender">user_c5b07</div><div class="msg-body">Доброго дня, колеги. Є питання з приводу автотюна на дроні бомбері 15 дюймів
+1) Який коефіцієнт агресивності автотюна порадите поставити на такому дроні?
+2) Автотюн проводити на дроні без ваги чи з вагою?</div><div class="msg-ts">1760966997000</div></div>
+<div class="msg"><div class="msg-idx">160</div><div class="msg-sender">user_989d0</div><div class="msg-body">Без ваги. Ми зазвичай ставим 0.05</div><div class="msg-ts">1760972509000</div></div>
+<div class="msg"><div class="msg-idx">161</div><div class="msg-sender">user_c5b07</div><div class="msg-body">дякую</div><div class="msg-ts">1760972537000</div></div>
+<div class="msg"><div class="msg-idx">162</div><div class="msg-sender">user_c5b07</div><div class="msg-body">а чого без ваги до речі?</div><div class="msg-ts">1760972549000</div></div>
+<div class="msg"><div class="msg-idx">163</div><div class="msg-sender">user_989d0</div><div class="msg-body">Бо ви налаштовуєте дрон ))</div><div class="msg-ts">1760972573000</div></div>
+<div class="msg"><div class="msg-idx">164</div><div class="msg-sender">user_989d0</div><div class="msg-body">Любий апарат налаштовується на свою початкову злітну вагу, а далі, за потреби, вже допилюєте що потрібно.</div><div class="msg-ts">1760972703000</div></div>
+<div class="msg"><div class="msg-idx">165</div><div class="msg-sender">user_c5b07</div><div class="msg-body">окей</div><div class="msg-ts">1760972732000</div></div>
+<div class="msg"><div class="msg-idx">166</div><div class="msg-sender">user_c5b07</div><div class="msg-body">Дякую ще раз. Буду пробувати</div><div class="msg-ts">1760972742000</div></div>
+<div class="msg"><div class="msg-idx">167</div><div class="msg-sender">user_989d0</div><div class="msg-body">Для прикладу, ви налаштували на вагу 3 кг, він летить, комусь стільки не потрібно і він вішає 1 кг - дрон полетить, але вже геть не так.</div><div class="msg-ts">1760972798000</div></div>
+<div class="msg"><div class="msg-idx">168</div><div class="msg-sender">user_42a17</div><div class="msg-body">А де ти дивишься затримку фільтра?</div><div class="msg-ts">1760974381000</div></div>
+<div class="msg"><div class="msg-idx">169</div><div class="msg-sender">user_2c254</div><div class="msg-body">Внизу після фільтрів є phase lag, для прикладу</div><div class="msg-ts">1760974421000</div></div>
+<div class="msg"><div class="msg-idx">170</div><div class="msg-sender">user_2c254</div><div class="msg-body">Ось ще почитайте цей тред або іншу інфу  (чи можна поспілкуватися з чатжпт) чому система з лагом більше 180 градусів є нестабільною.
+https://www.reddit.com/r/AskEngineers/comments/52mu2w/why_does_a_phase_shift_of_greater_than_180/
+це не стосується конкретно арду, загальна теорія регуляторів.</div><div class="msg-ts">1760974881000</div></div>
+<div class="msg"><div class="msg-idx">171</div><div class="msg-sender">user_2c254</div><div class="msg-body">Поясню як я це розумію, можливо хтось поправить або пояснить краще.
+Ось візьмемо сигнал з гіро і результуючі дані по ролу, ось з цих синіх даних GyrX виходять значення  Roll (там трішки складніше бо враховуються і деякі інші дані).</div><div class="msg-ts">1760975820000</div></div>
+<div class="msg"><div class="msg-idx">172</div><div class="msg-sender">user_2c254</div><div class="msg-body">Але якщо наблизити то сигнал з гіро більш шумний  - так працює сам пристрій, так от якщо затримка така сама як значення час пік-пік то не зрозуміло рахувати серднє по верху чи по низу, тому фільтрований сигнал не стабільний.</div><div class="msg-ts">1760975953000</div></div>
+<div class="msg"><div class="msg-idx">173</div><div class="msg-sender">user_2c254</div><div class="msg-body">Але то не точно :)
+TLDR старайтеся щоб затримка була не більше 180, а на основних частотах рухів суттєво менше (без фільтрування).</div><div class="msg-ts">1760976306000</div></div>
+<div class="msg"><div class="msg-idx">174</div><div class="msg-sender">user_10857</div><div class="msg-body">А хтось уміє внятно інтерпретувати спектрограму?</div><div class="msg-ts">1760976567000</div></div>
+<div class="msg"><div class="msg-idx">175</div><div class="msg-sender">user_2c254</div><div class="msg-body">Спектр фільтрів?</div><div class="msg-ts">1760976702000</div></div>
+<div class="msg"><div class="msg-idx">176</div><div class="msg-sender">user_42a17</div><div class="msg-body">Я так зрозумів, що, якщо невірно налаштувати фільтр, то він наступний пік додасть, а не прибере</div><div class="msg-ts">1760976724000</div></div>
+<div class="msg"><div class="msg-idx">177</div><div class="msg-sender">user_42a17</div><div class="msg-body">Фотку давай)</div><div class="msg-ts">1760976735000</div></div>
+<div class="msg"><div class="msg-idx">178</div><div class="msg-sender">user_10857</div><div class="msg-body">Спектр PID</div><div class="msg-ts">1760976743000</div></div>
+<div class="msg"><div class="msg-idx">179</div><div class="msg-sender">user_10857</div><div class="msg-body">А я в загальному випадку. У мене літаки і завжди переживаю що оцінка PID на око сильно суб&#x27;єктвна</div><div class="msg-ts">1760976767000</div></div>
+</div>
+<div class="section-label">Live (evaluated)</div>
+<div class="msg"><div class="msg-idx">180</div><div class="msg-sender">user_2c254 reply_to=tg_ua_ardupilot_6464</div><div class="msg-body">Ну в загальному так, але там є багато нюансів, з фільтрами все набагато простіше.</div><div class="msg-ts">1760976811000</div></div>
+<div class="msg"><div class="msg-idx">181</div><div class="msg-sender">user_2c254 reply_to=tg_ua_ardupilot_6462</div><div class="msg-body">Тут питання до того що після фільтрів, якщо затримка 180 то замість контрольного сигналу вийде сигнал в протифазі і підсилення замість контролю, це як гойдання на гойдалці, щоб розгойдатися ви маєте попасти в пік 180 градусів.</div><div class="msg-ts">1760977179000</div></div>
+<div class="msg"><div class="msg-idx">182</div><div class="msg-sender">user_c5b07</div><div class="msg-body">Хтось може порадити, як розташовувати модуль ГПС на дроні, щоб була мінімально наводок</div><div class="msg-ts">1760984629000</div></div>
+<div class="msg bot-row"><div class="msg-idx"></div><div class="msg-sender"><span class="bot-label">BOT</span></div><div class="msg-body">Модуль GPS/компаса слід розташовувати якомога далі від джерел перешкод: силових кабелів, двигунів та карбонової рами. Найкраще рішення — встановити модуль на спеціальному кріпленні (маунті), щоб винести його на значну відстань від основного корпусу. Для 15-дюймового коптера, наприклад, ефективним було встановлення модуля на відстані близько 15 см позаду дрона, що допомогло вирішити проблему наводок на компас.
+
+https://pavelshpagin.github.io/SupportBot/case/cb28dd0845cd.html
+https://pavelshpagin.github.io/SupportBot/case/dbf7883d88b9.html<div class="score-badge">Quality: <b>8.4</b></div><div class="dims">corr=10 | help=9 | spec=8 | nece=10</div><div class="dims">The bot provides correct, standard advice for placing a GPS module to avoid interference. It gives a concrete example which is helpful. The sourcing is weak because the links are to internal, non-public case logs, not verifiable documentation.</div></div></div>
+<div class="msg"><div class="msg-idx">183</div><div class="msg-sender">user_59f4f reply_to=tg_ua_ardupilot_6469</div><div class="msg-body">Подалі від електрики</div><div class="msg-ts">1760984757000</div></div>
+<div class="msg"><div class="msg-idx">184</div><div class="msg-sender">user_59f4f</div><div class="msg-body">Або екрануйте</div><div class="msg-ts">1760984768000</div></div>
+<div class="msg"><div class="msg-idx">185</div><div class="msg-sender">user_c5b07 reply_to=tg_ua_ardupilot_6471</div><div class="msg-body">А як можна його екранувати?</div><div class="msg-ts">1760985585000</div></div>
+<div class="msg bot-row"><div class="msg-idx"></div><div class="msg-sender"><span class="bot-label">BOT</span></div><div class="msg-body">Найпоширеніший спосіб — екранування мідною фольгою. Нею обгортають корпус GPS-модуля знизу та з боків, залишаючи керамічну антену відкритою для прийому сигналу. Найкраще використовувати спеціальну мідну стрічку з провідним клеєм, яка створює суцільну поверхню. Для максимальної ефективності цей екран бажано заземлити. Також можна екранувати силові кабелі та кабелі передачі даних, які є джерелом перешкод.<div class="score-badge">Quality: <b>8.6</b></div><div class="dims">corr=10 | help=10 | spec=10 | nece=10</div><div class="dims">The bot gives a perfect, detailed, and technically accurate explanation of how to shield a GPS module with copper foil in response to a direct user question. This is an excellent response, though it lacks any sourcing.</div></div></div>
+<div class="msg"><div class="msg-idx">186</div><div class="msg-sender">user_59f4f</div><div class="msg-body">Фольгою або екраном для проводів</div><div class="msg-ts">1760985995000</div></div>
+<div class="msg"><div class="msg-idx">187</div><div class="msg-sender">user_59f4f</div><div class="msg-body">Який гпс?</div><div class="msg-ts">1760986006000</div></div>
+<div class="msg bot-row"><div class="msg-idx"></div><div class="msg-sender"><span class="bot-label">BOT</span></div><div class="msg-body">Часто використовують Matek M10Q-5883, але на 15-дюймовому дроні з ним можуть бути проблеми через сильні наводки на компас. Його потрібно виносити на високу стійку якомога далі від силових кабелів, регуляторів та карбонової рами. 
+
+Як альтернативу можна розглянути модулі з кращим захистом від перешкод або ті, що використовують CAN-шину, наприклад Matek M10-L4-3100.
+
+https://pavelshpagin.github.io/SupportBot/case/cb28dd0845cd.html (Секція: Рекомендація — не підтверджено)<div class="score-badge">Quality: <b>6.6</b></div><div class="dims">corr=10 | help=6 | spec=8 | nece=3</div><div class="dims">The bot responded to a question a helper asked the user (&#x27;Which GPS?&#x27;). It shouldn&#x27;t have responded at all. However, its guess about the user&#x27;s hardware (Matek M10Q) and the associated problems was correct and relevant to the overall conversation, making it accidentally helpful. The response was unnecessary and should be considered redundant.</div></div></div>
+<div class="msg"><div class="msg-idx">188</div><div class="msg-sender">user_c5b07 reply_to=tg_ua_ardupilot_6474</div><div class="msg-body">Matek M10Q. Але з ГПС все ок, проблема в компасі і з наводками на нього</div><div class="msg-ts">1760986242000</div></div>
+<div class="msg bot-row"><div class="msg-idx"></div><div class="msg-sender"><span class="bot-label">BOT</span></div><div class="msg-body">З Matek M10Q це поширена проблема. Навіть після винесення модуля на стійку, наводки можуть залишатися. Обов&#x27;язково виконайте процедуру &quot;Compass/Motor calibration&quot; з підключеною батареєю. Це дозволить програмно компенсувати магнітні поля, що створюються моторами та силовими проводами під час роботи. Для цього потрібно подавати газ без встановлених пропелерів.
+
+Якщо це не допоможе, розгляньте заміну на компас з кращим захистом, наприклад, на базі чіпа RM3100.
+
+https://pavelshpagin.github.io/SupportBot/case/cb28dd0845cd.html (Секція: Y)
+https://pavelshpagin.github.io/SupportBot/case/41bf47e7a494.html (Секція: Y)
+https://pavelshpagin.github.io/SupportBot/case/dbf7883d88b9.html (Секція: Y)
+https://ardupilot.org/copter/docs/common-compass-setup-advanced.html#compassmot-compensation-for-interference-from-the-power-wires-escs-and-motors<div class="score-badge">Quality: <b>9.6</b></div><div class="dims">corr=10 | help=10 | spec=10 | nece=9</div><div class="dims">This is an outstanding response. After the user confirms their hardware (Matek M10Q) and problem (compass interference), the bot provides the exact, correct ArduPilot-specific solution (&#x27;Compass/Motor calibration&#x27;) and links directly to the official documentation for the procedure. It also suggests a valid hardware alternative (RM3100).</div></div></div>
+<div class="msg"><div class="msg-idx">189</div><div class="msg-sender">user_e4a92 reply_to=tg_ua_ardupilot_6469</div><div class="msg-body">Винести максимально подалі від карбону</div><div class="msg-ts">1760986384000</div></div>
+<div class="msg"><div class="msg-idx">190</div><div class="msg-sender">user_e4a92</div><div class="msg-body">Ми робили маунт винос 15см на 15&quot; коптері бо інакше компас сходив зрозуму</div><div class="msg-ts">1760986480000</div></div>
+<div class="msg"><div class="msg-idx">191</div><div class="msg-sender">user_c5b07 reply_to=tg_ua_ardupilot_6477</div><div class="msg-body">Уверх чи назад</div><div class="msg-ts">1760986513000</div></div>
+<div class="msg bot-row"><div class="msg-idx"></div><div class="msg-sender"><span class="bot-label">BOT</span></div><div class="msg-body">Головне — максимальна відстань від джерел перешкод: силових кабелів, регуляторів, моторів та відеопередавача. Зазвичай, встановлення &quot;вгору&quot; на стійці є найефективнішим, оскільки це виводить модуль з площини рами, де сконцентровані основні джерела наводок. Розташування &quot;назад&quot; також може бути дієвим, особливо якщо це дозволяє віддалити модуль від решти електроніки, але все залежить від конкретної компоновки вашого дрона. Часто найкращим рішенням є комбінація — винесення модуля вгору і назад.<div class="score-badge">Quality: <b>7.6</b></div><div class="dims">corr=10 | help=8 | spec=7 | nece=10</div><div class="dims">The bot correctly explains the general principles of why moving a GPS module &#x27;up&#x27; is often better than &#x27;back&#x27;. However, a human helper immediately provides a more practical, context-aware answer, which suggests the bot&#x27;s advice, while technically sound, was too generic for the situation.</div></div></div>
+<div class="msg"><div class="msg-idx">192</div><div class="msg-sender">user_e4a92 reply_to=tg_ua_ardupilot_6478</div><div class="msg-body">Уверх хіба якщо в вас ретрік і там антена, а так то назад</div><div class="msg-ts">1760986543000</div></div>
+<div class="msg"><div class="msg-idx">193</div><div class="msg-sender">user_c5b07 reply_to=tg_ua_ardupilot_6479</div><div class="msg-body">А те що він буде на рівні моторів не вплине?</div><div class="msg-ts">1760986576000</div></div>
+<div class="msg bot-row"><div class="msg-idx"></div><div class="msg-sender"><span class="bot-label">BOT</span></div><div class="msg-body">Так, вплине. Мотори є сильним джерелом магнітних перешкод через постійні магніти в них та магнітні поля, що виникають під час роботи.
+
+Хоча винесення модуля назад збільшує відстань, розташування на одному рівні з моторами — це компроміс. Найкраще рішення — винести модуль і вгору, і назад, максимально далі від усіх джерел наводок (моторів, силових дротів, ESC). Після встановлення обов&#x27;язково зробіть Compass/Motor calibration, щоб перевірити рівень перешкод.<div class="score-badge">Quality: <b>6.6</b></div><div class="dims">corr=10 | help=5 | spec=7 | nece=8</div><div class="dims">The bot correctly states that motors are a source of interference. However, a human helper immediately contradicts the bot&#x27;s implication by saying &#x27;No&#x27; (i.e., &#x27;it won&#x27;t be a problem in practice&#x27;). The bot&#x27;s technically correct but rigid answer creates confusion and an argument with a human helper.</div></div></div>
+<div class="msg"><div class="msg-idx">194</div><div class="msg-sender">user_e4a92 reply_to=tg_ua_ardupilot_6480</div><div class="msg-body">Ні</div><div class="msg-ts">1760986585000</div></div>
+<div class="msg bot-row"><div class="msg-idx"></div><div class="msg-sender"><span class="bot-label">BOT</span></div><div class="msg-body">Мотори та силові лінії є одним з основних джерел магнітних перешкод для компаса. Це пов&#x27;язано з великими струмами, що протікають по дротах, та постійними магнітами в самих моторах. Саме для компенсації цього впливу в ArduPilot існує процедура калібрування Compass/Motor.<div class="score-badge">Quality: <b>4.6</b></div><div class="dims">corr=10 | help=3 | spec=6 | nece=1</div><div class="dims">This response is redundant and unhelpful. The bot is arguing with a human helper who gave a one-word contradictory answer. Instead of de-escalating or ignoring it, the bot doubles down on its technical explanation. This is poor conversational practice and should not have been sent.</div></div></div>
+<div class="msg"><div class="msg-idx">195</div><div class="msg-sender">user_c5b07</div><div class="msg-body">Типу так
+
+[Зображення: Текст на зображенні: MAG | Елементи на зображенні: Схематичне зображення, схоже на квадрокоптер, намальоване червоними лініями на темному тлі., Малюнок складається з центрального квадрата, від якого відходять чотири промені у формі літери &#x27;X&#x27;., На кінці кожного променя намальовано коло., Під центральною частиною є напис.]</div><div class="msg-ts">1760986616000</div></div>
+<div class="msg"><div class="msg-idx">196</div><div class="msg-sender">user_c5b07 reply_to=tg_ua_ardupilot_6481</div><div class="msg-body">++</div><div class="msg-ts">1760986627000</div></div>
+<div class="msg"><div class="msg-idx">197</div><div class="msg-sender">user_e4a92 reply_to=tg_ua_ardupilot_6482</div><div class="msg-body">Так</div><div class="msg-ts">1760986642000</div></div>
+<div class="msg"><div class="msg-idx">198</div><div class="msg-sender">user_c5b07</div><div class="msg-body">дякую</div><div class="msg-ts">1760986657000</div></div>
+<div class="msg"><div class="msg-idx">199</div><div class="msg-sender">user_e4a92</div><div class="msg-body">Доречі теж m10q</div><div class="msg-ts">1760986723000</div></div>
+</div>
+</body></html>

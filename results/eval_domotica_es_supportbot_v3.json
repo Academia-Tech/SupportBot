@@ -1,0 +1,558 @@
+{
+  "benchmark": "SupportBench",
+  "version": "1.0",
+  "system": "supportbot",
+  "dataset": "domotica_es",
+  "meta": {
+    "pretty_name": "Domotica-ES",
+    "lang": "es",
+    "domain": "smarthome_automation",
+    "history_size": 900,
+    "live_size": 100,
+    "offset": 0
+  },
+  "score": 8.53,
+  "precision": 0.771,
+  "recall": 0.906,
+  "quality_breakdown": {
+    "correctness": 8.43,
+    "faithfulness": 8.46,
+    "helpfulness": 8.6,
+    "conciseness": 8.63
+  },
+  "counts": {
+    "history_msgs": 900,
+    "live_msgs": 100,
+    "cases_indexed": 75,
+    "responded": 35,
+    "escalated": 2,
+    "skipped": 63,
+    "questions_found": 32,
+    "true_positives": 27,
+    "false_positives": 8,
+    "missed": 3
+  },
+  "timing": {
+    "ingest_s": 2.9,
+    "process_s": 2079.6,
+    "judge_s": 174.7,
+    "total_s": 2257.3
+  },
+  "responses": [
+    {
+      "msg_id": "tg_domotica_es_577752",
+      "msg_text": "Hola! Tengo dos toldos con estos mandos de marca dooya, he probado con un Bridge 433 pero no captura los códigos ¿Alguien sabe cómo se podrían integrar en HA?",
+      "bot_text": "No hay menciones de Dooya en el historial del grupo, pero el problema suele ser que usan protocolos específicos o rolling code que los bridges 433 genéricos no capturan. Tienes tres opciones: usar un Broadlink RM4 Pro o un Bond Bridge (que tienen mucha mejor compatibilidad con toldos), comprar el bridge oficial de Dooya (a veces llamado Connector, que tiene integración en HA) o, si tienes acceso al cableado, instalar un Shelly 2PM directamente al motor para controlarlo de forma local y fiable.\n\n",
+      "correctness": 9,
+      "faithfulness": 9,
+      "helpfulness": 9,
+      "conciseness": 8,
+      "quality": 8.75,
+      "reasoning": "The bot correctly identifies the likely issue (proprietary/rolling code RF) and provides three distinct, technically sound, and commonly recommended solutions for integrating Dooya awnings into Home Assistant: using a compatible RF bridge (Broadlink/Bond), using the official Dooya gateway, or direct wiring with a Shelly 2PM. All suggestions are verifiable via Google Search and align with community knowledge. The answer is direct and very helpful for the user."
+    },
+    {
+      "msg_id": "tg_domotica_es_577754",
+      "msg_text": "Tengo ese mismo y me tarda 20segundos cronometrados",
+      "bot_text": "That 20-second delay is often a hardware-level cooldown or blind time designed to save battery, which can override lower software settings. For mmWave models like the ZG-204ZM, check the fading_time or presence_keep_time parameter in Zigbee2MQTT or ZHA, though some firmware versions have a hard floor of 10-20s regardless of the configuration. If it is a battery-powered PIR sensor, 20s is typically the hardcoded physical limit to prevent rapid battery drain.\n\nhttps://www.zigbee2mqtt.io/devices/ZG",
+      "correctness": 9,
+      "faithfulness": 9,
+      "helpfulness": 9,
+      "conciseness": 9,
+      "quality": 9,
+      "reasoning": "The bot accurately explains the reasons for the delay (hardware cooldown, battery saving) and correctly identifies the relevant parameters (`fading_time`, `presence_keep_time`) in Zigbee2MQTT/ZHA, which are the common ways to manage these devices. It also correctly notes the existence of a 'hard floor' for some firmware versions (10-20s), which aligns with subsequent user confirmation that the minimum for the ZG-204ZM is 10s. The provided link is highly relevant and points directly to the options section for the specific device in question, enhancing verifiability and helpfulness."
+    },
+    {
+      "msg_id": "tg_domotica_es_577762",
+      "msg_text": "Justo es eso lo que no quiero hacer, una cuenta mental para el long press.",
+      "bot_text": "Switch to buttons with a dedicated pairing button like the IKEA SOMRIG or Aqara Wireless Remote. They handle the hold event in firmware, so you won't trigger a reset by mistake. Generic Moes or Tuya buttons use the same button for pairing and actions, which is why they require that mental count.\n\nhttps://supportbot.info/case/eval_1\nhttps://supportbot.info/case/eval_0",
+      "correctness": 9,
+      "faithfulness": 9,
+      "helpfulness": 8,
+      "conciseness": 8,
+      "quality": 8.5,
+      "reasoning": "The bot's claims about dedicated pairing buttons and firmware handling for hold events in IKEA SOMRIG and Aqara Wireless Remote are generally accurate. These devices are known for more robust handling of different press types. The statement about generic Moes/Tuya buttons often combining pairing and action on the same button, leading to the described issue, is also a common characteristic of such devices. The solution directly addresses the user's problem of avoiding a 'mental count' and accidental resets."
+    },
+    {
+      "msg_id": "tg_domotica_es_577764",
+      "msg_text": "Lo tienes con z2mqtt?",
+      "bot_text": "That Moes switch is fully supported in Zigbee2MQTT, usually recognized as model TS0044. It provides specific action payloads for single, double, and hold events. Z2M is often more reliable for these Tuya devices than ZHA because you can verify the exact event timing in the logs to avoid hitting the 5-second hardware reset.\n\nhttps://www.zigbee2mqtt.io/guide/getting-started/ (Секція: Getting started)\nhttps://supportbot.info/case/eval_22",
+      "correctness": 9,
+      "faithfulness": 9,
+      "helpfulness": 9,
+      "conciseness": 8,
+      "quality": 8.75,
+      "reasoning": "The bot correctly identifies the Moes switch as TS0044 and confirms its support in Zigbee2MQTT with single, double, and hold events, which is verifiable via Z2M documentation. The claim about Z2M being more reliable for Tuya devices than ZHA and its utility for debugging event timing (specifically the 5-second reset issue mentioned by the user) is also widely accepted and relevant. The response directly answers the user's question and offers practical advice related to their previous problem, making it very helpful and reasonably concise."
+    },
+    {
+      "msg_id": "tg_domotica_es_577766",
+      "msg_text": "https://youtu.be/ZB3DpzqX32M?si=zarVVsOk5nlLVuvF",
+      "bot_text": "This video from Domótica Fácil is a clear guide for installing Shelly relays in 3-way switch (conmutada) setups. It explains how to identify the phase and lamp return wires to control the entire circuit with a single device. In the Shelly app, set the Button Type to Edge to ensure the light toggles correctly regardless of which switch is flipped.\n\nhttps://youtu.be/ZB3DpzqX32M",
+      "correctness": 3,
+      "faithfulness": 3,
+      "helpfulness": 8,
+      "conciseness": 9,
+      "quality": 5.75,
+      "reasoning": "The bot correctly identifies the technical content of the video and provides accurate advice regarding the 'Edge' button type for Shelly relays in 3-way switch setups. However, it incorrectly attributes the video to 'Domótica Fácil'. The video linked by the user (https://youtu.be/ZB3DpzqX32M) is from the YouTube channel 'electromanitas'. This misattribution is a factual error, significantly impacting correctness and faithfulness. Despite this, the technical advice provided is helpful and concise."
+    },
+    {
+      "msg_id": "tg_domotica_es_577769",
+      "msg_text": "¿Alguien que tengo cacharros con 433 sabe si los dispositivos que tienen código rotativo no se capturan su señal?",
+      "bot_text": "Correcto, los bridges 433 estándar no pueden capturar códigos rotativos porque la trama cambia en cada pulsación por seguridad. Para integrarlos en Home Assistant necesitas hardware específico como el Bond Bridge, que está diseñado para protocolos de toldos y ventiladores, o un Broadlink RM4 Pro. Otra opción muy fiable es usar un mando universal IR+RF de Tuya o soldar un relé de contacto seco (como un Shelly Uni) directamente a los botones de un mando a distancia original.\n\nhttps://supportbot.in",
+      "correctness": 3,
+      "faithfulness": 3,
+      "helpfulness": 5,
+      "conciseness": 8,
+      "quality": 4.75,
+      "reasoning": "The bot correctly states that standard 433MHz bridges cannot capture rolling codes due to their dynamic nature. It also provides a valid and reliable workaround by suggesting soldering a dry contact relay like a Shelly Uni to an original remote control. However, the bot incorrectly claims that the Broadlink RM4 Pro can integrate rolling codes; multiple sources explicitly state that the Broadlink RM4 Pro does not support rolling codes. Similarly, Tuya universal IR+RF remotes are generally not compatible with rolling codes. The Bond Bridge's support for rolling codes is also not universal as implied; while it can generate some rolling codes (e.g., for Somfy), it often does not support all types, particularly for security devices like garage doors. These factual inaccuracies significantly lower the correctness and faithfulness scores, despite the good initial diagnosis and one effective solution."
+    },
+    {
+      "msg_id": "tg_domotica_es_577770",
+      "msg_text": "A mí los mandos de persianas y toldos no me los coge. Y eso que probé con fw portisch o como se escriba.",
+      "bot_text": "Portisch amplia los protocolos que entiende el chip del Sonoff Bridge, pero sigue sin poder descifrar códigos rotativos (rolling codes) por seguridad. Para persianas y toldos, lo más fiable sigue siendo el Broadlink RM4 Pro o el Bond Bridge, que ya traen los algoritmos de marcas como Dooya o Somfy. Si quieres seguir por la vía DIY, te daría mejor resultado un CC1101 con ESPHome que el bridge de Sonoff.\n\nhttps://supportbot.info/case/eval_74",
+      "correctness": 9,
+      "faithfulness": 9,
+      "helpfulness": 9,
+      "conciseness": 8,
+      "quality": 8.75,
+      "reasoning": "The bot correctly identifies that Portisch firmware on the Sonoff Bridge generally cannot handle rolling codes due to security and hardware limitations. It provides accurate and helpful alternatives like the Broadlink RM4 Pro, Bond Bridge (mentioning specific brands like Dooya and Somfy, which are relevant to the chat history), and a more advanced DIY option with CC1101 and ESPHome. All claims are factually correct and verifiable with a quick search. The response directly addresses the user's problem and offers clear solutions."
+    },
+    {
+      "msg_id": "tg_domotica_es_577772",
+      "msg_text": "Entiendo.\nNo estoy seguro de que sean rotativos, me gustaría saber si el Bridge captura los códigos cuando son rotativos pero al intentar generar no funciona o no captura nada cuando son rotativos, ta",
+      "bot_text": "Si el Bridge no detecta nada (ni parpadea el LED ni registra evento en la consola), es porque el chip RF descarta la señal al no reconocer el protocolo o la modulación de Dooya, no solo por ser rotativo. En modo aprendizaje estándar, los bridges ignoran cualquier señal que no siga un patrón de código fijo conocido. Aunque lograses capturar una trama usando el modo crudo (rfraw 177 en Portisch), si el mando es rotativo el toldo la ignorará al intentar enviarla porque el contador de seguridad ya n",
+      "correctness": 9,
+      "faithfulness": 9,
+      "helpfulness": 8,
+      "conciseness": 8,
+      "quality": 8.5,
+      "reasoning": "The bot correctly explains the technical limitations of RF bridges regarding proprietary rolling codes, specifically for Dooya devices. It distinguishes between not recognizing the protocol at all and recognizing it but failing due to rolling code security. The explanation for why a captured raw signal wouldn't work for rolling codes is accurate. The provided links are relevant. The subsequent chat clarifies that the LED does flash, which implies some RF activity, but the lack of payload in logs confirms the bot's point about the protocol not being recognized, validating the core explanation."
+    },
+    {
+      "msg_id": "tg_domotica_es_577776",
+      "msg_text": "Cuando le das a \"aprender\" una señal, no se enciende el led del Bridge?",
+      "bot_text": "Sí, el LED rojo debería iluminarse o parpadear al activar el modo aprendizaje (como el comando RfKey en Tasmota) para confirmar que está a la escucha. Si el LED no hace nada al darle a aprender, es probable que el comando no esté llegando correctamente al chip RF o haya un bloqueo en el firmware. Si el LED se activa pero no reacciona cuando pulsas el mando, el chip EFM8BB1 está descartando la señal por protocolo o modulación incompatible antes de que el sistema pueda registrarla, algo muy habitu",
+      "correctness": 9,
+      "faithfulness": 9,
+      "helpfulness": 9,
+      "conciseness": 9,
+      "quality": 9,
+      "reasoning": "The bot's response is largely correct and helpful. It accurately describes the expected LED behavior for Tasmota's RF learning mode (blinking rapidly when listening, stopping when a code is received). The explanation for no LED activity (command not reaching chip or firmware issue) is a logical and common troubleshooting step. The claim about the EFM8BB1 chip discarding incompatible signals, especially for blinds remotes, even with Portisch firmware, is also accurate and a known limitation for these devices. Many blinds use proprietary or rolling codes that are difficult to capture and replay. The provided links are highly relevant and support the technical claims. The response directly addresses the user's question and provides valuable diagnostic information. It is concise and avoids unnecessary jargon where possible, while still being technically precise."
+    },
+    {
+      "msg_id": "tg_domotica_es_577784",
+      "msg_text": "Yo tengo ese mismo problema y no consigo hacerlo funcionar correctamente..se me queda pillado en la web externa y cuando entra en home assistant me sale lo que comentas. Lo pudiste solucionar? Gracias",
+      "bot_text": "Yes, adding not_from: unavailable to the trigger solves the automation firing on reboot. This prevents the event from triggering during the transition from an unknown state when the device reconnects. The hang on the external web usually occurs because the ESPHome dashboard requires a direct connection to the device's local IP from your browser; this fails when accessing Home Assistant via an external URL or Nabu Casa. Use the local IP of your Home Assistant instance to manage the device and avo",
+      "correctness": 9,
+      "faithfulness": 9,
+      "helpfulness": 9,
+      "conciseness": 9,
+      "quality": 9,
+      "reasoning": "The bot correctly identifies and confirms the solution for the automation trigger issue (`not_from: unavailable`), which was already discovered by a previous user in the chat. It also accurately diagnoses the 'hang on external web' problem, explaining that the ESPHome dashboard requires a direct local connection and provides the correct workaround. The technical claims are verifiable and align with common Home Assistant/ESPHome practices. The response directly addresses both parts of the user's question, making it very helpful and concise."
+    },
+    {
+      "msg_id": "tg_domotica_es_577785",
+      "msg_text": "Lo tengo con esphome, cuando voy a eventos en las herramientas de desarrollo y en la parte de escuchar pongo esphome.rf_code_recived no veo cambios en el bridge.\nPero cuando le doy al mando si parpade",
+      "bot_text": "Ese evento esphome.rf_code_received no es nativo de ESPHome; solo aparecerá en Home Assistant si lo has definido explícitamente en tu YAML usando la acción homeassistant.event dentro del trigger on_code_received. Si el LED del bridge parpadea pero no recibes nada, lo ideal es que revises los logs de ESPHome directamente (no los de HA) tras añadir dump: all en la configuración del remote_receiver. Esto te mostrará en la consola de ESPHome cualquier señal detectada, incluso si el protocolo no está",
+      "correctness": 9,
+      "faithfulness": 9,
+      "helpfulness": 9,
+      "conciseness": 9,
+      "quality": 9,
+      "reasoning": "The bot correctly identifies that `esphome.rf_code_received` is a custom event, not a native one, and advises on how to explicitly define it. It also provides excellent troubleshooting steps by suggesting checking ESPHome logs directly with `dump: all` in the `remote_receiver` configuration, which is a standard and effective method for debugging RF signal reception in ESPHome. The provided links are relevant and accurate, supporting the advice given. This directly helps the user diagnose why they aren't seeing codes."
+    },
+    {
+      "msg_id": "tg_domotica_es_577790",
+      "msg_text": "No sé si es rolling code, por ahora no he conseguido pillar nada 😅",
+      "bot_text": "Para confirmar si es rolling code, Tasmota con Portisch es mejor que ESPHome: usa el comando RfRaw 177 en la consola para ver tramas en bruto. Si al pulsar el mismo botón los datos recibidos cambian siempre, es rolling code y no podrás clonarlo. Si no aparece nada ni en modo raw, el chip RF no reconoce la modulación. Para persianas y toldos, lo habitual es usar un Broadlink RM4 Pro o Bond Bridge que sí soportan esos protocolos.\n\nhttps://tasmota.github.io/docs/Commands/ (Sección: RfBridge)\nhttps:",
+      "correctness": 9,
+      "faithfulness": 9,
+      "helpfulness": 9,
+      "conciseness": 9,
+      "quality": 9,
+      "reasoning": "The bot's technical claims are largely accurate and verifiable. The `RfRaw 177` command in Tasmota with Portisch firmware is a correct method for sniffing raw RF signals and identifying rolling codes. The explanation of how to detect rolling codes (data changing on repeated presses) and unrecognized modulation (no data) is correct. The suggestion of Broadlink RM4 Pro and Bond Bridge is also appropriate, as Bond Bridge explicitly supports Dooya motors, and Broadlink RM4 Pro generally supports RF blinds, though some newer Dooya rolling codes might be an exception for Broadlink. The bot's recommendation to use Tasmota/Portisch over ESPHome for this specific task is also reasonable given the user's current difficulties with ESPHome and the specific raw sniffing capabilities of Portisch. The response is direct and provides actionable steps."
+    },
+    {
+      "msg_id": "tg_domotica_es_577793",
+      "msg_text": "Buenas, alguien que tenga Shelly Wall Display, ¿es cierto que puede tener 2 termostatos virtuales ? Me lo dice Chatgpt y no sé si fiarme",
+      "bot_text": "No te fíes a ciegas. En el historial del grupo no hay menciones a ese caso, pero el Shelly Wall Display es nativamente para una sola zona (un relé y sus sensores). Aunque el firmware actual permite añadir Virtual Components de tipo termostato para controlar otros dispositivos, la interfaz está optimizada para una sola estancia. Puedes crear esa lógica extra mediante componentes virtuales, pero no es un dispositivo dual por diseño.\n\nhttps://kb.shelly.cloud/knowledge-base/shelly-wall-display\nhttps",
+      "correctness": 9,
+      "faithfulness": 9,
+      "helpfulness": 9,
+      "conciseness": 8,
+      "quality": 8.75,
+      "reasoning": "The bot correctly advises caution regarding ChatGPT's claim. It accurately states that the Shelly Wall Display is natively designed for a single zone, featuring one integrated relay and its own sensors, and functions as a room thermostat. While the bot mentions 'Virtual Components de tipo termostato', search results indicate that Virtual Components are more generic (Boolean, Number, Text, etc.) but can be used to create complex logic and control other devices. However, the bot's overall point that the device's interface is optimized for a single room/thermostat is correct, and user experiences suggest that while virtual thermostats can be created in the Shelly ecosystem, the Wall Display itself does not natively support displaying or managing multiple such virtual thermostats directly in its UI. The bot correctly concludes that it's not a dual device by design. The provided links are official Shelly documentation and relevant to the topic."
+    },
+    {
+      "msg_id": "tg_domotica_es_577799",
+      "msg_text": "He probado con tasmota en el sonoff bridgeRF v2.2 y al pulsar los mandos se enciende la luz roja un segundo pero en los log no veo que salga el payload /RESULT, solo veo trazas de estado como esta ¿Es",
+      "bot_text": "Ese log de STATE es solo el mensaje de estado periódico de Tasmota, no es la respuesta al mando. Que el LED parpadee pero no aparezca el /RESULT significa que el chip RF detecta la señal física pero el firmware no reconoce el protocolo. No tiene por qué ser rotativo, puede ser simplemente un código fijo no soportado por la base de datos estándar.\n\nUsa el comando RfRaw 177 en la consola para ver los datos en bruto: si el código cambia con cada pulsación del mismo botón, es rotativo y no podrás cl",
+      "correctness": 9,
+      "faithfulness": 9,
+      "helpfulness": 9,
+      "conciseness": 9,
+      "quality": 9,
+      "reasoning": "The bot's response is factually correct and highly relevant to the user's problem. It accurately explains the difference between 'STATE' and 'RESULT' logs in Tasmota, correctly interprets the LED flash without a 'RESULT' as the RF chip detecting a signal but the firmware not recognizing the protocol. The bot provides the correct diagnostic command, 'RfRaw 177', to capture raw RF data and differentiate between rolling codes and unsupported fixed protocols. Furthermore, it correctly highlights that the Sonoff RF Bridge v2.2 can be more restrictive than previous versions and might require hardware modifications or specific firmwares for full RF data pass-through. The advice is actionable and directly helps the user troubleshoot their issue. The response is concise and avoids unnecessary jargon or filler."
+    },
+    {
+      "msg_id": "tg_domotica_es_577801",
+      "msg_text": "Alguien sabe si la lámpara de mesa Xiaomi LED Desk Lamp 2 se puede integrar en home assistant? \nAhora tengo la lamp 1s sin y funciona sin problema con la integración Xiaomi miout auto",
+      "bot_text": "Sí, la Xiaomi LED Desk Lamp 2 es totalmente compatible. Al ser un dispositivo MIoT, la integración Xiaomi Miot Auto que ya usas la reconocerá en cuanto la enlaces a la app Mi Home. Además, este modelo también soporta HomeKit, por lo que puedes integrarla localmente con la integración HomeKit Device de Home Assistant si prefieres evitar la nube y tener una respuesta instantánea.\n\nhttps://github.com/al-one/hass-xiaomi-miot (Supported devices)",
+      "correctness": 3,
+      "faithfulness": 3,
+      "helpfulness": 5,
+      "conciseness": 8,
+      "quality": 4.75,
+      "reasoning": "The bot correctly identifies that the Xiaomi LED Desk Lamp 2 is a MIoT device and can be integrated with Home Assistant using the Xiaomi Miot Auto integration, which the user already uses for another lamp. However, the bot incorrectly claims that the Xiaomi LED Desk Lamp 2 supports HomeKit. Search results consistently show that HomeKit compatibility is for the Xiaomi Mi Bedside Lamp 2, not the Desk Lamp 2. Therefore, the recommendation to integrate it locally with the HomeKit Device integration is based on a factual error. This significantly impacts correctness and faithfulness. Helpfulness is moderate as one part of the advice is correct and useful, while the other is misleading."
+    },
+    {
+      "msg_id": "tg_domotica_es_577804",
+      "msg_text": "Buenas, una consulta para el grupo:\nMe he instalado un ventilador de techo DC con luz que viene con el típico kit universal RF, el que suele venir ya integrado con su mando. Me gustaría saber si algun",
+      "bot_text": "Sí, es posible integrarlo sin desmontar nada usando un puente RF. La opción más fiable es el Broadlink RM4 Pro, que suele aprender bien los códigos de la mayoría de kits universales de 433MHz. Otra alternativa es el Sonoff Bridge, aunque para maximizar la compatibilidad con protocolos específicos suele ser necesario flashearlo con Tasmota y Portisch. El éxito depende de si el mando usa código fijo o rolling code; la mayoría de estos kits son de código fijo y se clonan sin problemas, pero si es r",
+      "correctness": 9,
+      "faithfulness": 9,
+      "helpfulness": 9,
+      "conciseness": 8,
+      "quality": 8.75,
+      "reasoning": "The bot provides correct and verifiable information regarding the integration of RF ceiling fans. It accurately distinguishes between fixed and rolling codes, recommends appropriate hardware (Broadlink RM4 Pro, Sonoff Bridge with Tasmota/Portisch), and explains how these solutions avoid disassembling the fan. The advice is actionable and directly answers the user's questions. The conciseness is good, covering all necessary points without excessive verbosity. The included links are a bonus."
+    },
+    {
+      "msg_id": "tg_domotica_es_577805",
+      "msg_text": "Se puede controlar con alguna app, por ejemplo SmartLife?\n\nYo instalé uno ayer (ya es el tercero), son compatibles con SmartLife y se pueden integrar en HA, con Tuya",
+      "bot_text": "Sí, los kits que incluyen wifi funcionan nativamente con SmartLife y se integran en Home Assistant mediante la integración de Tuya. Si el modelo es solo RF (sin wifi), necesitarás un bridge como el Broadlink RM4 Pro o un Sonoff Bridge para capturar los códigos del mando y pasarlos a HA, ya que la app no los detectará por sí sola sin ese puente.\n\nhttps://www.home-assistant.io/integrations/tuya/\nhttps://supportbot.info/case/eval_8",
+      "correctness": 9,
+      "faithfulness": 9,
+      "helpfulness": 9,
+      "conciseness": 8,
+      "quality": 8.75,
+      "reasoning": "The bot correctly identifies that Wi-Fi kits integrate with SmartLife/Tuya and then with Home Assistant. It also accurately explains that RF-only devices require an RF bridge (like Broadlink RM4 Pro or Sonoff Bridge) to capture codes for HA integration. The provided links are relevant. While the chat history includes a discussion about rolling codes (which often cannot be captured by these bridges), the target message and the preceding question from user 811f3260d2 specifically refer to a ceiling fan, which typically uses fixed codes, making the bot's advice accurate for that context. The bot's response is concise and directly answers the user's implicit question while providing useful additional information."
+    },
+    {
+      "msg_id": "tg_domotica_es_577806",
+      "msg_text": "Buenas me ha llegado este mail de Amazon AWS:  Supervise el vencimiento del nivel gratuito. Una vez que finalicen las pruebas de corta duración o el periodo de 12 meses del nivel gratuito, se le cobra",
+      "bot_text": "Ese aviso es automático al cumplir el año. Si usas AWS para la integración manual de Alexa (Lambda), no te preocupes: las funciones Lambda tienen un nivel \"siempre gratuito\" de 1 millón de peticiones al mes que no caduca. Solo empezarían a cobrarte si tienes activos servidores (EC2), bases de datos o almacenamiento S3 (que sí caduca a los 12 meses). Entra en la consola de AWS, busca \"Billing\" y mira qué recursos tienes activos. Si es solo para Alexa, no necesitas hacer nada ni crear cuenta nueva",
+      "correctness": 10,
+      "faithfulness": 9,
+      "helpfulness": 10,
+      "conciseness": 9,
+      "quality": 9.5,
+      "reasoning": "The bot correctly explains the AWS Free Tier structure, differentiating between 'Always Free' services (like Lambda for Alexa integration) and '12 Months Free' services (like EC2, S3). It provides accurate advice on checking billing and clarifies that no new account is needed. All facts are verifiable with official AWS documentation. The response is highly helpful and concise."
+    },
+    {
+      "msg_id": "tg_domotica_es_577810",
+      "msg_text": "Sabéis si hay integración para los aires de hairmat, los del obramat que son wifi?",
+      "bot_text": "Los aires Airmat de Obramat suelen ser fabricados por el grupo Haier. Si el tuyo usa la app hOn, tienes la integración hOn en HACS que funciona muy bien. Si por el contrario usa Smart Life o Tuya, se integra con la oficial de Tuya. Mira qué app te pide el manual para confirmar cuál te toca.\n\nhttps://github.com/Andre0512/hon\nhttps://www.home-assistant.io/integrations/tuya/",
+      "correctness": 9,
+      "faithfulness": 9,
+      "helpfulness": 9,
+      "conciseness": 9,
+      "quality": 9,
+      "reasoning": "The bot correctly identifies that Airmat ACs are often Haier rebrands. It provides accurate integration options (hOn for Haier, Tuya for Smart Life/Tuya apps) with correct links. The advice to check the manual for the app is practical and helpful. All claims are verifiable."
+    },
+    {
+      "msg_id": "tg_domotica_es_577816",
+      "msg_text": "tema un poco offtopic, aunque no tanto: Pilas de litio cr2032, donde comprarlas a buen precio y que valga la pena por duración. Veo las de amazon basics a 0,63 por unidad. No se si son fiables.... En ",
+      "bot_text": "Las de Amazon Basics cumplen pero suelen durar menos en sensores Zigbee que las de primera marca. En AliExpress casi todas las Panasonic son falsas, no suelen valer la pena por la alta tasa de fallos. Para sensores de domótica, lo mejor calidad-precio en España son las PLATTBOJ de IKEA (salen a unos 0,25 euros la unidad) o las de marca blanca de Lidl/Aldi cuando salen de oferta. Si buscas máxima fiabilidad para sensores críticos, compra Panasonic o Sony originales en tiendas de electrónica espec",
+      "correctness": 9,
+      "faithfulness": 9,
+      "helpfulness": 9,
+      "conciseness": 9,
+      "quality": 9,
+      "reasoning": "The bot's advice is factually accurate and highly relevant. Amazon Basics batteries are indeed often reported to have shorter lifespans than premium brands, especially in low-drain devices like Zigbee sensors. The warning about fake Panasonic batteries on AliExpress is very common and justified. The recommendation for IKEA PLATTBOJ batteries at ~0.25€/unit is accurate (checked IKEA ES website) and they are widely regarded as a good value option in the home automation community. Nkon.nl is a well-known and reputable source for genuine batteries. The advice directly addresses the user's need for reliable, cost-effective CR2032 batteries and considers different purchasing priorities. The response is concise and well-structured, providing actionable recommendations and warnings."
+    },
+    {
+      "msg_id": "tg_domotica_es_577817",
+      "msg_text": "buenas, alguno tiene una tira led COB zigbee como esta? se integra bien en home assistant? sobre todo que alumbre mucho.. para dentras de un monitor y que alumbre bien la mesa..",
+      "bot_text": "COB strips integrate perfectly with HA via Zigbee2MQTT or ZHA. They are ideal for desks because they provide a continuous line of light without visible dots. For high brightness, choose a 24V strip with a dedicated Zigbee controller like Gledopto or BTF-Lighting. Avoid 5V USB versions if you want enough light to actually work at the desk, as they usually lack the necessary power.\n\nhttps://www.zigbee2mqtt.io/supported-devices/ (Section: Light)",
+      "correctness": 9,
+      "faithfulness": 9,
+      "helpfulness": 9,
+      "conciseness": 9,
+      "quality": 9,
+      "reasoning": "The bot's response is factually correct, detailing how COB strips integrate with HA via Zigbee2MQTT/ZHA, their benefit of continuous light, and providing specific, accurate recommendations for high brightness (24V, Gledopto/BTF-Lighting controllers) while warning against 5V USB versions. The provided link is also highly relevant and helpful. The advice is actionable and directly addresses the user's needs."
+    },
+    {
+      "msg_id": "tg_domotica_es_577825",
+      "msg_text": "es para trabajar es decir necesito ver bien el escritorio y los 2 monitores",
+      "bot_text": "COB strips are much better for working than standard ones because they are significantly brighter and eliminate the \"dot\" effect. For two monitors, 3 meters is usually enough, but the key is choosing a 24V strip with high density (480+ LEDs/m) to get enough light on the desk surface. Avoid 5V USB versions as they won't be bright enough for task work. If you get a 5m roll, you can cut it to fit perfectly. Make sure your Zigbee controller and power supply are rated for the total wattage of the str",
+      "correctness": 9,
+      "faithfulness": 9,
+      "helpfulness": 9,
+      "conciseness": 9,
+      "quality": 9,
+      "reasoning": "The bot's response is factually correct, aligning with widely accepted information about COB LED strips. It correctly highlights key advantages like brightness and the lack of a 'dot effect'. The recommendations for 24V, high density (480+ LEDs/m), and avoiding 5V USB versions are sound technical advice for achieving sufficient task lighting. The advice on cutting and matching power supply/controller wattage is also accurate. The information is highly relevant and directly addresses the user's specific problem and concerns, making it very helpful. The response is concise and packed with valuable information without any unnecessary verbosity."
+    },
+    {
+      "msg_id": "tg_domotica_es_577828",
+      "msg_text": "el regulador a que te refieres? ahora tengo un boton zigbee con una rueda y puedo usarlo para regular la intensidad sin problema..\ny al 100% seguro que no lo necesito si alumbran tanto no crees?\nahora",
+      "bot_text": "The \"regulador\" is the Zigbee LED controller (the hardware box wired to the strip), not your remote button. That controller handles the electrical load and can overheat if under-rated. Since 3 meters at 1200lm/m provides 3600 lumens (roughly 7x your Xiaomi 1S), you likely won't need 100% brightness. Running it dimmed will keep the hardware cool. Just ensure your 24V power supply and controller are rated for the strip's total wattage.\n\nhttps://www.zigbee2mqtt.io/supported-devices/\nhttps://www.hom",
+      "correctness": 9,
+      "faithfulness": 9,
+      "helpfulness": 9,
+      "conciseness": 8,
+      "quality": 8.75,
+      "reasoning": "The bot correctly clarifies the meaning of 'regulador' in the context of LED strips, performs accurate calculations to compare the potential brightness with the user's current setup, and provides crucial advice regarding power supply and controller rating. The advice about dimming to prevent overheating is also sound. The links provided are generally helpful contextually but not specifically tied to the answer's core facts."
+    },
+    {
+      "msg_id": "tg_domotica_es_577834",
+      "msg_text": "Hola, alguien sabe la forma más sencilla y que no use delays para dentro de una automatización encender un enchufe y apagarlo a los 30 segundos?",
+      "bot_text": "Lo mas sencillo es usar el parametro for en el trigger de estado: pones que cuando el enchufe este en on durante 30 segundos, se apague. Si quieres algo mas profesional que no dependa de que HA este encendido, configura el Auto Off directamente en la web del dispositivo (Shelly lo tiene en Settings -> Timer). Tambien puedes usar una entidad timer, que es mas robusta que un delay ante reinicios.\n\nhttps://www.home-assistant.io/docs/automation/trigger/ (Seccion: State Trigger)\nhttps://www.home-assi",
+      "correctness": 9,
+      "faithfulness": 9,
+      "helpfulness": 9,
+      "conciseness": 9,
+      "quality": 9,
+      "reasoning": "The bot provides three excellent and correct ways to achieve a timed turn-off without using 'delay' directly in the action block, which is the user's main concern. The 'for' parameter in a state trigger, device-level auto-off (if available), and Home Assistant timer entities are all valid and robust solutions. These methods effectively address the user's underlying problem of automation execution conflicts when using `delay` in an automation with multiple triggers. The provided links are relevant and helpful. The bot correctly identifies the purpose of these alternatives."
+    },
+    {
+      "msg_id": "tg_domotica_es_577835",
+      "msg_text": "Contar cuanto tiempo lleva encendida la auto desde que se ejecuta, pero porque no quieres delays? Si es lo más fácil",
+      "bot_text": "Evitamos delays porque si reinicias HA o recargas la configuración, la automatización se detiene y la acción final (como apagar la luz) nunca se ejecuta. Para contar el tiempo transcurrido desde el inicio, puedes restar el atributo last_triggered a la hora actual: {{ now() - state_attr('automation.tu_auto', 'last_triggered') }}. Para algo más robusto, usa la integración Timer, ya que es persistente a reinicios y permite visualizar la cuenta atrás en el dashboard.\n\nhttps://www.home-assistant.io/d",
+      "correctness": 9,
+      "faithfulness": 9,
+      "helpfulness": 9,
+      "conciseness": 9,
+      "quality": 9,
+      "reasoning": "The bot correctly explains why delays should be avoided in Home Assistant automations, citing that restarts or configuration reloads will terminate ongoing delays, preventing final actions from executing. It accurately provides a template to calculate the time elapsed since an automation's last execution using `now() - state_attr('automation.tu_auto', 'last_triggered')`. While this template itself doesn't directly implement a 30-second 'off' without further automation logic, it correctly answers the user's sub-question about counting elapsed time. The bot then recommends the `Timer` integration as a more robust solution, correctly stating that it is persistent across restarts and allows for countdown visualization on the dashboard. The provided links to Home Assistant documentation for automation basics and the Timer integration are relevant and accurate. The response directly addresses the user's concerns and offers a practical, reliable solution."
+    },
+    {
+      "msg_id": "tg_domotica_es_577836",
+      "msg_text": "Dentro de la automatización tengo varios triggers y para que no se solapen las llamadas.",
+      "bot_text": "Para que no se solapen las ejecuciones, tienes que configurar el parámetro mode en la automatización. Por defecto es single (ignora nuevos disparos si ya hay uno en curso), pero puedes usar restart para que el nuevo trigger cancele el anterior y empiece de cero, o queued para que se ejecuten en orden una tras otra sin perderse ninguna.\n\nhttps://www.home-assistant.io/docs/automation/ (Section: Run modes)",
+      "correctness": 10,
+      "faithfulness": 9,
+      "helpfulness": 9,
+      "conciseness": 9,
+      "quality": 9.25,
+      "reasoning": "The bot correctly identifies and explains the `mode` parameter in Home Assistant automations, which directly addresses the user's problem of preventing overlapping executions from multiple triggers. The descriptions of `single`, `restart`, and `queued` modes are accurate and consistent with Home Assistant documentation. The provided link to the official documentation is also correct and highly relevant."
+    },
+    {
+      "msg_id": "tg_domotica_es_577837",
+      "msg_text": "Igual puedo cambiar el modo de ejecución de la automatización?",
+      "bot_text": "Sí, se cambia en el editor de la automatización, en el desplegable Modo de ejecución. Tienes cuatro opciones: single, restart, queued y parallel. Para evitar solapamientos, restart es la mejor opción porque reinicia el ciclo con cada nuevo trigger.\n\nhttps://www.home-assistant.io/docs/automation/ (Sección: Basic automations)",
+      "correctness": 6,
+      "faithfulness": 8,
+      "helpfulness": 5,
+      "conciseness": 9,
+      "quality": 7,
+      "reasoning": "The bot correctly identifies the existence of automation execution modes in Home Assistant and lists the four options: single, restart, queued, and parallel. It also correctly states that these can be changed in the automation editor. However, the bot's recommendation that 'restart' is the 'best option' to avoid 'solapamientos' (overlaps) because it restarts the cycle with each new trigger is misleading for the user's implied (and later explicitly stated) need. The user wants different triggers within the same automation to execute their actions concurrently without waiting for previous actions to finish. For this scenario, 'parallel' mode would be the most appropriate choice, as it allows multiple independent runs of the automation simultaneously. 'Restart' mode, while preventing multiple instances from running *at the same time* by stopping the previous one, does not allow for concurrent execution of different trigger actions as the user desires. Therefore, while the factual information about the modes is correct, the specific recommendation for the user's problem is suboptimal."
+    },
+    {
+      "msg_id": "tg_domotica_es_577839",
+      "msg_text": "Ya pero quiero que puedan ir en paralelo las llamadas de los diferentes triggers de la automatización.",
+      "bot_text": "Cambia el modo de la automatización a parallel. Así cada vez que salte un trigger se creará una instancia nueva que corre al mismo tiempo que las demás sin detenerlas. Por defecto permite hasta 10 hilos paralelos, pero puedes subirlo con el parámetro max si te hace falta.\n\nhttps://www.home-assistant.io/docs/automation/ (Section: Run modes)",
+      "correctness": 9,
+      "faithfulness": 9,
+      "helpfulness": 9,
+      "conciseness": 9,
+      "quality": 9,
+      "reasoning": "The bot correctly identifies the `mode: parallel` setting in Home Assistant automations as the solution to the user's problem. It accurately explains how it works (new instances run simultaneously) and mentions the default `max` parameter, which is verifiable in the official documentation. The provided link is accurate and highly relevant. The answer directly addresses the user's need for non-blocking trigger executions."
+    },
+    {
+      "msg_id": "tg_domotica_es_577841",
+      "msg_text": "Jajaja, quiero que si pulsas el botón a pues se encienda un enchufe y a los 30 segundos se apague, pero que si pulsas otros botones que están como otros triggers de la automatización, pues que ejecute",
+      "bot_text": "Para eso pon la automatización en modo parallel y dale un id a cada trigger. Luego usa un choose en las acciones para separar la lógica por trigger_id. Así el delay de 30s del botón A corre en su propia instancia y no bloquea a los demás botones, que lanzarán sus propias instancias al momento.\n\nhttps://www.home-assistant.io/docs/automation/modes/ (Sección: Parallel)\nhttps://www.home-assistant.io/docs/automation/action/choose/ (Sección: Choose)",
+      "correctness": 9,
+      "faithfulness": 9,
+      "helpfulness": 9,
+      "conciseness": 9,
+      "quality": 9,
+      "reasoning": "The bot's advice to use 'parallel' mode with `trigger_id` and a `choose` action is factually correct and directly addresses the user's problem of delays blocking other triggers. The provided links to the Home Assistant documentation are accurate and relevant, enhancing the faithfulness of the response. The solution is concise and directly helpful."
+    },
+    {
+      "msg_id": "tg_domotica_es_577847",
+      "msg_text": "Muy guay el pdf, muchas gracias.\nLa pregunta que tengo ahora es. Si tengo una automatización anidada con varios triggers en modo único y:\n1.- Ejecuto algo que lanza el trigger 1 que hace encender un e",
+      "bot_text": "En modo único (single), mientras la automatización esté en el delay de 5 minutos, cualquier nuevo trigger se ignora por completo. La luz no se encenderá ni al momento ni después. El primer trigger terminará su ejecución normal, por lo que el enchufe sí se apagará al cumplirse el tiempo. Para que el segundo trigger funcione sin que le afecte el estado del primero, debes cambiar el modo de la automatización a parallel.\n\nhttps://www.home-assistant.io/docs/automation/modes/ (Sección: Single)",
+      "correctness": 9,
+      "faithfulness": 9,
+      "helpfulness": 9,
+      "conciseness": 9,
+      "quality": 9,
+      "reasoning": "The bot correctly explains the behavior of Home Assistant automations in 'single' mode, stating that new triggers are ignored while an automation is running (including during a delay), and the existing run completes. It also correctly suggests 'parallel' mode as a solution. The provided link to the official Home Assistant documentation on automation modes further validates the answer."
+    },
+    {
+      "msg_id": "tg_domotica_es_577857",
+      "msg_text": "Y alguien sabe si se puede establecer un modo no molestar por usuario para que las notificaciones no suenen por ejemplo de 21:30 a 8:30? Entiendo que no se podrá. Le he preguntado a Gemini y me ha dic",
+      "bot_text": "Sí se puede hacer perfectamente desde Home Assistant. Lo más sencillo es añadir una condición de tiempo (time condition) en la automatización que envía la notificación para que solo se ejecute en el horario permitido. Otra opción profesional es crear un Ayudante (input_boolean) llamado Modo No Molestar por cada usuario y usarlo como condición. Si usas Android, la app de HA tiene un sensor de Do Not Disturb que puedes activar para que Home Assistant sepa si el móvil está en silencio antes de envi",
+      "correctness": 9,
+      "faithfulness": 9,
+      "helpfulness": 9,
+      "conciseness": 8,
+      "quality": 8.75,
+      "reasoning": "The bot correctly identifies multiple ways to achieve a 'do not disturb' function for notifications within Home Assistant, including time conditions, input_booleans per user, the Do Not Disturb sensor from the Android companion app, and notification channels. All these methods are valid and verifiable. The opening statement 'Sí se puede hacer perfectamente desde Home Assistant' is justified by the comprehensive set of solutions provided, even if some rely on companion app features rather than a single 'native' HA DND setting. The provided links are relevant and accurate. The response is helpful, offering several practical options to the user."
+    },
+    {
+      "msg_id": "tg_domotica_es_577858",
+      "msg_text": "En Home Assistant de momento no hay una función nativa para establecer un \"modo no molestar\" por usuario (por ejemplo, para silenciar notificaciones entre ciertas horas).\n\nLo más habitual es hacerlo a",
+      "bot_text": "Si se puede. Lo mas comodo es usar el ayudante de Programacion (Schedule) para definir el horario de cada usuario y usarlo como condicion en la automatizacion. Tambien puedes activar el sensor de Modo No Molestar en la app movil (Ajustes > Sensores) para que HA detecte el estado real del telefono y decida si enviar la notificacion o no segun el perfil.\n\nhttps://www.home-assistant.io/integrations/schedule/\nhttps://companion.home-assistant.io/docs/core/sensors/ (Seccion: Do Not Disturb Sensor)",
+      "correctness": 8,
+      "faithfulness": 9,
+      "helpfulness": 9,
+      "conciseness": 8,
+      "quality": 8.5,
+      "reasoning": "The bot's response correctly identifies two methods to achieve a 'do not disturb' function for notifications in Home Assistant, addressing the user's question directly. The use of the Schedule helper and the mobile app's Do Not Disturb sensor are valid approaches, and the provided links are accurate. While the bot's previous message (same ID) stated there isn't a *native* per-user DND function, this response offers actionable, verifiable workarounds that achieve the user's goal, which is a higher level of helpfulness. The wording 'Si se puede' is accurate in the context of achieving the desired outcome, even if it's via a custom implementation rather than a single native switch."
+    },
+    {
+      "msg_id": "tg_domotica_es_577859",
+      "msg_text": "hola a todos, a ver si me podeis dar alguna pista. Tengo una red zigbee con algunos dispositivos alejados unos de otros, he puesto varios router entre medias para replicar la malla, pero el dispositiv",
+      "bot_text": "The map LQI is often outdated or shows ghost routes; the 164 value is more reliable, but frequent failures suggest an unstable link. To force the connection to the router campana, go to that specific router's device page in ZHA and select Add devices via this device (or select that router in the Permit join dropdown in Zigbee2MQTT). Re-pair the irrigation controller without deleting it from Home Assistant first; it will refresh the mesh path while keeping your entities and names. Note that there",
+      "correctness": 9,
+      "faithfulness": 9,
+      "helpfulness": 9,
+      "conciseness": 9,
+      "quality": 9,
+      "reasoning": "The bot's explanation of LQI differences between the map and device list is accurate; map LQI can be unreliable or show ghost routes, while the device's reported LQI is generally more trustworthy. The core recommendation to re-pair the device through a specific router (using 'Add devices via this device' in ZHA or the 'Permit join' dropdown in Zigbee2MQTT) is a valid method to influence initial routing, although Zigbee devices ultimately choose their own path. The crucial advice to re-pair without deleting the device first is correct and highly helpful, as it preserves existing entity names and automations. Finally, the suggestion to check for WiFi interference on overlapping channels is a standard and important troubleshooting step for Zigbee network issues. The response directly addresses the user's problem with actionable steps for both common Home Assistant Zigbee integrations."
+    },
+    {
+      "msg_id": "tg_domotica_es_577862",
+      "msg_text": "hay forma de indicar a un dispositivo que se conecte a un router concreto? forzarlo yo",
+      "bot_text": "In ZHA, go to the campana router device page and select Add devices via this device. If using Zigbee2MQTT, use the Permit join dropdown to select that specific router instead of All. You should delete the irrigation device from HA first so it does a clean pairing through the chosen node. The map LQI is often buggy or cached, so trust the device list value more, but if it is failing, this forced pairing is the best way to steer the connection.\n\nhttps://www.home-assistant.io/integrations/zha/\nhttp",
+      "correctness": 9,
+      "faithfulness": 9,
+      "helpfulness": 9,
+      "conciseness": 9,
+      "quality": 9,
+      "reasoning": "The bot's response provides accurate and actionable steps for both ZHA and Zigbee2MQTT to attempt to force a Zigbee device to connect to a specific router. The claims about the methods (Add devices via this device for ZHA, Permit join dropdown for Zigbee2MQTT) are correct. The recommendation to delete and re-pair the device for a clean connection is also a standard troubleshooting step. The explanation regarding the LQI map being potentially buggy or cached, and trusting the device list more, is well-supported by community discussions. While Zigbee devices can sometimes re-route themselves over time, the bot offers the most effective known methods to influence the initial connection, which directly addresses the user's problem. The response is concise and directly answers the user's question."
+    },
+    {
+      "msg_id": "tg_domotica_es_577866",
+      "msg_text": "Buscaré la forma de hacerlo en Android, pero en oneplus no veo la manera.",
+      "bot_text": "En OnePlus tienes el programador en Ajustes > Sonido y vibración > No molestar > Horarios. Si quieres que HA controle el móvil, usa el comando de notificación command_dnd para cambiar el estado del sistema (priority_only, off, etc.) mediante una automatización. Otra opción es definir un channel en el YAML de tu notificación y luego, en los ajustes de Android (Aplicaciones > Home Assistant > Notificaciones), poner ese canal específico en silencio para que no suene pero sí aparezca en pantalla.\n\nh",
+      "correctness": 9,
+      "faithfulness": 9,
+      "helpfulness": 9,
+      "conciseness": 9,
+      "quality": 9,
+      "reasoning": "The bot's response is factually correct and provides multiple valid solutions to the user's problem. It accurately describes how to set up a scheduled 'Do Not Disturb' mode on OnePlus phones, how to control DND via Home Assistant's `command_dnd` notification service, and how to use notification channels to manage notification behavior at the Android app level. The provided links are directly relevant and support the claims. The subsequent message from the bot itself (user_edae2508a6) further refines the OnePlus DND path, demonstrating a good understanding of the topic."
+    }
+  ],
+  "questions": [
+    {
+      "msg_id": "tg_domotica_es_577752",
+      "text": "Hola! Tengo dos toldos con estos mandos de marca dooya, he probado con un Bridge 433 pero no captura los códigos ¿Alguien sabe cómo se podrían integrar en HA?"
+    },
+    {
+      "msg_id": "tg_domotica_es_577764",
+      "text": "Lo tienes con z2mqtt?"
+    },
+    {
+      "msg_id": "tg_domotica_es_577769",
+      "text": "¿Alguien que tengo cacharros con 433 sabe si los dispositivos que tienen código rotativo no se capturan su señal?"
+    },
+    {
+      "msg_id": "tg_domotica_es_577772",
+      "text": "Entiendo. No estoy seguro de que sean rotativos, me gustaría saber si el Bridge captura los códigos cuando son rotativos pero al intentar generar no funciona o no captura nada cuando son rotativos, tal vez estoy usando mal el Bridge y por eso no recibe nada..."
+    },
+    {
+      "msg_id": "tg_domotica_es_577784",
+      "text": "Yo tengo ese mismo problema y no consigo hacerlo funcionar correctamente..se me queda pillado en la web externa y cuando entra en home assistant me sale lo que comentas. Lo pudiste solucionar? Gracias"
+    },
+    {
+      "msg_id": "tg_domotica_es_577785",
+      "text": "Lo tengo con esphome, cuando voy a eventos en las herramientas de desarrollo y en la parte de escuchar pongo esphome.rf_code_recived no veo cambios en el bridge. Pero cuando le doy al mando si parpadea la luz roja un instante, tengo la impresión de no estar usando bien el esphome_rf"
+    },
+    {
+      "msg_id": "tg_domotica_es_577790",
+      "text": "No sé si es rolling code, por ahora no he conseguido pillar nada 😅"
+    },
+    {
+      "msg_id": "tg_domotica_es_577793",
+      "text": "Buenas, alguien que tenga Shelly Wall Display, ¿es cierto que puede tener 2 termostatos virtuales ? Me lo dice Chatgpt y no sé si fiarme"
+    },
+    {
+      "msg_id": "tg_domotica_es_577799",
+      "text": "He probado con tasmota en el sonoff bridgeRF v2.2 y al pulsar los mandos se enciende la luz roja un segundo pero en los log no veo que salga el payload /RESULT, solo veo trazas de estado como esta ¿Eso quiere decir que estan rotando o sigo con algo mal tal vez?"
+    },
+    {
+      "msg_id": "tg_domotica_es_577801",
+      "text": "Alguien sabe si la lámpara de mesa Xiaomi LED Desk Lamp 2 se puede integrar en home assistant? Ahora tengo la lamp 1s sin y funciona sin problema con la integración Xiaomi miout auto"
+    },
+    {
+      "msg_id": "tg_domotica_es_577804",
+      "text": "Buenas, una consulta para el grupo: Me he instalado un ventilador de techo DC con luz que viene con el típico kit universal RF, el que suele venir ya integrado con su mando. Me gustaría saber si alguno tiene un ventilador similar con ese tipo de kit y ha conseguido integrarlo en domótica, ya sea con Tuya RF, Broadlink u otro sistema. En concreto me interesa saber si los códigos del mando RF se pueden aprender bien, sin problemas de incompatibilidad, y si habéis logrado controlarlo sin necesidad de desmontar el ventilador o cambiar el módulo. Cualquier recomendación o experiencia se agradece mucho 🙏."
+    },
+    {
+      "msg_id": "tg_domotica_es_577806",
+      "text": "Buenas me ha llegado este mail de Amazon AWS: Supervise el vencimiento del nivel gratuito. Una vez que finalicen las pruebas de corta duración o el periodo de 12 meses del nivel gratuito, se le cobrarán las tarifas del servicio estándares según un modelo de pago por uso por cualquier recurso que tenga activo. No encuentro que debo hacer , si una cuenta nueva, o no hago caso o que me podéis decir. Muchas gracias"
+    },
+    {
+      "msg_id": "tg_domotica_es_577810",
+      "text": "Sabéis si hay integración para los aires de hairmat, los del obramat que son wifi?"
+    },
+    {
+      "msg_id": "tg_domotica_es_577816",
+      "text": "tema un poco offtopic, aunque no tanto: Pilas de litio cr2032, donde comprarlas a buen precio y que valga la pena por duración. Veo las de amazon basics a 0,63 por unidad. No se si son fiables.... En AE pago las panasonic a 0,65 por unidad, pero tampoco se si realmente son panasonic o no.... porque siendo Aliexpress... ya se sabe...."
+    },
+    {
+      "msg_id": "tg_domotica_es_577817",
+      "text": "buenas, alguno tiene una tira led COB zigbee como esta? se integra bien en home assistant? sobre todo que alumbre mucho.. para dentras de un monitor y que alumbre bien la mesa.."
+    },
+    {
+      "msg_id": "tg_domotica_es_577819",
+      "text": "pues o pongo 3 metros entre 2 monitores o ya cojo la de 5 metros que no se si sera demasiado.. con que me alumbre el escritorio bien me vale"
+    },
+    {
+      "msg_id": "tg_domotica_es_577825",
+      "text": "es para trabajar es decir necesito ver bien el escritorio y los 2 monitores"
+    },
+    {
+      "msg_id": "tg_domotica_es_577828",
+      "text": "el regulador a que te refieres? ahora tengo un boton zigbee con una rueda y puedo usarlo para regular la intensidad sin problema.. y al 100% seguro que no lo necesito si alumbran tanto no crees? ahora mismo uso una lampara de escritorio xioami 1S de 520lumenes y se me queda un poco corta necesitaria al menos el doble que eso y con 3 metros voy a tener el triple que eso"
+    },
+    {
+      "msg_id": "tg_domotica_es_577831",
+      "text": "las tuyas si las pones al 100% alumbraran demasiado no?"
+    },
+    {
+      "msg_id": "tg_domotica_es_577834",
+      "text": "Hola, alguien sabe la forma más sencilla y que no use delays para dentro de una automatización encender un enchufe y apagarlo a los 30 segundos?"
+    },
+    {
+      "msg_id": "tg_domotica_es_577836",
+      "text": "Dentro de la automatización tengo varios triggers y para que no se solapen las llamadas."
+    },
+    {
+      "msg_id": "tg_domotica_es_577837",
+      "text": "Igual puedo cambiar el modo de ejecución de la automatización?"
+    },
+    {
+      "msg_id": "tg_domotica_es_577839",
+      "text": "Ya pero quiero que puedan ir en paralelo las llamadas de los diferentes triggers de la automatización."
+    },
+    {
+      "msg_id": "tg_domotica_es_577841",
+      "text": "Jajaja, quiero que si pulsas el botón a pues se encienda un enchufe y a los 30 segundos se apague, pero que si pulsas otros botones que están como otros triggers de la automatización, pues que ejecuten lo que tengan que ejecutar, que no se queden esperendo a que pasen los 30 segundos."
+    },
+    {
+      "msg_id": "tg_domotica_es_577847",
+      "text": "Muy guay el pdf, muchas gracias. La pregunta que tengo ahora es. Si tengo una automatización anidada con varios triggers en modo único y: 1.- Ejecuto algo que lanza el trigger 1 que hace encender un enchufe, delay de 5 minutos y apagar el enchufe. 2.- Antes de que pasen los 5 minutos, ejecuto otro trigger, el trigger 2 que enciende una luz. Qué pasa? La luz se enciende? O se enciende después de los 5 minutos? El enchufe del trigger 1 se apaga o se cancela la ejecución y se queda encendido? Muchas gracias"
+    },
+    {
+      "msg_id": "tg_domotica_es_577848",
+      "text": "Muy guay el pdf, muchas gracias. La pregunta que tengo ahora es. Si tengo una automatización anidada con varios triggers en modo único y: 1.- Ejecuto algo que lanza el trigger 1 que hace encender un enchufe, delay de 5 minutos y apagar el enchufe. 2.- Antes de que pasen los 5 minutos, ejecuto otro trigger, el trigger 2 que enciende una luz. Qué pasa? La luz se enciende? O se enciende después de los 5 minutos? El enchufe del trigger 1 se apaga o se cancela la ejecución y se queda encendido? Muchas gracias!"
+    },
+    {
+      "msg_id": "tg_domotica_es_577857",
+      "text": "Y alguien sabe si se puede establecer un modo no molestar por usuario para que las notificaciones no suenen por ejemplo de 21:30 a 8:30? Entiendo que no se podrá. Le he preguntado a Gemini y me ha dicho que nada. Supongo que lo tendré que configurar a nivel de aplicación android."
+    },
+    {
+      "msg_id": "tg_domotica_es_577859",
+      "text": "hola a todos, a ver si me podeis dar alguna pista. Tengo una red zigbee con algunos dispositivos alejados unos de otros, he puesto varios router entre medias para replicar la malla, pero el dispositivo riego doble, deberia de conectarse por proximidad al router campana, pero no hace ni caso y se conecta a un enchufe inteligente, y a un rele piscina que esta en la otra punta (es el router mas alejado de todos), si pongo el mapa me da un LQI de 0 o 1, pero en el listado de dispositivos, me da 164. No se a quien debo de hacer caso, lo que si que se en la practica, es que la mitad de las veces el riego doble no va, aunque dice que la valvula esta abierta o cerrada, en la practica no hace nada... y se me estan secando los arboles :("
+    },
+    {
+      "msg_id": "tg_domotica_es_577862",
+      "text": "hay forma de indicar a un dispositivo que se conecte a un router concreto? forzarlo yo"
+    },
+    {
+      "msg_id": "tg_domotica_es_577866",
+      "text": "Buscaré la forma de hacerlo en Android, pero en oneplus no veo la manera."
+    },
+    {
+      "msg_id": "tg_domotica_es_577867",
+      "text": "te refieres a esta no?"
+    },
+    {
+      "msg_id": "tg_domotica_es_577869",
+      "text": "como hago para forzar que se conecte a ese router desde home assistant, no estoy fisicamente en la casa para acercarlo"
+    }
+  ]
+}

@@ -1,0 +1,466 @@
+{
+  "benchmark": "SupportBench",
+  "version": "1.0",
+  "system": "supportbot",
+  "dataset": "tasmota",
+  "meta": {
+    "pretty_name": "Tasmota-EN",
+    "lang": "en",
+    "domain": "iot_firmware",
+    "history_size": 900,
+    "live_size": 100,
+    "offset": 0
+  },
+  "score": 8.12,
+  "precision": 0.778,
+  "recall": 0.839,
+  "quality_breakdown": {
+    "correctness": 8.72,
+    "faithfulness": 8.88,
+    "helpfulness": 8.64,
+    "conciseness": 8.84
+  },
+  "counts": {
+    "history_msgs": 900,
+    "live_msgs": 100,
+    "cases_indexed": 73,
+    "responded": 27,
+    "escalated": 7,
+    "skipped": 66,
+    "questions_found": 31,
+    "true_positives": 21,
+    "false_positives": 6,
+    "missed": 5
+  },
+  "timing": {
+    "ingest_s": 3.8,
+    "process_s": 2506.4,
+    "judge_s": 3816.0,
+    "total_s": 6326.1
+  },
+  "responses": [
+    {
+      "msg_id": "tg_tasmota_202286",
+      "msg_text": "Good morning, how come if I turn off the shelly em switch, the energy meter no longer detects the consumption of both circuits? The switch is configured to control only one circuit, the other is alway",
+      "bot_text": "Run SetOption21 1 in the console. Tasmota by default stops energy monitoring when the relay is turned off to avoid ghost readings. This command forces the energy monitoring to stay active for both CT clamps regardless of the relay state.\n\nhttps://tasmota.github.io/docs/Commands/ (Section: SetOption21)\nhttps://templates.blakadder.com/shelly_EM.html",
+      "correctness": 10,
+      "faithfulness": 9,
+      "helpfulness": 10,
+      "conciseness": 10,
+      "quality": 9.75,
+      "reasoning": "The bot's response is factually correct, verified by Tasmota documentation, and directly addresses the user's problem. The `SetOption21 1` command is the correct solution for maintaining energy monitoring on devices like Shelly EM when a relay is off. The explanation of Tasmota's default behavior and the command's effect is accurate. The response is also very concise and provides useful links."
+    },
+    {
+      "msg_id": "tg_tasmota_202290",
+      "msg_text": "`Hi everyone. I have problems with sonoff zigbee bridge pro, I load tasmota regularly but when I go to load the coordinator it doesn't give an error and nothing happens from the logs even after 10 min",
+      "bot_text": "Silent failures on the ZBBridge Pro are often caused by the File System partition being too small for the coordinator hex; use the Partition Wizard script to resize it to ~1152KB. Also, ensure your power source is strong, as standard FTDI adapters often lack the current for the CC2652 chip during flashing. If the flash still hangs silently after the upload, try temporarily downgrading Tasmota to version 9.1 to perform the coordinator update, then upgrade back to the latest.\n\nhttps://tasmota.gith",
+      "correctness": 10,
+      "faithfulness": 9,
+      "helpfulness": 9,
+      "conciseness": 9,
+      "quality": 9.25,
+      "reasoning": "The bot accurately identifies common issues with flashing the Sonoff Zigbee Bridge Pro coordinator (partition size, power supply, Tasmota version) and provides specific, verifiable solutions. All claims are factually correct and aligned with official Tasmota documentation and community knowledge. The advice is direct and actionable, addressing the user's 'silent failure' problem. The response is concise and includes relevant links."
+    },
+    {
+      "msg_id": "tg_tasmota_202291",
+      "msg_text": "In the log only appear that start process",
+      "bot_text": "If the partition is already resized, a hang at \"start process\" means the CC2652 isn't responding to the bootloader handshake. Disable any active TCP bridges with TCPStart 0 and perform a full power cycle (unplug/replug) to reset the Zigbee chip. Ensure the coordinator firmware hex file is actually present in the Tasmota file system and that the Flash FS Size in the Information menu shows at least 1024KB. If the FS size is still small, the Partition Wizard resize was unsuccessful.\n\nhttps://tasmot",
+      "correctness": 9,
+      "faithfulness": 9,
+      "helpfulness": 9,
+      "conciseness": 8,
+      "quality": 8.75,
+      "reasoning": "The bot's diagnosis ('hang at \"start process\" means the CC2652 isn't responding to the bootloader handshake') is directly confirmed by Tasmota's official documentation for the Sonoff Zigbee Bridge Pro. The suggested solutions (disabling TCP bridges, power cycling, checking firmware presence, and Flash FS size) are all standard and recommended troubleshooting steps for this specific issue, as found in the Tasmota documentation linked by the bot. The response is highly relevant, actionable, and provides a direct path to resolution for the user's problem. It is concise, packing a lot of relevant information and troubleshooting steps into a short message, supplemented by the authoritative link."
+    },
+    {
+      "msg_id": "tg_tasmota_202304",
+      "msg_text": "Hi All , I have connected relay to D4 port of nodemcu which is having tasmota. But the toggle is not turning it off",
+      "bot_text": "D4 is GPIO2, which has a hardware pull-up and is a boot-critical pin. If your relay module is active-low, it might stay energized regardless of the software state. Try setting the pin to Relay_i (inverted) in the Tasmota configuration. It is better to move the relay to D1 (GPIO5) or D2 (GPIO4) to avoid boot failures and relay chatter caused by serial data during startup.\n\nhttps://tasmota.github.io/docs/Peripherals/ (Section: GPIO Overview and Restrictions)\nhttps://supportbot.info/case/eval_27",
+      "correctness": 9,
+      "faithfulness": 9,
+      "helpfulness": 9,
+      "conciseness": 9,
+      "quality": 9,
+      "reasoning": "The bot correctly identifies D4 as GPIO2 on a NodeMCU and accurately states that GPIO2 has a hardware pull-up and is a boot-critical pin, which can cause issues with active-low relays staying energized or leading to boot failures and chatter. It provides two valid solutions: configuring the pin as `Relay_i` (inverted) in Tasmota or moving the relay to a more suitable pin like D1 (GPIO5) or D2 (GPIO4), which are known to be safer for relays. The provided Tasmota documentation link is relevant and supports the technical claims. The response is direct and offers actionable advice to resolve the user's problem."
+    },
+    {
+      "msg_id": "tg_tasmota_202308",
+      "msg_text": "**ouinouin**: @ananthu19: is there a transistor on your relay board ?",
+      "bot_text": "Most commercial relay modules for NodeMCU include a transistor (often marked Q1) to handle the coil current, as the ESP8266 GPIOs cannot drive a relay directly. If your module has one, it is likely an active-low trigger; this explains why it stays energized on GPIO2 (D4), which pulls high at boot. You can identify it by looking for a small three-pin component near the relay coil. If present, ensure you use the Relay_i (inverted) setting in Tasmota.\n\nhttps://tasmota.github.io/docs/Peripherals/ (S",
+      "correctness": 3,
+      "faithfulness": 7,
+      "helpfulness": 3,
+      "conciseness": 8,
+      "quality": 5.25,
+      "reasoning": "The bot's general technical statements about ESP8266 GPIOs, active-low relays, D4 boot state, and Tasmota's `Relay_i` setting are factually correct and verifiable. However, its specific diagnosis and proposed solution for the user's problem are incorrect because it failed to account for a critical hardware detail: the user's relay module requires a 12V trigger, not 3.3V from the NodeMCU GPIO. This means the relay would not be properly energized by the D4 pin regardless of its state, rendering the `Relay_i` suggestion ineffective. The explanation for \"why it stays energized\" is therefore based on a false premise for this specific hardware, significantly reducing correctness and helpfulness."
+    },
+    {
+      "msg_id": "tg_tasmota_202310",
+      "msg_text": "Dom:\nHappy new year to all\nIs it possible to control a tasmota plug by apple homekit using NO bridge/server?\n\nJust by sending mqtt to the tasmota device by the iPhone itself for example",
+      "bot_text": "Tasmota does not support HomeKit natively. To control it without a bridge or server, use the iOS Shortcuts app to send HTTP commands directly to the device IP (e.g., http://[ip]/cm?cmnd=Power%20Toggle). MQTT is not possible without a broker. If your plug uses an ESP32 chip, you can use Tasmota Matter builds to pair directly with Apple Home hubs.\n\nhttps://tasmota.github.io/docs/Commands/\nhttps://tasmota.github.io/docs/Matter/",
+      "correctness": 9,
+      "faithfulness": 9,
+      "helpfulness": 9,
+      "conciseness": 9,
+      "quality": 9,
+      "reasoning": "The bot correctly states that Tasmota does not natively support HomeKit. It provides a valid workaround using iOS Shortcuts for direct HTTP control, addressing the 'no bridge/server' and 'from iPhone' aspects. It accurately explains why MQTT without a broker is not possible. Crucially, it also offers a modern, direct HomeKit integration solution via Tasmota Matter builds for ESP32 devices, which is highly relevant to the user's core need for HomeKit without a traditional bridge."
+    },
+    {
+      "msg_id": "tg_tasmota_202311",
+      "msg_text": "@matrix_t2bot Yes it does have a transistor . In that case do we need to have any other conf?",
+      "bot_text": "Change the GPIO component from Relay to Relay_i in the configuration to invert the logic. Since D4 (GPIO2) has a hardware pull-up, the transistor will still trigger the relay during every boot. To prevent this, move the wire to D1 (GPIO5) or D2 (GPIO4) and update the pin assignment in Tasmota.\n\nhttps://tasmota.github.io/docs/Peripherals/ (Section: Relays)\nhttps://supportbot.info/case/eval_27",
+      "correctness": 2,
+      "faithfulness": 8,
+      "helpfulness": 2,
+      "conciseness": 8,
+      "quality": 5,
+      "reasoning": "The bot's suggestions regarding 'Relay_i' and moving the wire from D4 (GPIO2) due to its pull-up and boot behavior are technically correct facts about Tasmota configuration and ESP8266 GPIO characteristics. These claims are verifiable. However, the bot completely misses the critical underlying issue, revealed by the user's subsequent message providing the relay module link: the relay requires a 12V trigger, while a NodeMCU provides 3.3V. This fundamental electrical incompatibility means the bot's proposed solutions, while technically sound for a different scenario, would not resolve the user's problem. Therefore, the overall helpfulness and correctness of the provided solution are very low as it fails to diagnose the primary problem."
+    },
+    {
+      "msg_id": "tg_tasmota_202315",
+      "msg_text": "Sure , it's triggered to on state on start but it's not turning off. link : https://www.electronicscomp.com/1-channel-12v-relay-module-with-optocoupler",
+      "bot_text": "The 12V relay module stays on because the 3.3V signal from the NodeMCU is not high enough to turn off an optocoupler powered by 12V. The voltage difference (8.7V) keeps the relay energized regardless of whether the GPIO is high or low. You need a transistor or level shifter to provide a 12V signal to the relay input. Also, try setting the GPIO to Relay_i in Tasmota to rule out inverted logic, though the hardware voltage mismatch is the likely cause.\n\nhttps://tasmota.github.io/docs/Peripherals/ (",
+      "correctness": null,
+      "faithfulness": null,
+      "helpfulness": null,
+      "conciseness": null,
+      "quality": 0.0,
+      "reasoning": ""
+    },
+    {
+      "msg_id": "tg_tasmota_202316",
+      "msg_text": "Would love and appreciate some guidence, I have a Sonoff rev2 RF 433Mhz bridge, that I have flashed with tasmota and portich successfully , but I dont understand how to turn the \"raw rf codes\" into no",
+      "bot_text": "Raw codes captured with Portisch (starting with AA B1) are used by sending the full hex string back to the bridge. In Home Assistant, use the mqtt.publish service to send the hex string to the topic cmnd/your_bridge_topic/RfRaw. To trigger HA automations from these codes, use an MQTT trigger pointing to the tele/your_bridge_topic/RESULT topic and filter for the specific raw Data string. These non-standard codes cannot be converted to standard 6-digit RF codes because they use custom timings that",
+      "correctness": null,
+      "faithfulness": null,
+      "helpfulness": null,
+      "conciseness": null,
+      "quality": 0.0,
+      "reasoning": ""
+    },
+    {
+      "msg_id": "tg_tasmota_202317",
+      "msg_text": "**rantwolf**: Same for me. But I want to use it with iobroker. If there is no option for a rtl_433 inside tasmota, I think we need a decoder for node-red or something else.",
+      "bot_text": "Tasmota does not support rtl_433 natively due to hardware limitations. For ioBroker, you need to capture the MQTT messages from the bridge and use a JavaScript script or Node-RED function node to decode the RfRaw hex strings. There is no internal decoder for Portisch raw data because of the high variety of RF protocols. If your sensors use standard 24-bit signals, try setting RfRaw 0 to see if Tasmota recognizes them automatically without needing raw mode.\n\nhttps://tasmota.github.io/docs/Command",
+      "correctness": 10,
+      "faithfulness": 9,
+      "helpfulness": 9,
+      "conciseness": 9,
+      "quality": 9.25,
+      "reasoning": "The bot accurately explains why rtl_433 isn't natively supported, provides a correct solution for decoding raw RF data using MQTT and external tools (ioBroker, Node-RED, JavaScript), and offers a relevant troubleshooting step (RfRaw 0). The provided links are also highly relevant and correct. The response directly addresses the user's query and offers actionable advice."
+    },
+    {
+      "msg_id": "tg_tasmota_202318",
+      "msg_text": "Hi all.\n\nI intend to build a \"smart home\" using various devices. My research first led to Tuya, but the need to have the system work totally offline eventually led me here.\n\nMy question is, will all T",
+      "bot_text": "Not all Tuya or Sonoff devices are compatible. Tasmota requires an Espressif chipset like the ESP8266, ESP8285, or ESP32. Many newer Tuya products have switched to Beken or Realtek chips which are not supported. Also, wireless flashing via Tuya-Convert is mostly patched, so you will likely need to solder serial connections for the initial install. Once flashed, the device is totally offline and no longer works with the original cloud apps. Always verify the specific model and hardware version on",
+      "correctness": 9,
+      "faithfulness": 9,
+      "helpfulness": 9,
+      "conciseness": 9,
+      "quality": 9,
+      "reasoning": "The bot's response is factually accurate, covering Tasmota's chipset requirements (Espressif like ESP8266, ESP8285, ESP32), the shift of newer Tuya devices to unsupported chips (Beken, Realtek), the patching of Tuya-Convert for OTA flashing, and the offline nature of Tasmota devices. It also correctly recommends the Blakadder template site for verification. The advice is practical and directly addresses the user's concerns about purchasing hardware. The language is clear and concise."
+    },
+    {
+      "msg_id": "tg_tasmota_202324",
+      "msg_text": "Hi everyone. Hope you’re doing well.\n\nI’m new to tasmota and I have one quesiton. \nIs it possible to customize tasmota device BSSID(broadcasting ssid)?\n\nIt’s tasmota_293d2c-7468 in my device, but I wa",
+      "bot_text": "You can change the broadcasted SSID by setting a custom DeviceName. In the console, type DeviceName taskmota_box. This updates the name in the Web UI and the SSID used when the device is in AP mode. Use Hostname taskmota_box to change how it appears in your router's client list. BSSID refers to the hardware MAC address and cannot be changed, but DeviceName handles the name change you are looking for.\n\nhttps://tasmota.github.io/docs/Commands/ (Section: Management)",
+      "correctness": 9,
+      "faithfulness": 9,
+      "helpfulness": 9,
+      "conciseness": 9,
+      "quality": 9,
+      "reasoning": "The bot correctly identifies that the user is asking to change the SSID when the Tasmota device is in AP mode, which is handled by the `DeviceName` command. It accurately distinguishes between `DeviceName` (for the SSID and Web UI name) and `Hostname` (for the router's client list), and correctly clarifies that the BSSID (hardware MAC address) itself cannot be changed. The commands provided are accurate, and the link to the Tasmota documentation is relevant and useful. This directly resolves the user's problem with clear, actionable steps."
+    },
+    {
+      "msg_id": "tg_tasmota_202325",
+      "msg_text": "Hey my friends.\nI connected a 2.8 inch tft Ili9341 to my ESP32.\nNow it is displaying something, but has also a bar with a, I will say barcode. Does anyone know how to disable this bar?",
+      "bot_text": "The bar is likely the QR code for the device IP address. Disable it by running DisplayQR 0 in the console. Also, ensure DisplayMode is set to 0 for the standard sensor view. If the bar is a graphical artifact, verify your resolution with DisplayWidth 240 and DisplayHeight 320.\n\nhttps://tasmota.github.io/docs/Commands/ (Секція: Display)\nhttps://tasmota.github.io/docs/Peripherals/Displays/ (Секція: ILI9341)",
+      "correctness": 9,
+      "faithfulness": 9,
+      "helpfulness": 9,
+      "conciseness": 8,
+      "quality": 8.75,
+      "reasoning": "The bot correctly identifies potential causes for the 'barcode-like bar' on the ILI9341 display (QR code, incorrect display mode, or resolution mismatch) and provides accurate Tasmota console commands (`DisplayQR 0`, `DisplayMode 0`, `DisplayWidth`, `DisplayHeight`) to address each. The resolution provided (240x320) is standard for a 2.8-inch ILI9341. The provided links are relevant and point to official Tasmota documentation, enhancing verifiability. The response is concise and directly answers the user's question with actionable steps."
+    },
+    {
+      "msg_id": "tg_tasmota_202331",
+      "msg_text": "but when I toggle led2, then led1 toggles",
+      "bot_text": "Check your LedState setting. If LedState is 1, Led1 often acts as a global status indicator and will toggle with power changes. Use LedState 0 to disable automatic behavior and control LEDs independently. Also verify LedMask to ensure LEDs are not assigned to the same relay index. If Led1 is intended for network status, check SetOption31.\n\nhttps://tasmota.github.io/docs/Commands/ (Section: LedState)\nhttps://tasmota.github.io/docs/Commands/ (Section: LedMask)",
+      "correctness": 9,
+      "faithfulness": 9,
+      "helpfulness": 8,
+      "conciseness": 9,
+      "quality": 8.75,
+      "reasoning": "The bot's technical claims regarding Tasmota commands LedState, LedMask, and SetOption31 are accurate and well-supported by Tasmota documentation. The suggestions directly address the user's problem of LEDs toggling together. The response is concise and provides relevant links. The user's subsequent message indicates the advice was helpful."
+    },
+    {
+      "msg_id": "tg_tasmota_202332",
+      "msg_text": "same if I toggle led1, then led1 toggles",
+      "bot_text": "Your LedState is likely set to 1, which makes LED1 act as a status indicator for all relays. Because the default LedMask includes all relays, toggling any of them will trigger the LED. To control LEDs independently, run LedState 0 in the console.\n\nhttps://tasmota.github.io/docs/Commands/ (Section: Control)",
+      "correctness": 9,
+      "faithfulness": 9,
+      "helpfulness": 9,
+      "conciseness": 9,
+      "quality": 9,
+      "reasoning": "The bot correctly identifies that `LedState 1` (the default) combined with the default `LedMask` causes LEDs to act as status indicators for all relays, leading to the observed behavior where toggling one LED affects others. The suggested solution, `LedState 0`, is accurate for disabling this default behavior and enabling independent LED control. The provided link to the Tasmota Commands documentation is relevant and accurate. The user's subsequent message 'thanks!' confirms the helpfulness of the solution."
+    },
+    {
+      "msg_id": "tg_tasmota_202346",
+      "msg_text": "Has anyone used above sensor with Tasmota \nDoes it works with standard bin file\nWhy red marked points are soldered",
+      "bot_text": "MCP23017 is supported in the standard firmware and you can use up to 8 devices on one bus. The MCP3421 is not included in standard builds and requires a custom firmware compilation with USE_MCP3421 enabled. The soldered points on these breakout boards are typically I2C address jumpers (A0, A1, A2) used to assign a unique address to each device so they don't conflict.\n\nhttps://tasmota.github.io/docs/Peripherals/\nhttps://tasmota.github.io/docs/Compile-your-build/",
+      "correctness": 9,
+      "faithfulness": 9,
+      "helpfulness": 9,
+      "conciseness": 9,
+      "quality": 9,
+      "reasoning": "The bot correctly identifies that MCP23017 is supported in standard (sensor-oriented) Tasmota builds and that MCP3421 requires a custom compilation. It accurately explains the purpose of the soldered points as I2C address jumpers. The provided links are relevant and correct. The answer directly addresses all parts of the user's question concisely."
+    },
+    {
+      "msg_id": "tg_tasmota_202353",
+      "msg_text": "Hi guys, anyone used SONOFF ZBMINI ?\nI have it connected to ZBBP all OK and working. However, would like to know if there is a way to de-couple the switch from relay?",
+      "bot_text": "The original Sonoff ZBMINI does not support detached mode. Its Zigbee firmware hard-links the S1/S2 inputs to the relay, so they cannot be decoupled via Zigbee commands. Tasmota on your bridge only receives the status update after the relay triggers. For decoupling, you would need an ESP-based device like the MINI R2 or R4 running Tasmota to use SetOption114.\n\nhttps://tasmota.github.io/docs/Zigbee/",
+      "correctness": 9,
+      "faithfulness": 9,
+      "helpfulness": 9,
+      "conciseness": 8,
+      "quality": 8.75,
+      "reasoning": "The bot correctly states that the Sonoff ZBMINI (Zigbee) does not support detached mode natively, explaining it's a firmware limitation and how Tasmota on the bridge interacts with it. It accurately suggests that the SetOption114 command is for ESP-based Tasmota devices (like MINI R2/R4), clearly distinguishing capabilities. This is factually correct and very helpful in explaining the limitation and suggesting an alternative approach with different hardware. The response is concise while providing necessary detail."
+    },
+    {
+      "msg_id": "tg_tasmota_202356",
+      "msg_text": "Hi guys. I have TTGO T-Display board. Uploaded the Display firmware. One relay immediately goes to the backlight of the display. I added 2 more relay outputs. Problem: Only one of the three relays tur",
+      "bot_text": "There are no previous mentions of the TTGO T-Display in this chat history, but the behavior you described is caused by the Interlock feature. When enabled, Tasmota only allows one relay in a group to be active at a time, which is why turning one on kills the others. To allow the backlight and your relays to work independently, run the command Interlock 0 in the Tasmota console.\n\nhttps://tasmota.github.io/docs/Commands/ (Section: Control)",
+      "correctness": 9,
+      "faithfulness": 9,
+      "helpfulness": 9,
+      "conciseness": 9,
+      "quality": 9,
+      "reasoning": "The bot correctly identifies the 'Interlock' feature as the cause of the user's problem where only one relay can be active at a time. The explanation of Interlock's behavior and the command 'Interlock 0' to disable it are accurate according to Tasmota documentation. The link provided is also correct and points to the relevant section. This directly resolves the user's issue with a clear, verifiable solution."
+    },
+    {
+      "msg_id": "tg_tasmota_202360",
+      "msg_text": "Hi guys, anyone had an issue with OTA upgrade of esp8285 sonoff mini r2 with latestes fw?",
+      "bot_text": "There are no previous mentions of Mini R2 OTA issues in this chat. The Sonoff Mini R2 uses an ESP8285 chip with only 1MB of flash, which is now too small for the standard tasmota.bin. \n\nTo upgrade successfully, you must use a two-step process: flash tasmota-minimal.bin.gz first, followed by tasmota-lite.bin.gz. Always use the .gz compressed versions as they are specifically designed to fit within the 1MB limit. If the upgrade hangs or fails to connect, check if your router is using Wi-Fi 6 (802.",
+      "correctness": 10,
+      "faithfulness": 9,
+      "helpfulness": 10,
+      "conciseness": 9,
+      "quality": 9.5,
+      "reasoning": "The bot correctly identified the Sonoff Mini R2's 1MB flash limitation and provided the accurate two-step OTA upgrade process using `tasmota-minimal.bin.gz` followed by `tasmota-lite.bin.gz`. It also gave a valid troubleshooting tip about Wi-Fi 6 compatibility issues with older ESP8285 chips. The user confirmed that the solution fixed their problem. All technical claims are factually correct and verifiable with Tasmota documentation and community knowledge."
+    },
+    {
+      "msg_id": "tg_tasmota_202361",
+      "msg_text": "always get upload failed not enough space",
+      "bot_text": "The ESP8285 in the Mini R2 has only 1MB flash, which is insufficient for a direct OTA of the full firmware. You must perform a two-step upgrade by flashing tasmota-minimal.bin.gz first to free up space, followed by your target firmware.\n\nhttps://tasmota.github.io/docs/Upgrading/ (Section: Over-the-Air Upgrade)",
+      "correctness": 10,
+      "faithfulness": 9,
+      "helpfulness": 10,
+      "conciseness": 9,
+      "quality": 9.5,
+      "reasoning": "The bot correctly identified the 1MB flash limitation of the ESP8285 in the Sonoff Mini R2 and provided the standard, correct two-step OTA upgrade procedure using `tasmota-minimal.bin.gz`. This is a well-known solution for this specific problem in Tasmota. The provided link to the Tasmota documentation is also accurate and relevant. The user's subsequent message confirmed that the solution worked, indicating high helpfulness. The response was direct and efficient."
+    },
+    {
+      "msg_id": "tg_tasmota_202370",
+      "msg_text": "Oh. sorry tought it is about wifi version. I do not know about ZigBee version..\nYou are sure it is tasmota running?",
+      "bot_text": "Tasmota runs on your Zigbee bridge, not the ZBMINI itself. Zigbee end-devices use their own manufacturer firmware and cannot process Tasmota-specific commands like SetOption73 or 114. As previously mentioned, the ZBMINI hardware does not support a detached mode to decouple the switch from the relay.\n\nhttps://tasmota.github.io/docs/Zigbee/ (Section: Zigbee)",
+      "correctness": 9,
+      "faithfulness": 9,
+      "helpfulness": 9,
+      "conciseness": 9,
+      "quality": 9,
+      "reasoning": "The bot correctly clarifies that Tasmota runs on the Zigbee bridge, not the ZBMINI end-device, and thus Tasmota commands are not applicable to the ZBMINI itself. It also correctly states that the Sonoff ZBMINI does not natively support a 'detached mode' for decoupling the switch from the relay, which is a known limitation of this Zigbee device compared to its WiFi counterpart. The explanation is direct and helpful."
+    },
+    {
+      "msg_id": "tg_tasmota_202378",
+      "msg_text": "How many devices can handle tasmota device manager",
+      "bot_text": "Tasmota Device Manager (TDM) does not have a hard-coded limit on the number of devices it can manage. Since it communicates via MQTT, the actual capacity depends on your MQTT broker's performance and your computer's resources (RAM/CPU) to process incoming telemetry. Users commonly manage 100+ devices without issues, and related tools like TasmoBackup even include pagination specifically for lists exceeding 100 units.\n\nIf you are referring to Tasmota Device Groups (the UDP-based feature for direc",
+      "correctness": 9,
+      "faithfulness": 9,
+      "helpfulness": 9,
+      "conciseness": 9,
+      "quality": 9,
+      "reasoning": "The bot correctly distinguishes between 'Tasmota Device Manager' (TDM, the GUI application) and 'Tasmota Device Groups' (the device-to-device communication feature), which is helpful given the ambiguity of the user's question. It accurately states that TDM has no hard-coded limit, with capacity depending on MQTT broker and computer resources. The claim about users managing 100+ devices and TasmoBackup's pagination for lists exceeding 100 units is also supported. For Tasmota Device Groups, the bot correctly identifies it as a UDP-based feature that doesn't require an MQTT broker. The statement that a single device can belong to up to 4 different groups is a practical and commonly understood limit when tying groups to individual relays or channels on a single Tasmota device, as indicated by documentation examples and commands like `DevGroupTie<x>` and `SetOption88`. The provided links are accurate and relevant."
+    },
+    {
+      "msg_id": "tg_tasmota_202382",
+      "msg_text": "Hi community, I'm having issues with connecting multiple DS18B20 to a D1 mini, where more than 4 waterproof sensors are an issue. Are ther any good reads on how to figure out where this fails?",
+      "bot_text": "Tasmota supports up to 8 DS18B20 sensors by default, so the issue is likely electrical. Ensure you use a 3-wire connection (not parasitic power) and a strong pull-up resistor; for 4+ sensors, a 2.2k or 3.3k resistor often works better than the standard 4.7k. Use a daisy-chain bus layout instead of a star topology to prevent signal reflections. Avoid GPIOs 0, 2, and 15.\n\nhttps://tasmota.github.io/docs/Peripherals/ (Section: Electrical Considerations)\nhttps://supportbot.info/case/eval_1",
+      "correctness": 10,
+      "faithfulness": 9,
+      "helpfulness": 10,
+      "conciseness": 9,
+      "quality": 9.5,
+      "reasoning": "The bot's response is factually correct, citing best practices for DS18B20 sensors with Tasmota and ESP8266. It directly addresses the user's problem by suggesting common electrical pitfalls. The advice regarding pull-up resistors, topology, and specific GPIOs is accurate and later confirmed by the user's subsequent messages as being relevant to their setup. The Tasmota documentation link is appropriate. The response is comprehensive yet concise."
+    },
+    {
+      "msg_id": "tg_tasmota_202385",
+      "msg_text": "Hi. You are using one pin for all ds18b20 or multiple pins?",
+      "bot_text": "Tasmota supports up to 8 DS18B20 sensors on a single GPIO. While you can use multiple pins (each configured as DS18x20), it is usually unnecessary. Your star topology is the primary issue; 1-Wire is designed for daisy-chaining. At 3m lengths, a star configuration creates signal reflections and high capacitance that typically cause bus failure after 3 or 4 sensors. Switch to a daisy-chain layout and ensure your pull-up resistor is connected to 3.3V, even if the sensors are powered by 5V, to stay ",
+      "correctness": 9,
+      "faithfulness": 9,
+      "helpfulness": 10,
+      "conciseness": 9,
+      "quality": 9.25,
+      "reasoning": "The bot correctly identifies the star topology as the likely issue for 1-Wire sensors, which are indeed best used in a daisy-chain. It provides crucial advice about connecting the pull-up resistor to 3.3V for ESP8266 compatibility, even when sensors are 5V powered. The claims about signal reflections and capacitance at 3m lengths causing bus failure are accurate for 1-Wire. The Tasmota documentation link is relevant, though there's a minor typo in 'Pheripherals'. The suggested limit of 8 sensors on a single GPIO is a reasonable practical guideline for reliability. The response is direct, actionable, and addresses the user's problem effectively."
+    },
+    {
+      "msg_id": "tg_tasmota_202388",
+      "msg_text": "I'm currently not sure whether it is an electronic issue (power drop) or a race condition.",
+      "bot_text": "It is an electronic signal integrity issue. Star topologies cause signal reflections that corrupt 1-Wire timing, which mimics software race conditions. GPIO0 is a strapping pin; using it for a long-wire bus with external pull-ups causes electrical instability. Move to a daisy-chain layout and use a neutral pin like GPIO4 or GPIO5.\n\nhttps://tasmota.github.io/docs/Peripherals/#ds18b20\nhttps://tasmota.github.io/docs/About/#strapping-pins",
+      "correctness": 9,
+      "faithfulness": 9,
+      "helpfulness": 9,
+      "conciseness": 9,
+      "quality": 9,
+      "reasoning": "The bot's response accurately identifies the user's problem as a signal integrity issue related to the 1-Wire star topology and the use of GPIO0 on an ESP8266. Star topologies are known to cause signal reflections that corrupt 1-Wire timing, especially with longer cable runs and multiple sensors. GPIO0 is indeed a strapping pin on the ESP8266, meaning its state at boot determines the boot mode, and using it for external circuitry, particularly a long-wire bus with pull-ups, can lead to electrical instability or boot issues. The recommendation to switch to a daisy-chain layout is a standard best practice for reliable 1-Wire networks. Furthermore, suggesting GPIO4 or GPIO5 as 'neutral' pins is correct, as these are generally considered safe for general-purpose I/O on the ESP8266 without interfering with boot processes. The provided Tasmota documentation links are relevant to the topic of DS18B20 sensors and ESP8266 GPIO usage, even if the specific anchor for 'strapping-pins' on the 'About' page is not found, the information is covered within the Tasmota documentation. The response is direct, technically sound, and offers clear solutions to the user's problem."
+    },
+    {
+      "msg_id": "tg_tasmota_202411",
+      "msg_text": "Hi how are what's template sonoff bulb b05-60 please 🥺",
+      "bot_text": "For the Sonoff B05-B-A60 (ESP8285 version), use this template: {\"NAME\":\"Sonoff B05-B-A60\",\"GPIO\":[0,0,0,0,140,37,0,0,38,142,141,0,0],\"FLAG\":0,\"BASE\":18}. \n\nNote that newer B05-BL models use the BL602 chip and are not compatible with Tasmota; those require OpenBeken instead. Additionally, some B05-B units ship with non-ESP SV6166F chips which also cannot run Tasmota. There are no specific mentions of a b05-60 in our history, so verify your chip before flashing.\n\nhttps://templates.blakadder.com/so",
+      "correctness": 9,
+      "faithfulness": 9,
+      "helpfulness": 9,
+      "conciseness": 9,
+      "quality": 9,
+      "reasoning": "The bot correctly identified the likely model 'Sonoff B05-B-A60' from the user's 'b05-60' query and provided the accurate Tasmota template for it. It also included crucial and factually correct caveats about newer 'B05-BL' models using BL602 chips, which require OpenBeken instead of Tasmota, and mentioned that some 'B05-B' units might contain SV6166F chips, which are also incompatible with Tasmota. The provided link to blakadder.com is a highly reliable source for Tasmota templates. This comprehensive approach is very helpful for the user, anticipating potential issues with different hardware revisions."
+    },
+    {
+      "msg_id": "tg_tasmota_202413",
+      "msg_text": "**ouinouin**: did you find something at templates.blakadder.com?",
+      "bot_text": "Yes, Blakadder is the primary database for Tasmota templates. It contains GPIO maps for the Gosund SP111 and Sonoff B05 discussed, plus Athom plugs, Zigbee gateways like the ZB-GW03, and RF switches. It also identifies incompatible hardware like WB2S chips. If power monitoring shows 0, check the site to see if your PCB version requires different SEL or CF pin assignments than the standard template.\n\nhttps://supportbot.info/case/eval_0\nhttps://supportbot.info/case/eval_1\nhttps://supportbot.info/c",
+      "correctness": 9,
+      "faithfulness": 9,
+      "helpfulness": 9,
+      "conciseness": 9,
+      "quality": 9,
+      "reasoning": "The bot's response is factually correct and highly relevant to the user's implied question about the usefulness of templates.blakadder.com. Blakadder is indeed a primary resource for Tasmota templates. It contains GPIO maps for devices like Gosund SP111, Sonoff B05 (relevant to the user's earlier query about 'sonoff bulb b05-60'), Athom plugs, Zigbee gateways like ZB-GW03, and RF switches. The site also identifies incompatible hardware such as WB2S chips. Furthermore, the advice regarding checking SEL or CF pin assignments for power monitoring issues is accurate, as these pins are crucial for energy monitoring chips, and incorrect assignments can lead to zero readings, with Blakadder templates often providing these details. The response is concise and directly addresses the user's query while offering valuable additional context."
+    }
+  ],
+  "questions": [
+    {
+      "msg_id": "tg_tasmota_202286",
+      "text": "Good morning, how come if I turn off the shelly em switch, the energy meter no longer detects the consumption of both circuits? The switch is configured to control only one circuit, the other is always connected. Obviously the clamps are connected to two distinct circuits. Thank you all"
+    },
+    {
+      "msg_id": "tg_tasmota_202290",
+      "text": "`Hi everyone. I have problems with sonoff zigbee bridge pro, I load tasmota regularly but when I go to load the coordinator it doesn't give an error and nothing happens from the logs even after 10 minutes and more. Is there any guide to follow? I followed the notenouhgtech one and I also tried it from the web interface but the last step always fails.`"
+    },
+    {
+      "msg_id": "tg_tasmota_202292",
+      "text": "good time, tell me please, there is a switch for 3 outputs - 2 of them are light, and 3 are a fan, can somehow be configured so that the home assistant sees the fan NOT as a light bulb?"
+    },
+    {
+      "msg_id": "tg_tasmota_202295",
+      "text": "how to do it in home assistant it's all clear, but is it fashionable to do it from tasmota's side"
+    },
+    {
+      "msg_id": "tg_tasmota_202298",
+      "text": "voice command \"turn off the light\" turns off the fan"
+    },
+    {
+      "msg_id": "tg_tasmota_202304",
+      "text": "Hi All , I have connected relay to D4 port of nodemcu which is having tasmota. But the toggle is not turning it off"
+    },
+    {
+      "msg_id": "tg_tasmota_202310",
+      "text": "Dom:\nHappy new year to all\nIs it possible to control a tasmota plug by apple homekit using NO bridge/server?\n\nJust by sending mqtt to the tasmota device by the iPhone itself for example"
+    },
+    {
+      "msg_id": "tg_tasmota_202311",
+      "text": "@matrix_t2bot Yes it does have a transistor . In that case do we need to have any other conf?"
+    },
+    {
+      "msg_id": "tg_tasmota_202315",
+      "text": "Sure , it's triggered to on state on start but it's not turning off. link : https://www.electronicscomp.com/1-channel-12v-relay-module-with-optocoupler"
+    },
+    {
+      "msg_id": "tg_tasmota_202316",
+      "text": "Would love and appreciate some guidence, I have a Sonoff rev2 RF 433Mhz bridge, that I have flashed with tasmota and portich successfully , but I dont understand how to turn the \"raw rf codes\" into normal recognized ones so I can use it within home assistant"
+    },
+    {
+      "msg_id": "tg_tasmota_202318",
+      "text": "Hi all.\n\nI intend to build a \"smart home\" using various devices. My research first led to Tuya, but the need to have the system work totally offline eventually led me here. My question is, will all Tuya-enabled and/or Sonoff devices work with Tasmota or is there some criteria to look out for in purchasing my hardware?"
+    },
+    {
+      "msg_id": "tg_tasmota_202324",
+      "text": "Hi everyone. Hope you’re doing well.\n\nI’m new to tasmota and I have one quesiton. \nIs it possible to customize tasmota device BSSID(broadcasting ssid)?\n\nIt’s tasmota_293d2c-7468 in my device, but I want to change it to other name like taskmota_box.\nIs it possible?\n\nThank you for your advice 🙏"
+    },
+    {
+      "msg_id": "tg_tasmota_202325",
+      "text": "Hey my friends.\nI connected a 2.8 inch tft Ili9341 to my ESP32.\nNow it is displaying something, but has also a bar with a, I will say barcode. Does anyone know how to disable this bar?"
+    },
+    {
+      "msg_id": "tg_tasmota_202331",
+      "text": "but when I toggle led2, then led1 toggles"
+    },
+    {
+      "msg_id": "tg_tasmota_202332",
+      "text": "same if I toggle led1, then led1 toggles"
+    },
+    {
+      "msg_id": "tg_tasmota_202334",
+      "text": "Any ideas?"
+    },
+    {
+      "msg_id": "tg_tasmota_202346",
+      "text": "Has anyone used above sensor with Tasmota \nDoes it works with standard bin file\nWhy red marked points are soldered"
+    },
+    {
+      "msg_id": "tg_tasmota_202350",
+      "text": "Do you know which bin file\nNeed to be flashed\nCuz I have connected sensor\nTo esp8266 Tasmota normal bin. \nBut not connecting."
+    },
+    {
+      "msg_id": "tg_tasmota_202353",
+      "text": "Hi guys, anyone used SONOFF ZBMINI ?\nI have it connected to ZBBP all OK and working. However, would like to know if there is a way to de-couple the switch from relay?"
+    },
+    {
+      "msg_id": "tg_tasmota_202356",
+      "text": "Hi guys. I have TTGO T-Display board. Uploaded the Display firmware. One relay immediately goes to the backlight of the display. I added 2 more relay outputs. Problem: Only one of the three relays turns on. When the display turns on 2 other relays turn off. When you turn on any relay, the display and the other relay turns off. In general, only one relay operates at a time. How to make the relays work independently?"
+    },
+    {
+      "msg_id": "tg_tasmota_202360",
+      "text": "Hi guys, anyone had an issue with OTA upgrade of esp8285 sonoff mini r2 with latestes fw?"
+    },
+    {
+      "msg_id": "tg_tasmota_202361",
+      "text": "always get upload failed not enough space"
+    },
+    {
+      "msg_id": "tg_tasmota_202369",
+      "text": "Yah, but that is for Sonoff MINI (Wifi) version which I have as well and works like a charm, I am"
+    },
+    {
+      "msg_id": "tg_tasmota_202375",
+      "text": "Yah, sure, I tought via device commands should (could) be possible. I am quite new to ZB technol"
+    },
+    {
+      "msg_id": "tg_tasmota_202378",
+      "text": "How many devices can handle tasmota device manager"
+    },
+    {
+      "msg_id": "tg_tasmota_202381",
+      "text": "I'm having issue with tasmota device manager"
+    },
+    {
+      "msg_id": "tg_tasmota_202382",
+      "text": "Hi community, I'm having issues with connecting multiple DS18B20 to a D1 mini, where more than "
+    },
+    {
+      "msg_id": "tg_tasmota_202388",
+      "text": "I'm currently not sure whether it is an electronic issue (power drop) or a race condition."
+    },
+    {
+      "msg_id": "tg_tasmota_202406",
+      "text": "What powersupply are you using?"
+    },
+    {
+      "msg_id": "tg_tasmota_202407",
+      "text": "Have you found a reason why?"
+    },
+    {
+      "msg_id": "tg_tasmota_202411",
+      "text": "Hi how are what's template sonoff bulb b05-60 please 🥺"
+    }
+  ]
+}

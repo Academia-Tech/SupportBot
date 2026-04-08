@@ -1,0 +1,491 @@
+{
+  "benchmark": "SupportBench",
+  "version": "2.0",
+  "system": "supportbot",
+  "dataset": "ua_ardupilot",
+  "meta": {
+    "pretty_name": "Ardupilot-UA",
+    "lang": "uk",
+    "domain": "uav_drone_systems",
+    "history_size": 900,
+    "live_size": 100,
+    "offset": 0
+  },
+  "eval_version": "v2_chunked",
+  "score": 7.76,
+  "quality": 8.38,
+  "precision": 1.0,
+  "recall": 0.927,
+  "quality_breakdown": {
+    "correctness": 9,
+    "helpfulness": 7.84,
+    "specificity": 8.71,
+    "necessity": 7.95
+  },
+  "counts": {
+    "history_msgs": 900,
+    "live_msgs": 100,
+    "cases_indexed": 132,
+    "responded": 38,
+    "escalated": 1,
+    "skipped": 61,
+    "redundant": 0,
+    "missed": 3
+  },
+  "timing": {
+    "ingest_s": 7.4,
+    "process_s": 2298.7,
+    "judge_s": 228.3,
+    "total_s": 2534.4
+  },
+  "cost": {
+    "input_tokens": 263022,
+    "output_tokens": 7108,
+    "total_tokens": 270130,
+    "cost_usd": 0.3999,
+    "by_model": {
+      "gemini-2.5-pro": {
+        "input": 263022,
+        "output": 7108
+      }
+    }
+  },
+  "responses": [
+    {
+      "msg_id": "tg_ua_ardupilot_7379",
+      "msg_text": "Товариство HELP, VTX AKK long range, на smart audio, підкажіть щодо налаштувань потужності, можливо  хтось .param має?",
+      "bot_text": "Для коректного керування потужністю на VTX AKK Long Range через Smart Audio, ймовірно, знадобиться кастомна прошивка, оскільки стандартні налаштування можуть не працювати. Цей відеопередавач раніше в чаті не згадувався, тому готового файлу .param немає. Можете спробувати стандартні налаштування ArduPilot: VTX_ENABLE в 1 та SERIALx_PROTOCOL в 37 для порту, до якого підключений VTX. Якщо це не допоможе, проблема, швидше за все, у реалізації SmartAudio самим виробником.\n\nhttps://pavelshpagin.github.io/SupportBot/case/4c106480e325.html",
+      "correctness": 9,
+      "helpfulness": 8,
+      "specificity": 8,
+      "necessity": 10,
+      "quality": 8.75,
+      "reasoning": "The bot correctly identifies that AKK VTXs often have non-standard SmartAudio implementations and may require custom firmware. This is confirmed by a human user immediately after. The suggested standard ArduPilot parameters (VTX_ENABLE=1, SERIALx_PROTOCOL=37) are also correct to try as a first step. The sourcing is an internal link, not official documentation."
+    },
+    {
+      "msg_id": "tg_ua_ardupilot_7383",
+      "msg_text": "Доброго дня, хтось може підказати якийсь гарний плейліст чи курс по монтажу реа? Цим займаюся, але самоучка по факту. Хочеться побачити як це роблять професіонали, взяти якісь лайфхаки для поліпшення ",
+      "bot_text": "Це чат, присвячений ArduPilot. Питання монтажу відео тут не обговорюються. Існує багато спеціалізованих курсів та плейлістів на цю тему. Рекомендую пошукати профільні групи для відеомейкерів, там ви отримаєте кращу допомогу.",
+      "correctness": 10,
+      "helpfulness": 8,
+      "specificity": 10,
+      "necessity": 9,
+      "quality": 9.25,
+      "reasoning": "The user asked a question about video editing, which is off-topic for an ArduPilot support group. The bot correctly identified this, politely explained why it's off-topic, and suggested the user seek help in more appropriate, specialized communities. This is a good use of a bot for channel moderation."
+    },
+    {
+      "msg_id": "tg_ua_ardupilot_7391",
+      "msg_text": "Чи витягував хтось телеметрію з Hobbywing ESC 150A v5 в арду, як це зробити?",
+      "bot_text": "Цей ESC раніше в чаті не обговорювався. Документація ArduPilot описує отримання телеметрії з ESC Hobbywing через протокол DroneCAN, але для цього ваша версія ESC повинна мати CAN-інтерфейс. Якщо CAN-порту немає, альтернативою може бути використання протоколу Bidirectional DShot (BDShot), який передає телеметрію по сигнальному дроту мотора.\n\nhttps://pavelshpagin.github.io/SupportBot/case/fb5e1f96d286.html",
+      "correctness": 4,
+      "helpfulness": 3,
+      "specificity": 5,
+      "necessity": 10,
+      "quality": 5.5,
+      "reasoning": "The bot suggests DroneCAN or Bidirectional DShot for getting telemetry from a Hobbywing 150A v5 ESC. My search for 'Hobbywing 150A v5 ArduPilot telemetry' confirms this ESC uses a proprietary protocol on a dedicated port for systems like Futaba S.BUS2, and does not natively support DroneCAN or BDShot for ArduPilot. A human user later confirms this proprietary nature. The bot's advice is incorrect for this specific hardware and therefore unhelpful."
+    },
+    {
+      "msg_id": "tg_ua_ardupilot_7393",
+      "msg_text": "Іменно з цим ESC працює?",
+      "bot_text": "Ці параметри (BATT_MONITOR=9, SERIALx_PROTOCOL=16) є стандартними для отримання телеметрії з ESC по сигнальному дроту в ArduPilot. Однак, з вашим Hobbywing 150A V5 це, ймовірно, не спрацює. Цей ESC підтримує телеметрію, але зазвичай через окремий порт та адаптер для конкретних радіосистем, таких як Futaba S.BUS2 або Mikado VBar. Немає підтвердження, що він підтримує передачу телеметрії по DShot, яка потрібна для роботи з SERIALx_PROTOCOL = 16.",
+      "correctness": 8,
+      "helpfulness": 7,
+      "specificity": 8,
+      "necessity": 8,
+      "quality": 7.75,
+      "reasoning": "The bot correctly refutes a human's suggestion to use `SERIALx_PROTOCOL=16`, stating it likely won't work for the Hobbywing 150A V5. It also correctly identifies that the ESC uses a separate port for specific radio systems. This is accurate. It loses points for speculating about DShot support, which is not confirmed for this ESC's telemetry output."
+    },
+    {
+      "msg_id": "tg_ua_ardupilot_7394",
+      "msg_text": "Не знаю, еск в принципі по одній схемі працюють, в них же є провод телеметрії",
+      "bot_text": "Ні, схеми роботи різні. Деякі ESC дійсно мають окремий провід телеметрії для UART, але багато сучасних передають дані через Bidirectional DShot (BDShot) по основному сигнальному дроту. Ваш Hobbywing, швидше за все, використовує протокол DroneCAN, який підключається до CAN-порту, а не до UART. Головна перевага телеметрії з ESC — отримання обертів моторів для динамічного notch-фільтра, що критично для стабільності польоту.\n\nhttps://pavelshpagin.github.io/SupportBot/case/fb5e1f96d286.html\nhttps://pavelshpagin.github.io/SupportBot/case/2c8ebee6ba10.html\nhttps://pavelshpagin.github.io/SupportBot/case/08d8edfb027b.html",
+      "correctness": 6,
+      "helpfulness": 5,
+      "specificity": 4,
+      "necessity": 3,
+      "quality": 4.5,
+      "reasoning": "The bot correctly explains that different ESCs use different telemetry protocols (UART, BDShot, CAN), which is a good correction to a human's oversimplification. However, it repeats its incorrect assertion that this specific Hobbywing ESC 'most likely' uses DroneCAN. Responding to a helper's statement is also low necessity."
+    },
+    {
+      "msg_id": "tg_ua_ardupilot_7395",
+      "msg_text": "Вітаю, є така камера(гимбал) Tarot\nЯк його можна до herelink підключити?\n\n[Зображення: Текст на зображенні: 5V\nGND\nPWM2\n(SBUS)\nPWM1\nVIDEO\nVGND\nPWM2 (SBUS)\nPWM1\nVIDEO | Елементи на зображенні: На зобра",
+      "bot_text": "Вітаю. Ця камера та система Herelink раніше в чаті не обговорювалися.\n\nДля підключення відеосигналу вам знадобиться зовнішній конвертер з аналогового сигналу (піни VIDEO/VGND) на HDMI, оскільки Herelink приймає тільки цифровий відеосигнал. Якість роботи залежатиме від сумісності конкретного конвертера.\n\nКерувати підвісом можна двома способами:\n\n1.  Через автопілот (рекомендовано): Підключіть пін SBUS підвісу до SBUS-виходу (SBUSo) на польотному контролері. В налаштуваннях ArduPilot потрібно буде налаштувати параметри для керування підвісом (сімейство параметрів MNT). Це дозволить використовувати всі функції автопілота, наприклад, утримання камери на точці інтересу (ROI).\n\n2.  Напряму до Herelink: Підключіть SBUS підвісу до одного з SBUS-виходів на повітряному блоці Herelink. Потім в налаштуваннях самого Herelink потрібно буде призначити кнопки або стіки для керування відповідними каналами SBUS. Цей спосіб простіший, але функціонал буде обмежений прямим керуванням.",
+      "correctness": 10,
+      "helpfulness": 10,
+      "specificity": 10,
+      "necessity": 10,
+      "quality": 10,
+      "reasoning": "The bot provides a comprehensive and entirely correct answer. It correctly identifies that Herelink requires an HDMI input, so an analog-to-HDMI converter is needed for the Tarot gimbal's video. It also correctly outlines the two valid methods for gimbal control: through ArduPilot via SBUSo, or directly from the Herelink's SBUS output. This is excellent, specific, and actionable advice."
+    },
+    {
+      "msg_id": "tg_ua_ardupilot_7396",
+      "msg_text": "В тому то й справа що в нім таякби вивід є але через звичайні налаштувуння порта непрацює(",
+      "bot_text": "Для керування підвісом через SBUS потрібно використовувати спеціальний вихід SBUSo на польотному контролері, а не звичайний UART (SERIAL-порт). Перевірте, що ви підключені саме до SBUSo.\n\nВ ArduPilot увімкніть цей вихід параметром BRD_SBUS_OUT = 1. Потім налаштуйте сам підвіс: встановіть MNT1_TYPE = 7 (BrushlessPWM) та вкажіть RC-канали з пульта для керування, наприклад, MNT1_RC_IN_PITCH для нахилу. Після зміни цих параметрів потрібне перезавантаження контролера.",
+      "correctness": 8,
+      "helpfulness": 1,
+      "specificity": 1,
+      "necessity": 2,
+      "quality": 3,
+      "reasoning": "The bot has misread the conversation. The message it's replying to is from user `e4a92aa03e` about their Hobbywing ESC problem. However, the bot provides an answer related to the gimbal question from user `d864f6a1cd`. While the technical information about setting up an SBUS gimbal in ArduPilot is correct, it's completely unhelpful and confusing as it's directed at the wrong user and problem."
+    },
+    {
+      "msg_id": "tg_ua_ardupilot_7398",
+      "msg_text": "Вітаю. Можливо в когось є схема підключення( гімбал x robot), до польотника?\n\n[Зображення: Елементи на зображенні: На зображенні показаний чорний 3-осьовий підвіс для камери (гімбал)., З гімбалу виход",
+      "bot_text": "Вітаю. Цей гімбал, схоже, XFRobot, і для нього є документація в ArduPilot. Він підключається до польотного контролера через Serial (UART) порт для керування.\n\nДля налаштування потрібно встановити такі параметри:\n*   MNT1_TYPE = 14 (\"XFRobot\")\n*   SERIALx_PROTOCOL = 8 (\"Gimbal\")\n*   SERIALx_BAUD = 115 (або вище, гімбал визначає автоматично)\n\nВам потрібно знайти інструкцію до вашої конкретної моделі, щоб визначити точне призначення дротів для живлення та підключення до RX/TX порту.",
+      "correctness": 10,
+      "helpfulness": 10,
+      "specificity": 10,
+      "necessity": 10,
+      "quality": 10,
+      "reasoning": "The bot correctly identifies the gimbal as a likely XFRobot model. A search for 'ArduPilot XFRobot gimbal' confirms the parameters it provides are exactly correct: MNT1_TYPE = 14, SERIALx_PROTOCOL = 8, and SERIALx_BAUD = 115. This is a perfect, specific, and helpful answer."
+    },
+    {
+      "msg_id": "tg_ua_ardupilot_7403",
+      "msg_text": "Панове, підкажіть будь ласка, як зробити, щоб серва до якої ставиться камера і рухається по пітч, могла одночасно стабілізовуватись (Mount1Pitch) і при цьому з тумблера можна було рухати її в режим ку",
+      "bot_text": "Так, це робиться через функцію \"Mount RP Lock\". Призначте на 3-позиційний тумблер RCx_OPTION = 185. В одному положенні він увімкне стабілізацію відносно горизонту. В інших положеннях камера буде заблокована відносно рами, і тоді іншим каналом, налаштованим як \"Mount Pitch\" (RCy_OPTION = 213), ви зможете задавати потрібний кут для режиму курсової камери або скиду.",
+      "correctness": 10,
+      "helpfulness": 10,
+      "specificity": 10,
+      "necessity": 10,
+      "quality": 10,
+      "reasoning": "The bot provides the correct and standard ArduPilot solution for the user's request. A search for 'ArduPilot Mount RP Lock' confirms that `RCx_OPTION = 185` is the correct function to toggle stabilization, and using another channel for `Mount Pitch` (`RCy_OPTION = 213`) is the right way to combine stabilized and manual control. The advice is perfect."
+    },
+    {
+      "msg_id": "tg_ua_ardupilot_7405",
+      "msg_text": "Питання у тому, як це поєднати з MountPitch? Бо на серву я можу виставити тільки одну функцію - або MountPitch або RCINScaled.",
+      "bot_text": "Вам не потрібно перемикати функцію сервоприводу між MountPitch та RCINScaled. Залиште SERVOx_FUNCTION встановленим для керування підвісом (Mount1 Pitch).\n\nДля перемикання між стабілізацією та ручним керуванням використовуйте допоміжну функцію на перемикачі пульта. Призначте на вільний канал RCx_OPTION = 185 (Mount RP Lock). В одному положенні цього перемикача підвіс буде стабілізуватись відносно горизонту. В іншому — він зафіксується відносно рами, і ви зможете керувати ним вручну.\n\nДля самого ручного керування нахилом призначте інший вільний канал (стік або слайдер) як RCy_OPTION = 213 (Mount Pitch).",
+      "correctness": 10,
+      "helpfulness": 10,
+      "specificity": 10,
+      "necessity": 8,
+      "quality": 9.5,
+      "reasoning": "The user expressed confusion about how one servo can have two functions. The bot correctly clarifies the ArduPilot architecture: the `SERVOx_FUNCTION` is fixed to the mount, while an `RCx_OPTION` (auxiliary function) changes the *behavior* of that mount. This is a crucial and correct explanation that directly addresses the user's misunderstanding."
+    },
+    {
+      "msg_id": "tg_ua_ardupilot_7406",
+      "msg_text": "А мені потрібно, щоб вони обидві підтримувались одночасно на одній серві.",
+      "bot_text": "Саме так і треба робити. Функція сервоприводу (SERVOx_FUNCTION) залишається одна — \"Mount1 Pitch\". А режим роботи самого підвісу ви перемикаєте окремим тумблером на пульті, якому призначено функцію RCx_OPTION = 185 (Mount RP Lock). Цей перемикач змушує автопілот або стабілізувати камеру відносно горизонту, або жорстко фіксувати її відносно рами. При цьому ручне керування нахилом в обох режимах залишається на тому ж каналі, що налаштований як RCy_OPTION = 213 (Mount Pitch).\n\nhttps://ardupilot.org/copter/docs/common-camera-gimbal.html",
+      "correctness": 10,
+      "helpfulness": 9,
+      "specificity": 10,
+      "necessity": 7,
+      "quality": 9,
+      "reasoning": "The user is still confused, and the bot patiently and correctly re-explains the concept. It correctly reiterates that the servo function remains 'Mount1 Pitch' while the mode is switched with an RC option. This time, it provides a link to the official ArduPilot documentation, which is excellent."
+    },
+    {
+      "msg_id": "tg_ua_ardupilot_7409",
+      "msg_text": "скріпти працювати можуть?",
+      "bot_text": "Так, ArduPilot підтримує Lua-скрипти. З їх допомогою можна розширювати функціонал, наприклад, взаємодіяти з периферійними пристроями через серійний порт або створювати власні меню для налаштування на передавачах з протоколом CRSF. Для запуску скриптів потрібно увімкнути параметр SCR_ENABLE=1.",
+      "correctness": 10,
+      "helpfulness": 7,
+      "specificity": 9,
+      "necessity": 3,
+      "quality": 7.25,
+      "reasoning": "The bot correctly answers a helper's question about Lua scripting support in ArduPilot and provides the correct enabling parameter, `SCR_ENABLE=1`. However, responding to a short question from a helper to another user is low necessity and borderline redundant."
+    },
+    {
+      "msg_id": "tg_ua_ardupilot_7410",
+      "msg_text": "Вітаю спільното ! розумію що не по тематиці чату , але чи робив хтось мув з переставленням камери mavic 3t на тушку mavic 3 ent та чи працювало все це діло належним чином \n\nто ж наче і той і той дрон ",
+      "bot_text": "Вітаю. Це питання стосується закритої екосистеми DJI, а не ArduPilot.\n\nТака заміна, найімовірніше, не спрацює. Камери та підвіси в дронах серії Mavic 3 не є взаємозамінними. DJI програмно \"прив'язує\" камеру до конкретної моделі дрона. Навіть якщо фізично роз'єми збігаються, прошивка дрона розпізнає невідповідність обладнання і видасть помилку, не дозволивши злетіти.",
+      "correctness": 10,
+      "helpfulness": 10,
+      "specificity": 10,
+      "necessity": 10,
+      "quality": 10,
+      "reasoning": "The bot correctly identifies the question as off-topic (about DJI hardware). Its advice is also perfectly correct: DJI serializes components like cameras to the mainboard, and swapping them between different models (even within the same family) will not work due to firmware locks. This is accurate information that saves the user from a costly mistake."
+    },
+    {
+      "msg_id": "tg_ua_ardupilot_7411",
+      "msg_text": "на пульті потрібно буде виставити щоб на одному тумблері були 2 канали чи щось таке , один буде ввімкнений перманентно ( стаб гімбала) , а інший змінюватиме вручну його нахил",
+      "bot_text": "Так, ви праві, це налаштовується на самому пульті, наприклад, в EdgeTX/OpenTX. За допомогою логічних перемикачів та міксів можна зробити так, щоб один фізичний тумблер керував кількома RC-каналами одночасно. Це дозволить призначити один канал для перемикання режимів стабілізації, а інший — для ручного керування нахилом.\n\nhttps://pavelshpagin.github.io/SupportBot/case/5be511d9d287.html",
+      "correctness": 10,
+      "helpfulness": 4,
+      "specificity": 7,
+      "necessity": 1,
+      "quality": 5.5,
+      "reasoning": "This response is redundant. A human helper was already giving correct advice about transmitter-side mixing. The bot just chimes in to agree and add some technical terms ('logical switches', 'mixes'). It adds very little value and interrupts a human-to-human conversation."
+    },
+    {
+      "msg_id": "tg_ua_ardupilot_7416",
+      "msg_text": "В перших двох положенях тумблера працює як серва по пітчу, на 3й позиції вмикається стабілізація, але кут так само можна міняти.",
+      "bot_text": "Так, це стандартна поведінка, яка налаштовується через допоміжну функцію. Призначте на ваш 3-позиційний тумблер RCx_OPTION = 185 (Mount RP Lock). У нижньому/середньому положеннях стабілізація буде вимкнена, а у верхньому — увімкнена. При цьому керування кутом нахилу з іншого каналу, налаштованого як \"Mount Pitch\", буде працювати в усіх режимах.\n\nhttps://pavelshpagin.github.io/SupportBot/case/e311d3abba18.html",
+      "correctness": 10,
+      "helpfulness": 3,
+      "specificity": 8,
+      "necessity": 1,
+      "quality": 5.5,
+      "reasoning": "This response is redundant. It's replying to a helper's statement of fact, not a question. Furthermore, it's repeating the exact same advice (`RCx_OPTION = 185`) that it has already given multiple times in the same thread to the original user."
+    },
+    {
+      "msg_id": "tg_ua_ardupilot_7417",
+      "msg_text": "Дякую! А як в пульті відрізати значення зправа і зліва не пропорційно, не через weight? Тобто потрібно зробити типу offset, але з двох сторін.",
+      "bot_text": "Це робиться в налаштуваннях пульта, наприклад, в EdgeTX/OpenTX. Перейдіть на сторінку \"Outputs\" (\"Виходи\"), знайдіть потрібний канал і відредагуйте його параметри \"Min\" та \"Max\". Це дозволить вам несиметрично обмежити хід каналу, встановивши власні кінцеві точки незалежно одна від одної.\n\nhttps://pavelshpagin.github.io/SupportBot/case/5be511d9d287.html\nhttps://pavelshpagin.github.io/SupportBot/case/4e3b05450f62.html\nhttps://pavelshpagin.github.io/SupportBot/case/05b3a41988b8.html",
+      "correctness": 10,
+      "helpfulness": 10,
+      "specificity": 10,
+      "necessity": 10,
+      "quality": 10,
+      "reasoning": "The user asked how to asymmetrically limit servo travel on their transmitter. The bot gives the perfect answer for EdgeTX/OpenTX: go to the 'Outputs' page and adjust the 'Min' and 'Max' values. This is the correct procedure. The user later confirms this worked."
+    },
+    {
+      "msg_id": "tg_ua_ardupilot_7419",
+      "msg_text": "А як крива робиться з двох точок?",
+      "bot_text": "У меню пульта (наприклад, EdgeTX/OpenTX) перейдіть на сторінку \"Curves\" (\"Криві\"). Створіть нову криву, вкажіть тип \"Standard\" або \"Custom\" та встановіть кількість точок (Count) на 2.\n\nПерша точка (на позиції x=-100) визначає вихідне значення при мінімальному положенні стіка, а друга (на x=100) — при максимальному. Налаштувавши ці дві точки, ви фактично задаєте нові мінімальні та максимальні межі. Після цього перейдіть на сторінку \"Inputs\" або \"Mixes\" та для потрібного каналу в полі \"Curve\" виберіть створену вами криву.",
+      "correctness": 10,
+      "helpfulness": 9,
+      "specificity": 10,
+      "necessity": 8,
+      "quality": 9.25,
+      "reasoning": "In response to a human's suggestion, the user asked how to make a 2-point curve. The bot gives a clear, step-by-step guide on how to do this in the 'Curves' menu in EdgeTX/OpenTX. The explanation of setting the two points and applying the curve is accurate and helpful."
+    },
+    {
+      "msg_id": "tg_ua_ardupilot_7421",
+      "msg_text": "Щось не бачу у себе такого на пульті TX12 на EdgeTX.",
+      "bot_text": "Меню \"Curves\" знаходиться в налаштуваннях моделі. Натисніть кнопку [MDL], а потім кнопкою [PAGE] перегортайте сторінки, доки не дійдете до екрана \"CURVES\". Зазвичай він іде після вкладок Inputs, Mixes та Outputs.\n\nЯкщо ви все одно не можете знайти цю сторінку, можливо, її відображення вимкнено в налаштуваннях самої моделі (Enabled Features), де можна обирати, які вкладки показувати.",
+      "correctness": 10,
+      "helpfulness": 10,
+      "specificity": 10,
+      "necessity": 8,
+      "quality": 9.5,
+      "reasoning": "The user couldn't find the 'Curves' menu. The bot provided precise, button-press-level instructions ([MDL] then [PAGE]) for navigating EdgeTX, which is exactly what was needed. It also gave a valid troubleshooting tip about 'Enabled Features'. The user confirmed success shortly after, showing this was perfectly helpful."
+    },
+    {
+      "msg_id": "tg_ua_ardupilot_7424",
+      "msg_text": "Потрібна допомога: osd не виводиться неможу знайти контакт sbus\n\n[Зображення: Текст на зображенні: 4 in 1 ESC 2\nM5 M6 M7 M8\n4 in 1 ESC 1\nVBAT GND CURR TELE M1 M2 M3 M4\nBAT G CUR R5\nCamera\nVBAT GND Vid",
+      "bot_text": "Контакт SBUS знаходиться на роз'ємі \"HD System\".\n\nДля виведення OSD на аналогове відео, підключіть відеопередавач до контакту VO. Якщо у вас цифрова система (DJI, Vista), телеметрія для OSD передається через UART, тому підключіть її до пінів T1/R1 на роз'ємі \"HD System\".\n\nДля приймачів ELRS/TBS, зазначених на схемі, краще використовувати протокол CRSF, підключившись до пінів T2/R2 на окремому роз'ємі \"Receiver\".",
+      "correctness": 10,
+      "helpfulness": 9,
+      "specificity": 10,
+      "necessity": 10,
+      "quality": 9.75,
+      "reasoning": "The bot correctly interprets the user's pinout diagram. It points out the SBUS pin, but more importantly, it correctly advises the user to use the dedicated 'Receiver' port (T2/R2) for their ELRS/TBS receiver (which uses CRSF, not SBUS). It also gives correct advice for both analog (VO pin) and digital (T1/R1 pins) OSD connections. This is excellent, multi-part advice."
+    },
+    {
+      "msg_id": "tg_ua_ardupilot_7426",
+      "msg_text": "Я неможу знайти контакт sbus на стеці",
+      "bot_text": "Контакт SBUS знаходиться на роз'ємі \"HD System\". Однак, для приймачів ELRS/TBS, як показано на схемі, слід використовувати спеціальний порт \"Receiver\" (піни R2/T2), оскільки вони працюють за протоколом CRSF, а не SBUS.\n\nЩодо OSD:\n*   Для аналогового відео: Підключіть відеовихід вашого VTX до контакту VO.\n*   Для цифрової системи (DJI/Vista): Телеметрія для OSD передається через UART. Підключіть вашу систему до пінів T1/R1 на роз'ємі \"HD System\".",
+      "correctness": 10,
+      "helpfulness": 7,
+      "specificity": 10,
+      "necessity": 7,
+      "quality": 8.5,
+      "reasoning": "The user is still confused and asking where the SBUS pin is. The bot correctly repeats its previous advice, emphasizing that for an ELRS/TBS receiver, the user should be using the R2/T2 port with the CRSF protocol, not looking for an SBUS pin. Repeating the correct information is helpful when the user is lost."
+    },
+    {
+      "msg_id": "tg_ua_ardupilot_7429",
+      "msg_text": "Тут незнаю, на фото вище r2i, який це стек",
+      "bot_text": "R2I - це пін для SBUS, він вам не потрібен.\n\nДля приймачів ELRS/TBS використовується протокол CRSF, якому потрібен звичайний UART порт (TX та RX). На вашому фото є відповідні контакти: G R2 T2.\n\nПідключайте TX з приймача на пін R2 польотного контролера, а RX з приймача — на T2. Потім встановіть параметр SERIAL2_PROTOCOL на 23 (RCIN).",
+      "correctness": 10,
+      "helpfulness": 10,
+      "specificity": 10,
+      "necessity": 8,
+      "quality": 9.5,
+      "reasoning": "This is a fantastic response. It cuts through the user's confusion about 'SBUS' and 'R2I'. It correctly tells them to ignore the inverted SBUS pin and use the standard UART port (R2/T2) for their CRSF receiver. It provides the exact wiring (TX->R2, RX->T2) and the correct ArduPilot parameter (`SERIAL2_PROTOCOL = 23`). This is a critical correction that solves the user's problem."
+    },
+    {
+      "msg_id": "tg_ua_ardupilot_7440",
+      "msg_text": "Тут не цей контакт? А він повинен бути\n\n[Зображення: Текст на зображенні: CAM2 G 5V T1 M1 M2 CUR G BAT M3 M4 M5 M6 G BAT\n25 19\nST\nBOOT\n5V G R4 T4 SDA SCL G 5V G R2 T2\n12V G VO T1 R1 T3 R3 G 5V LED BZ-",
+      "bot_text": "Так, це саме ті контакти. Для приймачів ELRS/TBS використовується протокол CRSF, тому вам потрібен звичайний UART порт, яким і є R2 (RX) та T2 (TX). Пін для SBUS вам не потрібен.\n\nПідключайте TX з приймача на пін R2, а RX з приймача — на T2. Після цього встановіть параметр SERIAL2_PROTOCOL = 23.",
+      "correctness": 10,
+      "helpfulness": 7,
+      "specificity": 10,
+      "necessity": 7,
+      "quality": 8.5,
+      "reasoning": "The user is still fixated on the wrong pins. The bot patiently repeats the correct advice for the third time: use the R2/T2 pads for your CRSF receiver and set `SERIAL2_PROTOCOL = 23`. While repetitive, it's necessary given the user's confusion."
+    },
+    {
+      "msg_id": "tg_ua_ardupilot_7443",
+      "msg_text": "Так і він і був там включений і не працювало osd",
+      "bot_text": "Для роботи OSD з цифровою системою, як ваша Vista, потрібно два окремих підключення. Порт R2/T2, куди ви підключили приймач, передає тільки сигнали керування.\n\nЩоб запрацювало OSD, вам потрібно підключити TX та RX з самої Caddx Vista до іншого вільного UART порту на польотному контролері (наприклад, до T1/R1 на тому ж роз'ємі \"HD System\"). Потім для цього нового порту (наприклад, SERIAL1) встановіть параметр SERIAL1_PROTOCOL на 33 (DJI FPV). Також переконайтесь, що OSD_TYPE встановлено на 1.",
+      "correctness": 4,
+      "helpfulness": 3,
+      "specificity": 7,
+      "necessity": 9,
+      "quality": 5.75,
+      "reasoning": "The bot correctly identifies that OSD for a digital system requires a separate UART connection from the RC receiver. It also correctly gives SERIALx_PROTOCOL = 33. However, it gives the wrong parameter for OSD_TYPE, suggesting '1' which is for analog OSDs. The correct value for DJI/MSP OSD is 3 or 5. This error would prevent the user's OSD from working and add to their confusion."
+    },
+    {
+      "msg_id": "tg_ua_ardupilot_7445",
+      "msg_text": "Спробував вбити ось що дало",
+      "bot_text": "Зображення не видно. Для OSD з Caddx Vista потрібно підключити TX та RX з самої Vista до вільного UART порту на польотному контролері.\n\nДля цього UART порту встановіть параметри:\n*   SERIALx_PROTOCOL = 33 (де 'x' - номер порту)\n*   OSD_TYPE = 3\n\nТакож, у меню самих окулярів потрібно увімкнути \"Custom OSD\". Приймач ELRS/TBS при цьому залишається підключеним до іншого UART порту (R2/T2).",
+      "correctness": 10,
+      "helpfulness": 9,
+      "specificity": 9,
+      "necessity": 8,
+      "quality": 9,
+      "reasoning": "The bot corrects its previous mistake and provides the correct parameters for ArduPilot with a Caddx Vista: SERIALx_PROTOCOL = 33 and OSD_TYPE = 3. It also adds the crucial and correct advice to enable 'Custom OSD' in the goggles menu. This is a very helpful and accurate response."
+    },
+    {
+      "msg_id": "tg_ua_ardupilot_7448",
+      "msg_text": "Так це ж бетафлай. А параметри для ардупайлота",
+      "bot_text": "Так, ви праві, це налаштування для Betaflight. Для ArduPilot потрібні інші параметри.\n\nДля приймача ELRS/TBS за протоколом CRSF, підключеного до UART, встановіть SERIALx_PROTOCOL = 23. Для OSD на цифровій системі, як ваша Vista, підключіть її до іншого вільного UART порту та встановіть для нього SERIALx_PROTOCOL = 42 та OSD_TYPE = 5.",
+      "correctness": 7,
+      "helpfulness": 6,
+      "specificity": 8,
+      "necessity": 7,
+      "quality": 7,
+      "reasoning": "The bot correctly recognizes that the user was looking at Betaflight settings and provides parameters for ArduPilot. The parameters it gives (SERIALx_PROTOCOL = 42, OSD_TYPE = 5) are valid for an MSP-based OSD, but they are different from the more standard '33' and '3' it recommended just before, which could be confusing. The advice for the CRSF receiver (PROTOCOL = 23) is correct. It's a decent response but the inconsistency is a minor flaw."
+    },
+    {
+      "msg_id": "tg_ua_ardupilot_7452",
+      "msg_text": "Що може бути",
+      "bot_text": "Оскільки інший юніт працює з тими ж налаштуваннями, проблема, швидше за все, в самому Caddx Vista.\n\nОсь кілька можливих причин:\n\n1.  Прошивка: Спробуйте оновити або перепрошити прошивку на проблемному Vista. Іноді збій прошивки може викликати такі проблеми.\n2.  Налаштування в окулярах: Переконайтеся, що в меню окулярів увімкнено опцію \"Custom OSD\" (або аналогічну). Без цього налаштування телеметрія від польотного контролера не відображатиметься.\n3.  Апаратна несправність: Можливе пошкодження UART-порту (пінів TX/RX) на самому Vista, наприклад, через стрибок напруги. Це поширена проблема, яка призводить до відсутності OSD.",
+      "correctness": 10,
+      "helpfulness": 10,
+      "specificity": 10,
+      "necessity": 10,
+      "quality": 10,
+      "reasoning": "After the user isolates the problem to a specific Vista unit, the bot provides a perfect, structured list of troubleshooting steps: check firmware, check goggles settings, and suspect a hardware failure (damaged UART port). These are the exact logical steps a human expert would suggest. Excellent response."
+    },
+    {
+      "msg_id": "tg_ua_ardupilot_7457",
+      "msg_text": "Ось схема\n\n[Зображення: Текст на зображенні: DJI O4 AIR UNIT PRO\n型 / Model: XXXX\nACES\nDJI HD link (S.Bus) опционально\nSignal GND\nUART TX MSP (подключается к FC RX)\nUART RX MSP (подключается к FC TX)\nP",
+      "bot_text": "Для OSD підключайте сірий (UART TX MSP) та білий (UART RX MSP) дроти до вільного UART порту на польотному контролері (TX до RX, RX до TX). Для цього порту потрібно встановити параметр SERIALx_PROTOCOL = 33.\n\nЖовтий дріт (DJI HD link S.Bus) та коричневий (Signal GND) використовуються для передачі керування від пульта DJI, якщо ви не використовуєте окремий приймач.",
+      "correctness": 10,
+      "helpfulness": 8,
+      "specificity": 9,
+      "necessity": 8,
+      "quality": 8.75,
+      "reasoning": "The bot correctly interprets the user-provided wiring diagram for a DJI O4 unit. It accurately identifies the wires for OSD (MSP TX/RX) and the optional wires for RC control (S.Bus). It also provides the correct ArduPilot parameter (SERIALx_PROTOCOL = 33) for the OSD connection. This is a solid, factual response."
+    },
+    {
+      "msg_id": "tg_ua_ardupilot_7458",
+      "msg_text": "І в мене без S. Bus не працювало оsd на іншому дроні тому щось не то ви говорите",
+      "bot_text": "Розумію, звідки могла виникнути плутанина. Дійсно, деякі елементи OSD, як-от якість зв'язку (RSSI та LQ), залежать від даних з приймача. Без правильно налаштованого приймача польотний контролер не отримує цих даних і не може їх вивести.\n\nОднак в ArduPilot основна телеметрія для OSD (штучний горизонт, висота, швидкість) передається на DJI Air Unit через протокол MSP (сірий та білий дроти) і не залежить від підключення S.Bus. Провід S.Bus призначений виключно для отримання сигналів керування від пульта DJI. Можливо, на вашому іншому дроні була інша прошивка (наприклад, Betaflight), де логіка роботи відрізняється.\n\nhttps://pavelshpagin.github.io/SupportBot/case/2e53ab8872a3.html\nhttps://pavelshpagin.github.io/SupportBot/case/a87d3d581dd9.html",
+      "correctness": 10,
+      "helpfulness": 10,
+      "specificity": 10,
+      "necessity": 10,
+      "quality": 10,
+      "reasoning": "This is an excellent response. The user expresses a common misconception (that S.Bus is required for OSD). The bot correctly and clearly explains that in ArduPilot, OSD telemetry (via MSP) and RC control (via S.Bus) are separate functions. It correctly speculates that the user's previous experience might have been on a different firmware like Betaflight, which is a very insightful point. It correctly addresses the user's confusion."
+    },
+    {
+      "msg_id": "tg_ua_ardupilot_7462",
+      "msg_text": "Оновив , нічого не дало",
+      "bot_text": "Якщо оновлення прошивки не допомогло, а інший юніт з тими ж налаштуваннями працює, то проблема, найімовірніше, апаратна в самому модулі Vista.\n\nПоширеною причиною є вихід з ладу захисних діодів на лініях RX/TX через стрибок напруги. Перевірте пайку дротів UART на самому юніті. Якщо з'єднання надійне, а OSD все одно немає, то модуль, скоріш за все, несправний і потребує ремонту або заміни.",
+      "correctness": 10,
+      "helpfulness": 10,
+      "specificity": 10,
+      "necessity": 8,
+      "quality": 9.5,
+      "reasoning": "Based on the user's troubleshooting (another unit works, firmware update failed), the bot makes the correct logical deduction that the problem is a hardware fault in the Vista unit. It even correctly suggests a common failure mode (damaged protection diodes on RX/TX lines). This is expert-level diagnosis."
+    },
+    {
+      "msg_id": "tg_ua_ardupilot_7464",
+      "msg_text": "Бажаю здоров'я підкажіть може у когось є stl файл нормального поворотника камери на fpv?",
+      "bot_text": "Готових STL-файлів для поворотної камери є багато на сайтах типу Thingiverse, Printables та інших. Шукайте за запитами \"FPV pan tilt\" або \"FPV camera gimbal\". Моделі зазвичай розраховані під стандартні сервоприводи, наприклад 9g.\n\nПісля друку та збірки механізму, вам потрібно буде підключити сервоприводи до вільних PWM-виходів польотного контролера. В ArduPilot налаштування відбувається через параметри MNT_. Спочатку встановіть MNT1_TYPE в \"1\" (для сервоприводів), після чого з'являться інші параметри для налаштування кутів та каналів керування.",
+      "correctness": 10,
+      "helpfulness": 10,
+      "specificity": 9,
+      "necessity": 10,
+      "quality": 9.75,
+      "reasoning": "The bot provides a comprehensive and correct answer to the user's request for an STL file. It correctly suggests searching on Thingiverse/Printables with specific keywords. Crucially, it also provides the correct starting point for the software setup in ArduPilot (MNT1_TYPE = 1), anticipating the user's next question."
+    },
+    {
+      "msg_id": "tg_ua_ardupilot_7467",
+      "msg_text": "Хтось підкаже виробників TX-ів українських, окрім Loki i Bavovna, дякую",
+      "bot_text": "З українських виробників є VTX від StingBee (лінійка Stellar). Також є виробники комплексних рішень, як-от Buntar Aerospace, але вони не продають відеопередавачі окремо.\n\nEleron - це російський БПЛА. Про Loki та Bavovna в чаті згадок не було.",
+      "correctness": 3,
+      "helpfulness": 4,
+      "specificity": 5,
+      "necessity": 10,
+      "quality": 5.5,
+      "reasoning": "This response has major flaws. While it correctly identifies one Ukrainian manufacturer (StingBee), it then makes two significant errors. First, it brings up 'Eleron', a Russian UAV, which is completely irrelevant. Second, it falsely claims 'Про Loki та Bavovna в чаті згадок не було' ('There were no mentions of Loki and Bavovna in the chat'), directly contradicting the user's question which explicitly named them. This demonstrates a severe failure to process the input correctly."
+    },
+    {
+      "msg_id": "tg_ua_ardupilot_7474",
+      "msg_text": "Хтось ловив таку штуку:\nПри польоті без gps ардупілот скидує газ, навіть якщо виставлений граничний airspeed за який не можна виходити ?",
+      "bot_text": "Це робота системи контролю повної енергії (TECS), яка керує тягою та тангажем для підтримки швидкості та висоти. Система намагається тримати крейсерську швидкість (AIRSPEED_CRUISE), а не просто не перевищувати максимальну (AIRSPEED_MAX). Якщо літак має надлишок енергії, наприклад, летить швидше за крейсерську швидкість або вище заданої висоти, TECS зменшить газ.\n\nДля вирішення проблеми потрібно правильно налаштувати параметри TECS, в першу чергу TRIM_THROTTLE та AIRSPEED_CRUISE. Детальна інструкція є в документації ArduPilot.",
+      "correctness": 10,
+      "helpfulness": 10,
+      "specificity": 10,
+      "necessity": 10,
+      "quality": 10,
+      "reasoning": "A perfect response. The bot correctly identifies ArduPilot's Total Energy Control System (TECS) as the cause of the behavior. It accurately explains that TECS targets a cruise speed (AIRSPEED_CRUISE) and will reduce throttle if the plane has excess energy, and correctly points to the relevant parameters for tuning."
+    },
+    {
+      "msg_id": "tg_ua_ardupilot_7475",
+      "msg_text": "При чому це відбувається дуже плавно",
+      "bot_text": "Так, це штатна робота системи контролю повної енергії (TECS). Вона розроблена для плавного керування тягою та тангажем. На плавність реакції впливають параметри THR_SLEWRATE, TECS_TIME_CONST та TECS_THR_DAMP. Зменшення THR_SLEWRATE зробить зміну газу ще плавнішою, але може погіршити точність утримання швидкості.",
+      "correctness": 10,
+      "helpfulness": 10,
+      "specificity": 10,
+      "necessity": 8,
+      "quality": 9.5,
+      "reasoning": "The bot correctly interprets the user's follow-up ('it happens very smoothly') as a feature of the TECS system. It accurately names the specific ArduPilot parameters that control the smoothness of the throttle response (THR_SLEWRATE, TECS_TIME_CONST, TECS_THR_DAMP). This is highly specific and correct information."
+    },
+    {
+      "msg_id": "tg_ua_ardupilot_7480",
+      "msg_text": "Так",
+      "bot_text": "Так, це очікувана поведінка системи контролю повної енергії (TECS), якщо літак має надлишок енергії, наприклад, у пікіруванні. Якщо параметр THR_MIN встановлено на 0, система може повністю прибрати тягу, щоб сповільнитись до крейсерської швидкості AIRSPEED_CRUISE. Якщо така поведінка небажана, можна трохи підняти значення THR_MIN, але це погіршить здатність літака гальмувати. Для літаків з ДВЗ, наприклад, рекомендується встановлювати THR_MIN близько 10, щоб уникнути зупинки двигуна в польоті.",
+      "correctness": 10,
+      "helpfulness": 10,
+      "specificity": 10,
+      "necessity": 9,
+      "quality": 9.75,
+      "reasoning": "Responding to the user's confirmation that the throttle drops to zero, the bot gives another perfect explanation. It correctly identifies the THR_MIN parameter as the setting that allows the throttle to go to zero and correctly advises the user to raise it if this behavior is undesirable, providing a valid example for why this is done on planes with internal combustion engines."
+    },
+    {
+      "msg_id": "tg_ua_ardupilot_7482",
+      "msg_text": "Я просто думав, чи можна це пофіксити параметрами, якщо ні, то прийдеться регулятор свій писати, не складно але впадлу",
+      "bot_text": "Так, це можна налаштувати параметрами. Система контролю повної енергії (TECS) намагається підтримувати крейсерську швидкість (AIRSPEED_CRUISE), а не просто не перевищувати максимальну. Коли літак має надлишок енергії (наприклад, у пікіруванні), TECS зменшує тягу.\n\nЩоб двигун не вимикався повністю, встановіть параметр THR_MIN на невелике позитивне значення (наприклад, 5-10%). Це гарантує, що автопілот не опустить газ нижче цього рівня. Також переконайтеся, що TRIM_THROTTLE правильно налаштований для горизонтального польоту на крейсерській швидкості.",
+      "correctness": 10,
+      "helpfulness": 10,
+      "specificity": 10,
+      "necessity": 10,
+      "quality": 10,
+      "reasoning": "The bot correctly reassures the user that the issue can be fixed with parameters and doesn't require writing a new controller. It provides a concise and accurate summary of the solution: adjust THR_MIN and ensure TRIM_THROTTLE is set correctly. This is a perfect, confidence-building response."
+    },
+    {
+      "msg_id": "tg_ua_ardupilot_7485",
+      "msg_text": "В тому і прикол що по ekf що в messages нічого немає, наче так і повинно бути",
+      "bot_text": "Так, все вірно. Зменшення газу — це штатна робота системи контролю повної енергії (TECS), а не помилка. Система не повідомляє про це, тому що це нормальна дія для підтримки заданої швидкості, а не збій.",
+      "correctness": 10,
+      "helpfulness": 10,
+      "specificity": 10,
+      "necessity": 9,
+      "quality": 9.75,
+      "reasoning": "The user observes that there are no error messages, inferring the behavior is normal. The bot correctly confirms this inference, explaining that TECS reducing throttle is a normal control action, not a fault, and therefore does not generate warning messages. This is a helpful clarification that reinforces the correct understanding of the system."
+    },
+    {
+      "msg_id": "tg_ua_ardupilot_7491",
+      "msg_text": "Ця проблема що в симуляторі прошивки, що на реальних тестах",
+      "bot_text": "Те, що проблема відтворюється і в симуляторі, і на реальних тестах, підтверджує, що це штатна поведінка логіки автопілота, а не апаратна несправність.\n\nЦе очікувана робота системи контролю повної енергії (TECS), яка керує тягою та тангажем для підтримки заданої швидкості та висоти. Система намагається підтримувати крейсерську швидкість (AIRSPEED_CRUISE), а не просто не перевищувати максимальну. Якщо літак має надлишок енергії (наприклад, летить швидше за крейсерську швидкість або знижується), TECS зменшить тягу, щоб сповільнити його до цільової швидкості. Якщо параметр THR_MIN встановлено на 0, система може повністю вимкнути двигун.\n\nЩоб двигун не вимикався повністю, встановіть параметр THR_MIN на невелике позитивне значення, достатнє для стабільної роботи двигуна на холостих обертах.",
+      "correctness": 10,
+      "helpfulness": 9,
+      "specificity": 10,
+      "necessity": 9,
+      "quality": 9.5,
+      "reasoning": "The bot correctly uses the new information (that the problem is reproducible in the simulator) to confirm that the cause is the control logic (TECS) and not a hardware/sensor issue. It then provides another good summary of the solution. While slightly repetitive, it's a logically sound and helpful response to the user's diagnostic step."
+    },
+    {
+      "msg_id": "tg_ua_ardupilot_7493",
+      "msg_text": "Я грішу на ekf бо нещодавно виявив прям лютий баг дефолтної прошивки",
+      "bot_text": "Так, проблеми з EKF можуть бути причиною, навіть якщо скидання газу — це очікувана поведінка TECS. Нестабільна робота сенсорів, наприклад, компаса через наводки, може викликати помилки EKF, що призводить до непередбачуваної поведінки, аж до зупинки двигунів. Перевірте лог на предмет аномалій EKF, навіть якщо явних повідомлень про помилки немає.\n\nhttps://pavelshpagin.github.io/SupportBot/case/1b73b00bb6be.html",
+      "correctness": 3,
+      "helpfulness": 2,
+      "specificity": 4,
+      "necessity": 7,
+      "quality": 4,
+      "reasoning": "This response is incorrect and unhelpful in this context. After correctly identifying the problem as TECS tuning multiple times, the bot pivots to agree with the user's incorrect suspicion about the EKF. The user's problem (smooth, repeatable throttle reduction on overspeed, reproducible in SITL) is a classic TECS tuning issue, not an EKF fault. By validating the user's guess, the bot sends them on a wild goose chase and undermines its own previous, correct advice."
+    }
+  ],
+  "missed_questions": [
+    {
+      "msg_id": "tg_ua_ardupilot_7384",
+      "text": "Можливо хтось знає групи якісь на цю тему, як наприклад ця по ардупілоту",
+      "reason": "This is a direct follow-up question asking for recommendations for other groups (about video editing). The bot had previously identified the topic as off-topic but did not respond to this specific request for information."
+    },
+    {
+      "msg_id": "tg_ua_ardupilot_7430",
+      "text": "spedix f722",
+      "reason": "The user identifies their specific flight controller model. This is an implicit request for more detailed help, such as a pinout diagram or known issues for that board with ArduPilot. The bot did not respond to this new piece of information."
+    },
+    {
+      "msg_id": "tg_ua_ardupilot_7433",
+      "text": "Ось інша сторона колодка куди DJI вмикається",
+      "reason": "The user provides more information (implicitly, another photo) and describes what it is. This is an implicit request for help interpreting this new information to solve their OSD problem. The bot did not respond."
+    }
+  ],
+  "redundant_responses": []
+}

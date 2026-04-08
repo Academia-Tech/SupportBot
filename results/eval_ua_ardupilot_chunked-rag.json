@@ -1,0 +1,484 @@
+{
+  "benchmark": "SupportBench",
+  "version": "2.0",
+  "system": "chunked-rag",
+  "dataset": "ua_ardupilot",
+  "meta": {
+    "pretty_name": "Ardupilot-UA",
+    "lang": "uk",
+    "domain": "uav_drone_systems",
+    "history_size": 900,
+    "live_size": 100,
+    "offset": 0
+  },
+  "eval_version": "v2_chunked",
+  "score": 6.34,
+  "quality": 7.19,
+  "precision": 0.857,
+  "recall": 0.882,
+  "quality_breakdown": {
+    "correctness": 8.11,
+    "helpfulness": 6.06,
+    "specificity": 6.94,
+    "necessity": 7.63
+  },
+  "counts": {
+    "history_msgs": 900,
+    "live_msgs": 100,
+    "cases_indexed": 0,
+    "responded": 35,
+    "escalated": 0,
+    "skipped": 65,
+    "redundant": 5,
+    "missed": 4
+  },
+  "timing": {
+    "ingest_s": 6.5,
+    "process_s": 1155.6,
+    "judge_s": 113.0,
+    "total_s": 1275.2
+  },
+  "cost": {
+    "input_tokens": 469458,
+    "output_tokens": 3309,
+    "total_tokens": 472767,
+    "cost_usd": 0.6199,
+    "by_model": {
+      "gemini-2.5-pro": {
+        "input": 469458,
+        "output": 3309
+      }
+    }
+  },
+  "responses": [
+    {
+      "msg_id": "tg_ua_ardupilot_7379",
+      "msg_text": "Товариство HELP, VTX AKK long range, на smart audio, підкажіть щодо налаштувань потужності, можливо  хтось .param має?",
+      "bot_text": "Для налаштування VTX через SmartAudio необхідно налаштувати відповідний SERIAL порт. Встановіть параметр `SERIALx_PROTOCOL` (де 'x' - номер порту) на 37, увімкніть `VTX_ENABLE=1` та задайте список потужностей у мВт в параметрі `VTX_POWER_LIST`. Конкретний `.param` файл не потрібен, оскільки ці налаштування універсальні.\nhttps://pavelshpagin.github.io/SupportBot/chunk/chunk_450.html",
+      "correctness": 4,
+      "helpfulness": 3,
+      "specificity": 6,
+      "necessity": 10,
+      "quality": 5.75,
+      "reasoning": "The bot provided generic ArduPilot parameters for SmartAudio VTX setup. While these parameters are technically correct for ArduPilot in general, a human expert immediately pointed out that for the specific 'AKK long range' VTX, a custom firmware is required for it to work properly. The bot's confident assertion that the settings are 'universal' was misleading and unhelpful for the user's specific hardware, as it would likely lead to failure."
+    },
+    {
+      "msg_id": "tg_ua_ardupilot_7383",
+      "msg_text": "Доброго дня, хтось може підказати якийсь гарний плейліст чи курс по монтажу реа? Цим займаюся, але самоучка по факту. Хочеться побачити як це роблять професіонали, взяти якісь лайфхаки для поліпшення ",
+      "bot_text": "Для повного покрокового налаштування рекомендують англомовний YouTube-канал Chris Rosser, у якого також є корисні платні PDF-мануали. З українських каналів згадують Hyperion FPV, також є корисні відео від andyp1per.\nhttps://pavelshpagin.github.io/SupportBot/chunk/chunk_210.html",
+      "correctness": 9,
+      "helpfulness": 6,
+      "specificity": 6,
+      "necessity": 10,
+      "quality": 7.75,
+      "reasoning": "The user asked for courses or playlists on 'монтажу реа' (assembly of 'real' things, likely drones in this context). The bot recommended well-known and respected YouTube channels in the FPV/ArduPilot community (Chris Rosser, andyp1per, Hyperion FPV). The recommendations are correct and relevant. However, the user's follow-up question asking for communities suggests the bot's answer didn't fully satisfy their need."
+    },
+    {
+      "msg_id": "tg_ua_ardupilot_7384",
+      "msg_text": "Можливо хтось знає групи якісь на цю тему, як наприклад ця по ардупілоту",
+      "bot_text": "Згадувалась організація r2d2.org, яка займається складними технічними проєктами. На їхньому сайті можна знайти більше інформації та контакти.\nhttps://pavelshpagin.github.io/SupportBot/chunk/chunk_870.html",
+      "correctness": 8,
+      "helpfulness": 3,
+      "specificity": 2,
+      "necessity": 9,
+      "quality": 5.5,
+      "reasoning": "In response to a user asking for communities similar to the current one, the bot suggested looking at 'r2d2.org'. While this is a real Ukrainian organization involved in relevant technical projects, it is not a community forum or chat group, which is what the user asked for. The suggestion is too high-level and not specific enough to be helpful."
+    },
+    {
+      "msg_id": "tg_ua_ardupilot_7391",
+      "msg_text": "Чи витягував хтось телеметрію з Hobbywing ESC 150A v5 в арду, як це зробити?",
+      "bot_text": "Телеметрію з ESC можна передавати через окремий дріт (UART) або за допомогою Bidirectional DShot (bdshot). Спробуйте налаштувати передачу через bdshot, як описано в документації, і не забудьте правильно виставити тип прошивки в параметрі `SERVO_DSHOT_ESC`.\n\nhttps://pavelshpagin.github.io/SupportBot/chunk/chunk_80.html",
+      "correctness": 2,
+      "helpfulness": 1,
+      "specificity": 3,
+      "necessity": 10,
+      "quality": 4,
+      "reasoning": "The bot gave generic advice (use bdshot or UART) for getting telemetry from a Hobbywing ESC. However, another user later correctly pointed out that ArduPilot does not have reliable, direct support for proprietary Hobbywing telemetry without special converters, and linked to an open GitHub issue on the topic. The bot's advice is therefore incorrect and misleading for this specific hardware, as it presents a non-working solution as viable."
+    },
+    {
+      "msg_id": "tg_ua_ardupilot_7393",
+      "msg_text": "Іменно з цим ESC працює?",
+      "bot_text": "Так, ця комбінація параметрів (`BATT_MONITOR=9` та `SERIALx_PROTOCOL=16`) є правильною для отримання телеметрії з ESC Hobbywing через вільний UART порт.\nhttps://pavelshpagin.github.io/SupportBot/chunk/chunk_110.html",
+      "correctness": 0,
+      "helpfulness": 0,
+      "specificity": 8,
+      "necessity": 10,
+      "quality": 4.5,
+      "reasoning": "The bot confidently and incorrectly confirmed that setting `BATT_MONITOR=9` and `SERIALx_PROTOCOL=16` is the correct way to get telemetry from the Hobbywing ESC. As established by an expert user later in the conversation (with a link to a GitHub PR), direct Hobbywing telemetry is not properly supported in ArduPilot. The bot hallucinated a confirmation for a solution that is known to be problematic or non-functional, giving the user false confidence."
+    },
+    {
+      "msg_id": "tg_ua_ardupilot_7395",
+      "msg_text": "Вітаю, є така камера(гимбал) Tarot\nЯк його можна до herelink підключити?",
+      "bot_text": "Connect the gimbal to the flight controller via its PWM or SBUS pins. In ArduPilot, configure a gimbal mount and assign a wheel or joystick on your Herelink to control it by setting the function for the corresponding RC input channel. This will allow for smooth, proportional control instead of fixed positions.\nhttps://pavelshpagin.github.io/SupportBot/chunk/chunk_330.html",
+      "correctness": 10,
+      "helpfulness": 9,
+      "specificity": 6,
+      "necessity": 10,
+      "quality": 8.75,
+      "reasoning": "The bot provided a correct, high-level overview of how to connect a gimbal (like the Tarot in the picture) to a flight controller and control it with Herelink via ArduPilot. The described process (connect to FC, configure mount in ArduPilot, map RC channel) is the standard and correct workflow. The response is in English, while the user is Ukrainian."
+    },
+    {
+      "msg_id": "tg_ua_ardupilot_7396",
+      "msg_text": "В тому то й справа що в нім таякби вивід є але через звичайні налаштувуння порта непрацює(",
+      "bot_text": "Перевірте, чи параметр `MNT1_TYPE` відповідає протоколу вашого підвісу, наприклад \"Tarot Serial\". Також переконайтеся, що `SERIALx_PROTOCOL` налаштовано правильно для керування підвісом, і перевірте правильність підключення дротів TX/RX між підвісом і польотним контролером.\nhttps://pavelshpagin.github.io/SupportBot/chunk/chunk_450.html",
+      "correctness": 0,
+      "helpfulness": 0,
+      "specificity": 0,
+      "necessity": 2,
+      "quality": 0.5,
+      "reasoning": "The bot completely failed to understand the context. The user's message (7396) was a reply in the ongoing discussion about Hobbywing ESC telemetry not working. The bot responded with advice about gimbal settings (`MNT1_TYPE`, 'Tarot Serial'), which was entirely irrelevant to the user's problem. This is a critical context-tracking failure."
+    },
+    {
+      "msg_id": "tg_ua_ardupilot_7398",
+      "msg_text": "Вітаю. Можливо в когось є схема підключення( гімбал x robot), до польотника?",
+      "bot_text": "Вам потрібно знайти документацію до вашого підвісу, щоб ідентифікувати призначення дротів (живлення, земля, сигнал). Для плавного керування, як правило, сигнальний дріт підключається до PWM-виходу польотного контролера, а на пульті на цей канал призначається крутилка. Якщо підвіс використовує серійний протокол, підключіть його до вільного UART порту.\n\nhttps://pavelshpagin.github.io/SupportBot/chunk/chunk_330.html",
+      "correctness": 10,
+      "helpfulness": 7,
+      "specificity": 3,
+      "necessity": 10,
+      "quality": 7.5,
+      "reasoning": "The user asked for a wiring diagram for an unknown 'x robot' gimbal. The bot correctly gave generic but sound advice: find the documentation, identify the wires, and connect it either via PWM for simple control or UART for serial protocol control. This is the correct general procedure when dealing with unknown hardware."
+    },
+    {
+      "msg_id": "tg_ua_ardupilot_7403",
+      "msg_text": "Панове, підкажіть будь ласка, як зробити, щоб серва до якої ставиться камера і рухається по пітч, могла одночасно стабілізовуватись (Mount1Pitch) і при цьому з тумблера можна було рухати її в режим ку",
+      "bot_text": "Налаштуйте сервопривід як вихід для нахилу підвісу (наприклад, `SERVOx_FUNCTION` = 8, Mount1 Pitch). Стабілізація буде працювати за замовчуванням. Щоб керувати кутом нахилу з тумблера, призначте відповідний `RCx_OPTION` на 10 (Mount Pitch), що дозволить перемикати задані положення.\n\nhttps://pavelshpagin.github.io/SupportBot/chunk/chunk_370.html",
+      "correctness": 10,
+      "helpfulness": 9,
+      "specificity": 10,
+      "necessity": 10,
+      "quality": 9.75,
+      "reasoning": "The bot provided the exact and correct ArduPilot parameter setup to achieve the user's goal of having a camera servo that both stabilizes and can be manually controlled. It correctly identified that `SERVOx_FUNCTION` should be set for the mount and `RCx_OPTION` should be used to assign a transmitter channel for manual control, and that ArduPilot handles the mixing automatically."
+    },
+    {
+      "msg_id": "tg_ua_ardupilot_7405",
+      "msg_text": "Питання у тому, як це поєднати з MountPitch? Бо на серву я можу виставити тільки одну функцію - або MountPitch або RCINScaled.",
+      "bot_text": "Ви не призначаєте `RCIN` на вихід сервоприводу. Встановіть `SERVOx_FUNCTION` на `Mount1 Pitch`, а для потрібного каналу пульта (наприклад, `RC9_OPTION`) оберіть функцію `Mount Pitch` (10). Логіка підвісу ArduPilot автоматично поєднає стабілізацію з ручним керуванням, яке надходить з обраного каналу.\nhttps://pavelshpagin.github.io/SupportBot/chunk/chunk_330.html",
+      "correctness": 10,
+      "helpfulness": 10,
+      "specificity": 10,
+      "necessity": 9,
+      "quality": 9.75,
+      "reasoning": "The bot correctly addressed the user's specific misconception. The user thought they had to choose between passing an RC input directly or using the mount function. The bot accurately clarified that the ArduPilot architecture handles the mixing of RC control and stabilization when the `SERVOx_FUNCTION` and `RCx_OPTION` are both set to the mount function."
+    },
+    {
+      "msg_id": "tg_ua_ardupilot_7406",
+      "msg_text": "А мені потрібно, щоб вони обидві підтримувались одночасно на одній серві.",
+      "bot_text": "Саме так і працює стандартне налаштування підвісу в ArduPilot. Ви налаштовуєте `SERVOx_FUNCTION` на `Mount Pitch`, а для каналу пульта, яким хочете керувати, встановлюєте `RCy_OPTION` також на `Mount Pitch`. Прошивка автоматично поєднує стабілізацію та ручне керування на одному сервоприводі.\n\nhttps://pavelshpagin.github.io/SupportBot/chunk/chunk_310.html",
+      "correctness": 10,
+      "helpfulness": 7,
+      "specificity": 9,
+      "necessity": 7,
+      "quality": 8.25,
+      "reasoning": "The user was still expressing confusion, and the bot correctly and patiently reiterated that the standard ArduPilot mount setup does exactly what the user is asking for (combining stabilization and manual control on a single servo). While slightly repetitive, it was a necessary clarification given the user's continued doubt."
+    },
+    {
+      "msg_id": "tg_ua_ardupilot_7410",
+      "msg_text": "Вітаю спільното ! розумію що не по тематиці чату , але чи робив хтось мув з переставленням камери mavic 3t на тушку mavic 3 ent та чи працювало все це діло належним чином \n\nто ж наче і той і той дрон ",
+      "bot_text": "Це, швидше за все, не спрацює. DJI програмно прив'язує компоненти до конкретних моделей, і прошивка дрона Mavic 3 Enterprise, ймовірно, не розпізнає камеру від моделі 3T, навіть якщо вони фізично сумісні.\n\nhttps://pavelshpagin.github.io/SupportBot/chunk/chunk_330.html",
+      "correctness": 10,
+      "helpfulness": 10,
+      "specificity": 10,
+      "necessity": 10,
+      "quality": 10,
+      "reasoning": "The bot correctly and wisely advised that swapping a camera from a DJI Mavic 3T to a Mavic 3 Enterprise body would likely fail. It accurately cited DJI's practice of software-pairing components to specific drone models, which prevents such hardware swaps. This is excellent, practical advice that could save the user significant trouble and expense."
+    },
+    {
+      "msg_id": "tg_ua_ardupilot_7411",
+      "msg_text": "на пульті потрібно буде виставити щоб на одному тумблері були 2 канали чи щось таке , один буде ввімкнений перманентно ( стаб гімбала) , а інший змінюватиме вручну його нахил",
+      "bot_text": "Таке налаштування на пульті не потрібне. ArduPilot сам змішує сигнал стабілізації та ручного керування, якщо вихід сервоприводу (`SERVOx_FUNCTION`) та канал пульта (`RCy_OPTION`) налаштовані на функцію `Mount Pitch`.\n\nhttps://pavelshpagin.github.io/SupportBot/chunk/chunk_330.html",
+      "correctness": 10,
+      "helpfulness": 8,
+      "specificity": 8,
+      "necessity": 3,
+      "quality": 7.25,
+      "reasoning": "The bot responded to a helper who was giving suboptimal advice (suggesting complex mixing on the transmitter). The bot correctly pointed out that this is unnecessary and that ArduPilot handles the mixing internally. While responding to a helper is generally low necessity, correcting misinformation is valuable. I've marked it as redundant, but it was a helpful intervention."
+    },
+    {
+      "msg_id": "tg_ua_ardupilot_7417",
+      "msg_text": "Дякую! А як в пульті відрізати значення зправа і зліва не пропорційно, не через weight? Тобто потрібно зробити типу offset, але з двох сторін.",
+      "bot_text": "Це налаштовується в меню \"Outputs\" (Виходи) або \"Servos\" на вашому пульті за допомогою параметрів \"Limits\" (Ліміти) або \"Endpoints\". Вони дозволяють незалежно встановити мінімальне та максимальне значення для каналу, обрізаючи діапазон з обох сторін.\n\nhttps://pavelshpagin.github.io/SupportBot/chunk/chunk_300.html",
+      "correctness": 10,
+      "helpfulness": 9,
+      "specificity": 7,
+      "necessity": 10,
+      "quality": 9,
+      "reasoning": "The user asked how to set non-proportional limits on a transmitter channel. The bot correctly identified that this is done using the 'Limits' or 'Endpoints' settings in the 'Outputs' menu of the transmitter. This is the standard and correct terminology and procedure."
+    },
+    {
+      "msg_id": "tg_ua_ardupilot_7419",
+      "msg_text": "А як крива робиться з двох точок?",
+      "bot_text": "In your transmitter's \"Curves\" menu, create a new curve and specify two points. Set the output (Y) values for the minimum (X=-100) and maximum (X=100) input positions to define your new range. Then, assign this curve to the desired input or mixer channel.\n\nhttps://pavelshpagin.github.io/SupportBot/chunk/chunk_840.html",
+      "correctness": 10,
+      "helpfulness": 6,
+      "specificity": 9,
+      "necessity": 10,
+      "quality": 8.75,
+      "reasoning": "The bot correctly explained how to create a 2-point curve on a transmitter to remap a channel's output. The procedure is accurate. However, the response was in English, while the user was conversing in Ukrainian, which reduces helpfulness."
+    },
+    {
+      "msg_id": "tg_ua_ardupilot_7421",
+      "msg_text": "Щось не бачу у себе такого на пульті TX12 на EdgeTX.",
+      "bot_text": "The \"Curves\" menu is a separate page within the model settings on EdgeTX. Press the 'MDL' button, then use the 'PAGE' button to navigate through the screens until you find the 'CURVES' page. You can find more detailed instructions in the official EdgeTX manual.\n\nhttps://pavelshpagin.github.io/SupportBot/chunk/chunk_370.html",
+      "correctness": 10,
+      "helpfulness": 9,
+      "specificity": 10,
+      "necessity": 10,
+      "quality": 9.75,
+      "reasoning": "The user couldn't find the 'Curves' menu on their TX12 with EdgeTX. The bot gave precise instructions (MDL button, then PAGE button) to navigate to the correct menu. The user confirmed in a subsequent message that this worked. The advice was perfect, but again, it was delivered in English to a Ukrainian-speaking user."
+    },
+    {
+      "msg_id": "tg_ua_ardupilot_7424",
+      "msg_text": "Потрібна допомога: osd не виводиться неможу знайти контакт sbus",
+      "bot_text": "The SBUS pin is located on the connector for the \"HD System\" (DJI/Vista), as shown in the lower right of the diagram. For OSD to work with a digital system, you must also connect the TX/RX pins from that same connector and correctly configure the corresponding serial port.\nhttps://pavelshpagin.github.io/SupportBot/chunk/chunk_380.html",
+      "correctness": 10,
+      "helpfulness": 6,
+      "specificity": 9,
+      "necessity": 10,
+      "quality": 8.75,
+      "reasoning": "The bot correctly interpreted the provided wiring diagram, locating the SBUS pin on the HD System connector. It also correctly noted that for digital OSD, the TX/RX pins must be connected. The user was confused about SBUS being related to OSD, and the bot's answer, while technically correct, didn't explicitly clear up that confusion. The response was also in English."
+    },
+    {
+      "msg_id": "tg_ua_ardupilot_7426",
+      "msg_text": "Я неможу знайти контакт sbus на стеці",
+      "bot_text": "Для визначення контакту SBUS, зверніться до схеми розпіновки вашого польотного контролера. Зазвичай він підписаний як `SBUS`, `RCIN`, або ви можете використати `RX` пін вільного UART, налаштувавши відповідний серійний порт для RC-входу.\n\nhttps://pavelshpagin.github.io/SupportBot/chunk/chunk_450.html",
+      "correctness": 10,
+      "helpfulness": 9,
+      "specificity": 6,
+      "necessity": 9,
+      "quality": 8.5,
+      "reasoning": "The user was still unable to find an SBUS pin. The bot gave excellent, correct, and empowering advice: any free UART RX pin can be used for SBUS input in ArduPilot by configuring the corresponding serial port. This is a key piece of information that unblocks the user."
+    },
+    {
+      "msg_id": "tg_ua_ardupilot_7428",
+      "msg_text": "Де він тут?",
+      "bot_text": "Ви можете використати будь-який вільний пін `RX` для SBUS, наприклад, контакт `R2`. На вашій платі він розташований з правого боку, між контактами `G` та `T2`. Після підключення потрібно буде налаштувати відповідний серійний порт для RC-входу в параметрах.\n\nhttps://pavelshpagin.github.io/SupportBot/chunk/chunk_840.html",
+      "correctness": 10,
+      "helpfulness": 10,
+      "specificity": 10,
+      "necessity": 10,
+      "quality": 10,
+      "reasoning": "This is an excellent response. The user provided a photo of their board, and the bot correctly identified a specific, usable pin (`R2`) for their purpose (SBUS input), described its location, and mentioned that it would need software configuration. This is highly specific and actionable."
+    },
+    {
+      "msg_id": "tg_ua_ardupilot_7429",
+      "msg_text": "Тут незнаю, на фото вище r2i, який це стек",
+      "bot_text": "\"R2I\", ймовірно, означає вхідний пін R2 (RX2), який можна використовувати для SBUS, як згадувалося раніше. Щоб ідентифікувати ваш стек, шукайте будь-які назви виробника або номери моделей, надруковані на платах.\n\nhttps://pavelshpagin.github.io/SupportBot/chunk/chunk_840.html",
+      "correctness": 10,
+      "helpfulness": 3,
+      "specificity": 7,
+      "necessity": 2,
+      "quality": 5.5,
+      "reasoning": "This response was redundant. It was addressed to a helper who was confirming the bot's previous advice. The bot's response (confirming that 'R2I' means RX2 and suggesting to look for model numbers) added very little new information and was an unnecessary interruption in a conversation between other users."
+    },
+    {
+      "msg_id": "tg_ua_ardupilot_7430",
+      "msg_text": "spedix f722",
+      "bot_text": "To locate the SBUS pin, search for the \"Spedix F722 wiring diagram\" online. Look for a pad labeled `SBUS` or `RCIN`, or use an available `RX` pad on a free UART, then configure the corresponding serial port for RC input.\n\nhttps://pavelshpagin.github.io/SupportBot/chunk/chunk_850.html",
+      "correctness": 9,
+      "helpfulness": 3,
+      "specificity": 4,
+      "necessity": 8,
+      "quality": 6,
+      "reasoning": "After having provided specific advice based on a photo, the bot regressed to generic advice. When the user identified the FC as 'Spedix F722', the bot just told them to search for a wiring diagram. This is less helpful than its own previous messages. The response was also in English."
+    },
+    {
+      "msg_id": "tg_ua_ardupilot_7440",
+      "msg_text": "Тут не цей контакт? А він повинен бути",
+      "bot_text": "Так, це контакт R2 (RX для UART2), його можна використовувати для SBUS. Вам потрібно буде встановити параметр SERIAL2_PROTOCOL у значення 23 (RCIN).\n\nhttps://pavelshpagin.github.io/SupportBot/chunk/chunk_720.html",
+      "correctness": 10,
+      "helpfulness": 10,
+      "specificity": 10,
+      "necessity": 10,
+      "quality": 10,
+      "reasoning": "The bot provided the final, crucial piece of information. After the user pointed to the R2 pin, the bot confirmed it was the correct one for SBUS and provided the exact parameter setting required to make it work: `SERIAL2_PROTOCOL = 23` (RCIN). This is a perfect, specific, and actionable answer."
+    },
+    {
+      "msg_id": "tg_ua_ardupilot_7443",
+      "msg_text": "Так і він і був там включений і не працювало osd",
+      "bot_text": "A digital VTX OSD requires its own UART port, separate from the one used for your receiver. Connect the VTX to a free UART, set the `SERIALx_PROTOCOL` to MSP/DisplayPort, and ensure OSD elements are enabled in the OSD tab.\n\nhttps://pavelshpagin.github.io/SupportBot/chunk/chunk_860.html",
+      "correctness": 9,
+      "helpfulness": 7,
+      "specificity": 7,
+      "necessity": 9,
+      "quality": 8,
+      "reasoning": "The bot provided a correct and logical next step for troubleshooting a digital VTX OSD issue in ArduPilot (use a separate UART, set the protocol to MSP/DisplayPort). While this didn't solve the user's ultimate problem (faulty hardware), it was a necessary diagnostic step. The advice is generally applicable rather than specific to the user's exact hardware, but it is accurate for the ArduPilot ecosystem."
+    },
+    {
+      "msg_id": "tg_ua_ardupilot_7452",
+      "msg_text": "Що може бути",
+      "bot_text": "Якщо інший VTX-юніт працює з тим самим підключенням та налаштуваннями, найімовірніше, ваш перший юніт має апаратну несправність. Можливо, вийшов з ладу чіп OSD або пов'язані з ним компоненти на платі.\n\nhttps://pavelshpagin.github.io/SupportBot/chunk/chunk_10.html",
+      "correctness": 10,
+      "helpfulness": 10,
+      "specificity": 10,
+      "necessity": 10,
+      "quality": 10,
+      "reasoning": "The user performed a key diagnostic step (swapping the VTX unit) and asked for an interpretation. The bot correctly and logically concluded that the original VTX unit has a hardware failure. This is a perfect response that confirms the user's findings and provides a clear diagnosis."
+    },
+    {
+      "msg_id": "tg_ua_ardupilot_7462",
+      "msg_text": "Оновив , нічого не дало",
+      "bot_text": "Якщо інший юніт працює з тим самим підключенням, а цей не запрацював навіть після оновлення, то він, найімовірніше, має апаратну несправність. Можливо, вийшов з ладу чіп OSD або пов'язані з ним компоненти на платі.\n\nhttps://pavelshpagin.github.io/SupportBot/chunk/chunk_10.html",
+      "correctness": 10,
+      "helpfulness": 8,
+      "specificity": 10,
+      "necessity": 7,
+      "quality": 8.75,
+      "reasoning": "The bot correctly reiterates its diagnosis of hardware failure after the user confirms that a firmware update didn't fix the issue. The response is correct and specific. Its helpfulness is slightly reduced because it's a near-exact repetition of its previous message, and another human user gave the same conclusion immediately after."
+    },
+    {
+      "msg_id": "tg_ua_ardupilot_7464",
+      "msg_text": "Бажаю здоров'я підкажіть може у когось є stl файл нормального поворотника камери на fpv?",
+      "bot_text": "Можна пошукати файли у групі з 3D моделями, де деякі з них доступні за донат. Для плавного керування, замість різкого перемикання, можна призначити в пульті відповідний AUX канал на крутилку замість тумблера.\n\nhttps://pavelshpagin.github.io/SupportBot/chunk/chunk_680.html",
+      "correctness": 6,
+      "helpfulness": 2,
+      "specificity": 1,
+      "necessity": 9,
+      "quality": 4.5,
+      "reasoning": "The user asked for an STL file. The bot did not provide a file or a specific link. Instead, it gave a vague suggestion to 'search in a group' and then added unsolicited, off-topic advice about controlling the camera with a knob. A human user later provided a direct link, which is what was needed."
+    },
+    {
+      "msg_id": "tg_ua_ardupilot_7466",
+      "msg_text": "Не можу знайти що саме потрібно для рами 10 дюймів камера DJI O4 pro unit",
+      "bot_text": "Спробуйте моделі з цього репозиторію, яким ділились раніше в чаті: https://github.com/dmytr0/glory_to_ukraine/tree/master/FPV_CAMERA_MOUNT/Povorotna/V3.\n\nhttps://pavelshpagin.github.io/SupportBot/chunk/chunk_440.html",
+      "correctness": 10,
+      "helpfulness": 10,
+      "specificity": 10,
+      "necessity": 9,
+      "quality": 9.75,
+      "reasoning": "The bot correctly identified that the user was looking for a link that had been shared by another user just moments before and provided the exact link. This is an excellent use of conversation context to be immediately helpful."
+    },
+    {
+      "msg_id": "tg_ua_ardupilot_7467",
+      "msg_text": "Хтось підкаже виробників TX-ів українських, окрім Loki i Bavovna, дякую",
+      "bot_text": "Згадувався український виробник компонентів DefDrones, можете перевірити їх асортимент на наявність відеопередавачів.\n\nhttps://pavelshpagin.github.io/SupportBot/chunk/chunk_620.html",
+      "correctness": 7,
+      "helpfulness": 6,
+      "specificity": 6,
+      "necessity": 10,
+      "quality": 7.25,
+      "reasoning": "The user asked for Ukrainian VTX manufacturers. The bot suggested 'DefDrones', a known Ukrainian drone component maker, but correctly qualified that the user should check their product range. This is a reasonable, if not definitive, suggestion. Other users provided more direct answers."
+    },
+    {
+      "msg_id": "tg_ua_ardupilot_7468",
+      "msg_text": "Coalas",
+      "bot_text": "The retrieved conversations do not contain any mentions or reviews of \"Coalas\" motors. Other brands, such as EMAX, have been discussed previously.\n\nhttps://pavelshpagin.github.io/SupportBot/chunk/chunk_500.html",
+      "correctness": 0,
+      "helpfulness": 0,
+      "specificity": 0,
+      "necessity": 0,
+      "quality": 0,
+      "reasoning": "This response is a complete failure. 1) It responded to a user who was providing an answer, not asking a question. 2) It misunderstood the topic, talking about 'motors' when the discussion was about 'TX' (video transmitters). 3) It responded in English to a Ukrainian conversation. This is a redundant and incorrect interruption."
+    },
+    {
+      "msg_id": "tg_ua_ardupilot_7472",
+      "msg_text": "MaxLink",
+      "bot_text": "Assuming you meant MavLink, it is a protocol for communication with the drone, handling control and telemetry. You can use it with systems like ELRS 3.5 or for direct control from Mission Planner via a TCP connection, where the remote control acts as a joystick.\n\nhttps://pavelshpagin.github.io/SupportBot/chunk/chunk_360.html",
+      "correctness": 0,
+      "helpfulness": 0,
+      "specificity": 0,
+      "necessity": 0,
+      "quality": 0,
+      "reasoning": "Another complete failure. 1) It responded to a user providing an answer ('MaxLink'). 2) It incorrectly assumed 'MaxLink' was a typo for 'MavLink'. A quick search confirms MaxLink is a real Ukrainian manufacturer of drone communication systems. 3) The resulting explanation of MavLink was irrelevant. This is redundant and factually wrong."
+    },
+    {
+      "msg_id": "tg_ua_ardupilot_7474",
+      "msg_text": "Хтось ловив таку штуку:\nПри польоті без gps ардупілот скидує газ, навіть якщо виставлений граничний airspeed за який не можна виходити ?",
+      "bot_text": "Це може відбуватися, якщо ви перебуваєте в режимі польоту, що вимагає GPS для утримання позиції (наприклад, Loiter, PosHold). Для польотів без GPS-сигналу використовуйте режими, які не залежать від нього, наприклад, Stabilize.\n\nhttps://pavelshpagin.github.io/SupportBot/chunk/chunk_560.html",
+      "correctness": 10,
+      "helpfulness": 8,
+      "specificity": 8,
+      "necessity": 10,
+      "quality": 9,
+      "reasoning": "The bot correctly identified the most likely cause for the user's problem (throttle cut without GPS). It explained that GPS-dependent modes (like Loiter) will fail and suggested using a non-GPS mode (like Stabilize). This is the correct first step in diagnosing this common ArduPilot issue."
+    },
+    {
+      "msg_id": "tg_ua_ardupilot_7482",
+      "msg_text": "Я просто думав, чи можна це пофіксити параметрами, якщо ні, то прийдеться регулятор свій писати, не складно але впадлу",
+      "bot_text": "Це фундаментальна поведінка режимів, що залежать від GPS, і її не можна змінити параметрами, оскільки логіка навігації контролера дає збій без даних про місцезнаходження. Єдиний правильний спосіб літати без GPS — це використовувати відповідний режим, наприклад FBWA або Stabilize. Це дозволить уникнути необхідності писати власний регулятор.\n\nhttps://pavelshpagin.github.io/SupportBot/chunk/chunk_560.html",
+      "correctness": 10,
+      "helpfulness": 10,
+      "specificity": 10,
+      "necessity": 9,
+      "quality": 9.75,
+      "reasoning": "The bot correctly answered the user's follow-up question, confirming that the behavior is fundamental to ArduPilot's architecture and cannot be changed with parameters. It reinforced the correct solution (using a non-GPS mode like FBWA or Stabilize), saving the user from the pointless effort of writing a custom controller. Excellent, specific, and helpful response."
+    },
+    {
+      "msg_id": "tg_ua_ardupilot_7486",
+      "msg_text": "а airspeed use стоїть?",
+      "bot_text": "Параметр `ARSPD_USE` визначає, чи використовує польотний контролер датчик повітряної швидкості. Якщо він увімкнений, літак намагатиметься підтримувати задану повітряну швидкість, але навігаційні режими все одно потребують даних GPS для утримання позиції. Без GPS слід використовувати такі режими, як FBWA, де датчик повітряної швидкості буде використовуватися для контролю швидкості.\n\nhttps://pavelshpagin.github.io/SupportBot/chunk/chunk_320.html",
+      "correctness": 10,
+      "helpfulness": 4,
+      "specificity": 8,
+      "necessity": 2,
+      "quality": 6,
+      "reasoning": "The bot responded to a diagnostic question asked by one helper to another user. It should not have intervened. While the explanation of the ARSPD_USE parameter was correct and relevant to the overall topic, it disrupted the human-to-human troubleshooting flow."
+    },
+    {
+      "msg_id": "tg_ua_ardupilot_7487",
+      "msg_text": "Може TECS ? Думає, що у нього достатньо кінетичної енергії?)",
+      "bot_text": "Так, це ймовірна причина. TECS отримує цільову швидкість від навігаційного контролера, і при втраті GPS в навігаційному режимі цей контролер перестає надавати коректну ціль. В результаті TECS може скинути газ до мінімуму, оскільки не має завдання підтримувати швидкість.\nhttps://pavelshpagin.github.io/SupportBot/chunk/chunk_680.html",
+      "correctness": 10,
+      "helpfulness": 6,
+      "specificity": 10,
+      "necessity": 2,
+      "quality": 7,
+      "reasoning": "The bot responded to a helper's hypothesis about TECS. While the bot's explanation of how the navigation controller's failure affects TECS was technically brilliant and highly specific, it was unnecessary. It was confirming a helper's theory rather than answering a question from the user with the problem."
+    },
+    {
+      "msg_id": "tg_ua_ardupilot_7488",
+      "msg_text": "чи тільки enable?)",
+      "bot_text": "The `ARSPD_USE` parameter has several options: 0 to disable the sensor, 1 to always use it, and 2 to use it only in automatic flight modes.\nhttps://pavelshpagin.github.io/SupportBot/chunk/chunk_480.html",
+      "correctness": 10,
+      "helpfulness": 3,
+      "specificity": 10,
+      "necessity": 1,
+      "quality": 6,
+      "reasoning": "The bot responded to a clarifying question between two helpers, which is completely unnecessary. Furthermore, it responded in English to a Ukrainian conversation. Although the information about the ARSPD_USE parameter values was correct, the response should not have been sent."
+    }
+  ],
+  "missed_questions": [
+    {
+      "msg_id": "tg_ua_ardupilot_7409",
+      "text": "скріпти працювати можуть?",
+      "reason": "User asked if Lua scripts could be an alternative solution for their gimbal control problem. This is a valid technical question that the bot did not address."
+    },
+    {
+      "msg_id": "tg_ua_ardupilot_7445",
+      "text": "Спробував вбити ось що дало",
+      "reason": "User posted the result of a command they tried, which was an implicit request for help interpreting the result. The bot did not respond."
+    },
+    {
+      "msg_id": "tg_ua_ardupilot_7457",
+      "text": "Ось схема [[IMG]]",
+      "reason": "User posted a wiring diagram, which is an implicit request for help or confirmation. The bot did not respond."
+    },
+    {
+      "msg_id": "tg_ua_ardupilot_7458",
+      "text": "І в мене без S. Bus не працювало оsd на іншому дроні тому щось не то ви говорите",
+      "reason": "User is challenging another person's advice by stating a contradictory experience. This is an implicit request for clarification on a technical point (the role of SBUS in OSD), which the bot missed."
+    }
+  ],
+  "redundant_responses": [
+    {
+      "msg_id": "tg_ua_ardupilot_7468",
+      "reason": "Bot responded to a user who was providing an answer ('Coalas') to a question, not asking one. The response was also factually incorrect and in the wrong language."
+    },
+    {
+      "msg_id": "tg_ua_ardupilot_7472",
+      "reason": "Bot responded to a user who was providing an answer ('MaxLink') to a question. The response was also factually incorrect, confusing a brand name with a protocol."
+    },
+    {
+      "msg_id": "tg_ua_ardupilot_7486",
+      "reason": "Bot responded to a diagnostic question that one helper asked the user experiencing the problem. The bot should have allowed the user to answer."
+    },
+    {
+      "msg_id": "tg_ua_ardupilot_7487",
+      "reason": "Bot responded to a helper who was proposing a theory to another helper. This is a response to a statement, not a question for help."
+    },
+    {
+      "msg_id": "tg_ua_ardupilot_7488",
+      "reason": "Bot responded to a short, clarifying question between two helpers. This is a prime example of an unnecessary interruption."
+    }
+  ]
+}
