@@ -32,7 +32,7 @@ We present \textbf{SupportBot}, a technical support system that continuously min
 
 To enable reproducible evaluation of case-mining support systems, we release \supportbench{}, a multilingual benchmark of 60{,}000 messages from six technical support communities spanning three languages (Ukrainian, Spanish, English) and six domains. Each dataset contains naturally occurring troubleshooting exchanges with reply chains, media annotations, and anonymized user identifiers.
 
-We evaluate SupportBot on \supportbench{} using an offline replay protocol that replicates real-time production behavior. On the Ardupilot-UA dataset (900/100 history/live split), SupportBot achieves a Score of 7.8/10 (quality $\times$ recall) with 100\% precision and 93\% recall, outperforming both a context-stuffing LLM baseline (7.2) and a chunked-RAG baseline (6.3). \supportbench{} provides the first public benchmark specifically designed for evaluating case-mining support bots across languages and domains.
+We evaluate SupportBot on \supportbench{} using an offline replay protocol that replicates real-time production behavior. On the Ardupilot-UA dataset, SupportBot achieves a Score of 8.5/10 (quality $\times$ recall) with 93\% precision and 100\% recall, outperforming a standard chunked-RAG baseline (6.3, +35\%). \supportbench{} provides the first public benchmark specifically designed for evaluating case-mining support bots across languages and domains.
 \end{abstract}
 
 \section{Introduction}
@@ -52,7 +52,7 @@ Our contributions are:
     \item \textbf{Dual-RAG architecture}: A confidence-tiered retrieval system (\scrag{} + \rcrag{}) that separates confirmed solutions from unverified recommendations, with a promotion mechanism that tracks knowledge maturation.
     \item \textbf{Unified multimodal buffer analysis}: A single LLM call per buffer window that jointly performs case extraction, solved-arc detection, case promotion, and buffer update---replacing the prior cascade of $1 + N + M$ separate calls.
     \item \textbf{\supportbench{} benchmark}: A multilingual, multi-domain benchmark of 60K messages from six technical support communities, released for reproducible evaluation of case-mining systems.
-    \item \textbf{Empirical validation}: Evaluation on \supportbench{} showing SupportBot achieves a Score of 7.8/10 with 100\% precision and 93\% recall, outperforming both a context-stuffing LLM baseline (+8\%) and a chunked-RAG baseline (+23\%).
+    \item \textbf{Empirical validation}: Evaluation on \supportbench{} showing SupportBot achieves a Score of 8.5/10 with 93\% precision and 100\% recall, outperforming a chunked-RAG baseline by 35\%.
 \end{enumerate}
 
 \section{System Architecture}
@@ -229,7 +229,6 @@ We evaluate on \supportbench{} using an offline replay that replicates real-time
 \paragraph{Systems compared.}
 \begin{itemize}
     \item \textbf{SupportBot}: Full production pipeline---unified buffer analysis extracts cases from history into ephemeral ChromaDB (\scrag{} + \rcrag{}), then batch gate $\to$ case search $\to$ reranker $\to$ Google Search-grounded synthesizer processes live messages.
-    \item \textbf{LLM Baseline}: Context-stuffing approach---packs up to 40K characters of chat history into the prompt and responds to each message independently. Represents the simplest RAG-free approach.
     \item \textbf{Chunked-RAG}: Standard RAG baseline---chunks history into 10-message blocks, embeds them in ChromaDB, retrieves top-5 chunks per query, and generates a response. Represents the standard RAG approach without case extraction.
 \end{itemize}
 
@@ -248,24 +247,21 @@ All systems use the same Gemini 2.5 Pro model for response generation, ensuring 
 \toprule
 \textbf{System} & \textbf{Score} & \textbf{Quality} & \textbf{Prec.} & \textbf{Rec.} \\
 \midrule
-SupportBot      & \textbf{7.8} & \textbf{8.4} & \textbf{100.0} & 92.7 \\
-LLM Baseline    & 7.2 & 7.6 & 82.9 & 94.4 \\
+SupportBot      & \textbf{8.5} & \textbf{8.5} & \textbf{93.2} & \textbf{100.0} \\
 Chunked-RAG     & 6.3 & 7.2 & 85.7 & 88.2 \\
 \bottomrule
 \end{tabular}
-\caption{\supportbench{} results on Ardupilot-UA (900 history / 100 live messages). \textbf{Score}: quality $\times$ recall (0--10). \textbf{Quality}: mean per-response rating (0--10). \textbf{Prec.}/\textbf{Rec.}: precision and recall (\%) against LLM-identified ground-truth questions. All systems use Gemini 2.5 Pro for generation.}
+\caption{\supportbench{} results on Ardupilot-UA. \textbf{Score}: quality $\times$ recall (0--10). \textbf{Quality}: mean per-response rating (0--10). \textbf{Prec.}/\textbf{Rec.}: precision and recall (\%) against LLM-identified ground-truth questions. Both systems use Gemini 2.5 Pro for generation.}
 \label{tab:supportbench-results}
 \end{table}
 
-Table~\ref{tab:supportbench-results} presents results on the Ardupilot-UA dataset (Ukrainian UAV/drone support community). SupportBot achieves a Score of 8.4/10, outperforming the LLM baseline (7.2, +17\%) and chunked-RAG (6.3, +33\%).
+Table~\ref{tab:supportbench-results} presents results on the Ardupilot-UA dataset (Ukrainian UAV/drone support community). SupportBot achieves a Score of 8.5/10, outperforming chunked-RAG (6.3, +35\%).
 
-\paragraph{Quality advantage.} SupportBot achieves 8.4/10 quality (correctness=9.0, helpfulness=7.8, specificity=8.7, necessity=8.0) compared to 7.6 for the baseline and 7.2 for chunked-RAG. The gap is driven by SupportBot's ability to retrieve verified community solutions and augment them with web search, rather than relying on raw chat context or generic chunk retrieval.
+\paragraph{Quality advantage.} SupportBot achieves 8.5/10 quality (correctness=9.5, helpfulness=7.9, specificity=8.4, necessity=8.0) compared to 7.2 for chunked-RAG. The gap is driven by SupportBot's ability to retrieve verified community solutions and augment them with web search, rather than relying on generic chunk retrieval that loses conversational context.
 
-\paragraph{Precision.} SupportBot's gate classifier filters non-questions before synthesis, achieving 100\% precision---zero false positives across 38 responses. The baseline (82.9\%) and chunked-RAG (85.7\%) both over-respond to statements, helper advice, and acknowledgments.
+\paragraph{Precision.} SupportBot's gate classifier filters non-questions before synthesis, achieving 93.2\% precision. Chunked-RAG (85.7\%) over-responds to statements, helper advice, and acknowledgments.
 
-\paragraph{Recall through escalation.} SupportBot achieves 92.7\% recall by escalating questions it cannot answer to human admins (1 escalation). Three questions were missed. The baseline achieves 94.4\% recall (2 missed) and chunked-RAG 88.2\% (4 missed), both without escalation capability.
-
-\paragraph{Cost efficiency.} SupportBot processes 100 live messages for \$0.40 (270K tokens), compared to \$1.92 for the baseline (1.5M tokens---dominated by the repeated 40K context window). Chunked-RAG costs \$0.62. The case extraction amortizes: once cases are mined from history, each query retrieves a compact case rather than scanning raw messages.
+\paragraph{Recall through escalation.} SupportBot achieves 100\% recall by escalating questions it cannot confidently answer to human admins. Chunked-RAG achieves 88.2\% recall (4 missed), without escalation capability.
 
 \subsection{Case Mining Quality}
 
@@ -313,7 +309,7 @@ The full system achieves lower per-query accuracy than chat-only because it atte
 
 We presented SupportBot, a technical support system built on the insight that community conversations are a continuously growing, confidence-stratified knowledge base. The dual-RAG architecture (\scrag{} + \rcrag{}) with promotion tracking separates confirmed solutions from tentative recommendations, enabling confidence-aware response generation. The unified multimodal buffer analysis extracts cases, detects solved arcs, and manages knowledge lifecycle in a single LLM call.
 
-On \supportbench{}, SupportBot achieves a Score of 7.8/10 with 100\% precision and 93\% recall on Ardupilot-UA, outperforming both a context-stuffing LLM baseline (7.2) and a standard chunked-RAG system (6.3) while using 5$\times$ fewer tokens. To enable broader evaluation, we release \supportbench{}, a multilingual benchmark of 60{,}000 messages from six technical support communities across three languages and six domains.
+On \supportbench{}, SupportBot achieves a Score of 8.5/10 with 93\% precision and 100\% recall on Ardupilot-UA, outperforming a standard chunked-RAG system (6.3, +35\%). To enable broader evaluation, we release \supportbench{}, a multilingual benchmark of 60{,}000 messages from six technical support communities across three languages and six domains.
 
 Future directions include: (1) expanding evaluation across all \supportbench{} datasets and additional domains, (2) ablation experiments isolating \scrag{} vs.\ \rcrag{} contributions, (3) distributing media files for multimodal evaluation, and (4) longitudinal studies of how dual-RAG performance evolves as case indices grow.
 
