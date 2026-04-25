@@ -37,7 +37,22 @@ header {
   padding: 14px 20px; border-bottom: 1px solid var(--border);
 }
 .header-left { display: flex; align-items: center; gap: 10px; text-decoration: none; color: inherit; }
+.logo { width: 28px; height: 28px; }
 .brand { font-size: 15px; font-weight: 600; letter-spacing: -0.02em; }
+.chat-header { padding: 14px 20px; border-bottom: 1px solid var(--border); background: var(--page-bg); }
+.chat-header h2 { font-size: 14px; font-weight: 600; color: var(--text); display: flex; align-items: center; gap: 8px; }
+.chat-header h2 svg { width: 16px; height: 16px; color: var(--signal-blue); }
+.messages { padding: 0; }
+.message { padding: 16px 20px; border-bottom: 1px solid var(--border); }
+.message:last-child { border-bottom: none; }
+.message-header { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+.avatar { width: 28px; height: 28px; border-radius: 50%; color: white; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 600; flex-shrink: 0; }
+.sender-info { flex: 1; min-width: 0; }
+.sender-name { font-size: 13px; font-weight: 600; color: var(--text); }
+.message-text { font-size: 15px; line-height: 1.55; color: var(--text); white-space: pre-wrap; margin-left: 38px; }
+.reply-bubble { margin-left: 38px; margin-bottom: 6px; padding: 6px 10px; background: #f0f2f5; border-left: 3px solid var(--signal-blue); border-radius: 4px; font-size: 13px; color: var(--text-sec); }
+.reply-sender { font-weight: 600; color: var(--signal-blue); font-size: 12px; margin-bottom: 2px; }
+.reply-text { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .status-badge {
   padding: 4px 10px; font-size: 11px; font-weight: 600;
   text-transform: uppercase; letter-spacing: 0.04em; border-radius: 4px;
@@ -84,7 +99,8 @@ footer {
 <div class="shell">
   <div class="card">
     <header>
-      <a href="https://pavelshpagin.github.io/SupportBot" class="header-left">
+      <a href="https://academia-tech.github.io/SupportBot" class="header-left">
+        <img src="/SupportBot/supportbot-logo-128.png" alt="SupportBot" class="logo">
         <span class="brand">SupportBot</span>
       </a>
       <span class="status-recommendation status-badge">Рекомендація</span>
@@ -116,7 +132,7 @@ footer {
     </main>
   </div>
   <div class="card">
-    <div class="empty-chat">Історія переписки доступна у продакшн-системі на <a href="https://supportbot.info">supportbot.info</a></div>
+    <div class="chat-header"><h2><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Історія чату</h2></div><div class="messages"><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Buenas compañeros, tengo un red zigbee2mqtt instalada en home assistant y todos los dispositivos tienen buena señal, por encima de 200, pero si por ejemplo enciendo y apago la bombilla 5 o 6 veces va rápido, pero de repente deja de responder</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Eso a qué podría ser debido?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Buenas compañeros, tengo un red zigbee2mqtt instalada en home assistant y todos los dispositivos tienen buena señal, por</div></div><p class="message-text">Eso por qué lo haces?<br>No es normal.<br><br>Y lo que puede estar pasando es que lo estés poniendo en modo emparejamiento</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 2</div><div class="reply-text">Eso por qué lo haces? No es normal.  Y lo que puede estar pasando es que lo estés poniendo en modo emparejamiento</div></div><p class="message-text">Pero al igual que lo hago encendiendo y apagando lo hago cambiando el color varias veces rápido y se satura</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Tiene que haber una razón...</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Pero al igual que lo hago encendiendo y apagando lo hago cambiando el color varias veces rápido y se satura</div></div><p class="message-text">Dónde ves que se satura?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Pero al igual que lo hago encendiendo y apagando lo hago cambiando el color varias veces rápido y se satura</div></div><p class="message-text">Se satura el dispositivo? Se satura z2m? Se satura el broker mqtt? Empieza intentando averiguar eso</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 3</div><div class="reply-text">Se satura el dispositivo? Se satura z2m? Se satura el broker mqtt? Empieza intentando averiguar eso</div></div><p class="message-text">Como puedo saberlo? Lo único que capture es esto cuando se satura:</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><p class="message-text">Que coordinador es? Versión de ezsp?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 3</div><div class="reply-text">Que coordinador es? Versión de ezsp?</div></div><p class="message-text">Versión esta</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><p class="message-text">Hay un firmware más nuevo para ese Dongle, yo lo tengo. Busca un post mio, Sonoff ha sacado un portal para actualizar. Igual te ayuda</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 4</div><div class="reply-text">Hay un firmware más nuevo para ese Dongle, yo lo tengo. Busca un post mio, Sonoff ha sacado un portal para actualizar. I</div></div><p class="message-text">Valee y otra cosa, yo tengo home assistant en un contenedor lxc, y dentro de home assistant tengo el addon de mosquitto y zigbee2mqtt, puede ser que al tenerlo instalado ahí no funcione tan bien?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Igual es mejor separarlo por máquinas distintas cada cosa?</p></div></div>
     <footer>Academia Tech &copy; 2026</footer>
   </div>
 </div>

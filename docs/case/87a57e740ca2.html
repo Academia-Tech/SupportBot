@@ -37,7 +37,22 @@ header {
   padding: 14px 20px; border-bottom: 1px solid var(--border);
 }
 .header-left { display: flex; align-items: center; gap: 10px; text-decoration: none; color: inherit; }
+.logo { width: 28px; height: 28px; }
 .brand { font-size: 15px; font-weight: 600; letter-spacing: -0.02em; }
+.chat-header { padding: 14px 20px; border-bottom: 1px solid var(--border); background: var(--page-bg); }
+.chat-header h2 { font-size: 14px; font-weight: 600; color: var(--text); display: flex; align-items: center; gap: 8px; }
+.chat-header h2 svg { width: 16px; height: 16px; color: var(--signal-blue); }
+.messages { padding: 0; }
+.message { padding: 16px 20px; border-bottom: 1px solid var(--border); }
+.message:last-child { border-bottom: none; }
+.message-header { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+.avatar { width: 28px; height: 28px; border-radius: 50%; color: white; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 600; flex-shrink: 0; }
+.sender-info { flex: 1; min-width: 0; }
+.sender-name { font-size: 13px; font-weight: 600; color: var(--text); }
+.message-text { font-size: 15px; line-height: 1.55; color: var(--text); white-space: pre-wrap; margin-left: 38px; }
+.reply-bubble { margin-left: 38px; margin-bottom: 6px; padding: 6px 10px; background: #f0f2f5; border-left: 3px solid var(--signal-blue); border-radius: 4px; font-size: 13px; color: var(--text-sec); }
+.reply-sender { font-weight: 600; color: var(--signal-blue); font-size: 12px; margin-bottom: 2px; }
+.reply-text { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .status-badge {
   padding: 4px 10px; font-size: 11px; font-weight: 600;
   text-transform: uppercase; letter-spacing: 0.04em; border-radius: 4px;
@@ -84,7 +99,8 @@ footer {
 <div class="shell">
   <div class="card">
     <header>
-      <a href="https://pavelshpagin.github.io/SupportBot" class="header-left">
+      <a href="https://academia-tech.github.io/SupportBot" class="header-left">
+        <img src="/SupportBot/supportbot-logo-128.png" alt="SupportBot" class="logo">
         <span class="brand">SupportBot</span>
       </a>
       <span class="status-solved status-badge">Вирішено</span>
@@ -118,7 +134,7 @@ footer {
     </main>
   </div>
   <div class="card">
-    <div class="empty-chat">Історія переписки доступна у продакшн-системі на <a href="https://supportbot.info">supportbot.info</a></div>
+    <div class="chat-header"><h2><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Історія чату</h2></div><div class="messages"><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Панове, прошу вашої допомоги у роботі з Автотюном.<br><br>Проводжу автотюн в режимі Alt Hold. Після калібрування по усім трьом осям дрон видає на OSD сповіщення Autotune Success. Я виходжу з режиму Alt Hold, щоб посадити дрон (тумблер з автотюна не знімаю). В цей момент на OSD з&#x27;являється сповіщення Autotune Stopped. Саджаю і дізармлю дрон. Підключаюсь до ноутбука і не бачу ніяких змін по підам. Весь цей час тумблер з автотюна не прибираю.<br><br>Квадрокоптер 15 дюймів на АКБ 12S. Польотний контроле Matek H743.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><p class="message-text">Саджайте в althold. Дізармите.<br>Відєднуєете батарею, підключаєте до mp, і зберігаєте параметри.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 2</div><div class="reply-text">Саджайте в althold. Дізармите. Відєднуєете батарею, підключаєте до mp, і зберігаєте параметри.</div></div><p class="message-text">Це мій перший дрон на Арду. В альтхолді можна посадити? Це його вимкнення відкатує автотюн?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><p class="message-text">У вашому випадку так. В althold можна сідати</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 2</div><div class="reply-text">У вашому випадку так. В althold можна сідати</div></div><p class="message-text">Зрозуміів, дякую!</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Панове, прошу вашої допомоги у роботі з Автотюном.  Проводжу автотюн в режимі Alt Hold. Після калібрування по усім трьом</div></div><p class="message-text">После успешного автотюна, сажаете дрон - дизармите дрон - вырубаете автотюн - армите дрон - взлетаете с новыми настройками - проверяете все ли устраивает - сажаете дрон - дизармите и можно снимать мишкой новые настройки.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 3</div><div class="reply-text">После успешного автотюна, сажаете дрон - дизармите дрон - вырубаете автотюн - армите дрон - взлетаете с новыми настройка</div></div><p class="message-text">Я саме так і робив. Але як я розумію, вихід з альт холду збивав автотюн.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Я саме так і робив. Але як я розумію, вихід з альт холду збивав автотюн.</div></div><p class="message-text">верно. режим полета не меняем.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Це мій перший дрон на Арду. В альтхолді можна посадити? Це його вимкнення відкатує автотюн?</div></div><p class="message-text">В альтхолді можна взлітати, можна літати, і можна садити дрон</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#0891b2">M5</div><div class="sender-info"><span class="sender-name">Учасник 5</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Я саме так і робив. Але як я розумію, вихід з альт холду збивав автотюн.</div></div><p class="message-text">Альтхолд це як мавік. Тротл у центрі — висемо. Швидкість зниження та підьому залежить від кута відхилення тротла від центра. Я навіть підпружиню тротл до центра в пульті.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 5</div><div class="reply-text">Альтхолд це як мавік. Тротл у центрі — висемо. Швидкість зниження та підьому залежить від кута відхилення тротла від цен</div></div><p class="message-text">Зрозумів, дякую!</p></div></div>
     <footer>Academia Tech &copy; 2026</footer>
   </div>
 </div>

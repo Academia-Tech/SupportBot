@@ -35,7 +35,22 @@ header {
   padding: 14px 20px; border-bottom: 1px solid var(--border);
 }
 .header-left { display: flex; align-items: center; gap: 10px; text-decoration: none; color: inherit; }
+.logo { width: 28px; height: 28px; }
 .brand { font-size: 15px; font-weight: 600; letter-spacing: -0.02em; }
+.chat-header { padding: 14px 20px; border-bottom: 1px solid var(--border); background: var(--page-bg); }
+.chat-header h2 { font-size: 14px; font-weight: 600; color: var(--text); display: flex; align-items: center; gap: 8px; }
+.chat-header h2 svg { width: 16px; height: 16px; color: var(--signal-blue); }
+.messages { padding: 0; }
+.message { padding: 16px 20px; border-bottom: 1px solid var(--border); }
+.message:last-child { border-bottom: none; }
+.message-header { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+.avatar { width: 28px; height: 28px; border-radius: 50%; color: white; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 600; flex-shrink: 0; }
+.sender-info { flex: 1; min-width: 0; }
+.sender-name { font-size: 13px; font-weight: 600; color: var(--text); }
+.message-text { font-size: 15px; line-height: 1.55; color: var(--text); white-space: pre-wrap; margin-left: 38px; }
+.reply-bubble { margin-left: 38px; margin-bottom: 6px; padding: 6px 10px; background: #f0f2f5; border-left: 3px solid var(--signal-blue); border-radius: 4px; font-size: 13px; color: var(--text-sec); }
+.reply-sender { font-weight: 600; color: var(--signal-blue); font-size: 12px; margin-bottom: 2px; }
+.reply-text { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .status-badge {
   padding: 4px 10px; font-size: 11px; font-weight: 600;
   text-transform: uppercase; letter-spacing: 0.04em; border-radius: 4px;
@@ -82,7 +97,8 @@ footer {
 <div class="shell">
   <div class="card">
     <header>
-      <a href="https://pavelshpagin.github.io/SupportBot" class="header-left">
+      <a href="https://academia-tech.github.io/SupportBot" class="header-left">
+        <img src="/SupportBot/supportbot-logo-128.png" alt="SupportBot" class="logo">
         <span class="brand">SupportBot</span>
       </a>
       <span class="status-solved status-badge">Вирішено</span>
@@ -111,7 +127,7 @@ footer {
     </main>
   </div>
   <div class="card">
-    <div class="empty-chat">Історія переписки доступна у продакшн-системі на <a href="https://supportbot.info">supportbot.info</a></div>
+    <div class="chat-header"><h2><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Історія чату</h2></div><div class="messages"><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Вітаю панове , підкажіть будь ласка може було таке питання , але чого не крутяться мотори ні через мішку ні просто від радіо , виставлено і esc telemetry і мотори там де припаяні , але ніфіга</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><p class="message-text">Доброго дня всім, у нас є новий контролер польотів з деякими запасами в Україні. Портування Ardupilot власними силами займає більше часу, ніж нам хотілося б, тому хотіли б зв&#x27;язатися з вами та дізнатися, чи є тут розробники, які зацікавлені допомогти. Звичайно, якщо так, то там є безкоштовний H7 FC для вас. Напишіть в особисті повідомлення з кваліфікацією/посиланням на ваш GitHub, якщо зацікавлені.<br><br>редагування: у нас є літаюча збірка betaflight, яку можна використовувати для довідки.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Вітаю панове , підкажіть будь ласка може було таке питання , але чого не крутяться мотори ні через мішку ні просто від р</div></div><p class="message-text">Не крутяться в якому режимі?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 3</div><div class="reply-text">Не крутяться в якому режимі?</div></div><p class="message-text">В будь-якому, навіть просто через мотор тест</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Вітаю панове , підкажіть будь ласка може було таке питання , але чого не крутяться мотори ні через мішку ні просто від р</div></div><p class="message-text">Esc type или что-то подобное</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><p class="message-text">Ща скажу точно что проверил</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Ніхуя не змінилось, мотори не крутяться, але тепер тільки співають замість того щоб крутитись</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Ніхуя не змінилось, мотори не крутяться, але тепер тільки співають замість того щоб крутитись</div></div><p class="message-text">Чорт його знає, але поміняв на dshot 300 і все запрацювало , до цього ставив dshot600</p></div></div>
     <footer>Academia Tech &copy; 2026</footer>
   </div>
 </div>

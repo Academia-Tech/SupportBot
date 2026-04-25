@@ -36,7 +36,22 @@ header {
   padding: 14px 20px; border-bottom: 1px solid var(--border);
 }
 .header-left { display: flex; align-items: center; gap: 10px; text-decoration: none; color: inherit; }
+.logo { width: 28px; height: 28px; }
 .brand { font-size: 15px; font-weight: 600; letter-spacing: -0.02em; }
+.chat-header { padding: 14px 20px; border-bottom: 1px solid var(--border); background: var(--page-bg); }
+.chat-header h2 { font-size: 14px; font-weight: 600; color: var(--text); display: flex; align-items: center; gap: 8px; }
+.chat-header h2 svg { width: 16px; height: 16px; color: var(--signal-blue); }
+.messages { padding: 0; }
+.message { padding: 16px 20px; border-bottom: 1px solid var(--border); }
+.message:last-child { border-bottom: none; }
+.message-header { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+.avatar { width: 28px; height: 28px; border-radius: 50%; color: white; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 600; flex-shrink: 0; }
+.sender-info { flex: 1; min-width: 0; }
+.sender-name { font-size: 13px; font-weight: 600; color: var(--text); }
+.message-text { font-size: 15px; line-height: 1.55; color: var(--text); white-space: pre-wrap; margin-left: 38px; }
+.reply-bubble { margin-left: 38px; margin-bottom: 6px; padding: 6px 10px; background: #f0f2f5; border-left: 3px solid var(--signal-blue); border-radius: 4px; font-size: 13px; color: var(--text-sec); }
+.reply-sender { font-weight: 600; color: var(--signal-blue); font-size: 12px; margin-bottom: 2px; }
+.reply-text { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .status-badge {
   padding: 4px 10px; font-size: 11px; font-weight: 600;
   text-transform: uppercase; letter-spacing: 0.04em; border-radius: 4px;
@@ -83,7 +98,8 @@ footer {
 <div class="shell">
   <div class="card">
     <header>
-      <a href="https://pavelshpagin.github.io/SupportBot" class="header-left">
+      <a href="https://academia-tech.github.io/SupportBot" class="header-left">
+        <img src="/SupportBot/supportbot-logo-128.png" alt="SupportBot" class="logo">
         <span class="brand">SupportBot</span>
       </a>
       <span class="status-recommendation status-badge">Рекомендація</span>
@@ -116,7 +132,7 @@ footer {
     </main>
   </div>
   <div class="card">
-    <div class="empty-chat">Історія переписки доступна у продакшн-системі на <a href="https://supportbot.info">supportbot.info</a></div>
+    <div class="chat-header"><h2><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Історія чату</h2></div><div class="messages"><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Добрий день панове<br>Підкажіть будь ласка з яких причин дрон вирішив сам полетіти вгору та зробити фінт такий<br><br>[Відео: 6955.mp4 — The video shows a multirotor drone (appears to be a hexacopter) on a grassy dirt path. Two small, light-colored packages are attached to its underside.<br><br>**What happens over time:**<br>1.  **0:00-0:06:** The drone is stationary on the ground, motors off.<br>2.  **0:06-0:07:** The propellers spin up, and the drone lifts off the ground, hovering briefly.<br>3.  **0:07-0:10:** The drone moves forward slightly and drops the first package onto the path.<br>4.  **0:10-0:12:** The drone moves forward further and drops the second package onto the path.<br>5.  **0:12-0:14:** Immediately after dropping the second package, the drone initiates a rapid and seemingly uncommanded vertical ascent, gaining significant altitude quickly.<br>6.  **0:14-0:16:** The drone continues its aggressive ascent, reaches a high altitude, and appears to perform an uncontrolled, high-speed maneuver, possibly a flip or sudden pitch change, at its peak.<br>7.  **0:16-0:18:** Following this high-altitude maneuver, the drone rapidly loses altitude and plummets towards the ground, indicating a complete loss of flight control or power, before the video ends. A person is visible observing the flight from 0:14.<br><br>**Problems/Anomalies:**<br>*   **Uncommanded Rapid Ascent:** After dropping the second payload, the drone executed an immediate, sharp, and seemingly uncommanded rapid vertical ascent beyond the operator&#x27;s input.<br>*   **Loss of Control/Stability:** At altitude, the drone exhibited erratic behavior (a sudden maneuver/tumble) followed by an uncontrolled, rapid descent, indicating a critical loss of flight stability or potential power system failure.<br><br>No screens, indicators, or error messages are visible. No text is visible on screen.]<br>[Транскрипт відео: Wow Wow]</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Добрий день панове Підкажіть будь ласка з яких причин дрон вирішив сам полетіти вгору та зробити фінт такий  [Відео: 695</div></div><p class="message-text">Я ще новачок. Але здається у вас фільтри не спрацювали.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Цей запуск і був зроблений щоб вже фільтра дивитись але ніяк не очікував кувирка від нього</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Добрий день панове Підкажіть будь ласка з яких причин дрон вирішив сам полетіти вгору та зробити фінт такий  [Відео: 695</div></div><p class="message-text">Динамічний нотч вимкнений, INS_HNTCH_REF має бути 1</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 3</div><div class="reply-text">Динамічний нотч вимкнений, INS_HNTCH_REF має бути 1</div></div><p class="message-text">Спробуйте так. Там є якийсь дивний пік на 64 гц, можливо не якісні пропи.<br>І перший політ краще в Stabilize робити, бо althold/loiter (а у вашому випадку застарілий poshold) потребує окремого налаштування</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 3</div><div class="reply-text">Спробуйте так. Там є якийсь дивний пік на 64 гц, можливо не якісні пропи. І перший політ краще в Stabilize робити, бо al</div></div><p class="message-text">Сьогодні випробую</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Сьогодні випробую</div></div><p class="message-text">Дивний пік може бути удар пропом через що він пошкодився і почав вібрувати.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><p class="message-text">Взагалі для першого польоту рекомендують вручну зменшити піди в 3-4 рази щоб небуло отакого</p></div></div>
     <footer>Academia Tech &copy; 2026</footer>
   </div>
 </div>

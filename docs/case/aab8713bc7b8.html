@@ -36,7 +36,22 @@ header {
   padding: 14px 20px; border-bottom: 1px solid var(--border);
 }
 .header-left { display: flex; align-items: center; gap: 10px; text-decoration: none; color: inherit; }
+.logo { width: 28px; height: 28px; }
 .brand { font-size: 15px; font-weight: 600; letter-spacing: -0.02em; }
+.chat-header { padding: 14px 20px; border-bottom: 1px solid var(--border); background: var(--page-bg); }
+.chat-header h2 { font-size: 14px; font-weight: 600; color: var(--text); display: flex; align-items: center; gap: 8px; }
+.chat-header h2 svg { width: 16px; height: 16px; color: var(--signal-blue); }
+.messages { padding: 0; }
+.message { padding: 16px 20px; border-bottom: 1px solid var(--border); }
+.message:last-child { border-bottom: none; }
+.message-header { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+.avatar { width: 28px; height: 28px; border-radius: 50%; color: white; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 600; flex-shrink: 0; }
+.sender-info { flex: 1; min-width: 0; }
+.sender-name { font-size: 13px; font-weight: 600; color: var(--text); }
+.message-text { font-size: 15px; line-height: 1.55; color: var(--text); white-space: pre-wrap; margin-left: 38px; }
+.reply-bubble { margin-left: 38px; margin-bottom: 6px; padding: 6px 10px; background: #f0f2f5; border-left: 3px solid var(--signal-blue); border-radius: 4px; font-size: 13px; color: var(--text-sec); }
+.reply-sender { font-weight: 600; color: var(--signal-blue); font-size: 12px; margin-bottom: 2px; }
+.reply-text { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .status-badge {
   padding: 4px 10px; font-size: 11px; font-weight: 600;
   text-transform: uppercase; letter-spacing: 0.04em; border-radius: 4px;
@@ -83,7 +98,8 @@ footer {
 <div class="shell">
   <div class="card">
     <header>
-      <a href="https://pavelshpagin.github.io/SupportBot" class="header-left">
+      <a href="https://academia-tech.github.io/SupportBot" class="header-left">
+        <img src="/SupportBot/supportbot-logo-128.png" alt="SupportBot" class="logo">
         <span class="brand">SupportBot</span>
       </a>
       <span class="status-recommendation status-badge">Рекомендація</span>
@@ -116,7 +132,7 @@ footer {
     </main>
   </div>
   <div class="card">
-    <div class="empty-chat">Історія переписки доступна у продакшн-системі на <a href="https://supportbot.info">supportbot.info</a></div>
+    <div class="chat-header"><h2><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Історія чату</h2></div><div class="messages"><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Hola! ¿Es posible poner esphome en un sonnof basic r2 v1? Ayer probé a cambiar el firmware a dos usando el espbulder de HA y los dejo tostados....</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Hola! ¿Es posible poner esphome en un sonnof basic r2 v1? Ayer probé a cambiar el firmware a dos usando el espbulder de </div></div><p class="message-text">La gran mayoría de Sonoff llevan el ESP8266, que es compatible tanto como con ESPHome con Tasmota. En tu caso, al ser un v1, puede que no sea compatible con ESPHome.<br><br>https://devices.esphome.io/devices/Sonoff-BASIC-R2-v1.4<br><br>Prueba primero a meterles Tasmota (https://tasmota.github.io/docs/Getting-Started/#needed-software) y luego da el salto a ESPHome para comprobar si es compatible o no.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 2</div><div class="reply-text">La gran mayoría de Sonoff llevan el ESP8266, que es compatible tanto como con ESPHome con Tasmota. En tu caso, al ser un</div></div><p class="message-text">Ya les tenía con tasmota pero por unificar todos a esphome que tengo muchos otros dispositivos.<br>Gracias</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Hola! ¿Es posible poner esphome en un sonnof basic r2 v1? Ayer probé a cambiar el firmware a dos usando el espbulder de </div></div><p class="message-text">A qué te refieres con &quot;tostados&quot;?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Ya les tenía con tasmota pero por unificar todos a esphome que tengo muchos otros dispositivos. Gracias</div></div><p class="message-text">Mi consejo es que les metas la última de Tasmota de nuevo y desde el propio interfaz web de Tasmota que migres a ESPHome.<br><br>Hay una guía: https://esphome.io/guides/migrate_sonoff_tasmota</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 3</div><div class="reply-text">A qué te refieres con &quot;tostados&quot;?</div></div><p class="message-text">Pues que hace el proceso de actualización de firmware correctamente pero después no se conectan a la wifi ni responden al botón ni encienden la luz</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 2</div><div class="reply-text">Mi consejo es que les metas la última de Tasmota de nuevo y desde el propio interfaz web de Tasmota que migres a ESPHome</div></div><p class="message-text">Voy a probar gracias!</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Pues que hace el proceso de actualización de firmware correctamente pero después no se conectan a la wifi ni responden a</div></div><p class="message-text">Haz un firmware básico con captive portal y modo ap</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Voy a probar gracias!</div></div><p class="message-text">Lee bien la guía que para los ESP8266 hay que meter el firmware comprimido. No vayas a lo loco. Lee y luego ejecuta lo necesario.</p></div></div>
     <footer>Academia Tech &copy; 2026</footer>
   </div>
 </div>

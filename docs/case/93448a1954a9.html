@@ -35,7 +35,22 @@ header {
   padding: 14px 20px; border-bottom: 1px solid var(--border);
 }
 .header-left { display: flex; align-items: center; gap: 10px; text-decoration: none; color: inherit; }
+.logo { width: 28px; height: 28px; }
 .brand { font-size: 15px; font-weight: 600; letter-spacing: -0.02em; }
+.chat-header { padding: 14px 20px; border-bottom: 1px solid var(--border); background: var(--page-bg); }
+.chat-header h2 { font-size: 14px; font-weight: 600; color: var(--text); display: flex; align-items: center; gap: 8px; }
+.chat-header h2 svg { width: 16px; height: 16px; color: var(--signal-blue); }
+.messages { padding: 0; }
+.message { padding: 16px 20px; border-bottom: 1px solid var(--border); }
+.message:last-child { border-bottom: none; }
+.message-header { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+.avatar { width: 28px; height: 28px; border-radius: 50%; color: white; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 600; flex-shrink: 0; }
+.sender-info { flex: 1; min-width: 0; }
+.sender-name { font-size: 13px; font-weight: 600; color: var(--text); }
+.message-text { font-size: 15px; line-height: 1.55; color: var(--text); white-space: pre-wrap; margin-left: 38px; }
+.reply-bubble { margin-left: 38px; margin-bottom: 6px; padding: 6px 10px; background: #f0f2f5; border-left: 3px solid var(--signal-blue); border-radius: 4px; font-size: 13px; color: var(--text-sec); }
+.reply-sender { font-weight: 600; color: var(--signal-blue); font-size: 12px; margin-bottom: 2px; }
+.reply-text { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .status-badge {
   padding: 4px 10px; font-size: 11px; font-weight: 600;
   text-transform: uppercase; letter-spacing: 0.04em; border-radius: 4px;
@@ -82,7 +97,8 @@ footer {
 <div class="shell">
   <div class="card">
     <header>
-      <a href="https://pavelshpagin.github.io/SupportBot" class="header-left">
+      <a href="https://academia-tech.github.io/SupportBot" class="header-left">
+        <img src="/SupportBot/supportbot-logo-128.png" alt="SupportBot" class="logo">
         <span class="brand">SupportBot</span>
       </a>
       <span class="status-recommendation status-badge">Рекомендація</span>
@@ -111,7 +127,7 @@ footer {
     </main>
   </div>
   <div class="card">
-    <div class="empty-chat">Історія переписки доступна у продакшн-системі на <a href="https://supportbot.info">supportbot.info</a></div>
+    <div class="chat-header"><h2><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Історія чату</h2></div><div class="messages"><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">buenas<br><br>tengo varios ventiladores de techo con bombillas zigbee, excepto uno de ellos que los tengo con un sonoff directamente en el interruptor.<br><br>pues me ocurre que cuando apago el ventilador de techo desde su mando, las bombilllas dejan de responder al rato y tengo que encender la luz del ventilador desde su propio mando para que vuelvan a funcionar  ¿esto es normal?<br><br>yo pensaba que esto podia pasar en caso de que apagara la luz del ventilador desde su mando pero NO si apago simplemente las &quot;aspas&quot;...</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">buenas  tengo varios ventiladores de techo con bombillas zigbee, excepto uno de ellos que los tengo con un sonoff direct</div></div><p class="message-text">Pues parece ser que la electrónica que lleve el ventilador, deja a la lámpara OUT, por el motivo que sea</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 2</div><div class="reply-text">Pues parece ser que la electrónica que lleve el ventilador, deja a la lámpara OUT, por el motivo que sea</div></div><p class="message-text">Me pasa en 3 ventiladores distintos... Vaya mierda...</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">buenas  tengo varios ventiladores de techo con bombillas zigbee, excepto uno de ellos que los tengo con un sonoff direct</div></div><p class="message-text">yo tengo dos ventiladores de techo cecotec, y lo que hice fue separar el ventilador de la luz. No sé si tienes varios cables que lleguen al ventilador para hacerlo, pero la modificación del ventilador es muy sencilla</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 3</div><div class="reply-text">yo tengo dos ventiladores de techo cecotec, y lo que hice fue separar el ventilador de la luz. No sé si tienes varios ca</div></div><p class="message-text">Puf no tengo ni idea de temas de la luz</p></div></div>
     <footer>Academia Tech &copy; 2026</footer>
   </div>
 </div>
