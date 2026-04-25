@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html><head>
+<title>Принцип роботи та налаштування двох GNSS приймачів в ArduCopter | SupportBot</title>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta property="og:title" content="Принцип роботи та налаштування двох GNSS приймачів в ArduCopter">
+<meta property="og:description" content="Надано посилання на офіційну документацію ArduPilot, яка детально описує механізм GPS Blending. Ця функція дозволяє системі інтелектуально змішувати дані з кількох приймачів для підвищення точності та">
+<link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+<style>
+:root {
+  --signal-blue: #2c6bed;
+  --page-bg: #f6f7f9;
+  --card-bg: #ffffff;
+  --text: #0d0d0d;
+  --text-sec: #5c5c5c;
+  --border: #d8d8d8;
+  --radius: 12px;
+  --green: #16a34a;
+  --yellow: #ca8a04;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  background: var(--page-bg); color: var(--text);
+  min-height: 100vh; padding: 48px 20px;
+  -webkit-font-smoothing: antialiased;
+}
+@media (max-width: 520px) { body { padding: 24px 12px; } }
+.shell { max-width: 640px; margin: 0 auto; }
+.card {
+  background: var(--card-bg); border: 1px solid var(--border);
+  border-radius: var(--radius); overflow: hidden; margin-bottom: 16px;
+}
+header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 20px; border-bottom: 1px solid var(--border);
+}
+.header-left { display: flex; align-items: center; gap: 10px; text-decoration: none; color: inherit; }
+.brand { font-size: 15px; font-weight: 600; letter-spacing: -0.02em; }
+.status-badge {
+  padding: 4px 10px; font-size: 11px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.04em; border-radius: 4px;
+}
+.status-solved { background: #dcfce7; color: var(--green); }
+.status-recommendation { background: #fef3c7; color: #b45309; }
+main { padding: 24px 20px; }
+h1 { font-size: 20px; font-weight: 700; letter-spacing: -0.025em; margin-bottom: 12px; line-height: 1.3; }
+.meta { font-size: 12px; color: var(--text-sec); margin-bottom: 16px; }
+.tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 20px; }
+.tag {
+  background: rgba(44, 107, 237, 0.08); color: var(--signal-blue);
+  padding: 4px 10px; border-radius: 4px; font-size: 12px; font-weight: 500;
+}
+.section-title {
+  font-size: 11px; font-weight: 600; text-transform: uppercase;
+  letter-spacing: 0.06em; color: var(--text-sec); margin-bottom: 10px;
+  display: flex; align-items: center; gap: 6px;
+}
+.section-title svg { width: 14px; height: 14px; }
+.section-content { font-size: 15px; line-height: 1.6; color: var(--text); white-space: pre-wrap; }
+.problem-section { padding-bottom: 20px; border-bottom: 1px solid var(--border); margin-bottom: 20px; }
+.solution-section {
+  background: #f0fdf4; margin: -24px -20px -24px -20px; padding: 20px;
+  border-top: 1px solid #bbf7d0;
+}
+.solution-section .section-title { color: var(--green); }
+.recommendation-solution { background: #fffbeb; border-top-color: #fde68a; }
+.recommendation-solution .section-title { color: #b45309; }
+.empty-chat {
+  padding: 32px 20px; text-align: center; color: var(--text-sec); font-size: 14px;
+}
+footer {
+  padding: 14px 20px; border-top: 1px solid var(--border);
+  color: var(--text-sec); font-size: 12px; text-align: center;
+}
+@media (max-width: 520px) {
+  main { padding: 20px 16px; }
+  h1 { font-size: 18px; }
+  .solution-section { margin: -20px -16px -20px -16px; padding: 16px; }
+}
+</style>
+</head><body>
+<div class="shell">
+  <div class="card">
+    <header>
+      <a href="https://pavelshpagin.github.io/SupportBot" class="header-left">
+        <span class="brand">SupportBot</span>
+      </a>
+      <span class="status-recommendation status-badge">Рекомендація</span>
+    </header>
+    <main>
+      <h1>Принцип роботи та налаштування двох GNSS приймачів в ArduCopter</h1>
+      <p class="meta">Case b4da81ee0595 &middot; ua_ardupilot</p>
+      <div class='tags'><span class="tag">#ArduCopter</span><span class="tag">#GPS</span><span class="tag">#GNSS</span><span class="tag">#Dual GPS</span><span class="tag">#GPS Blending</span><span class="tag">#Redundancy</span><span class="tag">#Documentation</span></div>
+      <div class="problem-section">
+        <h2 class="section-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/>
+            <line x1="12" y1="16" x2="12.01" y2="16"/>
+          </svg>
+          Проблема
+        </h2>
+        <p class="section-content">Користувач запитує, як саме прошивка ArduCopter обробляє сигнали, коли на борту встановлено два фізичних GNSS приймача, і як відбувається вибір або змішування даних для підвищення надійності.</p>
+      </div>
+      <div class="solution-section recommendation-solution">
+        <h2 class="section-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          Рекомендація (не підтверджено)
+        </h2>
+        <p class="section-content">Надано посилання на офіційну документацію ArduPilot, яка детально описує механізм GPS Blending. Ця функція дозволяє системі інтелектуально змішувати дані з кількох приймачів для підвищення точності та надійності навігації. Документація доступна за посиланням: https://ardupilot.org/copter/docs/common-gps-blending.html</p>
+      </div>
+    </main>
+  </div>
+  <div class="card">
+    <div class="empty-chat">Історія переписки доступна у продакшн-системі на <a href="https://supportbot.info">supportbot.info</a></div>
+    <footer>Academia Tech &copy; 2026</footer>
+  </div>
+</div>
+</body></html>
