@@ -109,7 +109,7 @@ footer {
       <div class='tags'><span class="tag">#rules</span><span class="tag">#websend</span><span class="tag">#event</span><span class="tag">#trigger</span><span class="tag">#watchdog</span><span class="tag">#timer</span><span class="tag">#ruletimer</span></div>
       <div class="problem-section">
         <h2 class="section-title">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/>
             <line x1="12" y1="16" x2="12.01" y2="16"/>
           </svg>
@@ -119,7 +119,7 @@ footer {
       </div>
       <div class="solution-section">
         <h2 class="section-title">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
           Рішення
         </h2>
         <p class="section-content">Загальної події для всіх команд `WebSend` не існує. Рішення полягає в тому, щоб явно викликати власну подію всередині самої команди. Наприклад, `WebSend [ip] event MyEvent=1`. Потім можна створити правило, яке реагує на цю подію (`on event#MyEvent=1 do ruletimer1 600 endon`), щоб перезапустити таймер. Якщо протягом заданого часу команда не надходить, таймер спрацьовує і виконує потрібну дію (наприклад, вимикає реле).</p>

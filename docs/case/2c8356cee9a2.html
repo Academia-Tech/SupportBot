@@ -109,7 +109,7 @@ footer {
       <div class='tags'><span class="tag">#ESP32</span><span class="tag">#Tasmota</span><span class="tag">#MCP23017</span><span class="tag">#I2C</span><span class="tag">#custom build</span><span class="tag">#compilation</span><span class="tag">#sensor29</span><span class="tag">#GPIO</span></div>
       <div class="problem-section">
         <h2 class="section-title">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/>
             <line x1="12" y1="16" x2="12.01" y2="16"/>
           </svg>
@@ -119,7 +119,7 @@ footer {
       </div>
       <div class="solution-section recommendation-solution">
         <h2 class="section-title">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7c.6.4 1 1.1 1 1.8V17h6v-.5c0-.7.4-1.4 1-1.8A7 7 0 0 0 12 2z"/></svg>
           Рекомендація (не підтверджено)
         </h2>
         <p class="section-content">Рекомендовано перевірити правильність фізичного підключення I2C (використовувати стандартні піни GPIO 21 для SDA та GPIO 22 для SCL на ESP32) та наявність підтягуючих резисторів на шині. Для діагностики проблеми з прошивкою слід виконати в консолі Tasmota команду `drivers`. Ця команда покаже, чи драйвер `sensor29` дійсно включений у збірку. Якщо драйвер відсутній, необхідно перевірити правильність додавання директив `#define USE_MCP230xx` та інших пов&#x27;язаних у файл `user_config_override.h` перед компіляцією.</p>

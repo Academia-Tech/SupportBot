@@ -109,7 +109,7 @@ footer {
       <div class='tags'><span class="tag">#lua scripting</span><span class="tag">#custom logic</span><span class="tag">#servo</span><span class="tag">#drop mechanism</span><span class="tag">#pinio</span><span class="tag">#ardupilot</span><span class="tag">#betaflight</span></div>
       <div class="problem-section">
         <h2 class="section-title">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/>
             <line x1="12" y1="16" x2="12.01" y2="16"/>
           </svg>
@@ -119,7 +119,7 @@ footer {
       </div>
       <div class="solution-section recommendation-solution">
         <h2 class="section-title">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7c.6.4 1 1.1 1 1.8V17h6v-.5c0-.7.4-1.4 1-1.8A7 7 0 0 0 12 2z"/></svg>
           Рекомендація (не підтверджено)
         </h2>
         <p class="section-content">Так, в ArduPilot можна реалізувати практично будь-яку складну логіку, включаючи послідовні дії на один перемикач. Оскільки ArduPilot є дуже гнучкою платформою, подібні задачі вирішуються за допомогою програмування, а саме написання Lua-скриптів. Це дозволяє створювати кастомну поведінку, яка не передбачена стандартними параметрами.</p>
@@ -127,7 +127,7 @@ footer {
     </main>
   </div>
   <div class="card">
-    <div class="chat-header"><h2><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Історія чату</h2></div><div class="messages"><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Вітання. З Ardupilot ще не маю досвіду планую тільки переходити для використання з оптичною стабілізацією  ... але вже бачу, з переписки вище, що з реалізацією більше чим один скид, тут проблеми.<br>В БФ в мене був реалізований скид через on/off pinio, хоч 20ть скидів роби одним тумблером.<br>Чи я помиляюсь та в Ardupilot, це теж можливо реалізувати?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">В БФ це було так реалізовано:<br>Якщо коротко в бетафлайт командному рядку треба написати отаке:<br><br>set pinio_box = 40,255,255,255<br>resource pinio 1 &lt;пін на який запаяний сигнал скиду&gt;<br><br>Далі в режимах просто обираєш який аукс канал буде керувати User 1</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><p class="message-text">Ардупілот - це зроблено програмістами для програмістів. Можливо зробити майже все, але без програмування ніяк.</p></div></div>
+    <div class="chat-header"><h2><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Історія чату</h2></div><div class="messages"><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Вітання. З Ardupilot ще не маю досвіду планую тільки переходити для використання з оптичною стабілізацією  ... але вже бачу, з переписки вище, що з реалізацією більше чим один скид, тут проблеми.<br>В БФ в мене був реалізований скид через on/off pinio, хоч 20ть скидів роби одним тумблером.<br>Чи я помиляюсь та в Ardupilot, це теж можливо реалізувати?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">В БФ це було так реалізовано:<br>Якщо коротко в бетафлайт командному рядку треба написати отаке:<br><br>set pinio_box = 40,255,255,255<br>resource pinio 1 &lt;пін на який запаяний сигнал скиду&gt;<br><br>Далі в режимах просто обираєш який аукс канал буде керувати User 1</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><p class="message-text">Ардупілот - це зроблено програмістами для програмістів. Можливо зробити майже все, але без програмування ніяк.</p></div></div>
     <footer>Academia Tech &copy; 2026</footer>
   </div>
 </div>
