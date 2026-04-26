@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html><head>
+<title>Diagnosing and Fixing Severe Z-Wobble and Print Quality Issues | SupportBot</title>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta property="og:title" content="Diagnosing and Fixing Severe Z-Wobble and Print Quality Issues">
+<meta property="og:description" content="A comprehensive list of troubleshooting steps was provided by the community.
+1.  **Mechanical Checks:** The primary suspect is Z-axis wobble, potentially from a bent leadscrew. Other mechanical checks">
+<link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+<style>
+:root {
+  --signal-blue: #2c6bed;
+  --page-bg: #f6f7f9;
+  --card-bg: #ffffff;
+  --text: #0d0d0d;
+  --text-sec: #5c5c5c;
+  --border: #d8d8d8;
+  --radius: 12px;
+  --green: #16a34a;
+  --yellow: #ca8a04;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  background: var(--page-bg); color: var(--text);
+  min-height: 100vh; padding: 48px 20px;
+  -webkit-font-smoothing: antialiased;
+}
+@media (max-width: 520px) { body { padding: 24px 12px; } }
+.shell { max-width: 640px; margin: 0 auto; }
+.card {
+  background: var(--card-bg); border: 1px solid var(--border);
+  border-radius: var(--radius); overflow: hidden; margin-bottom: 16px;
+}
+header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 20px; border-bottom: 1px solid var(--border);
+}
+.header-left { display: flex; align-items: center; gap: 10px; text-decoration: none; color: inherit; }
+.logo { width: 28px; height: 28px; }
+.brand { font-size: 15px; font-weight: 600; letter-spacing: -0.02em; }
+.chat-header { padding: 14px 20px; border-bottom: 1px solid var(--border); background: var(--page-bg); }
+.chat-header h2 { font-size: 14px; font-weight: 600; color: var(--text); display: flex; align-items: center; gap: 8px; }
+.chat-header h2 svg { width: 16px; height: 16px; color: var(--signal-blue); }
+.messages { padding: 0; }
+.message { padding: 16px 20px; border-bottom: 1px solid var(--border); }
+.message:last-child { border-bottom: none; }
+.message-header { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+.avatar { width: 28px; height: 28px; border-radius: 50%; color: white; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 600; flex-shrink: 0; }
+.sender-info { flex: 1; min-width: 0; }
+.sender-name { font-size: 13px; font-weight: 600; color: var(--text); }
+.message-text { font-size: 15px; line-height: 1.55; color: var(--text); white-space: pre-wrap; margin-left: 38px; }
+.reply-bubble { margin-left: 38px; margin-bottom: 6px; padding: 6px 10px; background: #f0f2f5; border-left: 3px solid var(--signal-blue); border-radius: 4px; font-size: 13px; color: var(--text-sec); }
+.reply-sender { font-weight: 600; color: var(--signal-blue); font-size: 12px; margin-bottom: 2px; }
+.reply-text { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.status-badge {
+  padding: 4px 10px; font-size: 11px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.04em; border-radius: 4px;
+}
+.status-solved { background: #dcfce7; color: var(--green); }
+.status-recommendation { background: #fef3c7; color: #b45309; }
+main { padding: 24px 20px; }
+h1 { font-size: 20px; font-weight: 700; letter-spacing: -0.025em; margin-bottom: 12px; line-height: 1.3; }
+.meta { font-size: 12px; color: var(--text-sec); margin-bottom: 16px; }
+.tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 20px; }
+.tag {
+  background: rgba(44, 107, 237, 0.08); color: var(--signal-blue);
+  padding: 4px 10px; border-radius: 4px; font-size: 12px; font-weight: 500;
+}
+.section-title {
+  font-size: 11px; font-weight: 600; text-transform: uppercase;
+  letter-spacing: 0.06em; color: var(--text-sec); margin-bottom: 10px;
+  display: flex; align-items: center; gap: 6px;
+}
+.section-title svg { width: 14px; height: 14px; }
+.section-content { font-size: 15px; line-height: 1.6; color: var(--text); white-space: pre-wrap; }
+.problem-section { padding-bottom: 20px; border-bottom: 1px solid var(--border); margin-bottom: 20px; }
+.solution-section {
+  background: #f0fdf4; margin: -24px -20px -24px -20px; padding: 20px;
+  border-top: 1px solid #bbf7d0;
+}
+.solution-section .section-title { color: var(--green); }
+.recommendation-solution { background: #fffbeb; border-top-color: #fde68a; }
+.recommendation-solution .section-title { color: #b45309; }
+.empty-chat {
+  padding: 32px 20px; text-align: center; color: var(--text-sec); font-size: 14px;
+}
+footer {
+  padding: 14px 20px; border-top: 1px solid var(--border);
+  color: var(--text-sec); font-size: 12px; text-align: center;
+}
+@media (max-width: 520px) {
+  main { padding: 20px 16px; }
+  h1 { font-size: 18px; }
+  .solution-section { margin: -20px -16px -20px -16px; padding: 16px; }
+}
+</style>
+</head><body>
+<div class="shell">
+  <div class="card">
+    <header>
+      <a href="https://academia-tech.github.io/SupportBot" class="header-left">
+        <img src="/SupportBot/supportbot-logo-128.png" alt="SupportBot" class="logo">
+        <span class="brand">SupportBot</span>
+      </a>
+      <span class="status-recommendation status-badge">Рекомендація</span>
+    </header>
+    <main>
+      <h1>Diagnosing and Fixing Severe Z-Wobble and Print Quality Issues</h1>
+      <p class="meta">Case fade3dfad7a4 &middot; 3dprinting</p>
+      <div class='tags'><span class="tag">#z-wobble</span><span class="tag">#print quality</span><span class="tag">#elegoo neptune 3 pro</span><span class="tag">#troubleshooting</span><span class="tag">#calibration</span><span class="tag">#layer shifting</span><span class="tag">#retraction</span><span class="tag">#first layer</span></div>
+      <div class="problem-section">
+        <h2 class="section-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/>
+            <line x1="12" y1="16" x2="12.01" y2="16"/>
+          </svg>
+          Проблема
+        </h2>
+        <p class="section-content">A user with an Elegoo Neptune 3 Pro is experiencing very poor print quality, characterized by significant layer inconsistencies (Z-wobble), a peeling first layer, and other artifacts like blobs and a prominent vertical seam. The user has tried basic recalibration without success.</p>
+      </div>
+      <div class="solution-section recommendation-solution">
+        <h2 class="section-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7c.6.4 1 1.1 1 1.8V17h6v-.5c0-.7.4-1.4 1-1.8A7 7 0 0 0 12 2z"/></svg>
+          Рекомендація (не підтверджено)
+        </h2>
+        <p class="section-content">A comprehensive list of troubleshooting steps was provided by the community.
+1.  **Mechanical Checks:** The primary suspect is Z-axis wobble, potentially from a bent leadscrew. Other mechanical checks should include looking for slack belts, wobbly wheels on the carriages, and loose stepper motors or bearings.
+2.  **Full Recalibration:** The user performed a full recalibration (E-steps, PID tuning, speed reduction, Z-axis greasing) which resulted in only minor improvements.
+3.  **Slicer &amp; Firmware Settings:** It was suggested to check the g-code preview for anomalies and to tune Pressure Advance if using Klipper firmware. A user also noted that the infill pattern was visible on top surfaces, pointing to a potential slicer setting issue.
+4.  **Extruder Gear Alignment:** A key finding was a video (https://www.youtube.com/watch?v=c6JmCdovE0U) demonstrating that misaligned gears in direct drive extruders can cause repeating surface defects. This led to the recommendation to inspect the extruder&#x27;s gear alignment and consider upgrading the gear set (e.g., with a RIGDA kit).</p>
+      </div>
+    </main>
+  </div>
+  <div class="card">
+    <div class="chat-header"><h2><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Історія чату</h2></div><div class="messages"><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">I&#x27;m printing boxes for Gridfinity, and the quality is....  Discutibile (to not say it looks like sh*t)</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><p class="message-text">hoooly leadscrew!</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 2</div><div class="reply-text">hoooly leadscrew!</div></div><p class="message-text">??</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><p class="message-text">Everything is wrong with that printer</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><p class="message-text">the wobble on the z-axis</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><p class="message-text">At least the first layer looks good xD</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><p class="message-text">A bit far</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 2</div><div class="reply-text">the wobble on the z-axis</div></div><p class="message-text">What should i work on?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><p class="message-text">Good question, that wobble normally means the leadscrew is bend - geting it back into a straight line might be impossible. But at least it will look better.<br><br>The other thing is the retraction length - you can see it on the layer of queesed out filament at the bottom of the wall. Needs a calibration on the used filament.<br><br>The first layer peels off from the build plate, should not happen with PLA. Do you use any glue stick?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><p class="message-text">BTW...you did not say what kind of printer you use there.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 2</div><div class="reply-text">BTW...you did not say what kind of printer you use there.</div></div><p class="message-text">It&#x27;s an Elegoo Neptune 3 Pro</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><p class="message-text">So a better Ender3v2<br><br>Strange, i had a 3v2 and it was really good. Even without any tuning out of the box.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 2</div><div class="reply-text">Good question, that wobble normally means the leadscrew is bend - geting it back into a straight line might be impossibl</div></div><p class="message-text">No glue, textured PEI sheet<br><br>I&#x27;ve calibrated this material from a month, I&#x27;m spending more just to buy this specific brand..</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">I go to sleep<br><br>Maybe I&#x27;ll think better tomorrow</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 2</div><div class="reply-text">So a better Ender3v2  Strange, i had a 3v2 and it was really good. Even without any tuning out of the box.</div></div><p class="message-text">Yeah my Ender3 is WAY better than that.   😮</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><p class="message-text">Slack belts? Wobbly wheels? Loose steppers / bearings? Terrible filament? Bad calibration? Yeah no idea, but pretty gruesome.   😟</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><p class="message-text">That (last) pic tells me at least that the filament settings a bugged like hell.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Ok with the power of sleeping well i&#x27;m doing all my homework again<br><br>So E-steps, PID Tuning, reducing speed, greasing Z Axis (why not), etc.. ( i don&#x27;t know where i get all the time the force to do again ahah)</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Why.<br><br>I sincerely don&#x27;t know what to change</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Looks a little improved, but still bad</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">After some slicing adjustment, looks better<br><br>But still has some repeated defects..<br><br>Like the vertical line on the side or this point</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">This<br><br>I don&#x27;t know why</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><p class="message-text">Does your slicer let you examine the gcode in 3d? Is it doing a retract / z-step wrong?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 4</div><div class="reply-text">Does your slicer let you examine the gcode in 3d? Is it doing a retract / z-step wrong?</div></div><p class="message-text">Prbly<br><br>I&#x27;m using prusaslicer</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><p class="message-text">That first layer there - it&#x27;s not symmetric. You can see that the infull is moved to the bottom left. The gaps at top right a quite visible.<br><br>Never seen such thing before - not even with bad belt tension.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 2</div><div class="reply-text">That first layer there - it&#x27;s not symmetric. You can see that the infull is moved to the bottom left. The gaps at top ri</div></div><p class="message-text">Maybe is the picture<br><br>It is symmetric</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Anyway, tweaked some other settings<br><br>I&#x27;ll take a look when go back home</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">From the webcam doesn&#x27;t look promising..</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">From the webcam doesn&#x27;t look promising..</div></div><p class="message-text">Way out of focus too <br>How would a 40*40*40 cube single wall, no top layer, no infill  look like?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 2</div><div class="reply-text">Way out of focus too  How would a 40*40*40 cube single wall, no top layer, no infill  look like?</div></div><p class="message-text">I can tell you tomorrow!</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">I have noticed something<br><br>When printing a layer without nothing on top, like when doing the benchy, I can see on top like a pattern (prbly the same as the infil, but probly)<br><br>Can this be a hint of what&#x27;s happening?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><p class="message-text">How much / which infill are you using BTW? Yeah the &quot;areas with nothing on top&quot; will print more like... well whatever your top layer settings are.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><p class="message-text">EG i&#x27;ll usually use 10% or 20% gyroid infill, but 3 alternating diagonal top layers (which will include any other areas with nothing on top</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 4</div><div class="reply-text">How much / which infill are you using BTW? Yeah the &quot;areas with nothing on top&quot; will print more like... well whatever yo</div></div><p class="message-text">Cubic, usually 30%</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">I tweaked something more in the slicer and printed while not at home<br><br>Now it show some improvement signs, but still far from good quality</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><p class="message-text">Are you using pressure advance?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 3</div><div class="reply-text">Are you using pressure advance?</div></div><p class="message-text">I don&#x27;t know<br><br>Is this a slicer setting?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">I don&#x27;t know  Is this a slicer setting?</div></div><p class="message-text">It&#x27;s a setting if you&#x27;re running klipper</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 3</div><div class="reply-text">It&#x27;s a setting if you&#x27;re running klipper</div></div><p class="message-text">I&#x27;ll try!</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">I was thinking.. Could using the filament values from &quot;Generic PLA&quot; i use in Bambustudio for my Elegoo N3Pro (same filament) to solve my issues? I never considered this way cause i see the Bambulab A1 as a &quot;plug-and-play full of sensor&quot; solution, making it deeply different to other printers</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">https://www.youtube.com/watch?v=c6JmCdovE0U<br><br>Looking for a solution, i found this video so technically detailed (i&#x27;m prbly going to join his patreon if this solves my problem)<br><br>TLDR, if gears in direct drives are not precisely aligned (and i&#x27;m sure mine AREN&#x27;T, cause last time i dissasembled it was completely disalligned), we could find these defect<br><br>I could think on upgrading my direct drive feeding, i should just know how</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><p class="message-text">I&#x27;m already running RIGDA</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 3</div><div class="reply-text">I&#x27;m already running RIGDA</div></div><p class="message-text">So you change only the gear?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">So you change only the gear?</div></div><p class="message-text">Yep</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 3</div><div class="reply-text">Yep</div></div><p class="message-text">Do you have any improvments?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Do you have any improvments?</div></div><p class="message-text">🤷‍♀</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><p class="message-text">Didn&#x27;t do before and after</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><p class="message-text">But my layers are white consistent</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 3</div><div class="reply-text">But my layers are white consistent</div></div><p class="message-text">I should do this upgrade either<br><br>I have to understand what&#x27;s best to buy for me</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">I should do this upgrade either  I have to understand what&#x27;s best to buy for me</div></div><p class="message-text">Don&#x27;t know if the kit is compatible with your extruder</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 3</div><div class="reply-text">Don&#x27;t know if the kit is compatible with your extruder</div></div><p class="message-text">It&#x27;s what i&#x27;m looking about<br><br>Because i see online even just the gears</p></div></div>
+    <footer>Academia Tech &copy; 2026</footer>
+  </div>
+</div>
+</body></html>

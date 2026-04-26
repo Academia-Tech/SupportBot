@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html><head>
+<title>Designing a 3D Printed Tilting Stand for an Instax Camera | SupportBot</title>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta property="og:title" content="Designing a 3D Printed Tilting Stand for an Instax Camera">
+<meta property="og:description" content="A custom tilting stand was designed and 3D printed to hold an Instax camera securely. The initial design used small, printed teeth on the rotating part to create friction for holding the tilt angle. A">
+<link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+<style>
+:root {
+  --signal-blue: #2c6bed;
+  --page-bg: #f6f7f9;
+  --card-bg: #ffffff;
+  --text: #0d0d0d;
+  --text-sec: #5c5c5c;
+  --border: #d8d8d8;
+  --radius: 12px;
+  --green: #16a34a;
+  --yellow: #ca8a04;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  background: var(--page-bg); color: var(--text);
+  min-height: 100vh; padding: 48px 20px;
+  -webkit-font-smoothing: antialiased;
+}
+@media (max-width: 520px) { body { padding: 24px 12px; } }
+.shell { max-width: 640px; margin: 0 auto; }
+.card {
+  background: var(--card-bg); border: 1px solid var(--border);
+  border-radius: var(--radius); overflow: hidden; margin-bottom: 16px;
+}
+header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 20px; border-bottom: 1px solid var(--border);
+}
+.header-left { display: flex; align-items: center; gap: 10px; text-decoration: none; color: inherit; }
+.logo { width: 28px; height: 28px; }
+.brand { font-size: 15px; font-weight: 600; letter-spacing: -0.02em; }
+.chat-header { padding: 14px 20px; border-bottom: 1px solid var(--border); background: var(--page-bg); }
+.chat-header h2 { font-size: 14px; font-weight: 600; color: var(--text); display: flex; align-items: center; gap: 8px; }
+.chat-header h2 svg { width: 16px; height: 16px; color: var(--signal-blue); }
+.messages { padding: 0; }
+.message { padding: 16px 20px; border-bottom: 1px solid var(--border); }
+.message:last-child { border-bottom: none; }
+.message-header { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+.avatar { width: 28px; height: 28px; border-radius: 50%; color: white; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 600; flex-shrink: 0; }
+.sender-info { flex: 1; min-width: 0; }
+.sender-name { font-size: 13px; font-weight: 600; color: var(--text); }
+.message-text { font-size: 15px; line-height: 1.55; color: var(--text); white-space: pre-wrap; margin-left: 38px; }
+.reply-bubble { margin-left: 38px; margin-bottom: 6px; padding: 6px 10px; background: #f0f2f5; border-left: 3px solid var(--signal-blue); border-radius: 4px; font-size: 13px; color: var(--text-sec); }
+.reply-sender { font-weight: 600; color: var(--signal-blue); font-size: 12px; margin-bottom: 2px; }
+.reply-text { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.status-badge {
+  padding: 4px 10px; font-size: 11px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.04em; border-radius: 4px;
+}
+.status-solved { background: #dcfce7; color: var(--green); }
+.status-recommendation { background: #fef3c7; color: #b45309; }
+main { padding: 24px 20px; }
+h1 { font-size: 20px; font-weight: 700; letter-spacing: -0.025em; margin-bottom: 12px; line-height: 1.3; }
+.meta { font-size: 12px; color: var(--text-sec); margin-bottom: 16px; }
+.tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 20px; }
+.tag {
+  background: rgba(44, 107, 237, 0.08); color: var(--signal-blue);
+  padding: 4px 10px; border-radius: 4px; font-size: 12px; font-weight: 500;
+}
+.section-title {
+  font-size: 11px; font-weight: 600; text-transform: uppercase;
+  letter-spacing: 0.06em; color: var(--text-sec); margin-bottom: 10px;
+  display: flex; align-items: center; gap: 6px;
+}
+.section-title svg { width: 14px; height: 14px; }
+.section-content { font-size: 15px; line-height: 1.6; color: var(--text); white-space: pre-wrap; }
+.problem-section { padding-bottom: 20px; border-bottom: 1px solid var(--border); margin-bottom: 20px; }
+.solution-section {
+  background: #f0fdf4; margin: -24px -20px -24px -20px; padding: 20px;
+  border-top: 1px solid #bbf7d0;
+}
+.solution-section .section-title { color: var(--green); }
+.recommendation-solution { background: #fffbeb; border-top-color: #fde68a; }
+.recommendation-solution .section-title { color: #b45309; }
+.empty-chat {
+  padding: 32px 20px; text-align: center; color: var(--text-sec); font-size: 14px;
+}
+footer {
+  padding: 14px 20px; border-top: 1px solid var(--border);
+  color: var(--text-sec); font-size: 12px; text-align: center;
+}
+@media (max-width: 520px) {
+  main { padding: 20px 16px; }
+  h1 { font-size: 18px; }
+  .solution-section { margin: -20px -16px -20px -16px; padding: 16px; }
+}
+</style>
+</head><body>
+<div class="shell">
+  <div class="card">
+    <header>
+      <a href="https://academia-tech.github.io/SupportBot" class="header-left">
+        <img src="/SupportBot/supportbot-logo-128.png" alt="SupportBot" class="logo">
+        <span class="brand">SupportBot</span>
+      </a>
+      <span class="status-solved status-badge">Вирішено</span>
+    </header>
+    <main>
+      <h1>Designing a 3D Printed Tilting Stand for an Instax Camera</h1>
+      <p class="meta">Case 629fb2ca60c8 &middot; 3dprinting</p>
+      <div class='tags'><span class="tag">#3d printing</span><span class="tag">#functional print</span><span class="tag">#camera accessory</span><span class="tag">#instax</span><span class="tag">#design improvement</span><span class="tag">#o-ring</span><span class="tag">#petg</span><span class="tag">#abs</span></div>
+      <div class="problem-section">
+        <h2 class="section-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/>
+            <line x1="12" y1="16" x2="12.01" y2="16"/>
+          </svg>
+          Проблема
+        </h2>
+        <p class="section-content">An Instax camera lacks a tripod mount and is unstable on uneven surfaces, making it difficult to position for group photos. A user needed to create a stable, tilting stand for it.</p>
+      </div>
+      <div class="solution-section">
+        <h2 class="section-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          Рішення
+        </h2>
+        <p class="section-content">A custom tilting stand was designed and 3D printed to hold an Instax camera securely. The initial design used small, printed teeth on the rotating part to create friction for holding the tilt angle. After a discussion on materials, the design was further improved with the idea of using standard o-rings. This allows for a stepless adjustment and adds plenty of resistance. The 3D model can be adjusted to have a fitting profile for a common o-ring size (e.g., 20mm).</p>
+      </div>
+    </main>
+  </div>
+  <div class="card">
+    <div class="chat-header"><h2><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Історія чату</h2></div><div class="messages"><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Gf got an instax for Christmas and it<br>A) does not have a tripod mount<br>B) tips over easily when not on a perfectly even surface <br><br>So I designed and printed a stand that can tilt for group pictures<br><br>This is V1, it&#x27;s far from perfect but it&#x27;s already pretty good</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">The instax just slides right in</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><p class="message-text">https://www.youtube.com/shorts/_iB2h0aL77k</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Gf got an instax for Christmas and it A) does not have a tripod mount B) tips over easily when not on a perfectly even s</div></div><p class="message-text">the rough surface of the print is enough to keep it tilted in position? Nice!</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">It is 1cm off from being centered (v3 will be centered) so there isn&#x27;t a lot of force when it&#x27;s tilted. However I&#x27;ve added tiny teeth to the rotating part and it&#x27;s counterpart that add a bit of friction but they are so small that you can barely see the in the picture</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Using PETG was a mistake lol</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">It&#x27;s too smooth</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><p class="message-text">I think I see &quot;tiny teeth&quot;. Looks somewhat &quot;knurled&quot;. Cool.  👍</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><p class="message-text">(Adj) Milled, as the head of a screw, or the edge of a coin.<br>Sure, kinda</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Using PETG was a mistake lol</div></div><p class="message-text">I&#x27;m not so sure about that, because PLA parts can be too hard/brittle and wear out very quickly. The elasticity of PETG has its advantages.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><p class="message-text">Or go hardcore and use ABS-cf xd</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">there really isn&#x27;t anything that bends in that design and my alternative would be ABS</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">not printing anything mechanical (even this tiny thing) in PLA</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 3</div><div class="reply-text">Or go hardcore and use ABS-cf xd</div></div><p class="message-text">well....</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">if I had some</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">gonna use varioshore lmao</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><p class="message-text">Wayyy too $$$ for such tool</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">it&#x27;s like a 20g print in total</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">interestingly enough I could not find a single similar thing online</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">so off to etsy I go I guess</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><p class="message-text">TPU? Might be interesting, won&#x27;t need any teeth there.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 3</div><div class="reply-text">TPU? Might be interesting, won&#x27;t need any teeth there.</div></div><p class="message-text">the wobbliest tripod thingy</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">I could print a TPU ring for friction</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">ACTUALLY</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">I can just use regular o rings</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">that would allow for a stepless adjustment and add plenty of resistance</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><p class="message-text">1/100 ends up as modern art. xD</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">I can just use regular o rings</div></div><p class="message-text">rubber bands!</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">also an option but I already have a box full of o-rings</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">so I can just pick a 20mm one or so, adjust the print to have a fitting profile and go with that</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">I&#x27;ll keep that in mind when going back to fusion tomorrow</p></div></div>
+    <footer>Academia Tech &copy; 2026</footer>
+  </div>
+</div>
+</body></html>

@@ -37,7 +37,22 @@ header {
   padding: 14px 20px; border-bottom: 1px solid var(--border);
 }
 .header-left { display: flex; align-items: center; gap: 10px; text-decoration: none; color: inherit; }
+.logo { width: 28px; height: 28px; }
 .brand { font-size: 15px; font-weight: 600; letter-spacing: -0.02em; }
+.chat-header { padding: 14px 20px; border-bottom: 1px solid var(--border); background: var(--page-bg); }
+.chat-header h2 { font-size: 14px; font-weight: 600; color: var(--text); display: flex; align-items: center; gap: 8px; }
+.chat-header h2 svg { width: 16px; height: 16px; color: var(--signal-blue); }
+.messages { padding: 0; }
+.message { padding: 16px 20px; border-bottom: 1px solid var(--border); }
+.message:last-child { border-bottom: none; }
+.message-header { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+.avatar { width: 28px; height: 28px; border-radius: 50%; color: white; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 600; flex-shrink: 0; }
+.sender-info { flex: 1; min-width: 0; }
+.sender-name { font-size: 13px; font-weight: 600; color: var(--text); }
+.message-text { font-size: 15px; line-height: 1.55; color: var(--text); white-space: pre-wrap; margin-left: 38px; }
+.reply-bubble { margin-left: 38px; margin-bottom: 6px; padding: 6px 10px; background: #f0f2f5; border-left: 3px solid var(--signal-blue); border-radius: 4px; font-size: 13px; color: var(--text-sec); }
+.reply-sender { font-weight: 600; color: var(--signal-blue); font-size: 12px; margin-bottom: 2px; }
+.reply-text { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .status-badge {
   padding: 4px 10px; font-size: 11px; font-weight: 600;
   text-transform: uppercase; letter-spacing: 0.04em; border-radius: 4px;
@@ -84,7 +99,8 @@ footer {
 <div class="shell">
   <div class="card">
     <header>
-      <a href="https://pavelshpagin.github.io/SupportBot" class="header-left">
+      <a href="https://academia-tech.github.io/SupportBot" class="header-left">
+        <img src="/SupportBot/supportbot-logo-128.png" alt="SupportBot" class="logo">
         <span class="brand">SupportBot</span>
       </a>
       <span class="status-recommendation status-badge">Рекомендація</span>
@@ -95,7 +111,7 @@ footer {
       <div class='tags'><span class="tag">#DHCP</span><span class="tag">#rogue DHCP</span><span class="tag">#DHCP Snooping</span><span class="tag">#security</span><span class="tag">#scripting</span><span class="tag">#Telegram</span><span class="tag">#STP</span><span class="tag">#loop detect</span></div>
       <div class="problem-section">
         <h2 class="section-title">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/>
             <line x1="12" y1="16" x2="12.01" y2="16"/>
           </svg>
@@ -105,7 +121,7 @@ footer {
       </div>
       <div class="solution-section recommendation-solution">
         <h2 class="section-title">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7c.6.4 1 1.1 1 1.8V17h6v-.5c0-.7.4-1.4 1-1.8A7 7 0 0 0 12 2z"/></svg>
           Рекомендація (не підтверджено)
         </h2>
         <p class="section-content">Для боротьби зі сторонніми DHCP-серверами рекомендовано декілька методів:
@@ -116,7 +132,7 @@ footer {
     </main>
   </div>
   <div class="card">
-    <div class="empty-chat">Історія переписки доступна у продакшн-системі на <a href="https://supportbot.info">supportbot.info</a></div>
+    <div class="chat-header"><h2><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Історія чату</h2></div><div class="messages"><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">як з цим боретесь - коли світло офнули всім і включили)</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">циски у мну нема) а мікрот прям зараз), ну руцями ребут онушки, або по дзвінку ребут рутера) ну інколи погасити влан на голову, чи є якісь більш прості методи?)</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">циски у мну нема) а мікрот прям зараз), ну руцями ребут онушки, або по дзвінку ребут рутера) ну інколи погасити влан на </div></div><p class="message-text">Не зрозумів, що в тебе за проблема?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 2</div><div class="reply-text">Не зрозумів, що в тебе за проблема?</div></div><p class="message-text">лєві дхцп серваки, бо криворуко тикнуті пачкорди)</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">лєві дхцп серваки, бо криворуко тикнуті пачкорди)</div></div><p class="message-text">На скріншоті не схоже на сторонні сервери<br>Проти сторонніх dhcp-серверів є дуже просте і ефективне рішення, і називається воно DHCP Snooping.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">лєві дхцп серваки, бо криворуко тикнуті пачкорди)</div></div><p class="message-text">В Dhcp-server alarm є оповіщення про це. Можеш його собі кудась відправити, наприклад на пошту і дали вбити гада</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><p class="message-text">Якщо у вас бардак із розводкою, то дуже може допомогти STP і loop detect. Можна навіть міксувати, головне - не включати loop detect на uplink</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><p class="message-text">це не сторонні, це погані кабелі. В мене таке в офісі, бо розводив чорт з рогами. Періодично так роблять іп-телефони...</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 2</div><div class="reply-text">В Dhcp-server alarm є оповіщення про це. Можеш його собі кудась відправити, наприклад на пошту і дали вбити гада</div></div><p class="message-text">О, теж так робив. Всі сповіщення звідти (і з Dude) можна надсилати в групу Telegram і оперативно реагувати.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">лєві дхцп серваки, бо криворуко тикнуті пачкорди)</div></div><p class="message-text">Це не задача dhcp-servera, тому він і не зробить нічого. А взагалі - якщо в тебе там ОЛТ - то то не страшно</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 2</div><div class="reply-text">Це не задача dhcp-servera, тому він і не зробить нічого. А взагалі - якщо в тебе там ОЛТ - то то не страшно</div></div><p class="message-text">страшно, страшно)</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 2</div><div class="reply-text">В Dhcp-server alarm є оповіщення про це. Можеш його собі кудась відправити, наприклад на пошту і дали вбити гада</div></div><p class="message-text">там потрібен якийсь скрипт?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">там потрібен якийсь скрипт?</div></div><p class="message-text"># Get current time and save to variable<br>:local currenttime [/system clock get time]<br><br># Telegram message to monitoring group<br>/tool fetch url=&quot;https://api.telegram.org/bot____token____/sendMessage\?chat_id=telegram_chat_id&amp;text=$currenttime Unknown DHCP server on interface: $interface (IP: $address, MAC:$&quot;mac-address&quot;)&quot; keep-result=no</p></div></div>
     <footer>Academia Tech &copy; 2026</footer>
   </div>
 </div>

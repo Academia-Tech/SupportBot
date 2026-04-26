@@ -37,7 +37,22 @@ header {
   padding: 14px 20px; border-bottom: 1px solid var(--border);
 }
 .header-left { display: flex; align-items: center; gap: 10px; text-decoration: none; color: inherit; }
+.logo { width: 28px; height: 28px; }
 .brand { font-size: 15px; font-weight: 600; letter-spacing: -0.02em; }
+.chat-header { padding: 14px 20px; border-bottom: 1px solid var(--border); background: var(--page-bg); }
+.chat-header h2 { font-size: 14px; font-weight: 600; color: var(--text); display: flex; align-items: center; gap: 8px; }
+.chat-header h2 svg { width: 16px; height: 16px; color: var(--signal-blue); }
+.messages { padding: 0; }
+.message { padding: 16px 20px; border-bottom: 1px solid var(--border); }
+.message:last-child { border-bottom: none; }
+.message-header { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+.avatar { width: 28px; height: 28px; border-radius: 50%; color: white; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 600; flex-shrink: 0; }
+.sender-info { flex: 1; min-width: 0; }
+.sender-name { font-size: 13px; font-weight: 600; color: var(--text); }
+.message-text { font-size: 15px; line-height: 1.55; color: var(--text); white-space: pre-wrap; margin-left: 38px; }
+.reply-bubble { margin-left: 38px; margin-bottom: 6px; padding: 6px 10px; background: #f0f2f5; border-left: 3px solid var(--signal-blue); border-radius: 4px; font-size: 13px; color: var(--text-sec); }
+.reply-sender { font-weight: 600; color: var(--signal-blue); font-size: 12px; margin-bottom: 2px; }
+.reply-text { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .status-badge {
   padding: 4px 10px; font-size: 11px; font-weight: 600;
   text-transform: uppercase; letter-spacing: 0.04em; border-radius: 4px;
@@ -84,7 +99,8 @@ footer {
 <div class="shell">
   <div class="card">
     <header>
-      <a href="https://pavelshpagin.github.io/SupportBot" class="header-left">
+      <a href="https://academia-tech.github.io/SupportBot" class="header-left">
+        <img src="/SupportBot/supportbot-logo-128.png" alt="SupportBot" class="logo">
         <span class="brand">SupportBot</span>
       </a>
       <span class="status-recommendation status-badge">Рекомендація</span>
@@ -95,7 +111,7 @@ footer {
       <div class='tags'><span class="tag">#remote access</span><span class="tag">#NAT</span><span class="tag">#VPN</span><span class="tag">#Back to Home</span><span class="tag">#CHR</span><span class="tag">#SSTP</span><span class="tag">#Wireguard</span><span class="tag">#ZeroTier</span></div>
       <div class="problem-section">
         <h2 class="section-title">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/>
             <line x1="12" y1="16" x2="12.01" y2="16"/>
           </svg>
@@ -105,7 +121,7 @@ footer {
       </div>
       <div class="solution-section recommendation-solution">
         <h2 class="section-title">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7c.6.4 1 1.1 1 1.8V17h6v-.5c0-.7.4-1.4 1-1.8A7 7 0 0 0 12 2z"/></svg>
           Рекомендація (не підтверджено)
         </h2>
         <p class="section-content">Запропоновано декілька рішень для доступу до роутера за NAT:
@@ -118,7 +134,7 @@ footer {
     </main>
   </div>
   <div class="card">
-    <div class="empty-chat">Історія переписки доступна у продакшн-системі на <a href="https://supportbot.info">supportbot.info</a></div>
+    <div class="chat-header"><h2><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Історія чату</h2></div><div class="messages"><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Вітаю товариство, підкажіть як ви підключаєтесь до роутера якщо виділена адреса відсутня.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Вітаю товариство, підкажіть як ви підключаєтесь до роутера якщо виділена адреса відсутня.</div></div><p class="message-text">Вітаю.<br>Ну залежить від багатьох факторів. Якщо є публічна, але динамічно щоразу інша - ip/cloud<br>Якщо немає публічної - back2home<br>Або ж Zerotier<br>Або ж підключаю до CHR в хмарі по SSTP</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Вітаю товариство, підкажіть як ви підключаєтесь до роутера якщо виділена адреса відсутня.</div></div><p class="message-text">Завжди до CHR в хмарі, і все. Це ж лише для керування</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Openvpn , sstp чи l2tp, потім ромон ?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Openvpn , sstp чи l2tp, потім ромон ?</div></div><p class="message-text">Якщо лише керування, то sstp і далі вже маршрутизація</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Openvpn , sstp чи l2tp, потім ромон ?</div></div><p class="message-text">О, до повномасштабки наші цілу мережу РЖД поклали. Там якраз так все було організовано</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 2</div><div class="reply-text">О, до повномасштабки наші цілу мережу РЖД поклали. Там якраз так все було організовано</div></div><p class="message-text">Була стаття на хабрі. Там роутери були без паролів у внутрішній мережі</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#0891b2">M5</div><div class="sender-info"><span class="sender-name">Учасник 5</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 3</div><div class="reply-text">Якщо лише керування, то sstp і далі вже маршрутизація</div></div><p class="message-text">Для чого взагалі відкривати до chr щось? Є впн або якщо щось пішло не так то консоль, чи я щось не розумію?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 5</div><div class="reply-text">Для чого взагалі відкривати до chr щось? Є впн або якщо щось пішло не так то консоль, чи я щось не розумію?</div></div><p class="message-text">Питання звучало, як дістатись до роутера, і якщо нема публічної адреси, то чому не використовувати chr?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#9333ea">M6</div><div class="sender-info"><span class="sender-name">Учасник 6</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Вітаю товариство, підкажіть як ви підключаєтесь до роутера якщо виділена адреса відсутня.</div></div><p class="message-text">Back to home, навіть якщо у вас від провайдера приватна адреса за NAT</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 6</div><div class="reply-text">Back to home, навіть якщо у вас від провайдера приватна адреса за NAT</div></div><p class="message-text">Рос6 має таку фічу чи тільки 7 ?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#9333ea">M6</div><div class="sender-info"><span class="sender-name">Учасник 6</span></div></div><p class="message-text">Тільки ROS7</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#dc2626">M7</div><div class="sender-info"><span class="sender-name">Учасник 7</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Рос6 має таку фічу чи тільки 7 ?</div></div><p class="message-text">Back to home<br>Тільки в RouterOS 7 і тільки на архітектурі ARM і ARM64<br><br>Якщо пристрій на mips то на мій погляд кращій варіант для доступу за NAT провайдера це CHR + Wireguard від роутера до CHR</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#0d9488">M8</div><div class="sender-info"><span class="sender-name">Учасник 8</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 7</div><div class="reply-text">Back to home Тільки в RouterOS 7 і тільки на архітектурі ARM і ARM64  Якщо пристрій на mips то на мій погляд кращій варі</div></div><p class="message-text">то ж ZeroTier доступний лише на arm/64 а WG наче скрізь є</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#0d9488">M8</div><div class="sender-info"><span class="sender-name">Учасник 8</span></div></div><p class="message-text">а BTH і використовує WG</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#dc2626">M7</div><div class="sender-info"><span class="sender-name">Учасник 7</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 8</div><div class="reply-text">то ж ZeroTier доступний лише на arm/64 а WG наче скрізь є</div></div><p class="message-text">Саме BTH працює на ARM<br>При спробі активації на mips писало - девайс не підтримується <br>WG скрізь</p></div></div>
     <footer>Academia Tech &copy; 2026</footer>
   </div>
 </div>

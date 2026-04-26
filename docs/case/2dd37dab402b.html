@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html><head>
+<title>Building an Enclosure for a Hypercube Evo Printer | SupportBot</title>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta property="og:title" content="Building an Enclosure for a Hypercube Evo Printer">
+<meta property="og:description" content="For a cube-style printer like the Hypercube, it is recommended to attach panels directly to the aluminum extrusions. Users suggested looking at designs from the VzBot Github or using modified VCore 3 ">
+<link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+<style>
+:root {
+  --signal-blue: #2c6bed;
+  --page-bg: #f6f7f9;
+  --card-bg: #ffffff;
+  --text: #0d0d0d;
+  --text-sec: #5c5c5c;
+  --border: #d8d8d8;
+  --radius: 12px;
+  --green: #16a34a;
+  --yellow: #ca8a04;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  background: var(--page-bg); color: var(--text);
+  min-height: 100vh; padding: 48px 20px;
+  -webkit-font-smoothing: antialiased;
+}
+@media (max-width: 520px) { body { padding: 24px 12px; } }
+.shell { max-width: 640px; margin: 0 auto; }
+.card {
+  background: var(--card-bg); border: 1px solid var(--border);
+  border-radius: var(--radius); overflow: hidden; margin-bottom: 16px;
+}
+header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 20px; border-bottom: 1px solid var(--border);
+}
+.header-left { display: flex; align-items: center; gap: 10px; text-decoration: none; color: inherit; }
+.logo { width: 28px; height: 28px; }
+.brand { font-size: 15px; font-weight: 600; letter-spacing: -0.02em; }
+.chat-header { padding: 14px 20px; border-bottom: 1px solid var(--border); background: var(--page-bg); }
+.chat-header h2 { font-size: 14px; font-weight: 600; color: var(--text); display: flex; align-items: center; gap: 8px; }
+.chat-header h2 svg { width: 16px; height: 16px; color: var(--signal-blue); }
+.messages { padding: 0; }
+.message { padding: 16px 20px; border-bottom: 1px solid var(--border); }
+.message:last-child { border-bottom: none; }
+.message-header { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+.avatar { width: 28px; height: 28px; border-radius: 50%; color: white; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 600; flex-shrink: 0; }
+.sender-info { flex: 1; min-width: 0; }
+.sender-name { font-size: 13px; font-weight: 600; color: var(--text); }
+.message-text { font-size: 15px; line-height: 1.55; color: var(--text); white-space: pre-wrap; margin-left: 38px; }
+.reply-bubble { margin-left: 38px; margin-bottom: 6px; padding: 6px 10px; background: #f0f2f5; border-left: 3px solid var(--signal-blue); border-radius: 4px; font-size: 13px; color: var(--text-sec); }
+.reply-sender { font-weight: 600; color: var(--signal-blue); font-size: 12px; margin-bottom: 2px; }
+.reply-text { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.status-badge {
+  padding: 4px 10px; font-size: 11px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.04em; border-radius: 4px;
+}
+.status-solved { background: #dcfce7; color: var(--green); }
+.status-recommendation { background: #fef3c7; color: #b45309; }
+main { padding: 24px 20px; }
+h1 { font-size: 20px; font-weight: 700; letter-spacing: -0.025em; margin-bottom: 12px; line-height: 1.3; }
+.meta { font-size: 12px; color: var(--text-sec); margin-bottom: 16px; }
+.tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 20px; }
+.tag {
+  background: rgba(44, 107, 237, 0.08); color: var(--signal-blue);
+  padding: 4px 10px; border-radius: 4px; font-size: 12px; font-weight: 500;
+}
+.section-title {
+  font-size: 11px; font-weight: 600; text-transform: uppercase;
+  letter-spacing: 0.06em; color: var(--text-sec); margin-bottom: 10px;
+  display: flex; align-items: center; gap: 6px;
+}
+.section-title svg { width: 14px; height: 14px; }
+.section-content { font-size: 15px; line-height: 1.6; color: var(--text); white-space: pre-wrap; }
+.problem-section { padding-bottom: 20px; border-bottom: 1px solid var(--border); margin-bottom: 20px; }
+.solution-section {
+  background: #f0fdf4; margin: -24px -20px -24px -20px; padding: 20px;
+  border-top: 1px solid #bbf7d0;
+}
+.solution-section .section-title { color: var(--green); }
+.recommendation-solution { background: #fffbeb; border-top-color: #fde68a; }
+.recommendation-solution .section-title { color: #b45309; }
+.empty-chat {
+  padding: 32px 20px; text-align: center; color: var(--text-sec); font-size: 14px;
+}
+footer {
+  padding: 14px 20px; border-top: 1px solid var(--border);
+  color: var(--text-sec); font-size: 12px; text-align: center;
+}
+@media (max-width: 520px) {
+  main { padding: 20px 16px; }
+  h1 { font-size: 18px; }
+  .solution-section { margin: -20px -16px -20px -16px; padding: 16px; }
+}
+</style>
+</head><body>
+<div class="shell">
+  <div class="card">
+    <header>
+      <a href="https://academia-tech.github.io/SupportBot" class="header-left">
+        <img src="/SupportBot/supportbot-logo-128.png" alt="SupportBot" class="logo">
+        <span class="brand">SupportBot</span>
+      </a>
+      <span class="status-recommendation status-badge">Рекомендація</span>
+    </header>
+    <main>
+      <h1>Building an Enclosure for a Hypercube Evo Printer</h1>
+      <p class="meta">Case 2dd37dab402b &middot; 3dprinting</p>
+      <div class='tags'><span class="tag">#enclosure</span><span class="tag">#Hypercube</span><span class="tag">#CoreXY</span><span class="tag">#VzBot</span><span class="tag">#polycarbonate</span><span class="tag">#ABS</span><span class="tag">#ASA</span><span class="tag">#chamber temperature</span></div>
+      <div class="problem-section">
+        <h2 class="section-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/>
+            <line x1="12" y1="16" x2="12.01" y2="16"/>
+          </svg>
+          Проблема
+        </h2>
+        <p class="section-content">A user with a Hypercube Evo printer wants to build an enclosure and is asking for advice on suitable designs and materials. They are concerned about whether plastic panels can withstand the heat inside the chamber.</p>
+      </div>
+      <div class="solution-section recommendation-solution">
+        <h2 class="section-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7c.6.4 1 1.1 1 1.8V17h6v-.5c0-.7.4-1.4 1-1.8A7 7 0 0 0 12 2z"/></svg>
+          Рекомендація (не підтверджено)
+        </h2>
+        <p class="section-content">For a cube-style printer like the Hypercube, it is recommended to attach panels directly to the aluminum extrusions. Users suggested looking at designs from the VzBot Github or using modified VCore 3 plates, which mount with t-nuts.
+
+Regarding materials, polycarbonate sheets are recommended over metal. Metal is a poor choice as it will conduct heat out of the chamber. Polycarbonate is suitable for the typical chamber temperatures required for ABS and ASA (60-70°C), as its glass transition temperature is much higher at 147°C. For most use cases, the goal is simply to shield the printer from room temperature fluctuations.
+
+For extremely high-temperature engineering filaments like Ultem (PEI), which require chamber temperatures over 100°C, special considerations are needed, such as a special bed surface (as it can fuse to regular PEI beds) and extensive filament drying (e.g., 120°C for 8 hours).</p>
+      </div>
+    </main>
+  </div>
+  <div class="card">
+    <div class="chat-header"><h2><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Історія чату</h2></div><div class="messages"><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Hallo Leute <br>Ich hab gerade ein Hypercube evo und möchte ein enclosure für es bauen <br>Hat jemand darüber Erfahrungen? <br>Welche Materiale passen dazu?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Es sieht so aus</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Es sieht so aus</div></div><p class="message-text">Welcome. This is mostly an English-speaking group. You will get more replies if you post in English here</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><p class="message-text">There is a design that uses the IKEA Eket cabinet</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><p class="message-text">If the printer will fit inside, a lot of people use two IKEA Lack tables to make enclosures</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 2</div><div class="reply-text">If the printer will fit inside, a lot of people use two IKEA Lack tables to make enclosures</div></div><p class="message-text">You mean The whole printer inside a box rather than big plates for printer sides ?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">You mean The whole printer inside a box rather than big plates for printer sides ?</div></div><p class="message-text">They get two Lack tables and put one on top of the other to build a cabinet for the printer. The polycarbonate sheets are attached to the cabinet</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 2</div><div class="reply-text">They get two Lack tables and put one on top of the other to build a cabinet for the printer. The polycarbonate sheets ar</div></div><p class="message-text">that makes no sense for the machine he showed</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><p class="message-text">it&#x27;s already a cube frame, with no overhang of components outside of it</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><p class="message-text">You could also look in the VzBot Github. They have brackets to attach the plastic sheets to the printer extrusions. They should fit any cube printer. The only change should be the sizes of the plastic sheets</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><p class="message-text">that printer could just use slightly modified vcore 3 plates</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><p class="message-text">basically the same design, just need to be adjusted for the different size</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><p class="message-text">they mount directly in extrusion with tnuts</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><p class="message-text">front and top are doors held on by magnets</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><p class="message-text">A top lid may be required to make the filament feed work depending on how close the top of the extruder is to the top of the printer</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><p class="message-text">The VzBot lid will probably work if the dimensions are modified to match the printer</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">I&#x27;ve seen both of them.(ratrig and vzBot)<br>Would metal plates work better?<br>It gets hot inside. Will the high temperature have any impact on the plastic plates?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><p class="message-text">Unless you&#x27;re using silly high temperature engineering filaments, you won&#x27;t be heating the chamber up to any temperature that would degrade polycarbonate</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><p class="message-text">ABS and ASA want a chamber temperature of 60-70C</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><p class="message-text">I don&#x27;t think metal will work well. It will conduct the heat out of the chamber</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><p class="message-text">Nylon is not picky either</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><p class="message-text">The glass transition temperature of polycarbonate is 147C. That&#x27;s a lot of headroom above 70C before you start to damage the plastic</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><p class="message-text">You&#x27;ll probably want to add a chamber heater to the printer too</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><p class="message-text">Actually temps nearing or above 100C are too much for many filaments since they are not able to cool and get solid quick enough, which leads to sags and droops</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><p class="message-text">This is a silly engineering filament. Be shocked by the temperatures needed then so at the price. https://www.plastock.co.uk/products/ultem-9085-pei-3d-printing-filament?srsltid=AfmBOop_d5T3xLdjBWhDUfqbEOcYpO3-T_vuSAZN7DcJnuBSBmn1mDDd</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><p class="message-text">It&#x27;s for printing automotive and aviation parts that can withstand 160C temperatures in use. It needs the build plate and enclosure at over 100C</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><p class="message-text">It warps if you even look at it funny. It&#x27;s a complete bastard to print with</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><p class="message-text">Needs a special bed too as it&#x27;s PEI and will fuse to a regular bed</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><p class="message-text">You have to dry it at 120C for 8 hours before printing</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 2</div><div class="reply-text">This is a silly engineering filament. Be shocked by the temperatures needed then so at the price. https://www.plastock.c</div></div><p class="message-text">I mostly print ABS and PLA, sometimes PETG, and hardly ever nylon, let alone PEI filament.<br>The use of an enclosure due to temperature changes in the room.<br>I don&#x27;t want to heat the entire room.<br>I just want to use an enclosure to protect my printer from temperature changes in the room.</p></div></div>
+    <footer>Academia Tech &copy; 2026</footer>
+  </div>
+</div>
+</body></html>
