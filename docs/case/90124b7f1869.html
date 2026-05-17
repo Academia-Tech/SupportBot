@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html><head>
+<title>Recomendación de router para una empresa de 40 personas | SupportBot</title>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta property="og:title" content="Recomendación de router para una empresa de 40 personas">
+<meta property="og:description" content="Se ofrecen múltiples soluciones de nivel profesional para una empresa de 40 personas, y el usuario agradece los consejos. Se sugiere considerar una segunda línea de fibra de otro operador para balance">
+<link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+<style>
+:root {
+  --signal-blue: #2c6bed;
+  --page-bg: #f6f7f9;
+  --card-bg: #ffffff;
+  --text: #0d0d0d;
+  --text-sec: #5c5c5c;
+  --border: #d8d8d8;
+  --radius: 12px;
+  --green: #16a34a;
+  --yellow: #ca8a04;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  background: var(--page-bg); color: var(--text);
+  min-height: 100vh; padding: 48px 20px;
+  -webkit-font-smoothing: antialiased;
+}
+@media (max-width: 520px) { body { padding: 24px 12px; } }
+.shell { max-width: 640px; margin: 0 auto; }
+.card {
+  background: var(--card-bg); border: 1px solid var(--border);
+  border-radius: var(--radius); overflow: hidden; margin-bottom: 16px;
+}
+header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 20px; border-bottom: 1px solid var(--border);
+}
+.header-left { display: flex; align-items: center; gap: 10px; text-decoration: none; color: inherit; }
+.logo { width: 28px; height: 28px; }
+.brand { font-size: 15px; font-weight: 600; letter-spacing: -0.02em; }
+.chat-header { padding: 14px 20px; border-bottom: 1px solid var(--border); background: var(--page-bg); }
+.chat-header h2 { font-size: 14px; font-weight: 600; color: var(--text); display: flex; align-items: center; gap: 8px; }
+.chat-header h2 svg { width: 16px; height: 16px; color: var(--signal-blue); }
+.messages { padding: 0; }
+.message { padding: 16px 20px; border-bottom: 1px solid var(--border); }
+.message:last-child { border-bottom: none; }
+.message-header { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+.avatar { width: 28px; height: 28px; border-radius: 50%; color: white; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 600; flex-shrink: 0; }
+.sender-info { flex: 1; min-width: 0; }
+.sender-name { font-size: 13px; font-weight: 600; color: var(--text); }
+.message-text { font-size: 15px; line-height: 1.55; color: var(--text); white-space: pre-wrap; margin-left: 38px; }
+.reply-bubble { margin-left: 38px; margin-bottom: 6px; padding: 6px 10px; background: #f0f2f5; border-left: 3px solid var(--signal-blue); border-radius: 4px; font-size: 13px; color: var(--text-sec); }
+.reply-sender { font-weight: 600; color: var(--signal-blue); font-size: 12px; margin-bottom: 2px; }
+.reply-text { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.status-badge {
+  padding: 4px 10px; font-size: 11px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.04em; border-radius: 4px;
+}
+.status-solved { background: #dcfce7; color: var(--green); }
+.status-recommendation { background: #fef3c7; color: #b45309; }
+main { padding: 24px 20px; }
+h1 { font-size: 20px; font-weight: 700; letter-spacing: -0.025em; margin-bottom: 12px; line-height: 1.3; }
+.meta { font-size: 12px; color: var(--text-sec); margin-bottom: 16px; }
+.tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 20px; }
+.tag {
+  background: rgba(44, 107, 237, 0.08); color: var(--signal-blue);
+  padding: 4px 10px; border-radius: 4px; font-size: 12px; font-weight: 500;
+}
+.section-title {
+  font-size: 11px; font-weight: 600; text-transform: uppercase;
+  letter-spacing: 0.06em; color: var(--text-sec); margin-bottom: 10px;
+  display: flex; align-items: center; gap: 6px;
+}
+.section-title svg { width: 14px; height: 14px; }
+.section-content { font-size: 15px; line-height: 1.6; color: var(--text); white-space: pre-wrap; }
+.problem-section { padding-bottom: 20px; border-bottom: 1px solid var(--border); margin-bottom: 20px; }
+.solution-section {
+  background: #f0fdf4; margin: -24px -20px -24px -20px; padding: 20px;
+  border-top: 1px solid #bbf7d0;
+}
+.solution-section .section-title { color: var(--green); }
+.recommendation-solution { background: #fffbeb; border-top-color: #fde68a; }
+.recommendation-solution .section-title { color: #b45309; }
+.empty-chat {
+  padding: 32px 20px; text-align: center; color: var(--text-sec); font-size: 14px;
+}
+footer {
+  padding: 14px 20px; border-top: 1px solid var(--border);
+  color: var(--text-sec); font-size: 12px; text-align: center;
+}
+@media (max-width: 520px) {
+  main { padding: 20px 16px; }
+  h1 { font-size: 18px; }
+  .solution-section { margin: -20px -16px -20px -16px; padding: 16px; }
+}
+</style>
+</head><body>
+<div class="shell">
+  <div class="card">
+    <header>
+      <a href="https://academia-tech.github.io/SupportBot" class="header-left">
+        <img src="/SupportBot/supportbot-logo-128.png" alt="SupportBot" class="logo">
+        <span class="brand">SupportBot</span>
+      </a>
+      <span class="status-solved status-badge">Вирішено</span>
+    </header>
+    <main>
+      <h1>Recomendación de router para una empresa de 40 personas</h1>
+      <p class="meta">Case 90124b7f1869 &middot; naseros</p>
+      <div class='tags'><span class="tag">#router</span><span class="tag">#empresa</span><span class="tag">#PYME</span><span class="tag">#recomendación</span><span class="tag">#MikroTik</span><span class="tag">#Asus ExpertWiFi</span><span class="tag">#Cisco</span><span class="tag">#Ubiquiti</span><span class="tag">#red empresarial</span></div>
+      <div class="problem-section">
+        <h2 class="section-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/>
+            <line x1="12" y1="16" x2="12.01" y2="16"/>
+          </svg>
+          Проблема
+        </h2>
+        <p class="section-content">Un usuario solicita una recomendación de router para una agencia de marketing de unas 40 personas, para que todos puedan conectarse sin problemas.</p>
+      </div>
+      <div class="solution-section">
+        <h2 class="section-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          Рішення
+        </h2>
+        <p class="section-content">Se ofrecen múltiples soluciones de nivel profesional para una empresa de 40 personas, y el usuario agradece los consejos. Se sugiere considerar una segunda línea de fibra de otro operador para balanceo de carga y redundancia. Las recomendaciones de hardware incluyen:
+- **MikroTik**: Se menciona como una opción robusta de router/firewall, sugiriendo específicamente el modelo RB5009. Se comparte la experiencia de una empresa pequeña que usa Mikrotik y Cisco con éxito.
+- **Asus ExpertWifi**: Se recomienda el modelo EBM68 por su facilidad de configuración, compatibilidad con doble WAN, mesh y VLANs.
+- **Cisco/Ubiquiti**: Se sugiere una combinación de router Cisco o Mikrotik con puntos de acceso (AP) Ubiquiti. Un usuario incluso se ofrece para realizar instalaciones de Cisco y Huawei.</p>
+      </div>
+    </main>
+  </div>
+  <div class="card">
+    <div class="chat-header"><h2><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Історія чату</h2></div><div class="messages"><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Buenas tardes! ¿alguien me puede recomendar un router para una empresa de unas 40 personas?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Buenas tardes! ¿alguien me puede recomendar un router para una empresa de unas 40 personas?</div></div><p class="message-text">Pero ¿para que uso?<br>Router y FireWall?<br>Solo conexión a Internet?<br>Tiene servicios dentro para mostrar en Internet?<br>Etc...<br>Mikrotik tiene muy buenos equipos, router y FireWall...<br>Para cienes y cienes de usuarios...<br>Salud</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 2</div><div class="reply-text">Pero ¿para que uso? Router y FireWall? Solo conexión a Internet? Tiene servicios dentro para mostrar en Internet? Etc...</div></div><p class="message-text">es una agencia de marketing, para que todos nos podamos conectar sin problema</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Buenas tardes! ¿alguien me puede recomendar un router para una empresa de unas 40 personas?</div></div><p class="message-text">RB5009</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">es una agencia de marketing, para que todos nos podamos conectar sin problema</div></div><p class="message-text">Para tantos usuarios y el tipo de trabajo, lo primero que te sugeriría es tener una segunda fibra, a ser posible de otro operador, por si algún proveedor tiene alguna caída. Además de ser una fibra backup de la otra fibra, lo ideal es que trabajen conjuntamente de forma balanceada y así poder atender momentos de pico de tráfico y superar el Giga que da una única línea.<br><br>Lo ideal sería tener un router profesional y puntos de acceso wifi, pero para esto necesitas al menos una persona (mejor dos) en la empresa que entienda bastante o bien, que subcontrates la instalación y el mantenimiento.<br><br>No sé si te encaja, pero este modelo de la gama profesional de Asus destinado a la pequeña o mediana empresa, no requiere de ser un especialista a la hora de configurarlo, se configura de forma similar que cualquier router de la marca y es compatible con doble wan, admite tener varios routers para tener wifi mesh, posibilidad de varias wifis separadas con Vlan, es capaz de gestionar 2.5Gb, tiene VPN para acceso remoto, buena wifi categoría AX7800, etc., aquí puedes ver las características https://www.asus.com/es/networking-iot-servers/business-network-solutions/asus-expertwifi/asus-expertwifi-ebm68/<br><br>El pack de 2 routers, está de oferta, casi al precio de 1 rotuer https://amzn.eu/d/07Jmn2j y si necesitas más cobertura wifi, puedes comprar otro pack o por ejemplo estos puntos de acceso https://amzn.eu/d/91XyuIf, saludos.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#0891b2">M5</div><div class="sender-info"><span class="sender-name">Учасник 5</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">es una agencia de marketing, para que todos nos podamos conectar sin problema</div></div><p class="message-text">ponte un router decente como un mikortik o cisco, luego ap decentes como ubiquiti (aunque yo no usaría wifi para trabajar)</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">muchas gracias por los consejos!</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#9333ea">M6</div><div class="sender-info"><span class="sender-name">Учасник 6</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 5</div><div class="reply-text">ponte un router decente como un mikortik o cisco, luego ap decentes como ubiquiti (aunque yo no usaría wifi para trabaja</div></div><p class="message-text">conoces a alguien que monte Cisco? qué empresas y modelos hay?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#dc2626">M7</div><div class="sender-info"><span class="sender-name">Учасник 7</span></div></div><p class="message-text">Yo monto cisco y lo configuro</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#dc2626">M7</div><div class="sender-info"><span class="sender-name">Учасник 7</span></div></div><p class="message-text">Por??</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#dc2626">M7</div><div class="sender-info"><span class="sender-name">Учасник 7</span></div></div><p class="message-text">Pymes, grandes empresas??</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#dc2626">M7</div><div class="sender-info"><span class="sender-name">Учасник 7</span></div></div><p class="message-text">Huawei tmb</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#dc2626">M7</div><div class="sender-info"><span class="sender-name">Учасник 7</span></div></div><p class="message-text">FWs</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#0891b2">M5</div><div class="sender-info"><span class="sender-name">Учасник 5</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 6</div><div class="reply-text">conoces a alguien que monte Cisco? qué empresas y modelos hay?</div></div><p class="message-text">en mi empresa hay montados routers mikrotik y switchs cisco, es una empresita modesta de 6 trabajadores repartidos en 3 centros y así vamos tirando, con hard de primera linea para tener una latencia de 2 o 3 ms entre sucursales y que el AD no se queje (todo redundante, eso si)</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#0d9488">M8</div><div class="sender-info"><span class="sender-name">Учасник 8</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">es una agencia de marketing, para que todos nos podamos conectar sin problema</div></div><p class="message-text">Saludos, no me quedo claro, las ~40 personas necesitan conexión vía cable ethernet o inalámbrica wifi?</p></div></div>
+    <footer>Academia Tech &copy; 2026</footer>
+  </div>
+</div>
+</body></html>

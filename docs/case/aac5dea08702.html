@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html><head>
+<title>Cómo sustituir el router de Pro-Digi por uno propio (configuración estándar y 10Gbps) | SupportBot</title>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta property="og:title" content="Cómo sustituir el router de Pro-Digi por uno propio (configuración estándar y 10Gbps)">
+<meta property="og:description" content="Se confirman varias soluciones: 1. **Para conexiones estándar (no 10G)**: Es posible usar un router propio (ej. Asus XT12). La configuración clave es cambiar el modo de conexión a PPPoE y explícitamen">
+<link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+<style>
+:root {
+  --signal-blue: #2c6bed;
+  --page-bg: #f6f7f9;
+  --card-bg: #ffffff;
+  --text: #0d0d0d;
+  --text-sec: #5c5c5c;
+  --border: #d8d8d8;
+  --radius: 12px;
+  --green: #16a34a;
+  --yellow: #ca8a04;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  background: var(--page-bg); color: var(--text);
+  min-height: 100vh; padding: 48px 20px;
+  -webkit-font-smoothing: antialiased;
+}
+@media (max-width: 520px) { body { padding: 24px 12px; } }
+.shell { max-width: 640px; margin: 0 auto; }
+.card {
+  background: var(--card-bg); border: 1px solid var(--border);
+  border-radius: var(--radius); overflow: hidden; margin-bottom: 16px;
+}
+header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 20px; border-bottom: 1px solid var(--border);
+}
+.header-left { display: flex; align-items: center; gap: 10px; text-decoration: none; color: inherit; }
+.logo { width: 28px; height: 28px; }
+.brand { font-size: 15px; font-weight: 600; letter-spacing: -0.02em; }
+.chat-header { padding: 14px 20px; border-bottom: 1px solid var(--border); background: var(--page-bg); }
+.chat-header h2 { font-size: 14px; font-weight: 600; color: var(--text); display: flex; align-items: center; gap: 8px; }
+.chat-header h2 svg { width: 16px; height: 16px; color: var(--signal-blue); }
+.messages { padding: 0; }
+.message { padding: 16px 20px; border-bottom: 1px solid var(--border); }
+.message:last-child { border-bottom: none; }
+.message-header { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+.avatar { width: 28px; height: 28px; border-radius: 50%; color: white; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 600; flex-shrink: 0; }
+.sender-info { flex: 1; min-width: 0; }
+.sender-name { font-size: 13px; font-weight: 600; color: var(--text); }
+.message-text { font-size: 15px; line-height: 1.55; color: var(--text); white-space: pre-wrap; margin-left: 38px; }
+.reply-bubble { margin-left: 38px; margin-bottom: 6px; padding: 6px 10px; background: #f0f2f5; border-left: 3px solid var(--signal-blue); border-radius: 4px; font-size: 13px; color: var(--text-sec); }
+.reply-sender { font-weight: 600; color: var(--signal-blue); font-size: 12px; margin-bottom: 2px; }
+.reply-text { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.status-badge {
+  padding: 4px 10px; font-size: 11px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.04em; border-radius: 4px;
+}
+.status-solved { background: #dcfce7; color: var(--green); }
+.status-recommendation { background: #fef3c7; color: #b45309; }
+main { padding: 24px 20px; }
+h1 { font-size: 20px; font-weight: 700; letter-spacing: -0.025em; margin-bottom: 12px; line-height: 1.3; }
+.meta { font-size: 12px; color: var(--text-sec); margin-bottom: 16px; }
+.tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 20px; }
+.tag {
+  background: rgba(44, 107, 237, 0.08); color: var(--signal-blue);
+  padding: 4px 10px; border-radius: 4px; font-size: 12px; font-weight: 500;
+}
+.section-title {
+  font-size: 11px; font-weight: 600; text-transform: uppercase;
+  letter-spacing: 0.06em; color: var(--text-sec); margin-bottom: 10px;
+  display: flex; align-items: center; gap: 6px;
+}
+.section-title svg { width: 14px; height: 14px; }
+.section-content { font-size: 15px; line-height: 1.6; color: var(--text); white-space: pre-wrap; }
+.problem-section { padding-bottom: 20px; border-bottom: 1px solid var(--border); margin-bottom: 20px; }
+.solution-section {
+  background: #f0fdf4; margin: -24px -20px -24px -20px; padding: 20px;
+  border-top: 1px solid #bbf7d0;
+}
+.solution-section .section-title { color: var(--green); }
+.recommendation-solution { background: #fffbeb; border-top-color: #fde68a; }
+.recommendation-solution .section-title { color: #b45309; }
+.empty-chat {
+  padding: 32px 20px; text-align: center; color: var(--text-sec); font-size: 14px;
+}
+footer {
+  padding: 14px 20px; border-top: 1px solid var(--border);
+  color: var(--text-sec); font-size: 12px; text-align: center;
+}
+@media (max-width: 520px) {
+  main { padding: 20px 16px; }
+  h1 { font-size: 18px; }
+  .solution-section { margin: -20px -16px -20px -16px; padding: 16px; }
+}
+</style>
+</head><body>
+<div class="shell">
+  <div class="card">
+    <header>
+      <a href="https://academia-tech.github.io/SupportBot" class="header-left">
+        <img src="/SupportBot/supportbot-logo-128.png" alt="SupportBot" class="logo">
+        <span class="brand">SupportBot</span>
+      </a>
+      <span class="status-recommendation status-badge">Рекомендація</span>
+    </header>
+    <main>
+      <h1>Cómo sustituir el router de Pro-Digi por uno propio (configuración estándar y 10Gbps)</h1>
+      <p class="meta">Case aac5dea08702 &middot; naseros</p>
+      <div class='tags'><span class="tag">#pro-digi</span><span class="tag">#digi</span><span class="tag">#router</span><span class="tag">#pppoe</span><span class="tag">#vlan</span><span class="tag">#ont</span><span class="tag">#sfp+</span><span class="tag">#10gbps</span><span class="tag">#asus</span></div>
+      <div class="problem-section">
+        <h2 class="section-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/>
+            <line x1="12" y1="16" x2="12.01" y2="16"/>
+          </svg>
+          Проблема
+        </h2>
+        <p class="section-content">Un usuario quiere contratar Pro-Digi y pregunta cómo puede utilizar su propio router (Asus) en lugar del que proporciona el operador, tanto para conexiones estándar como para la de 10Gbps, evitando soluciones como DMZ.</p>
+      </div>
+      <div class="solution-section recommendation-solution">
+        <h2 class="section-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7c.6.4 1 1.1 1 1.8V17h6v-.5c0-.7.4-1.4 1-1.8A7 7 0 0 0 12 2z"/></svg>
+          Рекомендація (не підтверджено)
+        </h2>
+        <p class="section-content">Se confirman varias soluciones: 1. **Para conexiones estándar (no 10G)**: Es posible usar un router propio (ej. Asus XT12). La configuración clave es cambiar el modo de conexión a PPPoE y explícitamente NO crear la VLAN 20. 2. **Para conexiones de 10Gbps (sustitución completa)**: Se necesita un router con al menos dos puertos de 10Gb (uno SFP+), con aceleración por hardware para PPPoE. Se recomienda una ONT SFP+ (ej. de fs.com por ~250€ o de AliExpress por ~150€). Un usuario confirma tener un Asus BE88U con ONT SFP+ funcionando perfectamente. Se advierte que si el router solo tiene puertos RJ45 de 10Gb, una ONT SFP+ no sería compatible directamente, y se necesitaría una ONT con salida RJ45 de 10Gb compatible con Digi, de las cuales no se conocen opciones.</p>
+      </div>
+    </main>
+  </div>
+  <div class="card">
+    <div class="chat-header"><h2><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Історія чату</h2></div><div class="messages"><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Buenos días. Estoy valorando contratar pro-digi. He contactado con ellos por que quiero asegurarme de que podré utilizar mi router y nada de dmz ni parches del estilo, podría alguien darme más luz?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><p class="message-text">Yo tengo configurado mi router sin problemas con pro-digi</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><p class="message-text">soporte tecnico malisimo, pero bueno no tengo problemas</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Como lo hiciste?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 2</div><div class="reply-text">Yo tengo configurado mi router sin problemas con pro-digi</div></div><p class="message-text">Qué router?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><p class="message-text">Asus xt12</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><p class="message-text">simplemente cambiarlo a pppoe , NO CREAR la VLAN20</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Y tema ont?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><p class="message-text">Habrá dejado el router de Digi como ONT</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 2</div><div class="reply-text">Asus xt12</div></div><p class="message-text">No tiene puerto 10gb, no? Es más bien un sistema mesh, no?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 3</div><div class="reply-text">Habrá dejado el router de Digi como ONT</div></div><p class="message-text">Si, pero es posible que lo actualicen o cambien parámetros OTA? O simplemente, es sencillo ponerlo<br>En modo bridge?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Si, pero es posible que lo actualicen o cambien parámetros OTA? O simplemente, es sencillo ponerlo En modo bridge?</div></div><p class="message-text">No sé, a ver si nos lo cuenta</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><p class="message-text">En otro grupo de digi uno decía haber puesto el Asus RT-AX89X y quitado el de digi, pero no sé cómo si ese Asus no tiene entrada XG-PON</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">con un stick sfp+ puede ser</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 3</div><div class="reply-text">En otro grupo de digi uno decía haber puesto el Asus RT-AX89X y quitado el de digi, pero no sé cómo si ese Asus no tiene</div></div><p class="message-text">Yo lo tengo montado en un BE88U, con una ONT sfp+</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 4</div><div class="reply-text">Yo lo tengo montado en un BE88U, con una ONT sfp+</div></div><p class="message-text">Puedes darme un poco más de info? Aún no he contratado y quiero estar seguro de poder hacerlo</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Puedes darme un poco más de info? Aún no he contratado y quiero estar seguro de poder hacerlo</div></div><p class="message-text">Se puede hacer sin problemas, lo que necesitas, un router que tenga 2 bocas como mínimo a 10GB y una de ellas si o si sfp+, e importante que tenga aceleración por hardware para el pppoe, luego una ONT sfp+, de las cuales habrá muchas opciones, pero siempre se han hablado de 2 en concreto que si funcionan, una cara que ronda los 250€ de fs.com y otra más barata de AliExpress que ronda los 150, yo tengo la de AliExpress y la conseguí por 120 y pocos euros con cupones. <br>Funciona perfectamente y se configura en un tris, luego paso una captura de algun test que hice</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><p class="message-text">Hablamos de un presupuesto de 500-600€ para sustituir el router de digi…</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Router tengo Asus gt be98, creo que no tenga problema con hardware, puedes pasarme links de ont?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Router tengo Asus gt be98, creo que no tenga problema con hardware, puedes pasarme links de ont?</div></div><p class="message-text">Por equipo vas sobrado, el problema que los dos puertos 10GB son rj45, por lo que ont sfp+ ya no podrías utilizar, ahí tendrías que buscar una ONT que te ofrezca 10gb por rj45 y que funcione con Digi , yo no sé de ninguna</p></div></div>
+    <footer>Academia Tech &copy; 2026</footer>
+  </div>
+</div>
+</body></html>

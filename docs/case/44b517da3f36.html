@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html><head>
+<title>Problema de conexión con WireGuard en macOS, pero funciona en Windows | SupportBot</title>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta property="og:title" content="Problema de conexión con WireGuard en macOS, pero funciona en Windows">
+<meta property="og:description" content="El problema de conexión a la VPN WireGuard desde macOS, que no ocurría en Windows, se solucionó al identificar y resolver un conflicto de rangos de red. La causa era que la red local del usuario (ej. ">
+<link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+<style>
+:root {
+  --signal-blue: #2c6bed;
+  --page-bg: #f6f7f9;
+  --card-bg: #ffffff;
+  --text: #0d0d0d;
+  --text-sec: #5c5c5c;
+  --border: #d8d8d8;
+  --radius: 12px;
+  --green: #16a34a;
+  --yellow: #ca8a04;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  background: var(--page-bg); color: var(--text);
+  min-height: 100vh; padding: 48px 20px;
+  -webkit-font-smoothing: antialiased;
+}
+@media (max-width: 520px) { body { padding: 24px 12px; } }
+.shell { max-width: 640px; margin: 0 auto; }
+.card {
+  background: var(--card-bg); border: 1px solid var(--border);
+  border-radius: var(--radius); overflow: hidden; margin-bottom: 16px;
+}
+header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 20px; border-bottom: 1px solid var(--border);
+}
+.header-left { display: flex; align-items: center; gap: 10px; text-decoration: none; color: inherit; }
+.logo { width: 28px; height: 28px; }
+.brand { font-size: 15px; font-weight: 600; letter-spacing: -0.02em; }
+.chat-header { padding: 14px 20px; border-bottom: 1px solid var(--border); background: var(--page-bg); }
+.chat-header h2 { font-size: 14px; font-weight: 600; color: var(--text); display: flex; align-items: center; gap: 8px; }
+.chat-header h2 svg { width: 16px; height: 16px; color: var(--signal-blue); }
+.messages { padding: 0; }
+.message { padding: 16px 20px; border-bottom: 1px solid var(--border); }
+.message:last-child { border-bottom: none; }
+.message-header { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+.avatar { width: 28px; height: 28px; border-radius: 50%; color: white; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 600; flex-shrink: 0; }
+.sender-info { flex: 1; min-width: 0; }
+.sender-name { font-size: 13px; font-weight: 600; color: var(--text); }
+.message-text { font-size: 15px; line-height: 1.55; color: var(--text); white-space: pre-wrap; margin-left: 38px; }
+.reply-bubble { margin-left: 38px; margin-bottom: 6px; padding: 6px 10px; background: #f0f2f5; border-left: 3px solid var(--signal-blue); border-radius: 4px; font-size: 13px; color: var(--text-sec); }
+.reply-sender { font-weight: 600; color: var(--signal-blue); font-size: 12px; margin-bottom: 2px; }
+.reply-text { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.status-badge {
+  padding: 4px 10px; font-size: 11px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.04em; border-radius: 4px;
+}
+.status-solved { background: #dcfce7; color: var(--green); }
+.status-recommendation { background: #fef3c7; color: #b45309; }
+main { padding: 24px 20px; }
+h1 { font-size: 20px; font-weight: 700; letter-spacing: -0.025em; margin-bottom: 12px; line-height: 1.3; }
+.meta { font-size: 12px; color: var(--text-sec); margin-bottom: 16px; }
+.tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 20px; }
+.tag {
+  background: rgba(44, 107, 237, 0.08); color: var(--signal-blue);
+  padding: 4px 10px; border-radius: 4px; font-size: 12px; font-weight: 500;
+}
+.section-title {
+  font-size: 11px; font-weight: 600; text-transform: uppercase;
+  letter-spacing: 0.06em; color: var(--text-sec); margin-bottom: 10px;
+  display: flex; align-items: center; gap: 6px;
+}
+.section-title svg { width: 14px; height: 14px; }
+.section-content { font-size: 15px; line-height: 1.6; color: var(--text); white-space: pre-wrap; }
+.problem-section { padding-bottom: 20px; border-bottom: 1px solid var(--border); margin-bottom: 20px; }
+.solution-section {
+  background: #f0fdf4; margin: -24px -20px -24px -20px; padding: 20px;
+  border-top: 1px solid #bbf7d0;
+}
+.solution-section .section-title { color: var(--green); }
+.recommendation-solution { background: #fffbeb; border-top-color: #fde68a; }
+.recommendation-solution .section-title { color: #b45309; }
+.empty-chat {
+  padding: 32px 20px; text-align: center; color: var(--text-sec); font-size: 14px;
+}
+footer {
+  padding: 14px 20px; border-top: 1px solid var(--border);
+  color: var(--text-sec); font-size: 12px; text-align: center;
+}
+@media (max-width: 520px) {
+  main { padding: 20px 16px; }
+  h1 { font-size: 18px; }
+  .solution-section { margin: -20px -16px -20px -16px; padding: 16px; }
+}
+</style>
+</head><body>
+<div class="shell">
+  <div class="card">
+    <header>
+      <a href="https://academia-tech.github.io/SupportBot" class="header-left">
+        <img src="/SupportBot/supportbot-logo-128.png" alt="SupportBot" class="logo">
+        <span class="brand">SupportBot</span>
+      </a>
+      <span class="status-solved status-badge">Вирішено</span>
+    </header>
+    <main>
+      <h1>Problema de conexión con WireGuard en macOS, pero funciona en Windows</h1>
+      <p class="meta">Case 44b517da3f36 &middot; naseros</p>
+      <div class='tags'><span class="tag">#WireGuard</span><span class="tag">#VPN</span><span class="tag">#macOS</span><span class="tag">#Finder</span><span class="tag">#SMB</span><span class="tag">#troubleshooting</span><span class="tag">#red</span></div>
+      <div class="problem-section">
+        <h2 class="section-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/>
+            <line x1="12" y1="16" x2="12.01" y2="16"/>
+          </svg>
+          Проблема
+        </h2>
+        <p class="section-content">Un usuario no consigue conectar a su NAS a través de una VPN WireGuard desde su portátil con macOS, aunque la misma configuración funciona en un PC con Windows. En macOS, la conexión parece establecerse (hay tráfico TX/RX) pero no puede acceder a los archivos del servidor a través de Finder.</p>
+      </div>
+      <div class="solution-section">
+        <h2 class="section-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          Рішення
+        </h2>
+        <p class="section-content">El problema de conexión a la VPN WireGuard desde macOS, que no ocurría en Windows, se solucionó al identificar y resolver un conflicto de rangos de red. La causa era que la red local del usuario (ej. en casa) y la red remota del servidor VPN (ej. en la oficina) usaban el mismo rango de IP (p. ej., 192.168.1.x). La solución consistió en cambiar el rango de IP de una de las redes (por ejemplo, a 192.168.55.x) para evitar la superposición, lo que permitió el acceso desde ambos dispositivos.</p>
+      </div>
+    </main>
+  </div>
+  <div class="card">
+    <div class="chat-header"><h2><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Історія чату</h2></div><div class="messages"><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 2</div><div class="reply-text">Buenas tardes, tengo un NAS con WireGuard instalado des de la oficina. En casa, he podido configurarlo correctamente i a</div></div><p class="message-text">Buenas tardes,<br><br>Pueden existir unos cuantos motivos e incluso, varios de ellas a la vez. Se me ocurren los siguientes ;<br><br>-A veces pasa que a cedemos vía web al Nas utilizando el DDNS y creemos que la VPN funciona bien y resulta, que no funciona<br>¿Cómo comprobaste que tenias acceso remoto, por ejemplo, consultando alguna carpeta del Nas por ejemplo, ¿desde el Finder de Mac o desde el Explorador de archivos de Windows? <br><br>-Pudiera ser que sólo hayas creado 1 conexión WireGuard y esté siendo utilizada por el primer dispositivo. Dos dispositivos, no pueden utilizar a la vez una conexión remota o también llamado peer.<br><br>-Primero, vuelve a probar desde donde te funcionó y asegúrate que funciona correctamente, desde la conexión, que envía y recibe datos y varían los bytes enviados y recibidos (Tx y Rx) y por sobre todo, que accedes a datos del Nas, que no sea vía web, si no por el Explorador de archivos o Finder. Si te funciona, la misma configuración, pruébala en otros dispositivos y otras ubicaciones y por último en el Mac del trabajo<br><br>-Puede ser que utilizaras un número de IP para la primera conexión remota y haya cambiado la IP. Hay que utilizar nombres DDNS<br><br>-Si utilizaste  DDNS , puede ser que no esté actualizándose correctamente y cuando lo probaste la primera vez, el nombre tuyo y la IP fueran la misma, después, haya cambiado la IP del router y no se esté actualizando bien</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Buenas tardes,  Pueden existir unos cuantos motivos e incluso, varios de ellas a la vez. Se me ocurren los siguientes ; </div></div><p class="message-text">Hola, voy dando respuesta por orden<br><br>- Accedí a las carpetas con el explorador de Windows. De hecho acabo de hacer la prueba y sigo teniendo acceso.<br><br>- En WireGuard del NAS he creado una para cada dispositivo<br><br>-Con la configuración en el ordenador de Windows, tampoco me deja acceder en macOS <br><br>- No tengo más dispositivos, he creado de 0 una conexión de nuevo en el sistema macOS y detecta TX y RX, a la hora de intentar entrar en los archivos con Finder aparece que no es posible conectar con el servidor</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 2</div><div class="reply-text">Hola, voy dando respuesta por orden  - Accedí a las carpetas con el explorador de Windows. De hecho acabo de hacer la pr</div></div><p class="message-text">Ok,<br><br>De momento utiliza la conexión que sabes que funciona en ambos ordenadores. <br><br>Realiza una prueba sencilla, primero por ejemplo, desde el pc y después desde el Mac y hacer un ping al Nas, supongo que funcionará en ambos casos, pero asegúrate que la conductividad básica funciona<br><br>La siguiente prueba, igual que la anterior, pero accediendo al Nas vía web, en el Mac usa Safari, Chrome de Mac, a veces da problemas.<br><br>Si ambas pruebas te funciona y sigue sin funcionarte el Finder, creo que podría ser problema de protocolos, creo que Mac es compatible con los protocolos SMB y AFP, asegúrate que en el Mac ambos están habilitados e igual en el NAS, que ambos protocolos están activos y así deberías tener dos alternativas con el Finder, aunque son muy parecidas y sencillas, si no las hubieras utilizado nunca, hay mucha información en Internet para usar uno u otro protocolo desde Finder. <br><br>Un saludo</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><p class="message-text">Con SMB activado me da opción de activar SMB multicanal, no va por aquí, ¿no?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 2</div><div class="reply-text">Con SMB activado me da opción de activar SMB multicanal, no va por aquí, ¿no?</div></div><p class="message-text">El milticanal, es mejor dejarlo activado por defecto y en automático, pero eso se utiliza para mejorar el rendimiento si conectas dos cables ethernet al Nas.<br><br>Para este caso, da lo mismo que esté o no activado, tiene que estar activado SMB 3</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><p class="message-text">Vuelvo al tema, a ver si logramos encontrar el problema.<br><br>En sistema macOS no logro acceder ni por ethernet ni por wifi.<br><br>En cambio, des de una cafetería compartiendo datos si que he logrado acceder, ¿Puede que sea problema de mi proveedor de internet en casa?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><p class="message-text">Buenas tardes, tengo un NAS con WireGuard instalado des de la oficina. En casa, he podido configurarlo correctamente i acceder por remoto. En un segundo aparato, un portátil con macOS, por más que lo intento no me deja, me aparece que no logra conectar. ¿Alguna idea de por qué pasa esto?</p></div></div>
+    <footer>Academia Tech &copy; 2026</footer>
+  </div>
+</div>
+</body></html>

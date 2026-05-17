@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html><head>
+<title>Alternativas a DuckDNS: usar dominio con DDNS | SupportBot</title>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta property="og:title" content="Alternativas a DuckDNS: usar dominio con DDNS">
+<meta property="og:description" content="Sugerencias prácticas del chat para evitar problemas con DuckDNS:
+1.  **Comprar un dominio con soporte DDNS:** Utilizar el servicio DDNS del propio proveedor (si el router lo soporta).
+2.  **Cloudflar">
+<link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+<style>
+:root {
+  --signal-blue: #2c6bed;
+  --page-bg: #f6f7f9;
+  --card-bg: #ffffff;
+  --text: #0d0d0d;
+  --text-sec: #5c5c5c;
+  --border: #d8d8d8;
+  --radius: 12px;
+  --green: #16a34a;
+  --yellow: #ca8a04;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  background: var(--page-bg); color: var(--text);
+  min-height: 100vh; padding: 48px 20px;
+  -webkit-font-smoothing: antialiased;
+}
+@media (max-width: 520px) { body { padding: 24px 12px; } }
+.shell { max-width: 640px; margin: 0 auto; }
+.card {
+  background: var(--card-bg); border: 1px solid var(--border);
+  border-radius: var(--radius); overflow: hidden; margin-bottom: 16px;
+}
+header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 20px; border-bottom: 1px solid var(--border);
+}
+.header-left { display: flex; align-items: center; gap: 10px; text-decoration: none; color: inherit; }
+.logo { width: 28px; height: 28px; }
+.brand { font-size: 15px; font-weight: 600; letter-spacing: -0.02em; }
+.chat-header { padding: 14px 20px; border-bottom: 1px solid var(--border); background: var(--page-bg); }
+.chat-header h2 { font-size: 14px; font-weight: 600; color: var(--text); display: flex; align-items: center; gap: 8px; }
+.chat-header h2 svg { width: 16px; height: 16px; color: var(--signal-blue); }
+.messages { padding: 0; }
+.message { padding: 16px 20px; border-bottom: 1px solid var(--border); }
+.message:last-child { border-bottom: none; }
+.message-header { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+.avatar { width: 28px; height: 28px; border-radius: 50%; color: white; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 600; flex-shrink: 0; }
+.sender-info { flex: 1; min-width: 0; }
+.sender-name { font-size: 13px; font-weight: 600; color: var(--text); }
+.message-text { font-size: 15px; line-height: 1.55; color: var(--text); white-space: pre-wrap; margin-left: 38px; }
+.reply-bubble { margin-left: 38px; margin-bottom: 6px; padding: 6px 10px; background: #f0f2f5; border-left: 3px solid var(--signal-blue); border-radius: 4px; font-size: 13px; color: var(--text-sec); }
+.reply-sender { font-weight: 600; color: var(--signal-blue); font-size: 12px; margin-bottom: 2px; }
+.reply-text { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.status-badge {
+  padding: 4px 10px; font-size: 11px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.04em; border-radius: 4px;
+}
+.status-solved { background: #dcfce7; color: var(--green); }
+.status-recommendation { background: #fef3c7; color: #b45309; }
+main { padding: 24px 20px; }
+h1 { font-size: 20px; font-weight: 700; letter-spacing: -0.025em; margin-bottom: 12px; line-height: 1.3; }
+.meta { font-size: 12px; color: var(--text-sec); margin-bottom: 16px; }
+.tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 20px; }
+.tag {
+  background: rgba(44, 107, 237, 0.08); color: var(--signal-blue);
+  padding: 4px 10px; border-radius: 4px; font-size: 12px; font-weight: 500;
+}
+.section-title {
+  font-size: 11px; font-weight: 600; text-transform: uppercase;
+  letter-spacing: 0.06em; color: var(--text-sec); margin-bottom: 10px;
+  display: flex; align-items: center; gap: 6px;
+}
+.section-title svg { width: 14px; height: 14px; }
+.section-content { font-size: 15px; line-height: 1.6; color: var(--text); white-space: pre-wrap; }
+.problem-section { padding-bottom: 20px; border-bottom: 1px solid var(--border); margin-bottom: 20px; }
+.solution-section {
+  background: #f0fdf4; margin: -24px -20px -24px -20px; padding: 20px;
+  border-top: 1px solid #bbf7d0;
+}
+.solution-section .section-title { color: var(--green); }
+.recommendation-solution { background: #fffbeb; border-top-color: #fde68a; }
+.recommendation-solution .section-title { color: #b45309; }
+.empty-chat {
+  padding: 32px 20px; text-align: center; color: var(--text-sec); font-size: 14px;
+}
+footer {
+  padding: 14px 20px; border-top: 1px solid var(--border);
+  color: var(--text-sec); font-size: 12px; text-align: center;
+}
+@media (max-width: 520px) {
+  main { padding: 20px 16px; }
+  h1 { font-size: 18px; }
+  .solution-section { margin: -20px -16px -20px -16px; padding: 16px; }
+}
+</style>
+</head><body>
+<div class="shell">
+  <div class="card">
+    <header>
+      <a href="https://academia-tech.github.io/SupportBot" class="header-left">
+        <img src="/SupportBot/supportbot-logo-128.png" alt="SupportBot" class="logo">
+        <span class="brand">SupportBot</span>
+      </a>
+      <span class="status-recommendation status-badge">Рекомендація</span>
+    </header>
+    <main>
+      <h1>Alternativas a DuckDNS: usar dominio con DDNS</h1>
+      <p class="meta">Case 51ee07b73864 &middot; domotica_es</p>
+      <div class='tags'><span class="tag">#DuckDNS</span><span class="tag">#DDNS</span><span class="tag">#dominio</span><span class="tag">#Cloudflare</span><span class="tag">#acceso remoto</span></div>
+      <div class="problem-section">
+        <h2 class="section-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/>
+            <line x1="12" y1="16" x2="12.01" y2="16"/>
+          </svg>
+          Проблема
+        </h2>
+        <p class="section-content">Usuario reporta lentitud y problemas con DuckDNS al exponer servicios; pregunta por soluciones y experiencias de otros. Se comentan alternativas y costes asociados a dominios y proveedores con soporte DDNS.
+Se busca una forma fiable de exponer servicios sin depender de DuckDNS.</p>
+      </div>
+      <div class="solution-section recommendation-solution">
+        <h2 class="section-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7c.6.4 1 1.1 1 1.8V17h6v-.5c0-.7.4-1.4 1-1.8A7 7 0 0 0 12 2z"/></svg>
+          Рекомендація (не підтверджено)
+        </h2>
+        <p class="section-content">Sugerencias prácticas del chat para evitar problemas con DuckDNS:
+1.  **Comprar un dominio con soporte DDNS:** Utilizar el servicio DDNS del propio proveedor (si el router lo soporta).
+2.  **Cloudflared:** Un usuario (`user_824c4d244b`) sugiere usar Cloudflared con subdominios para otros servicios.
+3.  **Tailscale:** Otro usuario (`user_ec3e3823a6`) sugiere Tailscale como una opción para evitar la necesidad de un dominio.
+4.  **Cloudflare como registrador:** Un usuario (`user_91d1ecf626`) recomienda Cloudflare como registrador y hosting de dominios, destacando su buen funcionamiento y precios (ej. 10-11€/año para un .dev, 7.5$/año para un .org), además de ser compatible con ddclient. Se aclara que Cloudflare no es registrador de dominios .es.
+5.  **NoIP:** Otro usuario (`user_2c3f6d1bef`) menciona NoIP como una alternativa que viene en el router y se paga una vez.
+Se discute que Cloudflare cobra el precio de ICANN sin añadir recargos, a diferencia de otros registradores que ofrecen precios bajos el primer año y luego suben. Se recomienda usar VPN para ciertas cosas, aunque los túneles de Cloudflare son cómodos.</p>
+      </div>
+    </main>
+  </div>
+  <div class="card">
+    <div class="chat-header"><h2><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Історія чату</h2></div><div class="messages"><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">estoy ultimamente descontento con duckdns, me tarda mucho en cargar los servicios. Por otro lado, tengo ddns de asuscomm y he trasladado los servicios que admiten subruta, en cambio tengo muhcos que no lo admiten (los tengo como subdominios de duckdns y NPM gestionando todo para no abrir demasiados puertos en el router). alguien me puede recomendar alguna solucion? estoy viendo que si compro un dominio, me quito de la mayoria de problemas y no me haría falta asuscomm. ¿como lo teneis vosotros?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">estoy ultimamente descontento con duckdns, me tarda mucho en cargar los servicios. Por otro lado, tengo ddns de asuscomm</div></div><p class="message-text">yo lo tengo con un dominio... y realmente por el costo que tiene es la mejor solución que he encontrado.<br>Mi proveedor tiene opción de DDNS con lo que si tu router lo soporta.... resuelto.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 2</div><div class="reply-text">yo lo tengo con un dominio... y realmente por el costo que tiene es la mejor solución que he encontrado. Mi proveedor ti</div></div><p class="message-text">con quien lo tienes? cuanto pagas si no es indiscrecion?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">con quien lo tienes? cuanto pagas si no es indiscrecion?</div></div><p class="message-text">te he respondido por privado para evitar &quot;ensuciar&quot; el general</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">estoy ultimamente descontento con duckdns, me tarda mucho en cargar los servicios. Por otro lado, tengo ddns de asuscomm</div></div><p class="message-text">duckdns lleva un tiempo bastante mal. Yo tengo mi dominio en un proveedor que permite ddns y pago 12€ al año, pero no pongo el nombre porque no lo recomiendo en absoluto. Estas vacaciones quiero sacar tiempo y migrar ese dominio a otro proveedor con ddns (quizá cloudflare)</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><p class="message-text">yo monté n8n con notificaciones de telegam, y es raro cuando funcionan, porque telegram no detecta la URL del webhook por culpa de duckdns</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><p class="message-text">yo si no es considerado publicidad... lo suelto por aquí... después el administrador que borre si lo considera apropiado.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><p class="message-text">en joker.com y un dominio &quot;xxxxxxx.de&quot; me sale a 5€ anuales... que no está nada mal</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 2</div><div class="reply-text">en joker.com y un dominio &quot;xxxxxxx.de&quot; me sale a 5€ anuales... que no está nada mal</div></div><p class="message-text">y permite ddns?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 3</div><div class="reply-text">y permite ddns?</div></div><p class="message-text">así lo tengo yo, si</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">estoy ultimamente descontento con duckdns, me tarda mucho en cargar los servicios. Por otro lado, tengo ddns de asuscomm</div></div><p class="message-text">Yo estuve usando duckdns, pero sin gilipolleces.<br>Iba bien.<br>Hace un tiempo tengo dominio con cloudflared y subdominios para otros servicios y va de cine</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#0891b2">M5</div><div class="sender-info"><span class="sender-name">Учасник 5</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 4</div><div class="reply-text">Yo estuve usando duckdns, pero sin gilipolleces. Iba bien. Hace un tiempo tengo dominio con cloudflared y subdominios pa</div></div><p class="message-text">con tailscale te ahorras hasta el dominio</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">cloudflare o cloudflareD?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#9333ea">M6</div><div class="sender-info"><span class="sender-name">Учасник 6</span></div></div><p class="message-text">Yo tengo mi dominio con cloudflare, va escandalosamente bien y pago 10-11€ al año por un .dev</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#9333ea">M6</div><div class="sender-info"><span class="sender-name">Учасник 6</span></div></div><p class="message-text">El ddns es compatible con ddclient asi que perfecto</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#9333ea">M6</div><div class="sender-info"><span class="sender-name">Учасник 6</span></div></div><p class="message-text">Supongo que con inadyn también, pero no lo he probado</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#0891b2">M5</div><div class="sender-info"><span class="sender-name">Учасник 5</span></div></div><p class="message-text">cloudflare es genial, pero no sirve para todo. Para algunas cosas es mejor usar una VPN, por muy cómodos que sean los tuneles de cloudlfare</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#9333ea">M6</div><div class="sender-info"><span class="sender-name">Учасник 6</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 5</div><div class="reply-text">cloudflare es genial, pero no sirve para todo. Para algunas cosas es mejor usar una VPN, por muy cómodos que sean los tu</div></div><p class="message-text">Yo estoy hablando de cloudflare como registrador y hosting de dominios</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#9333ea">M6</div><div class="sender-info"><span class="sender-name">Учасник 6</span></div></div><p class="message-text">Que también lo es😁</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#0891b2">M5</div><div class="sender-info"><span class="sender-name">Учасник 5</span></div></div><p class="message-text">Y todo bien? Yo la verdad es que los gestiono todo con cloudflare, pero todo lo he comprado en otros registradores que eran los más baratos que encontraba</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#9333ea">M6</div><div class="sender-info"><span class="sender-name">Учасник 6</span></div></div><p class="message-text">A mí me va perfecto, los tenia en google domains pero cuando cerraron cambié a cloudflare, supuestamente cobran el precio que marca la icann y no añaden nada</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#0891b2">M5</div><div class="sender-info"><span class="sender-name">Учасник 5</span></div></div><p class="message-text">Entonces será que en otros sitios te lo venden a pérdida para engancharte otro paquete</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">cloudflare o cloudflareD?</div></div><p class="message-text">De los Dos.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 5</div><div class="reply-text">Entonces será que en otros sitios te lo venden a pérdida para engancharte otro paquete</div></div><p class="message-text">Siempre. Te lian el primer año y luego cobran lo que toca</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#0891b2">M5</div><div class="sender-info"><span class="sender-name">Учасник 5</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 4</div><div class="reply-text">Siempre. Te lian el primer año y luego cobran lo que toca</div></div><p class="message-text">Si bueno, pero incluso con esas son baratos. Lo que quieren es llamarte 2 veces al año a ver si quieres comprar su pack de tienda o su pack de blog o lo que sea</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#0891b2">M5</div><div class="sender-info"><span class="sender-name">Учасник 5</span></div></div><p class="message-text">Cuánto cuesta un dominio .es en cloudflare? Yo creo que pago 13 o 12 euros al año</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#dc2626">M7</div><div class="sender-info"><span class="sender-name">Учасник 7</span></div></div><p class="message-text">Yo hace un cojón que estoy con noip creo que es.<br>Viene en el ruter.<br>Lo usas todo el año.<br>Pagas una vez.<br>Quizás sea hasta caro.<br>Pero cuento de dura esa pasta en gasolina???<br>Cuanto dura el pago anual del dominio?<br>Pues eso</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 5</div><div class="reply-text">Cuánto cuesta un dominio .es en cloudflare? Yo creo que pago 13 o 12 euros al año</div></div><p class="message-text">Por ahí pillé un .es en OVH.<br><br>Me puse a mirás los precios para varios años, y al final no había nada de barato.<br>Al menos con los .es</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#9333ea">M6</div><div class="sender-info"><span class="sender-name">Учасник 6</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 5</div><div class="reply-text">Cuánto cuesta un dominio .es en cloudflare? Yo creo que pago 13 o 12 euros al año</div></div><p class="message-text">Cloudflare no es registrar de dominios .es</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#9333ea">M6</div><div class="sender-info"><span class="sender-name">Учасник 6</span></div></div><p class="message-text">un .org, por ejemplo, cuesta 7.5 dólares al año</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#9333ea">M6</div><div class="sender-info"><span class="sender-name">Учасник 6</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 5</div><div class="reply-text">Entonces será que en otros sitios te lo venden a pérdida para engancharte otro paquete</div></div><p class="message-text">Lo habitual es que te ofrezcan un preciazo el primer año, tipo 1.99€ o así, y luego te peguen el palo en las renovaciones</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#9333ea">M6</div><div class="sender-info"><span class="sender-name">Учасник 6</span></div></div><p class="message-text">pero vamos, que los precios suelen variar poco, a mi me gusta cloudflare por su panel de control y porque asi tienes el dominio integrado ya desde 0 con los servicios de cloudflare</p></div></div>
+    <footer>Academia Tech &copy; 2026</footer>
+  </div>
+</div>
+</body></html>

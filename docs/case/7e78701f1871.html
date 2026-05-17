@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html><head>
+<title>Flashing Custom Compiled Firmware to an ESP32 | SupportBot</title>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta property="og:title" content="Flashing Custom Compiled Firmware to an ESP32">
+<meta property="og:description" content="For flashing a custom firmware binary to an ESP32, `esptool.py` is recommended. The initial suggestion is `esptool.py write_flash 0x10000 ./custom_XXX.bin`. However, a user reported this failed to upd">
+<link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+<style>
+:root {
+  --signal-blue: #2c6bed;
+  --page-bg: #f6f7f9;
+  --card-bg: #ffffff;
+  --text: #0d0d0d;
+  --text-sec: #5c5c5c;
+  --border: #d8d8d8;
+  --radius: 12px;
+  --green: #16a34a;
+  --yellow: #ca8a04;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  background: var(--page-bg); color: var(--text);
+  min-height: 100vh; padding: 48px 20px;
+  -webkit-font-smoothing: antialiased;
+}
+@media (max-width: 520px) { body { padding: 24px 12px; } }
+.shell { max-width: 640px; margin: 0 auto; }
+.card {
+  background: var(--card-bg); border: 1px solid var(--border);
+  border-radius: var(--radius); overflow: hidden; margin-bottom: 16px;
+}
+header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 20px; border-bottom: 1px solid var(--border);
+}
+.header-left { display: flex; align-items: center; gap: 10px; text-decoration: none; color: inherit; }
+.logo { width: 28px; height: 28px; }
+.brand { font-size: 15px; font-weight: 600; letter-spacing: -0.02em; }
+.chat-header { padding: 14px 20px; border-bottom: 1px solid var(--border); background: var(--page-bg); }
+.chat-header h2 { font-size: 14px; font-weight: 600; color: var(--text); display: flex; align-items: center; gap: 8px; }
+.chat-header h2 svg { width: 16px; height: 16px; color: var(--signal-blue); }
+.messages { padding: 0; }
+.message { padding: 16px 20px; border-bottom: 1px solid var(--border); }
+.message:last-child { border-bottom: none; }
+.message-header { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+.avatar { width: 28px; height: 28px; border-radius: 50%; color: white; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 600; flex-shrink: 0; }
+.sender-info { flex: 1; min-width: 0; }
+.sender-name { font-size: 13px; font-weight: 600; color: var(--text); }
+.message-text { font-size: 15px; line-height: 1.55; color: var(--text); white-space: pre-wrap; margin-left: 38px; }
+.reply-bubble { margin-left: 38px; margin-bottom: 6px; padding: 6px 10px; background: #f0f2f5; border-left: 3px solid var(--signal-blue); border-radius: 4px; font-size: 13px; color: var(--text-sec); }
+.reply-sender { font-weight: 600; color: var(--signal-blue); font-size: 12px; margin-bottom: 2px; }
+.reply-text { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.status-badge {
+  padding: 4px 10px; font-size: 11px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.04em; border-radius: 4px;
+}
+.status-solved { background: #dcfce7; color: var(--green); }
+.status-recommendation { background: #fef3c7; color: #b45309; }
+main { padding: 24px 20px; }
+h1 { font-size: 20px; font-weight: 700; letter-spacing: -0.025em; margin-bottom: 12px; line-height: 1.3; }
+.meta { font-size: 12px; color: var(--text-sec); margin-bottom: 16px; }
+.tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 20px; }
+.tag {
+  background: rgba(44, 107, 237, 0.08); color: var(--signal-blue);
+  padding: 4px 10px; border-radius: 4px; font-size: 12px; font-weight: 500;
+}
+.section-title {
+  font-size: 11px; font-weight: 600; text-transform: uppercase;
+  letter-spacing: 0.06em; color: var(--text-sec); margin-bottom: 10px;
+  display: flex; align-items: center; gap: 6px;
+}
+.section-title svg { width: 14px; height: 14px; }
+.section-content { font-size: 15px; line-height: 1.6; color: var(--text); white-space: pre-wrap; }
+.problem-section { padding-bottom: 20px; border-bottom: 1px solid var(--border); margin-bottom: 20px; }
+.solution-section {
+  background: #f0fdf4; margin: -24px -20px -24px -20px; padding: 20px;
+  border-top: 1px solid #bbf7d0;
+}
+.solution-section .section-title { color: var(--green); }
+.recommendation-solution { background: #fffbeb; border-top-color: #fde68a; }
+.recommendation-solution .section-title { color: #b45309; }
+.empty-chat {
+  padding: 32px 20px; text-align: center; color: var(--text-sec); font-size: 14px;
+}
+footer {
+  padding: 14px 20px; border-top: 1px solid var(--border);
+  color: var(--text-sec); font-size: 12px; text-align: center;
+}
+@media (max-width: 520px) {
+  main { padding: 20px 16px; }
+  h1 { font-size: 18px; }
+  .solution-section { margin: -20px -16px -20px -16px; padding: 16px; }
+}
+</style>
+</head><body>
+<div class="shell">
+  <div class="card">
+    <header>
+      <a href="https://academia-tech.github.io/SupportBot" class="header-left">
+        <img src="/SupportBot/supportbot-logo-128.png" alt="SupportBot" class="logo">
+        <span class="brand">SupportBot</span>
+      </a>
+      <span class="status-recommendation status-badge">Рекомендація</span>
+    </header>
+    <main>
+      <h1>Flashing Custom Compiled Firmware to an ESP32</h1>
+      <p class="meta">Case 7e78701f1871 &middot; tasmota</p>
+      <div class='tags'><span class="tag">#ESP32</span><span class="tag">#flashing</span><span class="tag">#custom firmware</span><span class="tag">#esptool.py</span><span class="tag">#Tasmotizer</span><span class="tag">#OTA</span><span class="tag">#rules</span><span class="tag">#compile</span></div>
+      <div class="problem-section">
+        <h2 class="section-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/>
+            <line x1="12" y1="16" x2="12.01" y2="16"/>
+          </svg>
+          Проблема
+        </h2>
+        <p class="section-content">A user wants to flash a custom-compiled Tasmota .bin file to an ESP32 to enable features like IF/ELSE in rules. Standard tools like Tasmotizer do not work for ESP32, and attempting an OTA update with the custom file from the web UI resulted in a failure and safeboot mode. The user needs the correct tool and command, specifically the memory address for flashing.</p>
+      </div>
+      <div class="solution-section recommendation-solution">
+        <h2 class="section-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7c.6.4 1 1.1 1 1.8V17h6v-.5c0-.7.4-1.4 1-1.8A7 7 0 0 0 12 2z"/></svg>
+          Рекомендація (не підтверджено)
+        </h2>
+        <p class="section-content">For flashing a custom firmware binary to an ESP32, `esptool.py` is recommended. The initial suggestion is `esptool.py write_flash 0x10000 ./custom_XXX.bin`. However, a user reported this failed to update the firmware despite a successful write. For a more reliable flash, it is recommended to first perform a full flash erase (`esptool.py erase_flash`). It was also clarified that a complete `factory.bin` file (which includes the bootloader) should be flashed to address `0x0`. The correct address for flashing only a custom application binary on a device that has already been flashed is still under discussion.</p>
+      </div>
+    </main>
+  </div>
+  <div class="card">
+    <div class="chat-header"><h2><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Історія чату</h2></div><div class="messages"><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Hi guys<br>Did any flashed custom compiled Bin file for esp32<br><br>Is it similar to esp8266 flashing or is there any changes we have to do<br><br>Not able to flash directly with tamsotizer</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><p class="message-text">As far as I know you can&#x27;t flash esp32 with tasmotizer, you have to use esp easy or such.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Hi guys I&#x27;m using esp32<br>I flashed tasmota using web installer<br>It is working fine<br>I want to enable if conditions and expressions<br>How can I do that ?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Hi guys I&#x27;m using esp32 I flashed tasmota using web installer It is working fine I want to enable if conditions and expr</div></div><p class="message-text">according this &quot; ... Most pre-compiled [builds](https://tasmota.github.io/docs/Firmware-Builds/) have the Rules feature enabled. ...&quot;<br>https://tasmota.github.io/docs/Rules/<br><br>if you want habe conditions in it (IF ,THEN, ELSE) you have to compile it in (as described in the later parts of the document referenced above)</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 3</div><div class="reply-text">according this &quot; ... Most pre-compiled [builds](https://tasmota.github.io/docs/Firmware-Builds/) have the Rules feature </div></div><p class="message-text">Yeah I understood that I have to compile custom bin file<br>But how to flash it ?<br>I mean we can&#x27;t use tasmotizer for esp32 can&#x27;t flash through the web installer(custom bin file )</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Yeah I understood that I have to compile custom bin file But how to flash it ? I mean we can&#x27;t use tasmotizer for esp32 </div></div><p class="message-text">if you have tasmota already running on the target it could be done using the OTA functionality ... maybe flashing intermediately the minimal version</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><p class="message-text">otherwise i&#x27;d esptool.py give a try</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 3</div><div class="reply-text">otherwise i&#x27;d esptool.py give a try</div></div><p class="message-text">I have downloaded esptool.py but how to get the flash address<br>Like at whick address the custom bin file should be flashed<br>That is something I don&#x27;t know<br>And not seen anywhere on tasmota docs too</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><p class="message-text">do you have a terminal?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><p class="message-text">what I do is I check /dev before and after connecting the device. There should be one more item called ttyUSB1 or something of that kidney. that&#x27;s where you have to dump the .bin file</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 4</div><div class="reply-text">do you have a terminal?</div></div><p class="message-text">I work on windows</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><p class="message-text">I&#x27;m sorry</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><p class="message-text">my experience with terminal emulators forr windows was short and had a clear conclusion</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 4</div><div class="reply-text">my experience with terminal emulators forr windows was short and had a clear conclusion</div></div><p class="message-text">Thanks for the reply 😊👍<br>May be some other group members might be having some insights</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#0891b2">M5</div><div class="sender-info"><span class="sender-name">Учасник 5</span></div></div><p class="message-text">Hi All,<br>I am already running Tasmota for 3+ years but currently as a stand Alone setup in 3 rooms.<br>Those are NodeMCU based and only using 3 relay each with wall switches, everything works fine I wanted to integrate RFSend a specific frequency for one of my devices,<br>Already read the emitting code from it&#x27;s RF remote using an arduino uno board.<br>But as its a setup without HA,<br>I am getting out of ideas how can I emulate this RF Data using a momentary/temporary push button or thru Tasmota LAN Interface if accessed via browser.<br><br>Any help highly appreciated 🙏🙏</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#0891b2">M5</div><div class="sender-info"><span class="sender-name">Учасник 5</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">I work on windows</div></div><p class="message-text">You can download Putty for windows,<br>Also Tasmota web admin does have a console access<br>Don&#x27;t know what exactly I missed in your query.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 5</div><div class="reply-text">You can download Putty for windows, Also Tasmota web admin does have a console access Don&#x27;t know what exactly I missed i</div></div><p class="message-text">Yes through web UI I tired to do OTA for my custom bin file after flashing esp32 with web installer <br> but it failed and said<br><br>Enable logging 3<br><br>And now it is safeboot mode<br>So I</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#0891b2">M5</div><div class="sender-info"><span class="sender-name">Учасник 5</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Yes through web UI I tired to do OTA for my custom bin file after flashing esp32 with web installer   but it failed and </div></div><p class="message-text">esptool.py write_flash 0x10000 ./custom_XXX.bin<br><br>This should work fine, assuming you don&#x27;t need to change anything to Bootloader as its at a different address</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#0891b2">M5</div><div class="sender-info"><span class="sender-name">Учасник 5</span></div></div><p class="message-text">Tasmota Discord server is an excellent place to get help apart from this Telegram Channel.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 5</div><div class="reply-text">esptool.py write_flash 0x10000 ./custom_XXX.bin  This should work fine, assuming you don&#x27;t need to change anything to Bo</div></div><p class="message-text">Yeah I would try from address location<br><br>I hope it works</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 5</div><div class="reply-text">Tasmota Discord server is an excellent place to get help apart from this Telegram Channel.</div></div><p class="message-text">Oh<br>OK I will check that too<br>Thanks for the help 😊👍</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#0891b2">M5</div><div class="sender-info"><span class="sender-name">Учасник 5</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Yeah I would try from address location  I hope it works</div></div><p class="message-text">Hex address given on last post works fine for firmware<br><br>Incase you want to change Bootloader due to custom partition size requirements you would need to flash Bootloader to 0x0</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 5</div><div class="reply-text">esptool.py write_flash 0x10000 ./custom_XXX.bin  This should work fine, assuming you don&#x27;t need to change anything to Bo</div></div><p class="message-text">Hi<br>I have tired flashing using esptool at 0x10000<br>It was writing without any error<br>But the firmware after restarting is not changing to the custom bin file which I gave while writing<br><br>It seems the address location is not 0x10000 for tasmota</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#0891b2">M5</div><div class="sender-info"><span class="sender-name">Учасник 5</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Hi I have tired flashing using esptool at 0x10000 It was writing without any error But the firmware after restarting is </div></div><p class="message-text">You can erase flash then write<br>This will make sure your compiled bin is loaded</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 5</div><div class="reply-text">You can erase flash then write This will make sure your compiled bin is loaded</div></div><p class="message-text">It is erasing first and then writing<br>But it is not reflecting 😅</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Factory.bin file should be flashed at 0x0 as it contains both bootlaoader and safeapp and tasmota bin file<br><br>But if we want to flash only custom bin file <br>After flashing the factory bin file <br><br>then im not sure from which address we should be doing that from</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Thanks a lot 😊👍<br>But one doubt 😅<br>Its a silly question but I will just ask<br><br>One of the bin file is tasmota bin file that I&#x27;m sure<br><br>But remaining three can we download them on internet ?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><p class="message-text">this may be a noob question, but  why not flash at 0x0? is the bootloader between 0x0 and 0x10000?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><p class="message-text">I don&#x27;t use ESP32, I&#x27;m just curious</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 4</div><div class="reply-text">this may be a noob question, but  why not flash at 0x0? is the bootloader between 0x0 and 0x10000?</div></div><p class="message-text">Yeah</p></div></div>
+    <footer>Academia Tech &copy; 2026</footer>
+  </div>
+</div>
+</body></html>

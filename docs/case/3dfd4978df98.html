@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html><head>
+<title>Calibrating WCS 1800 Current Sensor with Tasmota Rules | SupportBot</title>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta property="og:title" content="Calibrating WCS 1800 Current Sensor with Tasmota Rules">
+<meta property="og:description" content="After initial complex rule attempts failed, the user found a simplified solution that worked. By using the `scale` command directly within a one-shot rule, they were able to map the raw ADC range to t">
+<link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+<style>
+:root {
+  --signal-blue: #2c6bed;
+  --page-bg: #f6f7f9;
+  --card-bg: #ffffff;
+  --text: #0d0d0d;
+  --text-sec: #5c5c5c;
+  --border: #d8d8d8;
+  --radius: 12px;
+  --green: #16a34a;
+  --yellow: #ca8a04;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  background: var(--page-bg); color: var(--text);
+  min-height: 100vh; padding: 48px 20px;
+  -webkit-font-smoothing: antialiased;
+}
+@media (max-width: 520px) { body { padding: 24px 12px; } }
+.shell { max-width: 640px; margin: 0 auto; }
+.card {
+  background: var(--card-bg); border: 1px solid var(--border);
+  border-radius: var(--radius); overflow: hidden; margin-bottom: 16px;
+}
+header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 20px; border-bottom: 1px solid var(--border);
+}
+.header-left { display: flex; align-items: center; gap: 10px; text-decoration: none; color: inherit; }
+.logo { width: 28px; height: 28px; }
+.brand { font-size: 15px; font-weight: 600; letter-spacing: -0.02em; }
+.chat-header { padding: 14px 20px; border-bottom: 1px solid var(--border); background: var(--page-bg); }
+.chat-header h2 { font-size: 14px; font-weight: 600; color: var(--text); display: flex; align-items: center; gap: 8px; }
+.chat-header h2 svg { width: 16px; height: 16px; color: var(--signal-blue); }
+.messages { padding: 0; }
+.message { padding: 16px 20px; border-bottom: 1px solid var(--border); }
+.message:last-child { border-bottom: none; }
+.message-header { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+.avatar { width: 28px; height: 28px; border-radius: 50%; color: white; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 600; flex-shrink: 0; }
+.sender-info { flex: 1; min-width: 0; }
+.sender-name { font-size: 13px; font-weight: 600; color: var(--text); }
+.message-text { font-size: 15px; line-height: 1.55; color: var(--text); white-space: pre-wrap; margin-left: 38px; }
+.reply-bubble { margin-left: 38px; margin-bottom: 6px; padding: 6px 10px; background: #f0f2f5; border-left: 3px solid var(--signal-blue); border-radius: 4px; font-size: 13px; color: var(--text-sec); }
+.reply-sender { font-weight: 600; color: var(--signal-blue); font-size: 12px; margin-bottom: 2px; }
+.reply-text { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.status-badge {
+  padding: 4px 10px; font-size: 11px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.04em; border-radius: 4px;
+}
+.status-solved { background: #dcfce7; color: var(--green); }
+.status-recommendation { background: #fef3c7; color: #b45309; }
+main { padding: 24px 20px; }
+h1 { font-size: 20px; font-weight: 700; letter-spacing: -0.025em; margin-bottom: 12px; line-height: 1.3; }
+.meta { font-size: 12px; color: var(--text-sec); margin-bottom: 16px; }
+.tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 20px; }
+.tag {
+  background: rgba(44, 107, 237, 0.08); color: var(--signal-blue);
+  padding: 4px 10px; border-radius: 4px; font-size: 12px; font-weight: 500;
+}
+.section-title {
+  font-size: 11px; font-weight: 600; text-transform: uppercase;
+  letter-spacing: 0.06em; color: var(--text-sec); margin-bottom: 10px;
+  display: flex; align-items: center; gap: 6px;
+}
+.section-title svg { width: 14px; height: 14px; }
+.section-content { font-size: 15px; line-height: 1.6; color: var(--text); white-space: pre-wrap; }
+.problem-section { padding-bottom: 20px; border-bottom: 1px solid var(--border); margin-bottom: 20px; }
+.solution-section {
+  background: #f0fdf4; margin: -24px -20px -24px -20px; padding: 20px;
+  border-top: 1px solid #bbf7d0;
+}
+.solution-section .section-title { color: var(--green); }
+.recommendation-solution { background: #fffbeb; border-top-color: #fde68a; }
+.recommendation-solution .section-title { color: #b45309; }
+.empty-chat {
+  padding: 32px 20px; text-align: center; color: var(--text-sec); font-size: 14px;
+}
+footer {
+  padding: 14px 20px; border-top: 1px solid var(--border);
+  color: var(--text-sec); font-size: 12px; text-align: center;
+}
+@media (max-width: 520px) {
+  main { padding: 20px 16px; }
+  h1 { font-size: 18px; }
+  .solution-section { margin: -20px -16px -20px -16px; padding: 16px; }
+}
+</style>
+</head><body>
+<div class="shell">
+  <div class="card">
+    <header>
+      <a href="https://academia-tech.github.io/SupportBot" class="header-left">
+        <img src="/SupportBot/supportbot-logo-128.png" alt="SupportBot" class="logo">
+        <span class="brand">SupportBot</span>
+      </a>
+      <span class="status-solved status-badge">Вирішено</span>
+    </header>
+    <main>
+      <h1>Calibrating WCS 1800 Current Sensor with Tasmota Rules</h1>
+      <p class="meta">Case 3dfd4978df98 &middot; tasmota</p>
+      <div class='tags'><span class="tag">#rules</span><span class="tag">#analog sensor</span><span class="tag">#calibration</span><span class="tag">#scale command</span><span class="tag">#WCS 1800</span><span class="tag">#current sensor</span><span class="tag">#Wemos D1</span></div>
+      <div class="problem-section">
+        <h2 class="section-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/>
+            <line x1="12" y1="16" x2="12.01" y2="16"/>
+          </svg>
+          Проблема
+        </h2>
+        <p class="section-content">A user was trying to read a WCS 1800 current sensor on a Wemos D1&#x27;s analog pin (A0). They had the raw ADC values for 0A (845) and 12A (1124) but was struggling to create a Tasmota rule to correctly scale the reading and publish it as Amps. Their initial attempts with complex rules and math expressions were failing or causing the device to restart.</p>
+      </div>
+      <div class="solution-section">
+        <h2 class="section-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          Рішення
+        </h2>
+        <p class="section-content">After initial complex rule attempts failed, the user found a simplified solution that worked. By using the `scale` command directly within a one-shot rule, they were able to map the raw ADC range to the desired Ampere range. The final working rule was:
+`on ANALOG#A0 do scale1 %value%,845,1124,0,12 endon`
+
+This approach avoids complex variables and math expressions, providing a stable way to perform linear calibration directly on the device.</p>
+      </div>
+    </main>
+  </div>
+  <div class="card">
+    <div class="chat-header"><h2><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Історія чату</h2></div><div class="messages"><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">I try to read out the current of a PV-string with a WCS 1800 sensor.<br>I get the data at A0 of my Wemos D1. I get the following:<br><br>For 0 Ampere its 845<br>For 12 Ampere its 1124<br><br>I tried to calculate to get the Amps out, but so far it didnt work<br><br>I tried this:<br>rule1 on ANALOG#A0 do backlog var1 %value%; scale %var1%,844,1124,0,12; publish /SmartHome/HZ/Heizstab/RealCurrent %var1% endon<br><br>and gthis:<br>rule1 on ANALOG#A0 do backlog var1 %value%; sub1 846; scale1 %sub1%,0,276,0,12; publish /SmartHome/HZ/Heizstab/RealCurrent %var% endon<br><br>and also that:<br>rule1 on analog#a0 do backlog var1 %value%; var2=(%var1%-846)/23; publish /SmartHome/HZ/Heizstab/RealCurrent %var2% endon<br><br>Can anyone help me with this?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">I try to read out the current of a PV-string with a WCS 1800 sensor. I get the data at A0 of my Wemos D1. I get the foll</div></div><p class="message-text">What is the max Amperage you can have for ADC a 100% maybe 2095</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">The max Amperage will only be 10 Amps.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><p class="message-text">The function will follow a linear definition y= a*x + b. With two points you should be able to calculate a and b. If you have on top a voltage devider keep in mind there is an internal one, too because ADC max internal voltage is 1V and not 3.3V. This can as far as i remember make your Funktion into y = a*x*x + b*x + c. In this case you need three measurements to get a b and c</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><p class="message-text">sounds like a calibration problem</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><p class="message-text">you ought to estimate the current that saturates the analog sensor though</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><p class="message-text">10 amps?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><p class="message-text">I am not sure I understand the question though, you want a value in amps to appear as the analog reading? as in 2.44 instead of 239 (for example)?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Hello Stef,<br>at 0 Amp  and A0 = 845 I have 2.6V from the Sensor.<br>at 10 Amps I have 3.26V from the sensor.<br>I think, that is oK for the internal divider.<br>I want to get the real Amps from the sensor and this is my formula: x=(A0-845)/23<br>I dont know, how to write the code without mistakes.<br>At the moment I try this:<br><br>rule1 on ANALOG#A0 do backlog var1 %value%; scale1 %var1%,842,1124,0,12; publish /SmartHome/HZ/Heizstab/RealCurrent %scale1% endon<br><br>Now the D1 does not start the rule but is restarting.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Now I tried to simlify it and I get values, that seem to be oK<br>Now I do only this:<br>on ANALOG#A0 do scale1 %value%,845,1124,0,12 endon</p></div></div>
+    <footer>Academia Tech &copy; 2026</footer>
+  </div>
+</div>
+</body></html>

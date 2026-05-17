@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html><head>
+<title>Configuración WiFi Mesh para unifamiliar de tres plantas con DIGI | SupportBot</title>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta property="og:title" content="Configuración WiFi Mesh para unifamiliar de tres plantas con DIGI">
+<meta property="og:description" content="Es posible conectar los nodos mesh por WiFi, aunque lo ideal es que al menos uno vaya por cable. Se recomienda WiFi 6 o 7. Para la configuración, se sugiere un router principal potente (ej. con puerto">
+<link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+<style>
+:root {
+  --signal-blue: #2c6bed;
+  --page-bg: #f6f7f9;
+  --card-bg: #ffffff;
+  --text: #0d0d0d;
+  --text-sec: #5c5c5c;
+  --border: #d8d8d8;
+  --radius: 12px;
+  --green: #16a34a;
+  --yellow: #ca8a04;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  background: var(--page-bg); color: var(--text);
+  min-height: 100vh; padding: 48px 20px;
+  -webkit-font-smoothing: antialiased;
+}
+@media (max-width: 520px) { body { padding: 24px 12px; } }
+.shell { max-width: 640px; margin: 0 auto; }
+.card {
+  background: var(--card-bg); border: 1px solid var(--border);
+  border-radius: var(--radius); overflow: hidden; margin-bottom: 16px;
+}
+header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 20px; border-bottom: 1px solid var(--border);
+}
+.header-left { display: flex; align-items: center; gap: 10px; text-decoration: none; color: inherit; }
+.logo { width: 28px; height: 28px; }
+.brand { font-size: 15px; font-weight: 600; letter-spacing: -0.02em; }
+.chat-header { padding: 14px 20px; border-bottom: 1px solid var(--border); background: var(--page-bg); }
+.chat-header h2 { font-size: 14px; font-weight: 600; color: var(--text); display: flex; align-items: center; gap: 8px; }
+.chat-header h2 svg { width: 16px; height: 16px; color: var(--signal-blue); }
+.messages { padding: 0; }
+.message { padding: 16px 20px; border-bottom: 1px solid var(--border); }
+.message:last-child { border-bottom: none; }
+.message-header { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+.avatar { width: 28px; height: 28px; border-radius: 50%; color: white; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 600; flex-shrink: 0; }
+.sender-info { flex: 1; min-width: 0; }
+.sender-name { font-size: 13px; font-weight: 600; color: var(--text); }
+.message-text { font-size: 15px; line-height: 1.55; color: var(--text); white-space: pre-wrap; margin-left: 38px; }
+.reply-bubble { margin-left: 38px; margin-bottom: 6px; padding: 6px 10px; background: #f0f2f5; border-left: 3px solid var(--signal-blue); border-radius: 4px; font-size: 13px; color: var(--text-sec); }
+.reply-sender { font-weight: 600; color: var(--signal-blue); font-size: 12px; margin-bottom: 2px; }
+.reply-text { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.status-badge {
+  padding: 4px 10px; font-size: 11px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.04em; border-radius: 4px;
+}
+.status-solved { background: #dcfce7; color: var(--green); }
+.status-recommendation { background: #fef3c7; color: #b45309; }
+main { padding: 24px 20px; }
+h1 { font-size: 20px; font-weight: 700; letter-spacing: -0.025em; margin-bottom: 12px; line-height: 1.3; }
+.meta { font-size: 12px; color: var(--text-sec); margin-bottom: 16px; }
+.tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 20px; }
+.tag {
+  background: rgba(44, 107, 237, 0.08); color: var(--signal-blue);
+  padding: 4px 10px; border-radius: 4px; font-size: 12px; font-weight: 500;
+}
+.section-title {
+  font-size: 11px; font-weight: 600; text-transform: uppercase;
+  letter-spacing: 0.06em; color: var(--text-sec); margin-bottom: 10px;
+  display: flex; align-items: center; gap: 6px;
+}
+.section-title svg { width: 14px; height: 14px; }
+.section-content { font-size: 15px; line-height: 1.6; color: var(--text); white-space: pre-wrap; }
+.problem-section { padding-bottom: 20px; border-bottom: 1px solid var(--border); margin-bottom: 20px; }
+.solution-section {
+  background: #f0fdf4; margin: -24px -20px -24px -20px; padding: 20px;
+  border-top: 1px solid #bbf7d0;
+}
+.solution-section .section-title { color: var(--green); }
+.recommendation-solution { background: #fffbeb; border-top-color: #fde68a; }
+.recommendation-solution .section-title { color: #b45309; }
+.empty-chat {
+  padding: 32px 20px; text-align: center; color: var(--text-sec); font-size: 14px;
+}
+footer {
+  padding: 14px 20px; border-top: 1px solid var(--border);
+  color: var(--text-sec); font-size: 12px; text-align: center;
+}
+@media (max-width: 520px) {
+  main { padding: 20px 16px; }
+  h1 { font-size: 18px; }
+  .solution-section { margin: -20px -16px -20px -16px; padding: 16px; }
+}
+</style>
+</head><body>
+<div class="shell">
+  <div class="card">
+    <header>
+      <a href="https://academia-tech.github.io/SupportBot" class="header-left">
+        <img src="/SupportBot/supportbot-logo-128.png" alt="SupportBot" class="logo">
+        <span class="brand">SupportBot</span>
+      </a>
+      <span class="status-solved status-badge">Вирішено</span>
+    </header>
+    <main>
+      <h1>Configuración WiFi Mesh para unifamiliar de tres plantas con DIGI</h1>
+      <p class="meta">Case 8cac1425ae26 &middot; naseros</p>
+      <div class='tags'><span class="tag">#WiFi Mesh</span><span class="tag">#DIGI</span><span class="tag">#Router</span><span class="tag">#VLAN</span><span class="tag">#NAS</span><span class="tag">#Redes</span><span class="tag">#Unifamiliar</span><span class="tag">#Asus</span><span class="tag">#TP-Link</span></div>
+      <div class="problem-section">
+        <h2 class="section-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/>
+            <line x1="12" y1="16" x2="12.01" y2="16"/>
+          </svg>
+          Проблема
+        </h2>
+        <p class="section-content">El usuario busca una solución WiFi Mesh para una casa de tres plantas (90-100 m² cada una) para sustituir el router de DIGI. Necesita cubrir toda la vivienda sin cableado entre plantas, integrar un NAS y un servidor, y segmentar con VLANs.</p>
+      </div>
+      <div class="solution-section">
+        <h2 class="section-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          Рішення
+        </h2>
+        <p class="section-content">Es posible conectar los nodos mesh por WiFi, aunque lo ideal es que al menos uno vaya por cable. Se recomienda WiFi 6 o 7. Para la configuración, se sugiere un router principal potente (ej. con puertos 10/2.5Gb) en la planta baja, un switch gestionado con VLANs en la primera planta (donde irían NAS/servidor), y nodos mesh (ej. Asus XT8) conectados al switch y distribuidos por WiFi en las otras plantas (ático). Se aconseja comprar dispositivos con opción de devolución y optimizar la colocación de los nodos, idealmente en vertical o cerca de la escalera, para asegurar la mejor conectividad inalámbrica. Se proporcionan ejemplos de dispositivos específicos.</p>
+      </div>
+    </main>
+  </div>
+  <div class="card">
+    <div class="chat-header"><h2><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Історія чату</h2></div><div class="messages"><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Buenas tardes: ¿En un unifamiliar de tres plantas qué pondríais para sustituir al router de DIGI? No tengo facilidad de pasar cables entre plantas.<br>Había pensado un router Asus o Tplink en el piso del medio, y alguno de los dispositivos de wifi mesh para los otros dos, pero no sé si se pueden conectar inalámbricamente o necesitan también cable.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Buenas tardes: ¿En un unifamiliar de tres plantas qué pondríais para sustituir al router de DIGI? No tengo facilidad de </div></div><p class="message-text">Hola,<br><br>Sí, se puede perfectamente, los tres pueden estar conectados por wifi, aunque lo ideal es que los routers 2 y 3 también vayan por cable o al menos uno de ellos los esté.<br><br>Si van unicamente vía wifi, es más importante, que entre los routers haya la menor comunicación posible, si estuvieran cerca de la escalera, sería lo idea, si no se puede, al menos que los tres routers, estén en la misma vertical, es decir, uno encima del otro.<br><br>Las dos marcas que has mencionado suelen tener modelos con una buena relación calidad precio, yo al menos, compraría wifi 6 e incluso si puedes wifi 7, hay bastantes modelos a un precio razonable.<br><br>Los Asus, son compatibles entre todos los modelos, puedes comprar un pack de 3 routers mesh o un router Asus más potente como principal + un pack medeloe 2<br><br>TP-LINK, también tienen pack de 3 que suelen denominarse Deco, entre ellos sin problema de compatibilidad, pero si los compras por separado, revisa la compatibilidad, ya que TP-Link, si que tiene varios estándares.<br><br>Para sustituir completamente el de Digi, tendrías que conocer qué ONT es compatible con tu instalación, comprar la ONT nueva o en Wallapop (hay muchas) y configúrarla o bien, dejar el router de Digi conectarlo por cable al primero de los que compres, esta segunda opción, sin duda es la más fácil y todo te funciona sin problema y los routers de operadora, vía cable, funcionan muy bien. <br><br>Si nos dices metros aproximados por planta, si tienes parcela y los metros que tienes y si sólo necesitas wifi o que tenga alguna característica más, te podemos dar algunas opiniones, un saludo</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 2</div><div class="reply-text">Hola,  Sí, se puede perfectamente, los tres pueden estar conectados por wifi, aunque lo ideal es que los routers 2 y 3 t</div></div><p class="message-text">Muchas gracias por la contestación tan completa. Te digo alguna cosa más. Gracias<br><br>La casa es planta baja, primera y ático, unos 90-100 m2 cada una.<br><br>La ONT de DIGI la tango en la planta baja, y he conseguido subir un cable hasta la primera, al cuarto de trabajo.<br><br>En el cuarto de trabajo iría un NAS y un pequeño servidor, por eso necesito cable y no sé si (router / switch). También quiero segmentar con VLANs.<br><br>Mi idea es un router un poco decente y luego WiFi mesh.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Muchas gracias por la contestación tan completa. Te digo alguna cosa más. Gracias  La casa es planta baja, primera y áti</div></div><p class="message-text">Hola, no sé las características del qué Nas y el servidor pequeño, te paso unos ejemplos de configuración<br><br>Este router en la planta baja, que tiene puertos de 10 y 2.5Gb, además de muchas funciones como Vlan, VPN, etc. Yo usaría un puerto de 10Gb, para la Red interna y conectarlo al cable que une la planta baja y la primera <br>https://amzn.eu/d/8mpFaSQ<br><br>En la primera planta, en el cuarto de trabajo, pones por ejemplo, un switch gestionado que admita Vlan como este y te quedan libres varios de 2.5 Gb y un puerto de 10Gb <br>https://amzn.eu/d/iwfQmi8<br><br>En la misma habitación, conectado a un puerto de 2.5 Gb del switch, conectas en modo mesh, uno de los dos routers de este pack, que también admite Vlan<br>https://amzn.eu/d/1UIlM7t<br><br>Si los ordenadores o Nas que tengas en el cuarto de trabajo, es probable que sean compatibles con adaptadores USB-ethernet de 2.5Gb, que cuestan menos de 20€ en Amazón y más baratos aún en AliExpress <br><br>El segundo de los routers del pack, lo conectas por mesh pero vía wifi en la buhardilla<br><br>Creo que es un conjunto cubre las necesidades que comentaste y tiene bastantes más posibilidades aún, saludos</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 2</div><div class="reply-text">Hola, no sé las características del qué Nas y el servidor pequeño, te paso unos ejemplos de configuración  Este router e</div></div><p class="message-text">Mil gracias.<br>Más o menos me había hecho una idea como lo dices, pero no sabía cómo materializarla en dispositivos concretos, por temas de compatibilidad, etc. Así que me sirve de mucha ayuda lo que me has dicho.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Mil gracias. Más o menos me había hecho una idea como lo dices, pero no sabía cómo materializarla en dispositivos concre</div></div><p class="message-text">Estupendo 👍<br><br>Es importante, que los dispositivos los compres dónde puedas devolverlos sin problema, por si algo no te termina de convencer<br><br>En cuanto a la colocación de los routers, lo ideal es que los tres estén cerca del hueco de la escalera, pero como no siempre se puede, intenta colocarlos unos encima del otro, sobre todo, el router 2 y 3, porque al estar unicamente conectados vía wifi, es importante que entre los dos, tengan la mejor conectividad posible, un saludo</p></div></div>
+    <footer>Academia Tech &copy; 2026</footer>
+  </div>
+</div>
+</body></html>

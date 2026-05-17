@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html><head>
+<title>Configurar GL.iNet como cliente VPN y Kill-Switch | SupportBot</title>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta property="og:title" content="Configurar GL.iNet como cliente VPN y Kill-Switch">
+<meta property="og:description" content="Para configurar un router GL.iNet como cliente VPN, la conexión más estable y de mejor rendimiento es por Ethernet al router principal. Sin embargo, algunos routers como los GL.iNet, Cudy y ciertos mo">
+<link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+<style>
+:root {
+  --signal-blue: #2c6bed;
+  --page-bg: #f6f7f9;
+  --card-bg: #ffffff;
+  --text: #0d0d0d;
+  --text-sec: #5c5c5c;
+  --border: #d8d8d8;
+  --radius: 12px;
+  --green: #16a34a;
+  --yellow: #ca8a04;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  background: var(--page-bg); color: var(--text);
+  min-height: 100vh; padding: 48px 20px;
+  -webkit-font-smoothing: antialiased;
+}
+@media (max-width: 520px) { body { padding: 24px 12px; } }
+.shell { max-width: 640px; margin: 0 auto; }
+.card {
+  background: var(--card-bg); border: 1px solid var(--border);
+  border-radius: var(--radius); overflow: hidden; margin-bottom: 16px;
+}
+header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 20px; border-bottom: 1px solid var(--border);
+}
+.header-left { display: flex; align-items: center; gap: 10px; text-decoration: none; color: inherit; }
+.logo { width: 28px; height: 28px; }
+.brand { font-size: 15px; font-weight: 600; letter-spacing: -0.02em; }
+.chat-header { padding: 14px 20px; border-bottom: 1px solid var(--border); background: var(--page-bg); }
+.chat-header h2 { font-size: 14px; font-weight: 600; color: var(--text); display: flex; align-items: center; gap: 8px; }
+.chat-header h2 svg { width: 16px; height: 16px; color: var(--signal-blue); }
+.messages { padding: 0; }
+.message { padding: 16px 20px; border-bottom: 1px solid var(--border); }
+.message:last-child { border-bottom: none; }
+.message-header { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+.avatar { width: 28px; height: 28px; border-radius: 50%; color: white; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 600; flex-shrink: 0; }
+.sender-info { flex: 1; min-width: 0; }
+.sender-name { font-size: 13px; font-weight: 600; color: var(--text); }
+.message-text { font-size: 15px; line-height: 1.55; color: var(--text); white-space: pre-wrap; margin-left: 38px; }
+.reply-bubble { margin-left: 38px; margin-bottom: 6px; padding: 6px 10px; background: #f0f2f5; border-left: 3px solid var(--signal-blue); border-radius: 4px; font-size: 13px; color: var(--text-sec); }
+.reply-sender { font-weight: 600; color: var(--signal-blue); font-size: 12px; margin-bottom: 2px; }
+.reply-text { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.status-badge {
+  padding: 4px 10px; font-size: 11px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.04em; border-radius: 4px;
+}
+.status-solved { background: #dcfce7; color: var(--green); }
+.status-recommendation { background: #fef3c7; color: #b45309; }
+main { padding: 24px 20px; }
+h1 { font-size: 20px; font-weight: 700; letter-spacing: -0.025em; margin-bottom: 12px; line-height: 1.3; }
+.meta { font-size: 12px; color: var(--text-sec); margin-bottom: 16px; }
+.tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 20px; }
+.tag {
+  background: rgba(44, 107, 237, 0.08); color: var(--signal-blue);
+  padding: 4px 10px; border-radius: 4px; font-size: 12px; font-weight: 500;
+}
+.section-title {
+  font-size: 11px; font-weight: 600; text-transform: uppercase;
+  letter-spacing: 0.06em; color: var(--text-sec); margin-bottom: 10px;
+  display: flex; align-items: center; gap: 6px;
+}
+.section-title svg { width: 14px; height: 14px; }
+.section-content { font-size: 15px; line-height: 1.6; color: var(--text); white-space: pre-wrap; }
+.problem-section { padding-bottom: 20px; border-bottom: 1px solid var(--border); margin-bottom: 20px; }
+.solution-section {
+  background: #f0fdf4; margin: -24px -20px -24px -20px; padding: 20px;
+  border-top: 1px solid #bbf7d0;
+}
+.solution-section .section-title { color: var(--green); }
+.recommendation-solution { background: #fffbeb; border-top-color: #fde68a; }
+.recommendation-solution .section-title { color: #b45309; }
+.empty-chat {
+  padding: 32px 20px; text-align: center; color: var(--text-sec); font-size: 14px;
+}
+footer {
+  padding: 14px 20px; border-top: 1px solid var(--border);
+  color: var(--text-sec); font-size: 12px; text-align: center;
+}
+@media (max-width: 520px) {
+  main { padding: 20px 16px; }
+  h1 { font-size: 18px; }
+  .solution-section { margin: -20px -16px -20px -16px; padding: 16px; }
+}
+</style>
+</head><body>
+<div class="shell">
+  <div class="card">
+    <header>
+      <a href="https://academia-tech.github.io/SupportBot" class="header-left">
+        <img src="/SupportBot/supportbot-logo-128.png" alt="SupportBot" class="logo">
+        <span class="brand">SupportBot</span>
+      </a>
+      <span class="status-recommendation status-badge">Рекомендація</span>
+    </header>
+    <main>
+      <h1>Configurar GL.iNet como cliente VPN y Kill-Switch</h1>
+      <p class="meta">Case 54d495843588 &middot; naseros</p>
+      <div class='tags'><span class="tag">#GL.iNet</span><span class="tag">#VPN Cliente</span><span class="tag">#Router</span><span class="tag">#WiFi</span><span class="tag">#Ethernet</span><span class="tag">#Kill-Switch</span><span class="tag">#Redes</span></div>
+      <div class="problem-section">
+        <h2 class="section-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/>
+            <line x1="12" y1="16" x2="12.01" y2="16"/>
+          </svg>
+          Проблема
+        </h2>
+        <p class="section-content">Un usuario pregunta si un router GL.iNet puede conectarse al WiFi del router principal para que los equipos conectados por Ethernet al GL.iNet salgan por VPN, y sobre la necesidad del Kill-Switch en el router.</p>
+      </div>
+      <div class="solution-section recommendation-solution">
+        <h2 class="section-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7c.6.4 1 1.1 1 1.8V17h6v-.5c0-.7.4-1.4 1-1.8A7 7 0 0 0 12 2z"/></svg>
+          Рекомендація (не підтверджено)
+        </h2>
+        <p class="section-content">Para configurar un router GL.iNet como cliente VPN, la conexión más estable y de mejor rendimiento es por Ethernet al router principal. Sin embargo, algunos routers como los GL.iNet, Cudy y ciertos modelos de Asus (RT-AX57 Go, RT-BE58 Go) soportan la función WISP, que les permite conectarse a una red WiFi existente. La configuración habitual implica conectar el nuevo router (ej. GL.iNet) por su puerto WAN a un puerto LAN del router de la operadora, creando una configuración de doble NAT, que funciona correctamente aunque requiere abrir puertos dos veces si es necesario. Routers como GL.iNet y Asus permiten decidir qué dispositivos de la red utilizan la VPN y cuáles acceden directamente a internet. Los routers GL.iNet no suelen tener capacidad Mesh con otros routers de su marca, a diferencia de Asus, TP-Link o Fritzbox. Respecto al Kill-Switch, es una función de seguridad crítica que bloquea el tráfico si la conexión VPN cae, evitando fugas de datos. Sin Kill-Switch, el tráfico continuaría enviándose sin VPN. Se recomienda investigar si el Kill-Switch es configurable en un Fritzbox como cliente VPN y cómo se comporta ante una caída de la VPN.</p>
+      </div>
+    </main>
+  </div>
+  <div class="card">
+    <div class="chat-header"><h2><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Історія чату</h2></div><div class="messages"><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Hola buenas,<br>acabo de verme el short en el que Macjosan habla de configurar VPN (como cliente) en un router glinet y me han surgido unas dudas. Quiero aclarar antes que nada que nunca he configurado VPN en el router (es algo que haré una vez me haga con un VPS).<br><br>Las dudas:<br><br>En lugar de conectar por cable el glinet a mi router principal y usar el WiFi del glinet para que los equipos se conecten via WiFi a él ¿puedo conectar el glinet al WiFi de mi router principal de manera que los equipos que tenga conectados por ethernet al glinet salgan a internet a traves de la VPN que el glinet tenga configurada como cliente?<br><br>¿Que pasa si no activas el kill-switch del cliente VPN? Es decir el KS es necesario (al menos en PC) para evitar algún leak pero si el kill-switch saltase en el router este se quedaría incomunicado (al menos así entiendo que funciona), y con él todos los equipos que dependan de su conexión.<br><br>Gracias de antemano, un saludo</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Hola buenas, acabo de verme el short en el que Macjosan habla de configurar VPN (como cliente) en un router glinet y me </div></div><p class="message-text">No conozco los gl.inet pero los routers no pueden conectarse a una wifi, en general.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 2</div><div class="reply-text">No conozco los gl.inet pero los routers no pueden conectarse a una wifi, en general.</div></div><p class="message-text">He tenido unidades mesh que tienen posibilidad de conectar como routers independientes.<br><br>Igualmente la posibilidad de usar el router glinet cono puente cableado y con WiFi deshabilitdo me sigue pareciendo interesante.<br><br>Las dudas sobre la VPN siguen abiertas, pongan que en vez de usar el WiFi lo que hago es usarlo de puente gracias a sus dos puertos ethernet</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Hola buenas, acabo de verme el short en el que Macjosan habla de configurar VPN (como cliente) en un router glinet y me </div></div><p class="message-text">Buenos días,<br><br>Los router, por rendimiento y estabilidad, se conectan por ethernet, pero sí que hay algunos routers que pueden hacerlo vía WiFi, esa característica la llaman WISP y que yo recuerde la tienen los routers GL.iNet, los routers Cudy y los modelos RT-AX57 Go y RT-BE58 Go de Asus <br><br>Lo más habitual, es conectar todos los dispositivos a la Red del nuevo router, ya sean dispositivos de cable o wifi y a su vez, el nuevo router, conectarlo por el puerto Wan a cualquier puerto LAN del router de tu operadora, eso se llama doble router y aunque tiene mala prensa, pero funciona perfectamente y desde el punto de vista técnico, lo único que hay que tener en cuenta, es que si en algún momento, necesitas abrir un puerto de tu Red interna, en lugar de una vez, hay que abrirlo dos veces<br><br>Qué yo recuerde, hay dos marcas, aunque puede que se me escape alguna más (GL.iNet y Asus), cuando los configuras como cliente VPN, puedes decidir qué dispositivos de tu Red se conecten a la VPN y cuáles salen a intenet directamente por tu operador, es decir, por ejemplo, que se conecten 2 teles para evitar los bloqueos del amigo Tebas o que se conecten todos los dispositivos. Si no quieres hacer distinciones entre unos sí y otros dispositivos no, cualquier router que tenga cliente VPN, por ejemplo GL.iNet, Friztbox, TP-Link, Cudy, Asus,..., te sirve<br><br>Ojo, si no estoy confundido, los Gl.iNet, si tienes una vivienda grande y con la wifi de 1 router no cubres toda la vivienda, esta marca, no tiene la posibilidad de hacer mesh con otro router de su marca, para que todo sea una wifi en casa, sin embargo Asus, TP-Link, Friztbox, si que pueden crear una Red mesh<br><br>Un saludo</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 3</div><div class="reply-text">Buenos días,  Los router, por rendimiento y estabilidad, se conectan por ethernet, pero sí que hay algunos routers que p</div></div><p class="message-text">Gracias por toda esta información. Me hace pensar que posiblemente ya tenga todo lo necesario (a excepción del VPS) para llevar a cabo lo que pretendo sin necesidad de hacerme con un nuevo router.<br><br>Verás, ya tengo un fritzbox y a raíz de tus aclaraciones me pregunto si el filtro (que determina que equipos salen a través de la VPN y que equipos tienen salida directa) se base en la IP (o la NIC) porque de ser así ya podría usar una IP secundaria en mi equipo o un segundo puerto ethernet. Todo el software que uso en mi equipo lo puedo bindear a una IP/NIC así que su tráfico estaría controlado por el bindeo.<br><br>En caso de que mis esperanzas sean en vano y siga necesitando un router secundario (porque el fritzbox obligue a todos sus equipos conectarse a través de la VPN o porque no pueda aprovechar sus opciones de filtrado de equipos para la salida via VPN) otra opción sería olvidarme del WiFi del glinet y conectarlo de puente 100% cableado. Prefiero esto antes que estar obligado a tener una segunda SSID para que el glinet no decaiga en rendimiento.<br><br>Aún así me sigue preocupando el tema del kill-switch ¿acaso los routers en caso de perder la conexión con la VPN la reintentan y deshabilitan el resto de tráfico que debería correr a través de la VPN hasta que la conexión con la VPN se restablezca? Sospecho que los routers podrían proceder así en lugar de usar un kill-switch, es lo que consideraría yo lógico pero no tengo la confirmación de que así sea.<br><br>Mil gracias, un saludo</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Gracias por toda esta información. Me hace pensar que posiblemente ya tenga todo lo necesario (a excepción del VPS) para</div></div><p class="message-text">No estaba seguro si un Friztbox cuando funciona como cliente Vpn Wireguard, es capaz de que sólo algunos dispositivos utilicen la VPN y parece que sí, he hecho esta búsqueda en Google y explica cómo hacerlo <br><br>Conectar router Friztbox como cliente vpn y configurar para que sólo algunos dispositivos utilicen la VPN<br><br>Sobre el Kill Switch, no he encontrado información, quizás alguien del grupo de Telegram de Friztbox lo conozca y si no, habría que probarlo, por ejemplo, instalando un servidor VPN en otro router o una VPS y deshabilitar el servidor VPN, a ver cómo se comporta el Friztbox como cliente, si corta o si continua trabajando sin la VPN, un saludo</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 3</div><div class="reply-text">No estaba seguro si un Friztbox cuando funciona como cliente Vpn Wireguard, es capaz de que sólo algunos dispositivos ut</div></div><p class="message-text">Generalmente el kill-switch es para evitar enviar trafico si cae la vpn. Si estas usando una vpn y es critico que ese trafico vaya si o si por la vpn el kill-switch bloquea el trafico si no hay vpn. Sin kill-switch si cae la vpn el trafico sigue enviandose sin vpn.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 2</div><div class="reply-text">Generalmente el kill-switch es para evitar enviar trafico si cae la vpn. Si estas usando una vpn y es critico que ese tr</div></div><p class="message-text">Yo creo que lo teníamos claro que es el Kill Switch, tú lo has definido muy bien también, lo que no conocemos es si en un router Friztbox, cuando está configurado como cliente Vpn Wireguard si es configurable o no el Kill Switch en el router y en caso de no ser configurable, como actúa el Friztbox ante una caída de la VPN, por eso le sugerí que preguntase en el Canal de Telegram y si no, directamente que pruebe a ver si corta o no la comunicación, un saludo</p></div></div>
+    <footer>Academia Tech &copy; 2026</footer>
+  </div>
+</div>
+</body></html>

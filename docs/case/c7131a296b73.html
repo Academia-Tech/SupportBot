@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html><head>
+<title>How to Flash Tasmota on a WVC-1600 Grid Tie Solar Inverter | SupportBot</title>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta property="og:title" content="How to Flash Tasmota on a WVC-1600 Grid Tie Solar Inverter">
+<meta property="og:description" content="The guide involves replacing the original LPT-270-0 module with an ESP-07. To initialize the inverter, a specific sequence of serial commands (at 115200 baud) must be sent, such as `+ILOPCONNECT=WIFI_">
+<link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+<style>
+:root {
+  --signal-blue: #2c6bed;
+  --page-bg: #f6f7f9;
+  --card-bg: #ffffff;
+  --text: #0d0d0d;
+  --text-sec: #5c5c5c;
+  --border: #d8d8d8;
+  --radius: 12px;
+  --green: #16a34a;
+  --yellow: #ca8a04;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  background: var(--page-bg); color: var(--text);
+  min-height: 100vh; padding: 48px 20px;
+  -webkit-font-smoothing: antialiased;
+}
+@media (max-width: 520px) { body { padding: 24px 12px; } }
+.shell { max-width: 640px; margin: 0 auto; }
+.card {
+  background: var(--card-bg); border: 1px solid var(--border);
+  border-radius: var(--radius); overflow: hidden; margin-bottom: 16px;
+}
+header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 20px; border-bottom: 1px solid var(--border);
+}
+.header-left { display: flex; align-items: center; gap: 10px; text-decoration: none; color: inherit; }
+.logo { width: 28px; height: 28px; }
+.brand { font-size: 15px; font-weight: 600; letter-spacing: -0.02em; }
+.chat-header { padding: 14px 20px; border-bottom: 1px solid var(--border); background: var(--page-bg); }
+.chat-header h2 { font-size: 14px; font-weight: 600; color: var(--text); display: flex; align-items: center; gap: 8px; }
+.chat-header h2 svg { width: 16px; height: 16px; color: var(--signal-blue); }
+.messages { padding: 0; }
+.message { padding: 16px 20px; border-bottom: 1px solid var(--border); }
+.message:last-child { border-bottom: none; }
+.message-header { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+.avatar { width: 28px; height: 28px; border-radius: 50%; color: white; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 600; flex-shrink: 0; }
+.sender-info { flex: 1; min-width: 0; }
+.sender-name { font-size: 13px; font-weight: 600; color: var(--text); }
+.message-text { font-size: 15px; line-height: 1.55; color: var(--text); white-space: pre-wrap; margin-left: 38px; }
+.reply-bubble { margin-left: 38px; margin-bottom: 6px; padding: 6px 10px; background: #f0f2f5; border-left: 3px solid var(--signal-blue); border-radius: 4px; font-size: 13px; color: var(--text-sec); }
+.reply-sender { font-weight: 600; color: var(--signal-blue); font-size: 12px; margin-bottom: 2px; }
+.reply-text { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.status-badge {
+  padding: 4px 10px; font-size: 11px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.04em; border-radius: 4px;
+}
+.status-solved { background: #dcfce7; color: var(--green); }
+.status-recommendation { background: #fef3c7; color: #b45309; }
+main { padding: 24px 20px; }
+h1 { font-size: 20px; font-weight: 700; letter-spacing: -0.025em; margin-bottom: 12px; line-height: 1.3; }
+.meta { font-size: 12px; color: var(--text-sec); margin-bottom: 16px; }
+.tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 20px; }
+.tag {
+  background: rgba(44, 107, 237, 0.08); color: var(--signal-blue);
+  padding: 4px 10px; border-radius: 4px; font-size: 12px; font-weight: 500;
+}
+.section-title {
+  font-size: 11px; font-weight: 600; text-transform: uppercase;
+  letter-spacing: 0.06em; color: var(--text-sec); margin-bottom: 10px;
+  display: flex; align-items: center; gap: 6px;
+}
+.section-title svg { width: 14px; height: 14px; }
+.section-content { font-size: 15px; line-height: 1.6; color: var(--text); white-space: pre-wrap; }
+.problem-section { padding-bottom: 20px; border-bottom: 1px solid var(--border); margin-bottom: 20px; }
+.solution-section {
+  background: #f0fdf4; margin: -24px -20px -24px -20px; padding: 20px;
+  border-top: 1px solid #bbf7d0;
+}
+.solution-section .section-title { color: var(--green); }
+.recommendation-solution { background: #fffbeb; border-top-color: #fde68a; }
+.recommendation-solution .section-title { color: #b45309; }
+.empty-chat {
+  padding: 32px 20px; text-align: center; color: var(--text-sec); font-size: 14px;
+}
+footer {
+  padding: 14px 20px; border-top: 1px solid var(--border);
+  color: var(--text-sec); font-size: 12px; text-align: center;
+}
+@media (max-width: 520px) {
+  main { padding: 20px 16px; }
+  h1 { font-size: 18px; }
+  .solution-section { margin: -20px -16px -20px -16px; padding: 16px; }
+}
+</style>
+</head><body>
+<div class="shell">
+  <div class="card">
+    <header>
+      <a href="https://academia-tech.github.io/SupportBot" class="header-left">
+        <img src="/SupportBot/supportbot-logo-128.png" alt="SupportBot" class="logo">
+        <span class="brand">SupportBot</span>
+      </a>
+      <span class="status-recommendation status-badge">Рекомендація</span>
+    </header>
+    <main>
+      <h1>How to Flash Tasmota on a WVC-1600 Grid Tie Solar Inverter</h1>
+      <p class="meta">Case c7131a296b73 &middot; tasmota</p>
+      <div class='tags'><span class="tag">#WVC-1600</span><span class="tag">#solar inverter</span><span class="tag">#grid tie</span><span class="tag">#Tasmota</span><span class="tag">#ESP-07</span><span class="tag">#serial communication</span><span class="tag">#hardware mod</span><span class="tag">#MQTT</span><span class="tag">#rules</span></div>
+      <div class="problem-section">
+        <h2 class="section-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/>
+            <line x1="12" y1="16" x2="12.01" y2="16"/>
+          </svg>
+          Проблема
+        </h2>
+        <p class="section-content">A user shared a detailed guide on how to replace the original Wi-Fi module on a WVC-1600 grid tie solar inverter with a Tasmota-flashed ESP-07 module to gain local control and read data via MQTT.</p>
+      </div>
+      <div class="solution-section recommendation-solution">
+        <h2 class="section-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7c.6.4 1 1.1 1 1.8V17h6v-.5c0-.7.4-1.4 1-1.8A7 7 0 0 0 12 2z"/></svg>
+          Рекомендація (не підтверджено)
+        </h2>
+        <p class="section-content">The guide involves replacing the original LPT-270-0 module with an ESP-07. To initialize the inverter, a specific sequence of serial commands (at 115200 baud) must be sent, such as `+ILOPCONNECT=WIFI_CONNECT`, `+ILOPCONNECT=SERVER_CONNECT`, and `+ILOPDATA=ICA,PowerSwitch,1`. The inverter then sends data strings that can be parsed. A Tasmota rule `Rule1 ON System#Boot DO Backlog Baudrate 115200; SerialSend1+ILOPCONNECT=WIFI_CONNECT; ...` is provided to automate the process on boot. The user also provides pinout details, hardware notes (e.g., adding capacitors, avoiding ESP32 due to power draw), and commands to power the inverter on/off.</p>
+      </div>
+    </main>
+  </div>
+  <div class="card">
+    <div class="chat-header"><h2><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Історія чату</h2></div><div class="messages"><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">That&#x27;s how a tasmotized WVC-1600 grid tie solar inverter looks inside (I replaced the original PCB module on the green PCB module by an ESP-07 with an additional capacitor for 3.3V and the according pullup- and pulldown-resistors (the one under the capacitor is parallel to one which I selected with too much resistance. Don&#x27;t use 47k resistors, stick with e.g. 1.5k or 4,7k).<br>I also added a small heat spreader to the big voltage converter of the inverter next to the module, since it became quite hot.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">It runs the default Tasmota firmware, has RX and TX pins configured (I did not yet connect TX since there is no need for me to send the three known commands to it (on/off, power limit 1..100%, and enter/exit some weird &quot;Energy_Cleared&quot; state)<br>If someone wants to do this: to initialize the inverter controller, so it doesn&#x27;t just send &quot;AT+AWSSRESET&quot; you either need to<br>* connect the inverter to WIFI &amp; Internet first (requires app download + app account creation), then you may need to turn it on via the app interface (by default the inverter may be disabled!) then replace the original module<br>* or remove the WIFi communication module  (the green board) and send the following strings via serial (115200 baud, e.g. from a computer via a USB-serial adapter or via Tasmota Web console command &quot;SerialSend1 [string here]&quot;) to the Inverter, in the given order. Each string terminated by a newline character [Notes are in brackets]:<br>  1) +ok [because the inverter controller will send requests/commands to the WIFI module which probably should be answered. All commands only need to be answered by &quot;+ok&quot;. Yes, all WiFi module communication is prefixed by a &#x27;+&#x27;]<br>  2) [empty string, so newline character only. maybe this is not needed and just fucked up firmware...]<br>  3) +ILOPCONNECT=BLE_START<br>  4) [empy string again - try skipping it for science]<br>  5) +ILOPCONNECT=WIFI_CONNECT<br>  6) [empy string again - try skipping it for science]<br>  7) +ILOPCONNECT=SERVER_CONNECT<br>  8) [empy string again - try skipping it for science]<br>  9) +ILOPDATA=ICA,PowerSwitch,1<br>* you may as well try to only send 5), 7) and 9). For science [insert GlaDOS meme here]<br><br>Then the inverter will send two strings alternatingly:<br>AT+SENDICA=property,PV_Volt,19.0,PV_Current,0.00,PV_Power,0.0,AC_Volt,0.0,AC_Current,0.00,Out_Power,0.0,Temperature,34.0,Power_adjustment,100,Energy,0.00<br>AT+SENDICA=property,PowerSwitch,0,Plant,0.00,Emission,0.00,Time,30,P_adj,0,TEMP_SET,66<br><br>In this case you see &quot;PowerSwitch,0&quot; which means it is powered off/disabled. To power on the inverter, you need to send the string mentioned in 9) - to turn it off, send the same, but replace &#x27;0&#x27; instead of &#x27;1&#x27;<br><br>Additional note: since the ESP8566 module already requires an additional capacitor to stabilize the power supply (the backside of the green PCB contains a voltage regulator 22V-&gt;3.3V), I guess an ESP32 would draw too much power and either not work at all or fry the power supply on the green PCB.<br><br>I&#x27;ll add more information once I connected the inverter to the grid (I&#x27;ll probably just answer to this message)<br><br>EDIT:<br>This is probably the rule that covers everything that is needed on boot:<br>Rule1 ON System#Boot DO Backlog Baudrate 115200; SerialSend1+ILOPCONNECT=WIFI_CONNECT; SerialSend1+ILOPCONNECT=SERVER_CONNECT; SerialSend1+ILOPDATA=ICA,PowerSwitch,1 ENDON<br>An additional rule may be useful for answering all received (non-empty) strings with &quot;+ok&quot;, and value extraction maybe can be done with a further rule, too. Since the trigger SerialReceived#Data did not work for me, I used<br>ON Time#Minute DO Backlog SerialSend1+ok; SerialSend1+ok ENDON<br>To at least acknowledge two messages every minute<br><br>I encountered my WVC-1600 to sometimes only give no output, so it may be needed to turn it off and back on again via these two console commands:<br>SerialSend1+ILOPDATA=ICA,PowerSwitch,0<br>SerialSend1+ILOPDATA=ICA,PowerSwitch,1<br>from time to time, e.g. by a rule.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Those are the relevant pins on the green PCB once the shown LPT-270-0 module is removed. VDD is +3.3V, the upper GND pad is more convenient to solder to that the one next to VDD, but this one would work, too.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">sry for the &quot;spam&quot;, I just wanted this information to be documented somewhere publicly and didn&#x27;t know any better way and place. I hope it&#x27;s helpful</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">sry for the &quot;spam&quot;, I just wanted this information to be documented somewhere publicly and didn&#x27;t know any better way an</div></div><p class="message-text">You can create a GitHub.com page to document it</p></div></div>
+    <footer>Academia Tech &copy; 2026</footer>
+  </div>
+</div>
+</body></html>

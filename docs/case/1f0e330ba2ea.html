@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html><head>
+<title>Висока затримка відео з IP-камери Hikvision | SupportBot</title>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta property="og:title" content="Висока затримка відео з IP-камери Hikvision">
+<meta property="og:description" content="Для зменшення затримки відео з IP-камери рекомендовано використовувати gstreamer, де можна налаштувати буфер. Затримка також сильно залежить від самої камери (може бути до 120 мс для h265). Надано пос">
+<link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+<style>
+:root {
+  --signal-blue: #2c6bed;
+  --page-bg: #f6f7f9;
+  --card-bg: #ffffff;
+  --text: #0d0d0d;
+  --text-sec: #5c5c5c;
+  --border: #d8d8d8;
+  --radius: 12px;
+  --green: #16a34a;
+  --yellow: #ca8a04;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  background: var(--page-bg); color: var(--text);
+  min-height: 100vh; padding: 48px 20px;
+  -webkit-font-smoothing: antialiased;
+}
+@media (max-width: 520px) { body { padding: 24px 12px; } }
+.shell { max-width: 640px; margin: 0 auto; }
+.card {
+  background: var(--card-bg); border: 1px solid var(--border);
+  border-radius: var(--radius); overflow: hidden; margin-bottom: 16px;
+}
+header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 20px; border-bottom: 1px solid var(--border);
+}
+.header-left { display: flex; align-items: center; gap: 10px; text-decoration: none; color: inherit; }
+.logo { width: 28px; height: 28px; }
+.brand { font-size: 15px; font-weight: 600; letter-spacing: -0.02em; }
+.chat-header { padding: 14px 20px; border-bottom: 1px solid var(--border); background: var(--page-bg); }
+.chat-header h2 { font-size: 14px; font-weight: 600; color: var(--text); display: flex; align-items: center; gap: 8px; }
+.chat-header h2 svg { width: 16px; height: 16px; color: var(--signal-blue); }
+.messages { padding: 0; }
+.message { padding: 16px 20px; border-bottom: 1px solid var(--border); }
+.message:last-child { border-bottom: none; }
+.message-header { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+.avatar { width: 28px; height: 28px; border-radius: 50%; color: white; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 600; flex-shrink: 0; }
+.sender-info { flex: 1; min-width: 0; }
+.sender-name { font-size: 13px; font-weight: 600; color: var(--text); }
+.message-text { font-size: 15px; line-height: 1.55; color: var(--text); white-space: pre-wrap; margin-left: 38px; }
+.reply-bubble { margin-left: 38px; margin-bottom: 6px; padding: 6px 10px; background: #f0f2f5; border-left: 3px solid var(--signal-blue); border-radius: 4px; font-size: 13px; color: var(--text-sec); }
+.reply-sender { font-weight: 600; color: var(--signal-blue); font-size: 12px; margin-bottom: 2px; }
+.reply-text { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.status-badge {
+  padding: 4px 10px; font-size: 11px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.04em; border-radius: 4px;
+}
+.status-solved { background: #dcfce7; color: var(--green); }
+.status-recommendation { background: #fef3c7; color: #b45309; }
+main { padding: 24px 20px; }
+h1 { font-size: 20px; font-weight: 700; letter-spacing: -0.025em; margin-bottom: 12px; line-height: 1.3; }
+.meta { font-size: 12px; color: var(--text-sec); margin-bottom: 16px; }
+.tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 20px; }
+.tag {
+  background: rgba(44, 107, 237, 0.08); color: var(--signal-blue);
+  padding: 4px 10px; border-radius: 4px; font-size: 12px; font-weight: 500;
+}
+.section-title {
+  font-size: 11px; font-weight: 600; text-transform: uppercase;
+  letter-spacing: 0.06em; color: var(--text-sec); margin-bottom: 10px;
+  display: flex; align-items: center; gap: 6px;
+}
+.section-title svg { width: 14px; height: 14px; }
+.section-content { font-size: 15px; line-height: 1.6; color: var(--text); white-space: pre-wrap; }
+.problem-section { padding-bottom: 20px; border-bottom: 1px solid var(--border); margin-bottom: 20px; }
+.solution-section {
+  background: #f0fdf4; margin: -24px -20px -24px -20px; padding: 20px;
+  border-top: 1px solid #bbf7d0;
+}
+.solution-section .section-title { color: var(--green); }
+.recommendation-solution { background: #fffbeb; border-top-color: #fde68a; }
+.recommendation-solution .section-title { color: #b45309; }
+.empty-chat {
+  padding: 32px 20px; text-align: center; color: var(--text-sec); font-size: 14px;
+}
+footer {
+  padding: 14px 20px; border-top: 1px solid var(--border);
+  color: var(--text-sec); font-size: 12px; text-align: center;
+}
+@media (max-width: 520px) {
+  main { padding: 20px 16px; }
+  h1 { font-size: 18px; }
+  .solution-section { margin: -20px -16px -20px -16px; padding: 16px; }
+}
+</style>
+</head><body>
+<div class="shell">
+  <div class="card">
+    <header>
+      <a href="https://academia-tech.github.io/SupportBot" class="header-left">
+        <img src="/SupportBot/supportbot-logo-128.png" alt="SupportBot" class="logo">
+        <span class="brand">SupportBot</span>
+      </a>
+      <span class="status-recommendation status-badge">Рекомендація</span>
+    </header>
+    <main>
+      <h1>Висока затримка відео з IP-камери Hikvision</h1>
+      <p class="meta">Case 1f0e330ba2ea &middot; ua_ardupilot</p>
+      <div class='tags'><span class="tag">#Hikvision</span><span class="tag">#IP-камера</span><span class="tag">#затримка</span><span class="tag">#відео</span><span class="tag">#VLC</span><span class="tag">#gstreamer</span></div>
+      <div class="problem-section">
+        <h2 class="section-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/>
+            <line x1="12" y1="16" x2="12.01" y2="16"/>
+          </svg>
+          Проблема
+        </h2>
+        <p class="section-content">Користувач зіткнувся з високою затримкою (100-150мс) при перегляді live view з камери Hikvision через браузер, та ще більшою через VLC, незважаючи на налаштування буфера.</p>
+      </div>
+      <div class="solution-section recommendation-solution">
+        <h2 class="section-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7c.6.4 1 1.1 1 1.8V17h6v-.5c0-.7.4-1.4 1-1.8A7 7 0 0 0 12 2z"/></svg>
+          Рекомендація (не підтверджено)
+        </h2>
+        <p class="section-content">Для зменшення затримки відео з IP-камери рекомендовано використовувати gstreamer, де можна налаштувати буфер. Затримка також сильно залежить від самої камери (може бути до 120 мс для h265). Надано посилання на документацію ArduPilot: https://ardupilot.org/planner/docs/live-video.html. Якщо при перегляді через VLC виникає велика затримка (близько 1 секунди), яка не прибирається зміною параметрів кешування, як альтернативу можна спробувати програмне забезпечення Cockpit від Blue Robotics (https://github.com/bluerobotics/cockpit/releases/tag/v1.16.0). Також зазначається, що для подібних камер затримка 0.5-0.7с є досяжною і прийнятною для польотів. Рекомендовано спробувати зменшити роздільну здатність (кроп) та бітрейт відео.</p>
+      </div>
+    </main>
+  </div>
+  <div class="card">
+    <div class="chat-header"><h2><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Історія чату</h2></div><div class="messages"><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Вітаю<br>Питання.<br>Є камера hikvision, все працює.<br>Але коли включаєш через браузер її рідний live view - затримка реально 100 мс-150 МС. В налаштуваннях є udp і все інше, і воно працює.<br>Піднімаю strp - 0.3-0.5.<br>Може хто знає де воно щоб вивести саме цей live view?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Вітаю Питання. Є камера hikvision, все працює. Але коли включаєш через браузер її рідний live view - затримка реально 10</div></div><p class="message-text">Вивести live view куди? На VLC чи ffplay?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 2</div><div class="reply-text">Вивести live view куди? На VLC чи ffplay?</div></div><p class="message-text">Да будь куди де затримка менша. VLC прям х2-3 від їх вьювера</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Да будь куди де затримка менша. VLC прям х2-3 від їх вьювера</div></div><p class="message-text">На vlc треба буфер поставити на показник 0</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Вітаю Питання. Є камера hikvision, все працює. Але коли включаєш через браузер її рідний live view - затримка реально 10</div></div><p class="message-text">300-500ms для rtsp це мега круто. Зробити меншу затримку на rtsp навряд чи вийде.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 2</div><div class="reply-text">300-500ms для rtsp це мега круто. Зробити меншу затримку на rtsp навряд чи вийде.</div></div><p class="message-text">чот забагато</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 2</div><div class="reply-text">На vlc треба буфер поставити на показник 0</div></div><p class="message-text">Все в нулі. Але щось прям хз що робити. Точно бачу налаштування які можуть зробити це все меньше. Але як це зробити. Питання відкрите.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Все в нулі. Але щось прям хз що робити. Точно бачу налаштування які можуть зробити це все меньше. Але як це зробити. Пит</div></div><p class="message-text">Я прям в мп виводив штатно через gstreamer , затримка була ок, буфер там налаштовується.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 4</div><div class="reply-text">Я прям в мп виводив штатно через gstreamer , затримка була ок, буфер там налаштовується.</div></div><p class="message-text">Дайте як це зробити?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#0891b2">M5</div><div class="sender-info"><span class="sender-name">Учасник 5</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 2</div><div class="reply-text">300-500ms для rtsp це мега круто. Зробити меншу затримку на rtsp навряд чи вийде.</div></div><p class="message-text">Дуже сильно від камери залежить, є камери і 120 мс (h265)</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Дайте як це зробити?</div></div><p class="message-text">https://ardupilot.org/planner/docs/live-video.html<br>Тут більше, треба тільки підібрати налаштування під вашу камеру</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 4</div><div class="reply-text">https://ardupilot.org/planner/docs/live-video.html Тут більше, треба тільки підібрати налаштування під вашу камеру</div></div><p class="message-text">дякую, в мене сам стрим з великою затримкою, аля я розумію що це вже в камері проблема. Або вона там перепаковує довго і нудно все.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">дякую, в мене сам стрим з великою затримкою, аля я розумію що це вже в камері проблема. Або вона там перепаковує довго і</div></div><p class="message-text">Можливо і так, але бачив щось про vlc, в мене теж він давав велику затримку.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">та, саме vlc це робить, майже секунда, другий день танців з бубном нічого не дали)</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Ровно секунда 😭</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#9333ea">M6</div><div class="sender-info"><span class="sender-name">Учасник 6</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">та, саме vlc це робить, майже секунда, другий день танців з бубном нічого не дали)</div></div><p class="message-text">Це час буфера по ідеє..</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">да все все міняв, всі ці параметри</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#9333ea">M6</div><div class="sender-info"><span class="sender-name">Учасник 6</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">да все все міняв, всі ці параметри</div></div><p class="message-text">десь 9 параметрів з різними розмірами кешу в мс</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">зараз всі гляну ще раз</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">та, саме vlc це робить, майже секунда, другий день танців з бубном нічого не дали)</div></div><p class="message-text">Спробуйте cockpit, це звичайно не їх use case але в мене працювало<br>https://github.com/bluerobotics/cockpit/releases/tag/v1.16.0<br>Або окремо на rpi</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#dc2626">M7</div><div class="sender-info"><span class="sender-name">Учасник 7</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">дякую, в мене сам стрим з великою затримкою, аля я розумію що це вже в камері проблема. Або вона там перепаковує довго і</div></div><p class="message-text">Та проблема не в самій камеру</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#dc2626">M7</div><div class="sender-info"><span class="sender-name">Учасник 7</span></div></div><p class="message-text">Я працював з такою самою камерою і затримку отримав десь 0.5 - 0.7 с, що впринципі вже можно нормально літати. Нащо боротися за ще менше хз</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#dc2626">M7</div><div class="sender-info"><span class="sender-name">Учасник 7</span></div></div><p class="message-text">При чому через стрімер МР</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#dc2626">M7</div><div class="sender-info"><span class="sender-name">Учасник 7</span></div></div><p class="message-text">Ви пробували кропати картинку а не кидати її в їбейшій якості ?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 7</div><div class="reply-text">Я працював з такою самою камерою і затримку отримав десь 0.5 - 0.7 с, що впринципі вже можно нормально літати. Нащо боро</div></div><p class="message-text">ну зараз десь так локально, зараз прокину через инет - гляну</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#dc2626">M7</div><div class="sender-info"><span class="sender-name">Учасник 7</span></div></div><p class="message-text">А просто rtsp пробували ?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">тут вже секунда, на параметри реакціі нема</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#dc2626">M7</div><div class="sender-info"><span class="sender-name">Учасник 7</span></div></div><p class="message-text">Бітрейт розмір картинки змінювали?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">кеш і все інше в нулях стоїть</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 7</div><div class="reply-text">Бітрейт розмір картинки змінювали?</div></div><p class="message-text">та, міняється але там 100 мс максмимум</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#dc2626">M7</div><div class="sender-info"><span class="sender-name">Учасник 7</span></div></div><p class="message-text">Окей, тоді почнемо з початку.<br>1. Яку затримку ви хочете?<br>2. Чому саме таку затримку ?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Ок, ну 300-500 було б добре, бо керувати вже досить складно</p></div></div>
+    <footer>Academia Tech &copy; 2026</footer>
+  </div>
+</div>
+</body></html>

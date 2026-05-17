@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html><head>
+<title>Arrancar NAS QNAP de forma remota fuera de la red | SupportBot</title>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta property="og:title" content="Arrancar NAS QNAP de forma remota fuera de la red">
+<meta property="og:description" content="Para arrancar un NAS QNAP de forma remota, se recomienda activar Wake-on-LAN (WOL), configurar una VPN y un servicio DDNS. Luego, se puede usar una aplicación como WolOn (disponible para Android) para">
+<link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+<style>
+:root {
+  --signal-blue: #2c6bed;
+  --page-bg: #f6f7f9;
+  --card-bg: #ffffff;
+  --text: #0d0d0d;
+  --text-sec: #5c5c5c;
+  --border: #d8d8d8;
+  --radius: 12px;
+  --green: #16a34a;
+  --yellow: #ca8a04;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  background: var(--page-bg); color: var(--text);
+  min-height: 100vh; padding: 48px 20px;
+  -webkit-font-smoothing: antialiased;
+}
+@media (max-width: 520px) { body { padding: 24px 12px; } }
+.shell { max-width: 640px; margin: 0 auto; }
+.card {
+  background: var(--card-bg); border: 1px solid var(--border);
+  border-radius: var(--radius); overflow: hidden; margin-bottom: 16px;
+}
+header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 20px; border-bottom: 1px solid var(--border);
+}
+.header-left { display: flex; align-items: center; gap: 10px; text-decoration: none; color: inherit; }
+.logo { width: 28px; height: 28px; }
+.brand { font-size: 15px; font-weight: 600; letter-spacing: -0.02em; }
+.chat-header { padding: 14px 20px; border-bottom: 1px solid var(--border); background: var(--page-bg); }
+.chat-header h2 { font-size: 14px; font-weight: 600; color: var(--text); display: flex; align-items: center; gap: 8px; }
+.chat-header h2 svg { width: 16px; height: 16px; color: var(--signal-blue); }
+.messages { padding: 0; }
+.message { padding: 16px 20px; border-bottom: 1px solid var(--border); }
+.message:last-child { border-bottom: none; }
+.message-header { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+.avatar { width: 28px; height: 28px; border-radius: 50%; color: white; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 600; flex-shrink: 0; }
+.sender-info { flex: 1; min-width: 0; }
+.sender-name { font-size: 13px; font-weight: 600; color: var(--text); }
+.message-text { font-size: 15px; line-height: 1.55; color: var(--text); white-space: pre-wrap; margin-left: 38px; }
+.reply-bubble { margin-left: 38px; margin-bottom: 6px; padding: 6px 10px; background: #f0f2f5; border-left: 3px solid var(--signal-blue); border-radius: 4px; font-size: 13px; color: var(--text-sec); }
+.reply-sender { font-weight: 600; color: var(--signal-blue); font-size: 12px; margin-bottom: 2px; }
+.reply-text { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.status-badge {
+  padding: 4px 10px; font-size: 11px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.04em; border-radius: 4px;
+}
+.status-solved { background: #dcfce7; color: var(--green); }
+.status-recommendation { background: #fef3c7; color: #b45309; }
+main { padding: 24px 20px; }
+h1 { font-size: 20px; font-weight: 700; letter-spacing: -0.025em; margin-bottom: 12px; line-height: 1.3; }
+.meta { font-size: 12px; color: var(--text-sec); margin-bottom: 16px; }
+.tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 20px; }
+.tag {
+  background: rgba(44, 107, 237, 0.08); color: var(--signal-blue);
+  padding: 4px 10px; border-radius: 4px; font-size: 12px; font-weight: 500;
+}
+.section-title {
+  font-size: 11px; font-weight: 600; text-transform: uppercase;
+  letter-spacing: 0.06em; color: var(--text-sec); margin-bottom: 10px;
+  display: flex; align-items: center; gap: 6px;
+}
+.section-title svg { width: 14px; height: 14px; }
+.section-content { font-size: 15px; line-height: 1.6; color: var(--text); white-space: pre-wrap; }
+.problem-section { padding-bottom: 20px; border-bottom: 1px solid var(--border); margin-bottom: 20px; }
+.solution-section {
+  background: #f0fdf4; margin: -24px -20px -24px -20px; padding: 20px;
+  border-top: 1px solid #bbf7d0;
+}
+.solution-section .section-title { color: var(--green); }
+.recommendation-solution { background: #fffbeb; border-top-color: #fde68a; }
+.recommendation-solution .section-title { color: #b45309; }
+.empty-chat {
+  padding: 32px 20px; text-align: center; color: var(--text-sec); font-size: 14px;
+}
+footer {
+  padding: 14px 20px; border-top: 1px solid var(--border);
+  color: var(--text-sec); font-size: 12px; text-align: center;
+}
+@media (max-width: 520px) {
+  main { padding: 20px 16px; }
+  h1 { font-size: 18px; }
+  .solution-section { margin: -20px -16px -20px -16px; padding: 16px; }
+}
+</style>
+</head><body>
+<div class="shell">
+  <div class="card">
+    <header>
+      <a href="https://academia-tech.github.io/SupportBot" class="header-left">
+        <img src="/SupportBot/supportbot-logo-128.png" alt="SupportBot" class="logo">
+        <span class="brand">SupportBot</span>
+      </a>
+      <span class="status-solved status-badge">Вирішено</span>
+    </header>
+    <main>
+      <h1>Arrancar NAS QNAP de forma remota fuera de la red</h1>
+      <p class="meta">Case cc5c12c1f904 &middot; naseros</p>
+      <div class='tags'><span class="tag">#NAS</span><span class="tag">#QNAP</span><span class="tag">#WOL</span><span class="tag">#Wake-on-LAN</span><span class="tag">#VPN</span><span class="tag">#DDNS</span><span class="tag">#Acceso Remoto</span><span class="tag">#Red</span><span class="tag">#Configuración</span></div>
+      <div class="problem-section">
+        <h2 class="section-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/>
+            <line x1="12" y1="16" x2="12.01" y2="16"/>
+          </svg>
+          Проблема
+        </h2>
+        <p class="section-content">Un usuario pregunta cómo arrancar un NAS QNAP de forma remota cuando se encuentra fuera de la red local (LAN/WAN).</p>
+      </div>
+      <div class="solution-section">
+        <h2 class="section-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          Рішення
+        </h2>
+        <p class="section-content">Para arrancar un NAS QNAP de forma remota, se recomienda activar Wake-on-LAN (WOL), configurar una VPN y un servicio DDNS. Luego, se puede usar una aplicación como WolOn (disponible para Android) para enviar el &#x27;paquete mágico&#x27;. La configuración implica conocer la dirección MAC del NAS, su IP, y el puerto UDP (9 o 7). Para acceso desde fuera de la LAN (WOW), se necesita un nombre DDNS y redirigir un puerto UDP aleatorio (ej. 34567) al puerto 9 UDP de la IP interna del NAS. Se proporciona una guía detallada para configurar WOL/WOW en dos partes (LAN y WAN), incluyendo el uso de la app WolOn y la configuración de puertos y DDNS. Se recomienda probar primero en la red interna.</p>
+      </div>
+    </main>
+  </div>
+  <div class="card">
+    <div class="chat-header"><h2><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Історія чату</h2></div><div class="messages"><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Buenas tardes,<br><br>A ver si alguien me puede ayudar.<br>Hay alguna forma de arrancar un Nas de QNAP fuera de la LAN\WAN?<br><br>Gracias, un slaudo</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Buenas tardes,  A ver si alguien me puede ayudar. Hay alguna forma de arrancar un Nas de QNAP fuera de la LAN\WAN?  Grac</div></div><p class="message-text">Lo más seguro y fiable es que actives el WOL, configures una VPN  ,y a través de ella mandar a encender el qnap.<br>Saludos.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 2</div><div class="reply-text">Lo más seguro y fiable es que actives el WOL, configures una VPN  ,y a través de ella mandar a encender el qnap. Saludos</div></div><p class="message-text">Gracias, es lo que imaginaba.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Buenas tardes,  A ver si alguien me puede ayudar. Hay alguna forma de arrancar un Nas de QNAP fuera de la LAN\WAN?  Grac</div></div><p class="message-text">Hola, lo yo configúraria, pero en dos partes, primero en la Lan (Red interna) y después en la Wan (desde fuera de tu Red de casa).<br><br>Como requisito, la aplicación que elijas, debe ser capaz de enviar un WOL (paquete mágico) ya sea en tu Red interna, a una dirección IP o a un nombre DDNS y también poder configurar el puerto hacia donde realiza la llamada/envío del paquete mágico <br><br>Yo he probado una App de Android llamada WolOn y sirve para Qnap o cualquier otro dispositivo de cualquier marca que tenga activado WOL. Es probable que haya otras Apps que hagan lo mismo, despertar el dispositivo en tu Red interna y con algún requisito más, puedes usarla también desde fuera de tu Lan (Internet WOW) <br><br>1) Comienza por crear un elemento nuevo en la App en tu Red interna, para ello tienes que conocer la Mac del Nas (o del dispositivo a despertar), la IP, y el puerto UDP (habitualmente el 9 ó el 7), prueba a intentar despertar el Nas desde la App <br><br>2 A) Cuando te haya funcionado el punto 1, si tienes en casa una VPN para acceso remoto configurado en el router, por ejemplo WireGuard, haz lo mismo que antes, pero precisamente desconectado de la wifi de casa del móvil y activando el WireGuard, debería funcionar como el punto 1<br><br>2 B) Si no tienes VPN y te funcionó el punto 1<br><br>Debes tener un nombre creado y funcionando DDNS, puede ser un DDNS de Qnap, de otra marca de Nas, de otra marca de router, de DuckDNS, etc, cualquier DDNS sirve.<br><br>Por otro lado, el puerto 9 UDP es peligroso exponerlo a Internet, por lo que debes elegir un número al azar menor del 65535, por ejemplo el 34567 y en el router redirige el puerto 34567 UDP al 9 UDP de la IP interna de tu Nas o dispositivo a despertar.<br><br>Por último hay que hacer lo mismo que el punto 1, con el móvil desconectado de la wifi y con algunos cambios: <br><br>Crea un elemento nuevo en la App en tu Wan, para ello tienes que introducir la Mac del Nas, el nombre DDNS (ya no necesitas la IP), y el puerto UDP 34567 (en lugar del 9), con esto debe funcionar<br><br>Si necesitas poder despertar otro dispositivo adicional desde fuera de casa, por ejemplo un pc, simplemente eligiendo un número de puerto UDP al azar diferente y creando una redirección de ese puerto inventado al 9 de la IP del ordenador a despertar serviría. Pero antes siempre, es mejor hacer la prueba en tu Lan/Red interna, un saludo</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 3</div><div class="reply-text">Hola, lo yo configúraria, pero en dos partes, primero en la Lan (Red interna) y después en la Wan (desde fuera de tu Red</div></div><p class="message-text">Perfecto Jose,<br><br>Lo pruebo. Muchísimas gracias</p></div></div>
+    <footer>Academia Tech &copy; 2026</footer>
+  </div>
+</div>
+</body></html>

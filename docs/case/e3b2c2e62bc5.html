@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html><head>
+<title>Integrar mandos de 433MHz con código rotativo (Rolling Code) en Home Assistant | SupportBot</title>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta property="og:title" content="Integrar mandos de 433MHz con código rotativo (Rolling Code) en Home Assistant">
+<meta property="og:description" content="Se confirma que los dispositivos con código rotativo (Rolling Code) no se pueden clonar o capturar con bridges de RF genéricos, ya que el código cambia con cada pulsación por seguridad. Para diagnosti">
+<link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+<style>
+:root {
+  --signal-blue: #2c6bed;
+  --page-bg: #f6f7f9;
+  --card-bg: #ffffff;
+  --text: #0d0d0d;
+  --text-sec: #5c5c5c;
+  --border: #d8d8d8;
+  --radius: 12px;
+  --green: #16a34a;
+  --yellow: #ca8a04;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  background: var(--page-bg); color: var(--text);
+  min-height: 100vh; padding: 48px 20px;
+  -webkit-font-smoothing: antialiased;
+}
+@media (max-width: 520px) { body { padding: 24px 12px; } }
+.shell { max-width: 640px; margin: 0 auto; }
+.card {
+  background: var(--card-bg); border: 1px solid var(--border);
+  border-radius: var(--radius); overflow: hidden; margin-bottom: 16px;
+}
+header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 20px; border-bottom: 1px solid var(--border);
+}
+.header-left { display: flex; align-items: center; gap: 10px; text-decoration: none; color: inherit; }
+.logo { width: 28px; height: 28px; }
+.brand { font-size: 15px; font-weight: 600; letter-spacing: -0.02em; }
+.chat-header { padding: 14px 20px; border-bottom: 1px solid var(--border); background: var(--page-bg); }
+.chat-header h2 { font-size: 14px; font-weight: 600; color: var(--text); display: flex; align-items: center; gap: 8px; }
+.chat-header h2 svg { width: 16px; height: 16px; color: var(--signal-blue); }
+.messages { padding: 0; }
+.message { padding: 16px 20px; border-bottom: 1px solid var(--border); }
+.message:last-child { border-bottom: none; }
+.message-header { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+.avatar { width: 28px; height: 28px; border-radius: 50%; color: white; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 600; flex-shrink: 0; }
+.sender-info { flex: 1; min-width: 0; }
+.sender-name { font-size: 13px; font-weight: 600; color: var(--text); }
+.message-text { font-size: 15px; line-height: 1.55; color: var(--text); white-space: pre-wrap; margin-left: 38px; }
+.reply-bubble { margin-left: 38px; margin-bottom: 6px; padding: 6px 10px; background: #f0f2f5; border-left: 3px solid var(--signal-blue); border-radius: 4px; font-size: 13px; color: var(--text-sec); }
+.reply-sender { font-weight: 600; color: var(--signal-blue); font-size: 12px; margin-bottom: 2px; }
+.reply-text { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.status-badge {
+  padding: 4px 10px; font-size: 11px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.04em; border-radius: 4px;
+}
+.status-solved { background: #dcfce7; color: var(--green); }
+.status-recommendation { background: #fef3c7; color: #b45309; }
+main { padding: 24px 20px; }
+h1 { font-size: 20px; font-weight: 700; letter-spacing: -0.025em; margin-bottom: 12px; line-height: 1.3; }
+.meta { font-size: 12px; color: var(--text-sec); margin-bottom: 16px; }
+.tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 20px; }
+.tag {
+  background: rgba(44, 107, 237, 0.08); color: var(--signal-blue);
+  padding: 4px 10px; border-radius: 4px; font-size: 12px; font-weight: 500;
+}
+.section-title {
+  font-size: 11px; font-weight: 600; text-transform: uppercase;
+  letter-spacing: 0.06em; color: var(--text-sec); margin-bottom: 10px;
+  display: flex; align-items: center; gap: 6px;
+}
+.section-title svg { width: 14px; height: 14px; }
+.section-content { font-size: 15px; line-height: 1.6; color: var(--text); white-space: pre-wrap; }
+.problem-section { padding-bottom: 20px; border-bottom: 1px solid var(--border); margin-bottom: 20px; }
+.solution-section {
+  background: #f0fdf4; margin: -24px -20px -24px -20px; padding: 20px;
+  border-top: 1px solid #bbf7d0;
+}
+.solution-section .section-title { color: var(--green); }
+.recommendation-solution { background: #fffbeb; border-top-color: #fde68a; }
+.recommendation-solution .section-title { color: #b45309; }
+.empty-chat {
+  padding: 32px 20px; text-align: center; color: var(--text-sec); font-size: 14px;
+}
+footer {
+  padding: 14px 20px; border-top: 1px solid var(--border);
+  color: var(--text-sec); font-size: 12px; text-align: center;
+}
+@media (max-width: 520px) {
+  main { padding: 20px 16px; }
+  h1 { font-size: 18px; }
+  .solution-section { margin: -20px -16px -20px -16px; padding: 16px; }
+}
+</style>
+</head><body>
+<div class="shell">
+  <div class="card">
+    <header>
+      <a href="https://academia-tech.github.io/SupportBot" class="header-left">
+        <img src="/SupportBot/supportbot-logo-128.png" alt="SupportBot" class="logo">
+        <span class="brand">SupportBot</span>
+      </a>
+      <span class="status-recommendation status-badge">Рекомендація</span>
+    </header>
+    <main>
+      <h1>Integrar mandos de 433MHz con código rotativo (Rolling Code) en Home Assistant</h1>
+      <p class="meta">Case e3b2c2e62bc5 &middot; domotica_es</p>
+      <div class='tags'><span class="tag">#433mhz</span><span class="tag">#rf bridge</span><span class="tag">#rolling code</span><span class="tag">#código rotativo</span><span class="tag">#home assistant</span><span class="tag">#integración</span><span class="tag">#dooya</span><span class="tag">#persianas</span></div>
+      <div class="problem-section">
+        <h2 class="section-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/>
+            <line x1="12" y1="16" x2="12.01" y2="16"/>
+          </svg>
+          Проблема
+        </h2>
+        <p class="section-content">Un usuario intenta integrar los mandos de sus toldos (marca Dooya) en Home Assistant usando un bridge RF de 433MHz, pero no consigue capturar los códigos. Sospecha que pueden usar código rotativo (Rolling Code), lo que impediría su clonación.</p>
+      </div>
+      <div class="solution-section recommendation-solution">
+        <h2 class="section-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7c.6.4 1 1.1 1 1.8V17h6v-.5c0-.7.4-1.4 1-1.8A7 7 0 0 0 12 2z"/></svg>
+          Рекомендація (не підтверджено)
+        </h2>
+        <p class="section-content">Se confirma que los dispositivos con código rotativo (Rolling Code) no se pueden clonar o capturar con bridges de RF genéricos, ya que el código cambia con cada pulsación por seguridad. Para diagnosticar si el bridge funciona correctamente, al ponerlo en modo &#x27;aprender&#x27;, un LED debería encenderse y apagarse rápidamente al recibir una señal. Si el bridge genérico no detecta el código de un mando específico (como los de toldos de Leroy Merlin), es muy probable que sea de código rotativo. Como alternativa, si las persianas o toldos ya están integrados en Home Assistant, se pueden controlar con mandos Zigbee como los Philips Hue, aunque estos no copian códigos 433MHz, sino que actúan como controladores dentro de la red Zigbee de HA.</p>
+      </div>
+    </main>
+  </div>
+  <div class="card">
+    <div class="chat-header"><h2><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Історія чату</h2></div><div class="messages"><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Hola! Tengo dos toldos con estos mandos de marca dooya, he probado con un Bridge 433 pero no captura los códigos ¿Alguien sabe cómo se podrían integrar en HA?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Hola! Tengo dos toldos con estos mandos de marca dooya, he probado con un Bridge 433 pero no captura los códigos ¿Alguie</div></div><p class="message-text">¿Alguien que tengo cacharros con 433 sabe si los dispositivos que tienen código rotativo no se capturan su señal?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">¿Alguien que tengo cacharros con 433 sabe si los dispositivos que tienen código rotativo no se capturan su señal?</div></div><p class="message-text">A mí los mandos de persianas y toldos no me los coge. Y eso que probé con fw portisch o como se escriba.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">¿Alguien que tengo cacharros con 433 sabe si los dispositivos que tienen código rotativo no se capturan su señal?</div></div><p class="message-text">Si es rotativo olvídate de capturarlo. Es decir, por eso es rotativo, para no poder capturarlo ya que cada vez que mandas una señal, es distinta a la anterior.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Entiendo.<br>No estoy seguro de que sean rotativos, me gustaría saber si el Bridge captura los códigos cuando son rotativos pero al intentar generar no funciona o no captura nada cuando son rotativos, tal vez estoy usando mal el Bridge y por eso no recibe nada...</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><p class="message-text">Qué Bridge tienes?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Es este, le he cambiado el firmware para integrarlo en ha</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><p class="message-text">Cuando le das a &quot;aprender&quot; una señal, no se enciende el led del Bridge?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Creo que no, voy a comprobarlo</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><p class="message-text">En el momento que le des a &quot;aprender&quot;, se debería encender un led y cuando presionas el botón del mando, el led debería apagarse un momento y volverse a encender esperando una segunda pulsación para así confirmar la señal capturada.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><p class="message-text">Al menos funciona así en un Broadlink</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><p class="message-text">Si lo tienes tasmotizado lo puedes ver en la consola</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Entonces voy a probar de nuevo gracias!</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 2</div><div class="reply-text">Si lo tienes tasmotizado lo puedes ver en la consola</div></div><p class="message-text">Lo tengo con esphome, cuando voy a eventos en las herramientas de desarrollo y en la parte de escuchar pongo esphome.rf_code_recived no veo cambios en el bridge.<br>Pero cuando le doy al mando si parpadea la luz roja un instante, tengo la impresión de no estar usando bien el esphome_rf</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Lo tengo con esphome, cuando voy a eventos en las herramientas de desarrollo y en la parte de escuchar pongo esphome.rf_</div></div><p class="message-text">Ummm, es que yo lo tengo con tasmota y portisch</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 2</div><div class="reply-text">Ummm, es que yo lo tengo con tasmota y portisch</div></div><p class="message-text">Pues si veo que no lo consigo con esphome probaré tasmota, gracias por tu ayuda!</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Pues si veo que no lo consigo con esphome probaré tasmota, gracias por tu ayuda!</div></div><p class="message-text">Pero rolling code no va a copiar</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 2</div><div class="reply-text">Pero rolling code no va a copiar</div></div><p class="message-text">No sé si es rolling code, por ahora no he conseguido pillar nada 😅</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 2</div><div class="reply-text">Si lo tienes tasmotizado lo puedes ver en la consola</div></div><p class="message-text">Ahh</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><p class="message-text">Yo tengo el Sonoff y un Broadcom y los dos bien con home assistant.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 2</div><div class="reply-text">Yo tengo el Sonoff y un Broadcom y los dos bien con home assistant.</div></div><p class="message-text">He probado con tasmota en el sonoff bridgeRF v2.2 y al pulsar los mandos se enciende la luz roja un segundo pero en los log no veo que salga el payload /RESULT, solo veo trazas de estado como esta ¿Eso quiere decir que estan rotando o sigo con algo mal tal vez?<br><br>12:01:48.515 MQT: tele/tasmota_0AD32F/STATE = {&quot;Time&quot;:&quot;2025-06-29T12:01:48&quot;,&quot;Uptime&quot;:&quot;9T17:15:00&quot;,&quot;UptimeSec&quot;:839700,&quot;Vcc&quot;:3.430,&quot;Heap&quot;:29,&quot;SleepMode&quot;:&quot;Dynamic&quot;,&quot;Sleep&quot;:50,&quot;LoadAvg&quot;:21,&quot;MqttCount&quot;:3,&quot;POWER&quot;:&quot;OFF&quot;,&quot;Wifi&quot;:{&quot;AP&quot;:1,&quot;SSId&quot;:&quot;ADN&quot;,&quot;BSSId&quot;:&quot;D0:17:C2:D8:16:48&quot;,&quot;Channel&quot;:1,&quot;Mode&quot;:&quot;11n&quot;,&quot;RSSI&quot;:100,&quot;Signal&quot;:-50,&quot;LinkCount&quot;:1,&quot;Downtime&quot;:&quot;0T00:00:08&quot;}}</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">He probado con tasmota en el sonoff bridgeRF v2.2 y al pulsar los mandos se enciende la luz roja un segundo pero en los </div></div><p class="message-text">Prueba con un mando rf433 no rotativo a ver qué te sale en el log. Te tiene que salir el código del botón en hexadecimal.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 2</div><div class="reply-text">Prueba con un mando rf433 no rotativo a ver qué te sale en el log. Te tiene que salir el código del botón en hexadecimal</div></div><p class="message-text">Hola! Me ha llegado un mando rf433 generico y lo he probado con el sonoff bridge qye tengo tasmota y reconoce las pulsaciones, en el log si veo que le ha llegado algo: 12:46:22.413 MQT: tele/rf_sonoff/RESULT = {&quot;Time&quot;:&quot;2025-07-09T12:46:22&quot;,&quot;RfReceived&quot;:{&quot;Sync&quot;:20718,&quot;Low&quot;:648,&quot;High&quot;:1966,&quot;Data&quot;:&quot;0B80A8&quot;,&quot;RfKey&quot;:&quot;None&quot;}}<br>Parece que los mandos de los toldos del Leroy entonces van con algun cifrado o seguridad que no permite leer las pulsaciones.<br>Muchas gracias por tu ayuda!</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Hola! Me ha llegado un mando rf433 generico y lo he probado con el sonoff bridge qye tengo tasmota y reconoce las pulsac</div></div><p class="message-text">Yo para controlar las persianas y toldo con mandos que no sean de gaviota, lo que hago es usar los mandos philips hue zigbee que van de fábula.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 2</div><div class="reply-text">Yo para controlar las persianas y toldo con mandos que no sean de gaviota, lo que hago es usar los mandos philips hue zi</div></div><p class="message-text">Pero los mandos de Philips pueden copiar códigos de 433?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Pero los mandos de Philips pueden copiar códigos de 433?</div></div><p class="message-text">No son zigbee, pero como las persianas y toldo ya los tengo integrados en home assistant, pues vale.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 2</div><div class="reply-text">No son zigbee, pero como las persianas y toldo ya los tengo integrados en home assistant, pues vale.</div></div><p class="message-text">Vale es que mi problema es justo como integrar el toldo en HA, no esperaba que fuera tan complicado la verdad...</p></div></div>
+    <footer>Academia Tech &copy; 2026</footer>
+  </div>
+</div>
+</body></html>

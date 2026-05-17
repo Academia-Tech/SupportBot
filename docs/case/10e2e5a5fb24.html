@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html><head>
+<title>Скрипт для виведення коптера з зони втрати відео/керування | SupportBot</title>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta property="og:title" content="Скрипт для виведення коптера з зони втрати відео/керування">
+<meta property="og:description" content="Скрипт для ArduPilot, що забезпечує виведення коптера з зони втрати відео чи керування за заданим або визначеним курсом. Скрипт облітаний з повним вимкненням пульта, працює передбачувано: при втраті л">
+<link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+<style>
+:root {
+  --signal-blue: #2c6bed;
+  --page-bg: #f6f7f9;
+  --card-bg: #ffffff;
+  --text: #0d0d0d;
+  --text-sec: #5c5c5c;
+  --border: #d8d8d8;
+  --radius: 12px;
+  --green: #16a34a;
+  --yellow: #ca8a04;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  background: var(--page-bg); color: var(--text);
+  min-height: 100vh; padding: 48px 20px;
+  -webkit-font-smoothing: antialiased;
+}
+@media (max-width: 520px) { body { padding: 24px 12px; } }
+.shell { max-width: 640px; margin: 0 auto; }
+.card {
+  background: var(--card-bg); border: 1px solid var(--border);
+  border-radius: var(--radius); overflow: hidden; margin-bottom: 16px;
+}
+header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 20px; border-bottom: 1px solid var(--border);
+}
+.header-left { display: flex; align-items: center; gap: 10px; text-decoration: none; color: inherit; }
+.logo { width: 28px; height: 28px; }
+.brand { font-size: 15px; font-weight: 600; letter-spacing: -0.02em; }
+.chat-header { padding: 14px 20px; border-bottom: 1px solid var(--border); background: var(--page-bg); }
+.chat-header h2 { font-size: 14px; font-weight: 600; color: var(--text); display: flex; align-items: center; gap: 8px; }
+.chat-header h2 svg { width: 16px; height: 16px; color: var(--signal-blue); }
+.messages { padding: 0; }
+.message { padding: 16px 20px; border-bottom: 1px solid var(--border); }
+.message:last-child { border-bottom: none; }
+.message-header { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+.avatar { width: 28px; height: 28px; border-radius: 50%; color: white; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 600; flex-shrink: 0; }
+.sender-info { flex: 1; min-width: 0; }
+.sender-name { font-size: 13px; font-weight: 600; color: var(--text); }
+.message-text { font-size: 15px; line-height: 1.55; color: var(--text); white-space: pre-wrap; margin-left: 38px; }
+.reply-bubble { margin-left: 38px; margin-bottom: 6px; padding: 6px 10px; background: #f0f2f5; border-left: 3px solid var(--signal-blue); border-radius: 4px; font-size: 13px; color: var(--text-sec); }
+.reply-sender { font-weight: 600; color: var(--signal-blue); font-size: 12px; margin-bottom: 2px; }
+.reply-text { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.status-badge {
+  padding: 4px 10px; font-size: 11px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.04em; border-radius: 4px;
+}
+.status-solved { background: #dcfce7; color: var(--green); }
+.status-recommendation { background: #fef3c7; color: #b45309; }
+main { padding: 24px 20px; }
+h1 { font-size: 20px; font-weight: 700; letter-spacing: -0.025em; margin-bottom: 12px; line-height: 1.3; }
+.meta { font-size: 12px; color: var(--text-sec); margin-bottom: 16px; }
+.tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 20px; }
+.tag {
+  background: rgba(44, 107, 237, 0.08); color: var(--signal-blue);
+  padding: 4px 10px; border-radius: 4px; font-size: 12px; font-weight: 500;
+}
+.section-title {
+  font-size: 11px; font-weight: 600; text-transform: uppercase;
+  letter-spacing: 0.06em; color: var(--text-sec); margin-bottom: 10px;
+  display: flex; align-items: center; gap: 6px;
+}
+.section-title svg { width: 14px; height: 14px; }
+.section-content { font-size: 15px; line-height: 1.6; color: var(--text); white-space: pre-wrap; }
+.problem-section { padding-bottom: 20px; border-bottom: 1px solid var(--border); margin-bottom: 20px; }
+.solution-section {
+  background: #f0fdf4; margin: -24px -20px -24px -20px; padding: 20px;
+  border-top: 1px solid #bbf7d0;
+}
+.solution-section .section-title { color: var(--green); }
+.recommendation-solution { background: #fffbeb; border-top-color: #fde68a; }
+.recommendation-solution .section-title { color: #b45309; }
+.empty-chat {
+  padding: 32px 20px; text-align: center; color: var(--text-sec); font-size: 14px;
+}
+footer {
+  padding: 14px 20px; border-top: 1px solid var(--border);
+  color: var(--text-sec); font-size: 12px; text-align: center;
+}
+@media (max-width: 520px) {
+  main { padding: 20px 16px; }
+  h1 { font-size: 18px; }
+  .solution-section { margin: -20px -16px -20px -16px; padding: 16px; }
+}
+</style>
+</head><body>
+<div class="shell">
+  <div class="card">
+    <header>
+      <a href="https://academia-tech.github.io/SupportBot" class="header-left">
+        <img src="/SupportBot/supportbot-logo-128.png" alt="SupportBot" class="logo">
+        <span class="brand">SupportBot</span>
+      </a>
+      <span class="status-solved status-badge">Вирішено</span>
+    </header>
+    <main>
+      <h1>Скрипт для виведення коптера з зони втрати відео/керування</h1>
+      <p class="meta">Case 10e2e5a5fb24 &middot; ua_ardupilot</p>
+      <div class='tags'><span class="tag">#ArduPilot</span><span class="tag">#скрипт</span><span class="tag">#failsafe</span><span class="tag">#бомбер</span><span class="tag">#ретрік</span><span class="tag">#Lua</span><span class="tag">#безпека</span></div>
+      <div class="problem-section">
+        <h2 class="section-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/>
+            <line x1="12" y1="16" x2="12.01" y2="16"/>
+          </svg>
+          Проблема
+        </h2>
+        <p class="section-content">Поділено скрипт для ArduPilot, що дозволяє вивести коптер із зони втрати відео або керування за заданим курсом, актуальний для бомберів, крил та НРК.</p>
+      </div>
+      <div class="solution-section">
+        <h2 class="section-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          Рішення
+        </h2>
+        <p class="section-content">Скрипт для ArduPilot, що забезпечує виведення коптера з зони втрати відео чи керування за заданим або визначеним курсом. Скрипт облітаний з повним вимкненням пульта, працює передбачувано: при втраті лінку дрон набирає висоту і летить зазначеним курсом до відновлення зв&#x27;язку. Вхід та вихід в фейлсейф працює. Альтернативою Lua-скрипту для вимкнення GPS в місії є використання дефолтної команди `DO_AUX_FUNCTION`. Для вимкнення GPS потрібно встановити номер команди 65 та стан -2, для увімкнення - 0. Ця функція дозволяє вимикати GPS на певній точці місії без використання Lua-скриптів. Інформацію про цю команду важко знайти в документації, її було виявлено при аналізі коду Mission Planner та ArduPilot. Користувач підтвердив, що спробує це рішення.</p>
+      </div>
+    </main>
+  </div>
+  <div class="card">
+    <div class="chat-header"><h2><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Історія чату</h2></div><div class="messages"><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Простий по суті скріпт виведення коптера з зони втрати відео чи керування заданим чи визначеним курсом.<br>https://drive.google.com/file/d/1Feqr09qaAMY_w4ZRhPoxm-UhJtS3Od-o/view?usp=sharing</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><p class="message-text">Актуально для бомберів,крил,НРК.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Деяки виправлення, можливість не використовувати окремий світч, спрацювання тільки по втраті радіолінку, таймаут на вхід та вихід з фейлсейфу. Це шанс витягти ретрік чи бомбер.<br>https://drive.google.com/file/d/1Feqr09qaAMY_w4ZRhPoxm-UhJtS3Od-o/view?usp=sharing</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Деяки виправлення, можливість не використовувати окремий світч, спрацювання тільки по втраті радіолінку, таймаут на вхід</div></div><p class="message-text">Крутяк. Вже відтестований скрипт?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">повністю в сітл, на 80% в реалі, не тестовані більше логічні функції, погоди нема вискочіть.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">повністю в сітл, на 80% в реалі, не тестовані більше логічні функції, погоди нема вискочіть.</div></div><p class="message-text">На якому політнику тестували?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">stellar h7v2</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Деяки виправлення, можливість не використовувати окремий світч, спрацювання тільки по втраті радіолінку, таймаут на вхід</div></div><p class="message-text">Що це за окремий світч?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">якщо треба для тесту без реального вимкнення апки. Або якщо зникло чи залагало відео</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Деяки виправлення, можливість не використовувати окремий світч, спрацювання тільки по втраті радіолінку, таймаут на вхід</div></div><p class="message-text">Якщо зв&#x27;язок зникне під час польоту до ЛБЗ, то дрон розвернеться і полетить назад?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 3</div><div class="reply-text">Якщо зв&#x27;язок зникне під час польоту до ЛБЗ, то дрон розвернеться і полетить назад?</div></div><p class="message-text">Так, якщо це час більший ніж вказано в RC_FS_TIMEOUT</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Але можу зробити що нижне положення світча - вимкнений скріпт, середній активація по лінку, верхне - ручна</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">..але тоді варіант що під час польоту до ЛБЗ зв&#x27;язок зникає на зовсім і він улітає в нікуди. А так він спочатку набере вказані додаткові метри і можливо відновить керування.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Але можу зробити що нижне положення світча - вимкнений скріпт, середній активація по лінку, верхне - ручна</div></div><p class="message-text">Крутяк. Я також пишу певну автоматизацію на малинці. Raspberry Zero + Python + Mavlink + OpenCV</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 3</div><div class="reply-text">Крутяк. Я також пишу певну автоматизацію на малинці. Raspberry Zero + Python + Mavlink + OpenCV</div></div><p class="message-text">Я не програмер.. тут примітивні буквально пару команд керування. Основу гпт накидав, а там вже по трохи галюни вичищав.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Я не програмер.. тут примітивні буквально пару команд керування. Основу гпт накидав, а там вже по трохи галюни вичищав.</div></div><p class="message-text">Все одно це дуже корисний скрипт. Який буде рятувати бомбер</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Облітав скріпт з повним вимкненням пульта, працює передбачувано, втратив лінк, набрав висоти і полетів зазначеним курсом до відновлення зв&#x27;язку.<br>Вхід та вихід в фейлсейф рознесені по таймаутам, вхідний можна змінювати через параметри, вихід якщо лінк стабільний 3 секунди. Наприклад якщо треба проскочити зони де зв&#x27;язок відсутній і якщо він не з&#x27;явиться через таймаут - дрон розвернеться на зворотній курс і почне повернення.<br><br>https://drive.google.com/file/d/1Feqr09qaAMY_w4ZRhPoxm-UhJtS3Od-o/view?usp=sharing</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><p class="message-text">Та просто вимикає gps якшо вилітаєш за вказаний радіус</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#0891b2">M5</div><div class="sender-info"><span class="sender-name">Учасник 5</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 4</div><div class="reply-text">Та просто вимикає gps якшо вилітаєш за вказаний радіус</div></div><p class="message-text">Все одно це не зліт без gps</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#0891b2">M5</div><div class="sender-info"><span class="sender-name">Учасник 5</span></div></div><p class="message-text">Якщо ekf не встигне відбитися то буде біда</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><p class="message-text">Та я про зліт і не писав</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><p class="message-text">Політ - да а зліт то вже інше</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#0891b2">M5</div><div class="sender-info"><span class="sender-name">Учасник 5</span></div></div><p class="message-text">Ну gps можна і через мішку вимикати</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#0891b2">M5</div><div class="sender-info"><span class="sender-name">Учасник 5</span></div></div><p class="message-text">То вже не проблема</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><p class="message-text">Якшо встигнете))</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#9333ea">M6</div><div class="sender-info"><span class="sender-name">Учасник 6</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 5</div><div class="reply-text">Ну gps можна і через мішку вимикати</div></div><p class="message-text">Ще б вміти це робити в автоматі по місії...</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#0891b2">M5</div><div class="sender-info"><span class="sender-name">Учасник 5</span></div></div><p class="message-text">Та взагалі ізі</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#0891b2">M5</div><div class="sender-info"><span class="sender-name">Учасник 5</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 6</div><div class="reply-text">Ще б вміти це робити в автоматі по місії...</div></div><p class="message-text">Там є окрема команда</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#0891b2">M5</div><div class="sender-info"><span class="sender-name">Учасник 5</span></div></div><p class="message-text">Де ви на точці можете вимкнути gps</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#9333ea">M6</div><div class="sender-info"><span class="sender-name">Учасник 6</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 5</div><div class="reply-text">Там є окрема команда</div></div><p class="message-text">Не підкажете? Бо з пульта ок, а в місії не бачив</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#0891b2">M5</div><div class="sender-info"><span class="sender-name">Учасник 5</span></div></div><p class="message-text">DO_AUX_FUNCTION</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#0891b2">M5</div><div class="sender-info"><span class="sender-name">Учасник 5</span></div></div><p class="message-text">Називається</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#9333ea">M6</div><div class="sender-info"><span class="sender-name">Учасник 6</span></div></div><p class="message-text">І там луа-скрипт?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#0891b2">M5</div><div class="sender-info"><span class="sender-name">Учасник 5</span></div></div><p class="message-text">Там треба внести номер команди і стан low чи high</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#0891b2">M5</div><div class="sender-info"><span class="sender-name">Учасник 5</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 6</div><div class="reply-text">І там луа-скрипт?</div></div><p class="message-text">Там луа не треба то дефолтна команда</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#9333ea">M6</div><div class="sender-info"><span class="sender-name">Учасник 6</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 5</div><div class="reply-text">Там треба внести номер команди і стан low чи high</div></div><p class="message-text">Номер RC?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#0891b2">M5</div><div class="sender-info"><span class="sender-name">Учасник 5</span></div></div><p class="message-text">Ні, номер команди</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#0891b2">M5</div><div class="sender-info"><span class="sender-name">Учасник 5</span></div></div><p class="message-text">На скільки пам&#x27;ятаю то для gps це 65</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#0891b2">M5</div><div class="sender-info"><span class="sender-name">Учасник 5</span></div></div><p class="message-text">Ну зараз спробую відео записати</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#0891b2">M5</div><div class="sender-info"><span class="sender-name">Учасник 5</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 6</div><div class="reply-text">Номер RC?</div></div><p class="message-text">гляньте відео</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#0891b2">M5</div><div class="sender-info"><span class="sender-name">Учасник 5</span></div></div><p class="message-text">Щоб вимкнути треба поставити  - 2, щоб увімкнути - 0</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#0891b2">M5</div><div class="sender-info"><span class="sender-name">Учасник 5</span></div></div><p class="message-text">Хз нашо роблять ті скрипти з радіусом, якщо можна це робити в місії...</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#0891b2">M5</div><div class="sender-info"><span class="sender-name">Учасник 5</span></div></div><p class="message-text">@smyrnov_art</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#9333ea">M6</div><div class="sender-info"><span class="sender-name">Учасник 6</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 5</div><div class="reply-text">@smyrnov_art</div></div><p class="message-text">+, пробую</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#0891b2">M5</div><div class="sender-info"><span class="sender-name">Учасник 5</span></div></div><p class="message-text">Та воно 100% працювати буде 😅😅</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#0891b2">M5</div><div class="sender-info"><span class="sender-name">Учасник 5</span></div></div><p class="message-text">Правда цю штуку в документації не знайти</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#0891b2">M5</div><div class="sender-info"><span class="sender-name">Учасник 5</span></div></div><p class="message-text">Я її знайшов, розбираючись в коді mission planner та ардупілот</p></div></div>
+    <footer>Academia Tech &copy; 2026</footer>
+  </div>
+</div>
+</body></html>

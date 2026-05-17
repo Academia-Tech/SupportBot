@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html><head>
+<title>Instalación de Shelly en cuadro de depuradora de piscina con contactor | SupportBot</title>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta property="og:title" content="Instalación de Shelly en cuadro de depuradora de piscina con contactor">
+<meta property="og:description" content="La comunidad recomienda encarecidamente el uso de un contactor para manejar la carga del motor de la bomba de la piscina, protegiendo así el relé del Shelly. El usuario `user_067e7d5d38` proporciona u">
+<link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+<style>
+:root {
+  --signal-blue: #2c6bed;
+  --page-bg: #f6f7f9;
+  --card-bg: #ffffff;
+  --text: #0d0d0d;
+  --text-sec: #5c5c5c;
+  --border: #d8d8d8;
+  --radius: 12px;
+  --green: #16a34a;
+  --yellow: #ca8a04;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  background: var(--page-bg); color: var(--text);
+  min-height: 100vh; padding: 48px 20px;
+  -webkit-font-smoothing: antialiased;
+}
+@media (max-width: 520px) { body { padding: 24px 12px; } }
+.shell { max-width: 640px; margin: 0 auto; }
+.card {
+  background: var(--card-bg); border: 1px solid var(--border);
+  border-radius: var(--radius); overflow: hidden; margin-bottom: 16px;
+}
+header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 20px; border-bottom: 1px solid var(--border);
+}
+.header-left { display: flex; align-items: center; gap: 10px; text-decoration: none; color: inherit; }
+.logo { width: 28px; height: 28px; }
+.brand { font-size: 15px; font-weight: 600; letter-spacing: -0.02em; }
+.chat-header { padding: 14px 20px; border-bottom: 1px solid var(--border); background: var(--page-bg); }
+.chat-header h2 { font-size: 14px; font-weight: 600; color: var(--text); display: flex; align-items: center; gap: 8px; }
+.chat-header h2 svg { width: 16px; height: 16px; color: var(--signal-blue); }
+.messages { padding: 0; }
+.message { padding: 16px 20px; border-bottom: 1px solid var(--border); }
+.message:last-child { border-bottom: none; }
+.message-header { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+.avatar { width: 28px; height: 28px; border-radius: 50%; color: white; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 600; flex-shrink: 0; }
+.sender-info { flex: 1; min-width: 0; }
+.sender-name { font-size: 13px; font-weight: 600; color: var(--text); }
+.message-text { font-size: 15px; line-height: 1.55; color: var(--text); white-space: pre-wrap; margin-left: 38px; }
+.reply-bubble { margin-left: 38px; margin-bottom: 6px; padding: 6px 10px; background: #f0f2f5; border-left: 3px solid var(--signal-blue); border-radius: 4px; font-size: 13px; color: var(--text-sec); }
+.reply-sender { font-weight: 600; color: var(--signal-blue); font-size: 12px; margin-bottom: 2px; }
+.reply-text { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.status-badge {
+  padding: 4px 10px; font-size: 11px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.04em; border-radius: 4px;
+}
+.status-solved { background: #dcfce7; color: var(--green); }
+.status-recommendation { background: #fef3c7; color: #b45309; }
+main { padding: 24px 20px; }
+h1 { font-size: 20px; font-weight: 700; letter-spacing: -0.025em; margin-bottom: 12px; line-height: 1.3; }
+.meta { font-size: 12px; color: var(--text-sec); margin-bottom: 16px; }
+.tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 20px; }
+.tag {
+  background: rgba(44, 107, 237, 0.08); color: var(--signal-blue);
+  padding: 4px 10px; border-radius: 4px; font-size: 12px; font-weight: 500;
+}
+.section-title {
+  font-size: 11px; font-weight: 600; text-transform: uppercase;
+  letter-spacing: 0.06em; color: var(--text-sec); margin-bottom: 10px;
+  display: flex; align-items: center; gap: 6px;
+}
+.section-title svg { width: 14px; height: 14px; }
+.section-content { font-size: 15px; line-height: 1.6; color: var(--text); white-space: pre-wrap; }
+.problem-section { padding-bottom: 20px; border-bottom: 1px solid var(--border); margin-bottom: 20px; }
+.solution-section {
+  background: #f0fdf4; margin: -24px -20px -24px -20px; padding: 20px;
+  border-top: 1px solid #bbf7d0;
+}
+.solution-section .section-title { color: var(--green); }
+.recommendation-solution { background: #fffbeb; border-top-color: #fde68a; }
+.recommendation-solution .section-title { color: #b45309; }
+.empty-chat {
+  padding: 32px 20px; text-align: center; color: var(--text-sec); font-size: 14px;
+}
+footer {
+  padding: 14px 20px; border-top: 1px solid var(--border);
+  color: var(--text-sec); font-size: 12px; text-align: center;
+}
+@media (max-width: 520px) {
+  main { padding: 20px 16px; }
+  h1 { font-size: 18px; }
+  .solution-section { margin: -20px -16px -20px -16px; padding: 16px; }
+}
+</style>
+</head><body>
+<div class="shell">
+  <div class="card">
+    <header>
+      <a href="https://academia-tech.github.io/SupportBot" class="header-left">
+        <img src="/SupportBot/supportbot-logo-128.png" alt="SupportBot" class="logo">
+        <span class="brand">SupportBot</span>
+      </a>
+      <span class="status-recommendation status-badge">Рекомендація</span>
+    </header>
+    <main>
+      <h1>Instalación de Shelly en cuadro de depuradora de piscina con contactor</h1>
+      <p class="meta">Case a60ed8502b24 &middot; domotica_es</p>
+      <div class='tags'><span class="tag">#shelly</span><span class="tag">#piscina</span><span class="tag">#depuradora</span><span class="tag">#contactor</span><span class="tag">#cuadro eléctrico</span><span class="tag">#motor</span><span class="tag">#cableado</span><span class="tag">#domótica</span></div>
+      <div class="problem-section">
+        <h2 class="section-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/>
+            <line x1="12" y1="16" x2="12.01" y2="16"/>
+          </svg>
+          Проблема
+        </h2>
+        <p class="section-content">Un usuario solicita ayuda para instalar un Shelly y domotizar el control de una bomba de piscina, queriendo mantener los interruptores manuales. La conversación deriva en la necesidad de instalar un contactor para proteger el relé del alto consumo del motor.</p>
+      </div>
+      <div class="solution-section recommendation-solution">
+        <h2 class="section-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7c.6.4 1 1.1 1 1.8V17h6v-.5c0-.7.4-1.4 1-1.8A7 7 0 0 0 12 2z"/></svg>
+          Рекомендація (не підтверджено)
+        </h2>
+        <p class="section-content">La comunidad recomienda encarecidamente el uso de un contactor para manejar la carga del motor de la bomba de la piscina, protegiendo así el relé del Shelly. El usuario `user_067e7d5d38` proporciona un esquema de cableado detallado que fue confirmado como útil por el solicitante:
+
+1.  **Alimentación del Shelly:** Conectar Neutro y Fase a las bornas N y L del Shelly.
+2.  **Alimentación del relé del Shelly:** Puentear la Fase a la borna de entrada del relé (I).
+3.  **Activación del contactor:** Conectar la borna de salida del relé del Shelly (O) a la bobina A1 del contactor. Conectar la bobina A2 del contactor al Neutro.
+4.  **Circuito de potencia:** La alimentación principal pasa por los contactos de potencia del contactor y de ahí al guardamotor y la bomba.
+
+Adicionalmente, se sugiere que el antiguo reloj programador o un interruptor manual se pueden cablear en paralelo con las bornas I y O del Shelly para mantener un control manual redundante. El usuario que pidió ayuda agradeció la detallada explicación y el esquema proporcionado.</p>
+      </div>
+    </main>
+  </div>
+  <div class="card">
+    <div class="chat-header"><h2><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Історія чату</h2></div><div class="messages"><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Buenos días. Si os paso una foto del cuadro de la depuradora me echáis una mano a instalar un shelly?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Buenos días. Si os paso una foto del cuadro de la depuradora me echáis una mano a instalar un shelly?</div></div><p class="message-text">Pasa un par i dinos que quieres</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Conectar un shelly sin perder el modo auto/paro/manual</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><p class="message-text">Si ya lo has puesto tu.<br>😅😅</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 2</div><div class="reply-text">Si ya lo has puesto tu. 😅😅</div></div><p class="message-text">Está bien así?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Está bien así?</div></div><p class="message-text">No lo he mirado, cuando no ya estaba marcado 😅</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Entonces lo monto así y debería funcionar no?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Entonces lo monto así y debería funcionar no?</div></div><p class="message-text">Mirando ahora, veo varios errores.<br>El cable verde va de I a ningún lado?<br>La alimentación deberías cogerla del magnetotermico.<br>Y el SW, si vas a dejar el reloj programador, no lo necesitas.<br><br>Luego, te crees que nosotros sabemos cada borna del programador lo que es, y nunca más lejos de la realidad sin una buena foto que se vea bien, o el esquema de ese programador</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 2</div><div class="reply-text">Mirando ahora, veo varios errores. El cable verde va de I a ningún lado? La alimentación deberías cogerla del magnetoter</div></div><p class="message-text">L+N general irían a LN del shelly<br>I del interruptor iría a I del shelly<br>O del interruptor iría al SW del shelly<br>O del reloj a O del shelly</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><p class="message-text">No sé dónde lo he visto.<br>Pero  creo que ya te indicaron la necesidad de instalar un contactor.<br>Si más información oarace que tienes un sistema un tanto arcaico programación y mando directamente por un reloj y un guarda motor de accionamiento manual.<br>El shelly suprime la necesidad del reloj o mantenerlo para accionamiento manual, el guarda motor dejarlo solo para función de seguridad. Entiendo yo.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 3</div><div class="reply-text">No sé dónde lo he visto. Pero  creo que ya te indicaron la necesidad de instalar un contactor. Si más información oarace</div></div><p class="message-text">No hace falta contactor</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">No hace falta contactor</div></div><p class="message-text">Para todos los motores de piscina, aire y demás, se recomienda un contactor para no freírlo, pero si tu crees que no, adelante.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">No hace falta contactor</div></div><p class="message-text">parece que lo tienes muy claro.<br>No es imprescindible, pero pides ayuda, sobre un problema que parece has resuelto y no facilitas muchos datos.<br><br>Para manejar un motor con un Shelly es muy recomendable el contactor y algún elemento de protección más, nadie te obliga.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#0891b2">M5</div><div class="sender-info"><span class="sender-name">Учасник 5</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">No hace falta contactor</div></div><p class="message-text">Si necesitas un contactor, si no terminarás fundiendo el reloj programador y o el shelly. Lo que no necesitas es el reloj programador. Pues el shelly haría su función. <br>Yo, en mi piscina, en vez de shelly tengo un contactor wifi, que sustituye el reloj y el contactor y se programa y controla con smarlife y home assistant</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 3</div><div class="reply-text">parece que lo tienes muy claro. No es imprescindible, pero pides ayuda, sobre un problema que parece has resuelto y no f</div></div><p class="message-text">Ya tengo puesto el contactor.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#9333ea">M6</div><div class="sender-info"><span class="sender-name">Учасник 6</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Ya tengo puesto el contactor.</div></div><p class="message-text">Justo así es como lo tengo, cambiando el reloj por un shelly</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 6</div><div class="reply-text">Justo así es como lo tengo, cambiando el reloj por un shelly</div></div><p class="message-text">Con el contactor no?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#9333ea">M6</div><div class="sender-info"><span class="sender-name">Учасник 6</span></div></div><p class="message-text">Yes, además ese mismo</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Y me podrías echar una mano?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#0891b2">M5</div><div class="sender-info"><span class="sender-name">Учасник 5</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Ya tengo puesto el contactor.</div></div><p class="message-text">Un contactor que no se activa nunca,  por lo que veo</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 5</div><div class="reply-text">Un contactor que no se activa nunca,  por lo que veo</div></div><p class="message-text">Claro, es lo que intento conectar</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Junto a un shelly</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Y me podrías echar una mano?</div></div><p class="message-text">Tienes que poner neutro y fase ppal shelly, le pones también fase a la borna I del shelly.<br> y de la O, también del shelly a A1 del contactor, y a la A2 neutro. <br>Cómo supongo que el salva motor alimenta a la bomba, tienes que cambiar la entrada del salva-motor a la entrada contactor y las salidas de este a la entrada del salva-motor. <br>El reloj mejor anúlado.<br>Si necesitas manual pon un interruptor, por ejemplo un pia mono polar en paralelo con I  y O del shelly.<br>El orden de fase neutro en la bobina del contactor,A1 A2 sin indicativas</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 3</div><div class="reply-text">Tienes que poner neutro y fase ppal shelly, le pones también fase a la borna I del shelly.  y de la O, también del shell</div></div><p class="message-text">Interruptor ya tengo, lo podría aprovechar no?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Interruptor ya tengo, lo podría aprovechar no?</div></div><p class="message-text">Si</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Interruptor ya tengo, lo podría aprovechar no?</div></div><p class="message-text">Podrías aprovechar el reloj si no lia mucho.<br>Supongo que los contactos del reloj cierran la fase de las bomba , sería conectarlo a la salida del shelly en paralelo. <br>Edito: si el reloj corta fase de la bomba deberás meter los extremos en una clema, y los bornes del reloj uno a O y el otro al I del shelly</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 3</div><div class="reply-text">Podrías aprovechar el reloj si no lia mucho. Supongo que los contactos del reloj cierran la fase de las bomba , sería co</div></div><p class="message-text">Así es. La idea es mantenerlo ya que la conexión a internet es mediante router 4g y, aunque no ha pasado todavía, puede ser que en algún momento caiga la conexión.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Se me olvidó citar</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Así es. La idea es mantenerlo ya que la conexión a internet es mediante router 4g y, aunque no ha pasado todavía, puede </div></div><p class="message-text">No sé cómo es tu instalación, pero si quieres domotizar debes asegurar tú red.<br>Ten en cuenta que el Shell puede trabajar autonomamente.<br>El reloj está bien como redundancia de servicio</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 3</div><div class="reply-text">No sé cómo es tu instalación, pero si quieres domotizar debes asegurar tú red. Ten en cuenta que el Shell puede trabajar</div></div><p class="message-text">Pues ahí tengo un magneto en el cuadro principal que va al diferencial de la foto. Con el guarda motor y quiero conectar el contactor y el shelly</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Pues ahí tengo un magneto en el cuadro principal que va al diferencial de la foto. Con el guarda motor y quiero conectar</div></div><p class="message-text">No entiendo lo del  magnetotermico.<br>El de la foto es de 10 A debería ser de 16 A.<br>No entiendo el cableado, sobretodo maneto y contactor. Yo conectaría el guarda-motor aguas abajo del contactor.<br>Te he descrito las conexiones: <br>Contactor: A1 neutro, A2 ligado a O (Out ) shelly.<br>La I (In) de shelly  fase.<br>Los contactos reloj ligados a O e I del shelly</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 3</div><div class="reply-text">No entiendo lo del  magnetotermico. El de la foto es de 10 A debería ser de 16 A. No entiendo el cableado, sobretodo man</div></div><p class="message-text">El magneto del cuadro que sale en la foto es de los focos. el cableado es el que traía el cuadro. Ahora quiero añadir cableado al contactor y al shelly. Empezar desde el principio</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><p class="message-text">https://images.app.goo.gl/s2fUzWwCpTH9D6DW9</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">El magneto del cuadro que sale en la foto es de los focos. el cableado es el que traía el cuadro. Ahora quiero añadir ca</div></div><p class="message-text">Te enlazo un esquema conexiones, aquí ponen el contactor aguas abajo del guarda-motor. La corriente debe circular por los tres bornes.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 3</div><div class="reply-text">Te enlazo un esquema conexiones, aquí ponen el contactor aguas abajo del guarda-motor. La corriente debe circular por lo</div></div><p class="message-text">Gracias!!</p></div></div>
+    <footer>Academia Tech &copy; 2026</footer>
+  </div>
+</div>
+</body></html>

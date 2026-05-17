@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html><head>
+<title>Extender señal Zigbee a garaje con cable RJ45 | SupportBot</title>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta property="og:title" content="Extender señal Zigbee a garaje con cable RJ45">
+<meta property="og:description" content="Para extender la señal Zigbee, se pueden usar enchufes o dispositivos Zigbee cableados que actúen como routers, aunque se advierte que si uno falla, la señal podría perderse. Otra opción es montar dos">
+<link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+<style>
+:root {
+  --signal-blue: #2c6bed;
+  --page-bg: #f6f7f9;
+  --card-bg: #ffffff;
+  --text: #0d0d0d;
+  --text-sec: #5c5c5c;
+  --border: #d8d8d8;
+  --radius: 12px;
+  --green: #16a34a;
+  --yellow: #ca8a04;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  background: var(--page-bg); color: var(--text);
+  min-height: 100vh; padding: 48px 20px;
+  -webkit-font-smoothing: antialiased;
+}
+@media (max-width: 520px) { body { padding: 24px 12px; } }
+.shell { max-width: 640px; margin: 0 auto; }
+.card {
+  background: var(--card-bg); border: 1px solid var(--border);
+  border-radius: var(--radius); overflow: hidden; margin-bottom: 16px;
+}
+header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 20px; border-bottom: 1px solid var(--border);
+}
+.header-left { display: flex; align-items: center; gap: 10px; text-decoration: none; color: inherit; }
+.logo { width: 28px; height: 28px; }
+.brand { font-size: 15px; font-weight: 600; letter-spacing: -0.02em; }
+.chat-header { padding: 14px 20px; border-bottom: 1px solid var(--border); background: var(--page-bg); }
+.chat-header h2 { font-size: 14px; font-weight: 600; color: var(--text); display: flex; align-items: center; gap: 8px; }
+.chat-header h2 svg { width: 16px; height: 16px; color: var(--signal-blue); }
+.messages { padding: 0; }
+.message { padding: 16px 20px; border-bottom: 1px solid var(--border); }
+.message:last-child { border-bottom: none; }
+.message-header { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+.avatar { width: 28px; height: 28px; border-radius: 50%; color: white; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 600; flex-shrink: 0; }
+.sender-info { flex: 1; min-width: 0; }
+.sender-name { font-size: 13px; font-weight: 600; color: var(--text); }
+.message-text { font-size: 15px; line-height: 1.55; color: var(--text); white-space: pre-wrap; margin-left: 38px; }
+.reply-bubble { margin-left: 38px; margin-bottom: 6px; padding: 6px 10px; background: #f0f2f5; border-left: 3px solid var(--signal-blue); border-radius: 4px; font-size: 13px; color: var(--text-sec); }
+.reply-sender { font-weight: 600; color: var(--signal-blue); font-size: 12px; margin-bottom: 2px; }
+.reply-text { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.status-badge {
+  padding: 4px 10px; font-size: 11px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.04em; border-radius: 4px;
+}
+.status-solved { background: #dcfce7; color: var(--green); }
+.status-recommendation { background: #fef3c7; color: #b45309; }
+main { padding: 24px 20px; }
+h1 { font-size: 20px; font-weight: 700; letter-spacing: -0.025em; margin-bottom: 12px; line-height: 1.3; }
+.meta { font-size: 12px; color: var(--text-sec); margin-bottom: 16px; }
+.tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 20px; }
+.tag {
+  background: rgba(44, 107, 237, 0.08); color: var(--signal-blue);
+  padding: 4px 10px; border-radius: 4px; font-size: 12px; font-weight: 500;
+}
+.section-title {
+  font-size: 11px; font-weight: 600; text-transform: uppercase;
+  letter-spacing: 0.06em; color: var(--text-sec); margin-bottom: 10px;
+  display: flex; align-items: center; gap: 6px;
+}
+.section-title svg { width: 14px; height: 14px; }
+.section-content { font-size: 15px; line-height: 1.6; color: var(--text); white-space: pre-wrap; }
+.problem-section { padding-bottom: 20px; border-bottom: 1px solid var(--border); margin-bottom: 20px; }
+.solution-section {
+  background: #f0fdf4; margin: -24px -20px -24px -20px; padding: 20px;
+  border-top: 1px solid #bbf7d0;
+}
+.solution-section .section-title { color: var(--green); }
+.recommendation-solution { background: #fffbeb; border-top-color: #fde68a; }
+.recommendation-solution .section-title { color: #b45309; }
+.empty-chat {
+  padding: 32px 20px; text-align: center; color: var(--text-sec); font-size: 14px;
+}
+footer {
+  padding: 14px 20px; border-top: 1px solid var(--border);
+  color: var(--text-sec); font-size: 12px; text-align: center;
+}
+@media (max-width: 520px) {
+  main { padding: 20px 16px; }
+  h1 { font-size: 18px; }
+  .solution-section { margin: -20px -16px -20px -16px; padding: 16px; }
+}
+</style>
+</head><body>
+<div class="shell">
+  <div class="card">
+    <header>
+      <a href="https://academia-tech.github.io/SupportBot" class="header-left">
+        <img src="/SupportBot/supportbot-logo-128.png" alt="SupportBot" class="logo">
+        <span class="brand">SupportBot</span>
+      </a>
+      <span class="status-recommendation status-badge">Рекомендація</span>
+    </header>
+    <main>
+      <h1>Extender señal Zigbee a garaje con cable RJ45</h1>
+      <p class="meta">Case abce4b04e775 &middot; domotica_es</p>
+      <div class='tags'><span class="tag">#Zigbee</span><span class="tag">#cobertura</span><span class="tag">#red</span><span class="tag">#garaje</span><span class="tag">#Conbee</span><span class="tag">#SMLIGHT</span><span class="tag">#router</span><span class="tag">#extensor</span><span class="tag">#Home Assistant</span><span class="tag">#Bluetooth Proxy</span><span class="tag">#ESPHome</span><span class="tag">#enchufe inteligente</span><span class="tag">#RJ45</span></div>
+      <div class="problem-section">
+        <h2 class="section-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/>
+            <line x1="12" y1="16" x2="12.01" y2="16"/>
+          </svg>
+          Проблема
+        </h2>
+        <p class="section-content">Un usuario quiere instalar un sensor de temperatura y humedad en su garaje, pero su coordinador Conbee 2 en el salón no tiene suficiente alcance. Pregunta cómo extender la señal Zigbee, considerando que tiene un cable RJ45 que llega al rack del garaje.</p>
+      </div>
+      <div class="solution-section recommendation-solution">
+        <h2 class="section-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7c.6.4 1 1.1 1 1.8V17h6v-.5c0-.7.4-1.4 1-1.8A7 7 0 0 0 12 2z"/></svg>
+          Рекомендація (не підтверджено)
+        </h2>
+        <p class="section-content">Para extender la señal Zigbee, se pueden usar enchufes o dispositivos Zigbee cableados que actúen como routers, aunque se advierte que si uno falla, la señal podría perderse. Otra opción es montar dos redes Zigbee separadas o usar alternativas como Bluetooth con ESPHome y Bluetooth Proxy. Se aclara que Zigbee y WiFi son redes distintas y no se extienden mutuamente. Se recomienda específicamente el SMLIGHT SLZB-06 en modo router. Aunque se conecta por Ethernet, su función de router Zigbee es inalámbrica. El puerto Ethernet/WiFi se usa para la configuración inicial y las actualizaciones, pero no es necesario para la conexión a Z2M/ZHA una vez configurado. Un usuario confirma que lo usa con USB y cable Ethernet, pero se aclara que el cable Ethernet no es imprescindible para el funcionamiento como router Zigbee, solo para gestión. Este dispositivo ofrece mayor cobertura y soporta hasta 160 dispositivos.</p>
+      </div>
+    </main>
+  </div>
+  <div class="card">
+    <div class="chat-header"><h2><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Історія чату</h2></div><div class="messages"><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Una pregunta, quiero poner un sensor de temperatura y humedad en la cochera(es un chalet todo a una planta) pero el Conbee 2 lo tengo en el salón y no creo que llegue muy bien a la cochera la señal, se puede poner un hub conectado en la cochera para ampliar la señal zigbee?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">o que solución hay?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Una pregunta, quiero poner un sensor de temperatura y humedad en la cochera(es un chalet todo a una planta) pero el Conb</div></div><p class="message-text">Puedes poner enchufes o aparatos zigbee que tengan cableas hasta la cochera, el sensor irá pasando sus datos de uno a otro. El problema es que con que uno caiga, te quedarás sin señal.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">ese es el problema</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">que no tengo nada más</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Pero por ejemplo donde está el conbee2 va un cable rj45 hasta el rack de la cochera con todos los cables y switches</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Ya no sé que es mejor</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Si Zigbee o wifi o cual</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Si Zigbee o wifi o cual</div></div><p class="message-text">O montas dos redes zigbee o tiras por alternativas como bluetooth con un ESPHome con Bluetooth Proxy</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 2</div><div class="reply-text">O montas dos redes zigbee o tiras por alternativas como bluetooth con un ESPHome con Bluetooth Proxy</div></div><p class="message-text">Pensaba que existía la posibilidad de ampliar la red zigbee por wifi</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Pensaba que existía la posibilidad de ampliar la red zigbee por wifi</div></div><p class="message-text">La red zigbee es la red zigbee, la wifi es la wifi. No tienen relación</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Pues entonces me tocará buscar algún nodo router de zigbee</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Entiendo no?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">De esa forma si llegaría la señal</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Pues entonces me tocará buscar algún nodo router de zigbee</div></div><p class="message-text">Si. Como enchufes o bombillas siempre conectadas a corriente.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Pues me interesaría un enchufe</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Algún modelo que sea decente y tenga medidor de energía?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Pero por ejemplo donde está el conbee2 va un cable rj45 hasta el rack de la cochera con todos los cables y switches</div></div><p class="message-text">Pues lo tienes fácil.<br>Con el SLBZ-06 de SMLIGHT puesto por ethernet y configurado en modo router, tienes Zigbee en la cochera y de primera calidad</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 2</div><div class="reply-text">La red zigbee es la red zigbee, la wifi es la wifi. No tienen relación</div></div><p class="message-text">Existen los de SMLIGHT que son dispositivos Zigbee pero se conectan mediante Ethernet.<br>Claro, siempre que se tenga HA</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 3</div><div class="reply-text">Existen los de SMLIGHT que son dispositivos Zigbee pero se conectan mediante Ethernet. Claro, siempre que se tenga HA</div></div><p class="message-text">Si y no, hasta donde sé, no puedes tener un SMLight como mesh en Zigbee. O lo tienes como router (con lo que el ethernet no te sirve), o creas una red zigbee secundaria</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 2</div><div class="reply-text">Si y no, hasta donde sé, no puedes tener un SMLight como mesh en Zigbee. O lo tienes como router (con lo que el ethernet</div></div><p class="message-text">Comprobado que funciona.<br>Espera e invoco al compañero que lo hizo.<br>Además lo puso en modo router teniendo como concentrador un pincho de otra marca.<br><br>@Extre_12345 , que tienes que decir al respecto del SLBZ-06 en modo router?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 3</div><div class="reply-text">Comprobado que funciona. Espera e invoco al compañero que lo hizo. Además lo puso en modo router teniendo como concentra</div></div><p class="message-text">Pero modo router NO debería usar Ethernet para nada. para algo es un router.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 2</div><div class="reply-text">Pero modo router NO debería usar Ethernet para nada. para algo es un router.</div></div><p class="message-text">Pues es router, no se decirte más.<br>Imagino porque solamente debe haber un concentrador.<br>Y hace de router, pero manda los datos recogidos por ethernet. No estoy seguro.<br><br>En SMLIGHT tendrás más info.<br>Pero funciona</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 3</div><div class="reply-text">Pues es router, no se decirte más. Imagino porque solamente debe haber un concentrador. Y hace de router, pero manda los</div></div><p class="message-text">Me extrañaría, algo me dice que usa en este caso Ethernet para recibir corriente por POE y poco más.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 2</div><div class="reply-text">Me extrañaría, algo me dice que usa en este caso Ethernet para recibir corriente por POE y poco más.</div></div><p class="message-text">A ver qué nos cuenta @Extre_12345 , que creo que lo alimentó por USB</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 3</div><div class="reply-text">A ver qué nos cuenta @Extre_12345 , que creo que lo alimentó por USB</div></div><p class="message-text">Hola buenas yo lo tengo alimentado por usb y sin problema</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><p class="message-text">Funciona a las mil maravillas</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 2</div><div class="reply-text">Me extrañaría, algo me dice que usa en este caso Ethernet para recibir corriente por POE y poco más.</div></div><p class="message-text">Toda la lógica lo que dices.<br>Y aquí está la respuesta, extraída de SMLIGHT <br><br>¿Cómo funciona el modo router? El SLZB-06 en modo router utiliza únicamente una conexión inalámbrica para funcionar con la red Zigbee (como un dispositivo Zigbee normal), por lo que debe estar dentro del área de cobertura de su coordinador principal. Puede usar WiFi/ETH para configurar el dispositivo, pero no para conectarse a Z2M/ZHA.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 4</div><div class="reply-text">Hola buenas yo lo tengo alimentado por usb y sin problema</div></div><p class="message-text">Pero sin cable ethernet.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 3</div><div class="reply-text">Toda la lógica lo que dices. Y aquí está la respuesta, extraída de SMLIGHT   ¿Cómo funciona el modo router? El SLZB-06 e</div></div><p class="message-text">Vamos, que es lo mismo que poner un enchufe, solo que igual en este caso, pues tienes mucha más cobertura</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 2</div><div class="reply-text">Pero sin cable ethernet.</div></div><p class="message-text">Si lo configuras antes, luego ya no lo necesitas.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><p class="message-text">Con cable</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 4</div><div class="reply-text">Con cable</div></div><p class="message-text">Pues no te sirve de nada 😅</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><p class="message-text">Yo lo tengo con cable de ethernet y usb</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 2</div><div class="reply-text">Vamos, que es lo mismo que poner un enchufe, solo que igual en este caso, pues tienes mucha más cobertura</div></div><p class="message-text">Claro, igual la ventaja es que tiene mayor cobertura, además de que te garantizan 160 dispositivos</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><p class="message-text">Desconozco para que sirve el cable de ethernet</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 4</div><div class="reply-text">Yo lo tengo con cable de ethernet y usb</div></div><p class="message-text">Si, pero si quitas el cable, por lo que he encontrado, funcionaria igual.<br>Lo único que no tendrías la gestión de configuración y actualizaciones</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 3</div><div class="reply-text">Pues lo tienes fácil. Con el SLBZ-06 de SMLIGHT puesto por ethernet y configurado en modo router, tienes Zigbee en la co</div></div><p class="message-text">Pero entonces el conbee 2 lo tengo que quitar?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Ya que me toca crear 2 redes zigbee</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Pero entonces el conbee 2 lo tengo que quitar?</div></div><p class="message-text">No has leído lo que he escrito.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><p class="message-text">Y si vas escribiendo sin hacer referencia a los mensajes, pues como que se va a perder la conversacion</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 3</div><div class="reply-text">Pues lo tienes fácil. Con el SLBZ-06 de SMLIGHT puesto por ethernet y configurado en modo router, tienes Zigbee en la co</div></div><p class="message-text">Perdona desconozco lo que hace este cacharro</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 3</div><div class="reply-text">Y si vas escribiendo sin hacer referencia a los mensajes, pues como que se va a perder la conversacion</div></div><p class="message-text">He hecho referencia al mensaje en ambas preguntas</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Perdona desconozco lo que hace este cacharro</div></div><p class="message-text">Hace lo que necesites.<br>Hace de concentrador, de router, para ZHA, Z2M....<br>Pero será mejor que pilles un enchufe como te ha comentado @danimart1991 <br><br>Has dejado al menos un mensaje suelto, pero no tiene importancia para mi .</p></div></div>
+    <footer>Academia Tech &copy; 2026</footer>
+  </div>
+</div>
+</body></html>

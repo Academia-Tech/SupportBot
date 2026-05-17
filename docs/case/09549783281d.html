@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html><head>
+<title>El asistente de voz Alexa/Nabu no entiende el comando para ajustar persianas a un porcentaje | SupportBot</title>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta property="og:title" content="El asistente de voz Alexa/Nabu no entiende el comando para ajustar persianas a un porcentaje">
+<meta property="og:description" content="Varios usuarios sugieren que el problema para que Alexa o Nabu Casa entiendan el ajuste de persianas a un porcentaje radica en la sintaxis del comando. Se recomienda probar formulaciones más directas ">
+<link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+<style>
+:root {
+  --signal-blue: #2c6bed;
+  --page-bg: #f6f7f9;
+  --card-bg: #ffffff;
+  --text: #0d0d0d;
+  --text-sec: #5c5c5c;
+  --border: #d8d8d8;
+  --radius: 12px;
+  --green: #16a34a;
+  --yellow: #ca8a04;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  background: var(--page-bg); color: var(--text);
+  min-height: 100vh; padding: 48px 20px;
+  -webkit-font-smoothing: antialiased;
+}
+@media (max-width: 520px) { body { padding: 24px 12px; } }
+.shell { max-width: 640px; margin: 0 auto; }
+.card {
+  background: var(--card-bg); border: 1px solid var(--border);
+  border-radius: var(--radius); overflow: hidden; margin-bottom: 16px;
+}
+header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 20px; border-bottom: 1px solid var(--border);
+}
+.header-left { display: flex; align-items: center; gap: 10px; text-decoration: none; color: inherit; }
+.logo { width: 28px; height: 28px; }
+.brand { font-size: 15px; font-weight: 600; letter-spacing: -0.02em; }
+.chat-header { padding: 14px 20px; border-bottom: 1px solid var(--border); background: var(--page-bg); }
+.chat-header h2 { font-size: 14px; font-weight: 600; color: var(--text); display: flex; align-items: center; gap: 8px; }
+.chat-header h2 svg { width: 16px; height: 16px; color: var(--signal-blue); }
+.messages { padding: 0; }
+.message { padding: 16px 20px; border-bottom: 1px solid var(--border); }
+.message:last-child { border-bottom: none; }
+.message-header { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+.avatar { width: 28px; height: 28px; border-radius: 50%; color: white; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 600; flex-shrink: 0; }
+.sender-info { flex: 1; min-width: 0; }
+.sender-name { font-size: 13px; font-weight: 600; color: var(--text); }
+.message-text { font-size: 15px; line-height: 1.55; color: var(--text); white-space: pre-wrap; margin-left: 38px; }
+.reply-bubble { margin-left: 38px; margin-bottom: 6px; padding: 6px 10px; background: #f0f2f5; border-left: 3px solid var(--signal-blue); border-radius: 4px; font-size: 13px; color: var(--text-sec); }
+.reply-sender { font-weight: 600; color: var(--signal-blue); font-size: 12px; margin-bottom: 2px; }
+.reply-text { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.status-badge {
+  padding: 4px 10px; font-size: 11px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.04em; border-radius: 4px;
+}
+.status-solved { background: #dcfce7; color: var(--green); }
+.status-recommendation { background: #fef3c7; color: #b45309; }
+main { padding: 24px 20px; }
+h1 { font-size: 20px; font-weight: 700; letter-spacing: -0.025em; margin-bottom: 12px; line-height: 1.3; }
+.meta { font-size: 12px; color: var(--text-sec); margin-bottom: 16px; }
+.tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 20px; }
+.tag {
+  background: rgba(44, 107, 237, 0.08); color: var(--signal-blue);
+  padding: 4px 10px; border-radius: 4px; font-size: 12px; font-weight: 500;
+}
+.section-title {
+  font-size: 11px; font-weight: 600; text-transform: uppercase;
+  letter-spacing: 0.06em; color: var(--text-sec); margin-bottom: 10px;
+  display: flex; align-items: center; gap: 6px;
+}
+.section-title svg { width: 14px; height: 14px; }
+.section-content { font-size: 15px; line-height: 1.6; color: var(--text); white-space: pre-wrap; }
+.problem-section { padding-bottom: 20px; border-bottom: 1px solid var(--border); margin-bottom: 20px; }
+.solution-section {
+  background: #f0fdf4; margin: -24px -20px -24px -20px; padding: 20px;
+  border-top: 1px solid #bbf7d0;
+}
+.solution-section .section-title { color: var(--green); }
+.recommendation-solution { background: #fffbeb; border-top-color: #fde68a; }
+.recommendation-solution .section-title { color: #b45309; }
+.empty-chat {
+  padding: 32px 20px; text-align: center; color: var(--text-sec); font-size: 14px;
+}
+footer {
+  padding: 14px 20px; border-top: 1px solid var(--border);
+  color: var(--text-sec); font-size: 12px; text-align: center;
+}
+@media (max-width: 520px) {
+  main { padding: 20px 16px; }
+  h1 { font-size: 18px; }
+  .solution-section { margin: -20px -16px -20px -16px; padding: 16px; }
+}
+</style>
+</head><body>
+<div class="shell">
+  <div class="card">
+    <header>
+      <a href="https://academia-tech.github.io/SupportBot" class="header-left">
+        <img src="/SupportBot/supportbot-logo-128.png" alt="SupportBot" class="logo">
+        <span class="brand">SupportBot</span>
+      </a>
+      <span class="status-recommendation status-badge">Рекомендація</span>
+    </header>
+    <main>
+      <h1>El asistente de voz Alexa/Nabu no entiende el comando para ajustar persianas a un porcentaje</h1>
+      <p class="meta">Case 09549783281d &middot; domotica_es</p>
+      <div class='tags'><span class="tag">#asistente de voz</span><span class="tag">#alexa</span><span class="tag">#nabu casa</span><span class="tag">#control por voz</span><span class="tag">#persianas</span><span class="tag">#domótica</span><span class="tag">#sintaxis de comando</span><span class="tag">#tuya</span></div>
+      <div class="problem-section">
+        <h2 class="section-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/>
+            <line x1="12" y1="16" x2="12.01" y2="16"/>
+          </svg>
+          Проблема
+        </h2>
+        <p class="section-content">Un usuario (`user_69347a683e`) expresa su frustración porque los asistentes de voz como Alexa y Nabu Casa no interpretan correctamente los comandos para ajustar una persiana a un porcentaje específico (ej. &quot;Sube al 50% la persiana&quot;). En su lugar, intentan reproducir música o responden que no entienden la orden.</p>
+      </div>
+      <div class="solution-section recommendation-solution">
+        <h2 class="section-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7c.6.4 1 1.1 1 1.8V17h6v-.5c0-.7.4-1.4 1-1.8A7 7 0 0 0 12 2z"/></svg>
+          Рекомендація (не підтверджено)
+        </h2>
+        <p class="section-content">Varios usuarios sugieren que el problema para que Alexa o Nabu Casa entiendan el ajuste de persianas a un porcentaje radica en la sintaxis del comando. Se recomienda probar formulaciones más directas y simples. Las sugerencias que han funcionado para otros usuarios son &quot;Alexa, persiana cocina al 50%&quot; o, más recientemente, &quot;ajusta la persiana al X%&quot;. Un usuario confirma que la primera estructura de comando le funciona correctamente, y otro indica que probará la nueva sugerencia.</p>
+      </div>
+    </main>
+  </div>
+  <div class="card">
+    <div class="chat-header"><h2><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Історія чату</h2></div><div class="messages"><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Voy a mandar a los asistentes de voz a la mierda.<br><br>Alexa:<br>Sube al 50% la persiana de la cocina. Respuesta: No se que hacer con eso. o me quiere poner una canción.<br><br>Nabu:<br>Sube al 50% la persiana de la cocina. Respuesta: No he encontrado X canción</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Lo he probado de varias formas. No me acuerdo como hay que decirles para que entiendan mi orden</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Lo he probado incluso con: Pon la persiana al 50%</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Se que no entienden de mitades o tres cuartos</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Voy a mandar a los asistentes de voz a la mierda.  Alexa: Sube al 50% la persiana de la cocina. Respuesta: No se que hac</div></div><p class="message-text">prueba Google a mí me funciona bien el 90% de las veces</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Voy a mandar a los asistentes de voz a la mierda.  Alexa: Sube al 50% la persiana de la cocina. Respuesta: No se que hac</div></div><p class="message-text">Has probado:<br>Alexa persiana cocina al 50%<br><br><br>A mi me funcionan todas así</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 3</div><div class="reply-text">Has probado: Alexa persiana cocina al 50%   A mi me funcionan todas así</div></div><p class="message-text">Lo he probado de varias maneras, debo ver cual es la correcta. Pero joder, que tengamos que ser tan especificos en la forma de decirlo, mata las ganas de tenerlos.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Lo he probado de varias maneras, debo ver cual es la correcta. Pero joder, que tengamos que ser tan especificos en la fo</div></div><p class="message-text">tómatelo con calma, la mucha hay días que esta algo desmejorada, teniéndole  que repetir lo mismo un par de veces hasta que reacciona, no se si será o no será, pero la tendencia es cuestión de ráscanos lo bolsillos, algún €y ...</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 3</div><div class="reply-text">tómatelo con calma, la mucha hay días que esta algo desmejorada, teniéndole  que repetir lo mismo un par de veces hasta </div></div><p class="message-text">Na, funciona muy bien.<br>La cosa es que esta o sorda o no me entiende del todo.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><p class="message-text">de eso también me he dado cuenta, algún tarpon de polvo tendrá en el conducto de los micros 😁</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Voy a mandar a los asistentes de voz a la mierda.  Alexa: Sube al 50% la persiana de la cocina. Respuesta: No se que hac</div></div><p class="message-text">Es raro. Yo tengo las persianas con tuya zigbee y el Alexa va bien.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 4</div><div class="reply-text">Es raro. Yo tengo las persianas con tuya zigbee y el Alexa va bien.</div></div><p class="message-text">Nunca he dicho que las persianas me vayan mal. Si Alexa conoce mis persianas fácilmente.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Si quiero subir, sube, si queiro bajar baja. Pero estados intermedios se lia</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><p class="message-text">Con el nabu si que es imposible. Pero si le doy porcentaje de apertura a Alexa sin problema.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Con Nabu lo he hecho</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Si quiero subir, sube, si queiro bajar baja. Pero estados intermedios se lia</div></div><p class="message-text">Los tienes por wifi o por zigbee?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 4</div><div class="reply-text">Los tienes por wifi o por zigbee?</div></div><p class="message-text">Wifi, tengo la red gestionada con Mikrotik y AP para estabilidad de la red.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><p class="message-text">Lo digo por si igual es conflicto de la aplicación de la marca del dispositivo que tienes. Desde la web de home assistant te va bien con los porcentajes?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 4</div><div class="reply-text">Lo digo por si igual es conflicto de la aplicación de la marca del dispositivo que tienes. Desde la web de home assistan</div></div><p class="message-text">Ha eso, no te preocupes son Shellys</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Y desde HA funcionan muy bien los porcentajes.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Es mas por el tema de la voz. Una vez le dije.<br><br>Sube la persiana de aquí.<br><br>Y me respondió: No encuentro una canción del real Madrid</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><p class="message-text">Pues a ver si alguien los tiene con shelly y Alexa  para ver cómo le va.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Que esa es otra, tu tienes configurado bien las zonas de la casa. Y normalmente a alexa si le dices apaga la luz, ella sin tenerle que decir de que zona apagara la de su zona.<br><br>Pos con los ventiladores no. Si le digo que encienda el evntilador, desde el taller me enciende el del salón o el de mi cuarto.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">O lo peor aún, cuando tengo que irme del taller, le pido que apague las luces. Y ME LO APAGA TODO<br>El aire, el ventilador, me baja la pesiana... 😤</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">O lo peor aún, cuando tengo que irme del taller, le pido que apague las luces. Y ME LO APAGA TODO El aire, el ventilador</div></div><p class="message-text">Si. Eso lo tenían que pulir un poco. Con la luz y un interruptor en casa estancia me va bien. Pero por ejemplo las persianas ya no hay forma de que las ponga como tal en cada estancia. Si no digo el nombre de la estancia me abre o cierra la que le da la gana o me dice que hay varios equipos que se llaman igual....</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 4</div><div class="reply-text">Si. Eso lo tenían que pulir un poco. Con la luz y un interruptor en casa estancia me va bien. Pero por ejemplo las persi</div></div><p class="message-text">Eso es</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Eso es</div></div><p class="message-text">Por eso quería poner una ia local y usar nabu a ver si así iba mejor. Pero aun no probé.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 4</div><div class="reply-text">Por eso quería poner una ia local y usar nabu a ver si así iba mejor. Pero aun no probé.</div></div><p class="message-text">Pruebalo.<br>Si el comando es muy extraño para lo básico, lo recoge la IA y este si entiende lo que quieres. Solo tiene un pequeño detalle y es que a veces se toma los comandos por su cuenta.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#0891b2">M5</div><div class="sender-info"><span class="sender-name">Учасник 5</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Pruebalo. Si el comando es muy extraño para lo básico, lo recoge la IA y este si entiende lo que quieres. Solo tiene un </div></div><p class="message-text">O sea, que estamos igual</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 5</div><div class="reply-text">O sea, que estamos igual</div></div><p class="message-text">No así como ahora.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Pruebalo. Si el comando es muy extraño para lo básico, lo recoge la IA y este si entiende lo que quieres. Solo tiene un </div></div><p class="message-text">Con el altavoz de nabu lo extraño es que entienda algo por si solo. Las luces va bien y algún enchufe pero hay que pronunciar todo perfecto, despacio, y rezar. Para el resto de dispositivos como termómetros, etc todavía no sé cómo hacer</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 4</div><div class="reply-text">Con el altavoz de nabu lo extraño es que entienda algo por si solo. Las luces va bien y algún enchufe pero hay que pronu</div></div><p class="message-text">Nabu no tiene los microfonos optimizados, si es verdad que hay que ser bien castellano para que entienda. No puede con los acentos raros</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><p class="message-text">Poco a poco. Aún está  todo muy verde</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Ya es una mejora que si Nabu hace una pregunta este espere una respuesta y la pregunta no se quede sin responder como antes</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#9333ea">M6</div><div class="sender-info"><span class="sender-name">Учасник 6</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Lo he probado incluso con: Pon la persiana al 50%</div></div><p class="message-text">Prueba con “ajusta la persiana al X%”</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 6</div><div class="reply-text">Prueba con “ajusta la persiana al X%”</div></div><p class="message-text">No he probado ajustar, lo hare</p></div></div>
+    <footer>Academia Tech &copy; 2026</footer>
+  </div>
+</div>
+</body></html>

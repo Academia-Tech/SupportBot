@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html><head>
+<title>Copia de seguridad automática con disco desconectado en NAS | SupportBot</title>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta property="og:title" content="Copia de seguridad automática con disco desconectado en NAS">
+<meta property="og:description" content="Para realizar copias de seguridad en un disco que permanezca inaccesible y apagado la mayor parte del tiempo, se proponen varias soluciones.
+A nivel de software, es posible usar un script (ej. en bash">
+<link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+<style>
+:root {
+  --signal-blue: #2c6bed;
+  --page-bg: #f6f7f9;
+  --card-bg: #ffffff;
+  --text: #0d0d0d;
+  --text-sec: #5c5c5c;
+  --border: #d8d8d8;
+  --radius: 12px;
+  --green: #16a34a;
+  --yellow: #ca8a04;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  background: var(--page-bg); color: var(--text);
+  min-height: 100vh; padding: 48px 20px;
+  -webkit-font-smoothing: antialiased;
+}
+@media (max-width: 520px) { body { padding: 24px 12px; } }
+.shell { max-width: 640px; margin: 0 auto; }
+.card {
+  background: var(--card-bg); border: 1px solid var(--border);
+  border-radius: var(--radius); overflow: hidden; margin-bottom: 16px;
+}
+header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 20px; border-bottom: 1px solid var(--border);
+}
+.header-left { display: flex; align-items: center; gap: 10px; text-decoration: none; color: inherit; }
+.logo { width: 28px; height: 28px; }
+.brand { font-size: 15px; font-weight: 600; letter-spacing: -0.02em; }
+.chat-header { padding: 14px 20px; border-bottom: 1px solid var(--border); background: var(--page-bg); }
+.chat-header h2 { font-size: 14px; font-weight: 600; color: var(--text); display: flex; align-items: center; gap: 8px; }
+.chat-header h2 svg { width: 16px; height: 16px; color: var(--signal-blue); }
+.messages { padding: 0; }
+.message { padding: 16px 20px; border-bottom: 1px solid var(--border); }
+.message:last-child { border-bottom: none; }
+.message-header { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+.avatar { width: 28px; height: 28px; border-radius: 50%; color: white; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 600; flex-shrink: 0; }
+.sender-info { flex: 1; min-width: 0; }
+.sender-name { font-size: 13px; font-weight: 600; color: var(--text); }
+.message-text { font-size: 15px; line-height: 1.55; color: var(--text); white-space: pre-wrap; margin-left: 38px; }
+.reply-bubble { margin-left: 38px; margin-bottom: 6px; padding: 6px 10px; background: #f0f2f5; border-left: 3px solid var(--signal-blue); border-radius: 4px; font-size: 13px; color: var(--text-sec); }
+.reply-sender { font-weight: 600; color: var(--signal-blue); font-size: 12px; margin-bottom: 2px; }
+.reply-text { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.status-badge {
+  padding: 4px 10px; font-size: 11px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.04em; border-radius: 4px;
+}
+.status-solved { background: #dcfce7; color: var(--green); }
+.status-recommendation { background: #fef3c7; color: #b45309; }
+main { padding: 24px 20px; }
+h1 { font-size: 20px; font-weight: 700; letter-spacing: -0.025em; margin-bottom: 12px; line-height: 1.3; }
+.meta { font-size: 12px; color: var(--text-sec); margin-bottom: 16px; }
+.tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 20px; }
+.tag {
+  background: rgba(44, 107, 237, 0.08); color: var(--signal-blue);
+  padding: 4px 10px; border-radius: 4px; font-size: 12px; font-weight: 500;
+}
+.section-title {
+  font-size: 11px; font-weight: 600; text-transform: uppercase;
+  letter-spacing: 0.06em; color: var(--text-sec); margin-bottom: 10px;
+  display: flex; align-items: center; gap: 6px;
+}
+.section-title svg { width: 14px; height: 14px; }
+.section-content { font-size: 15px; line-height: 1.6; color: var(--text); white-space: pre-wrap; }
+.problem-section { padding-bottom: 20px; border-bottom: 1px solid var(--border); margin-bottom: 20px; }
+.solution-section {
+  background: #f0fdf4; margin: -24px -20px -24px -20px; padding: 20px;
+  border-top: 1px solid #bbf7d0;
+}
+.solution-section .section-title { color: var(--green); }
+.recommendation-solution { background: #fffbeb; border-top-color: #fde68a; }
+.recommendation-solution .section-title { color: #b45309; }
+.empty-chat {
+  padding: 32px 20px; text-align: center; color: var(--text-sec); font-size: 14px;
+}
+footer {
+  padding: 14px 20px; border-top: 1px solid var(--border);
+  color: var(--text-sec); font-size: 12px; text-align: center;
+}
+@media (max-width: 520px) {
+  main { padding: 20px 16px; }
+  h1 { font-size: 18px; }
+  .solution-section { margin: -20px -16px -20px -16px; padding: 16px; }
+}
+</style>
+</head><body>
+<div class="shell">
+  <div class="card">
+    <header>
+      <a href="https://academia-tech.github.io/SupportBot" class="header-left">
+        <img src="/SupportBot/supportbot-logo-128.png" alt="SupportBot" class="logo">
+        <span class="brand">SupportBot</span>
+      </a>
+      <span class="status-recommendation status-badge">Рекомендація</span>
+    </header>
+    <main>
+      <h1>Copia de seguridad automática con disco desconectado en NAS</h1>
+      <p class="meta">Case 0a88ab2e37b9 &middot; naseros</p>
+      <div class='tags'><span class="tag">#NAS</span><span class="tag">#Backup</span><span class="tag">#Copia de seguridad</span><span class="tag">#Scripting</span><span class="tag">#rsync</span><span class="tag">#Almacenamiento</span></div>
+      <div class="problem-section">
+        <h2 class="section-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/>
+            <line x1="12" y1="16" x2="12.01" y2="16"/>
+          </svg>
+          Проблема
+        </h2>
+        <p class="section-content">Un usuario busca una solución de copia de seguridad automática para su NAS donde un disco secundario se conecte solo periódicamente para realizar el backup y luego se apague/desmonte para ser inaccesible.</p>
+      </div>
+      <div class="solution-section recommendation-solution">
+        <h2 class="section-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7c.6.4 1 1.1 1 1.8V17h6v-.5c0-.7.4-1.4 1-1.8A7 7 0 0 0 12 2z"/></svg>
+          Рекомендація (не підтверджено)
+        </h2>
+        <p class="section-content">Para realizar copias de seguridad en un disco que permanezca inaccesible y apagado la mayor parte del tiempo, se proponen varias soluciones.
+A nivel de software, es posible usar un script (ej. en bash) para montar el disco, sincronizar los datos con `rsync`, y luego desmontarlo. Mientras está desmontado, el disco es inaccesible.
+Para un control físico del encendido/apagado:
+1.  **NAS Comercial**: La marca ASUSTOR ofrece la función &quot;MyArchive&quot;, que permite tratar discos internos como extraíbles, montándolos y desmontándolos a voluntad. Sin embargo, esto no corta la alimentación eléctrica del disco. (Ver: https://www.youtube.com/watch?v=UwvJ-EyDKcU)
+2.  **Solución Universal/DIY**: No es posible controlar la alimentación de bahías internas de forma selectiva. La solución recomendada es utilizar un disco en una carcasa externa USB con su propia fuente de alimentación. La alimentación de esta carcasa se puede gestionar con un enchufe inteligente (domótica) para encenderla solo cuando sea necesario para la copia de seguridad. Se advierte no alimentar discos mecánicos directamente desde el puerto USB del NAS.
+Ejemplos de carcasas externas: https://es.aliexpress.com/item/1005005594204689.html, https://es.aliexpress.com/item/1005007786917996.html</p>
+      </div>
+    </main>
+  </div>
+  <div class="card">
+    <div class="chat-header"><h2><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Історія чату</h2></div><div class="messages"><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Estoy cerca de comprar las piezas para mi primer NAS y pienso que para mi no me hace falta un Raid pero si una copia de seguridad, y creo que la mejor manera sería la siguiente (no se si esto existe ni cual sea su nombre):<br><br>Copia de seguridad automática con un disco montado en la propia unidad y que peródicamente el solo se conecte y haga la copia del disco principal.<br><br>Es decir, tengo un disco principal que uso con normalidad en donde coloco mis archivos y fisicamente otro conectado fisicamente pero no en funcioamiento, menos, por ejemplo, una vez a la semana en la que el solo arranca y hace el backup del disco principal y cuando termina vuelve a apagarse del todo de forma que no se pueda acceder a el, permaneceria de igual manera que si lo desenchufase del NAS.<br><br>Por lo que he podido encontrar en internet sobre esto, sería como tener una bahía airgap dentro del mismo NAS.<br><br>Lo ven posible? Cómo podría hacerlo?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Estoy cerca de comprar las piezas para mi primer NAS y pienso que para mi no me hace falta un Raid pero si una copia de </div></div><p class="message-text">si es posible,<br><br>dependerás del sistema operativo, pero seguramente con un script en bash puedes montar/desmontar y sincronizar las carpetas (rsync por ejemplo)</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 2</div><div class="reply-text">si es posible,  dependerás del sistema operativo, pero seguramente con un script en bash puedes montar/desmontar y sincr</div></div><p class="message-text">pero con eso si trato de guardar algo en ese disco de encendería no? <br><br>la idea era q no se pudiese, q tuviese q encenderlo primero</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">pero con eso si trato de guardar algo en ese disco de encendería no?   la idea era q no se pudiese, q tuviese q encender</div></div><p class="message-text">no se entiende la pregunta</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><p class="message-text">creo que entendi la pregunta: si el disco no esta montado, no se podrá usar ni leer</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">es decir yo lo mantengo dentro de su bahía pero desmontándolo está imposible acceder a él al menos q primero lo monte primero?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">es decir yo lo mantengo dentro de su bahía pero desmontándolo está imposible acceder a él al menos q primero lo monte pr</div></div><p class="message-text">ok, volvamos de nuevo,<br><br>depende del NAS,<br><br>en las marcas comerciales, solo ASUSTOR te deja tener un disco en las bahias internas sin formar aprte de un volumen,<br><br>se llama &quot;MyArchive&quot; y es justamente apra eso que quieres hacer<br><br>https://www.youtube.com/watch?v=UwvJ-EyDKcU</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><p class="message-text">que NAS tienes?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Tener un primer disco profesional y un segundo de los normales (sin q sea para nas) para arrancarlo una vez a la semana y que copie el primero<br><br>Dentro del mismo nas<br><br>Como cortarle la energía hasta q la conecte expresamente. <br>O si esa solución, hacerlo literalmente: se vende alguna manera de cortarle la energía con alguna pieza de hardware controlada por software?<br><br>gracias</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Tener un primer disco profesional y un segundo de los normales (sin q sea para nas) para arrancarlo una vez a la semana </div></div><p class="message-text">no lo puedes hacer con discos internos,<br>tendras que hacerlo via USB</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 2</div><div class="reply-text">que NAS tienes?</div></div><p class="message-text">aún ninguno estoy a punto de comprar las piezas para montarlo, entre esta noche y mañana empiezo a pedirlas</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><p class="message-text">para controlar la alimentacion tendras qeu ahcerlo fuera del NAS, no puedes activar la alimentacion de forma selectiva para discos internos<br><br>si usas USB puedes usar domotica para controla la alimentacion por ejemplo</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 2</div><div class="reply-text">no lo puedes hacer con discos internos, tendras que hacerlo via USB</div></div><p class="message-text">un usb siempre conectado y programar el encendido del puerto 🤔, cierto</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">me suena q hay programas para controlar el encendido de los puertos usb</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">me suena q hay programas para controlar el encendido de los puertos usb</div></div><p class="message-text">no alimentes los discos por USB,<br>los discos mecanicos necesitan una buena cantidad de amperios</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 2</div><div class="reply-text">ok, volvamos de nuevo,  depende del NAS,  en las marcas comerciales, solo ASUSTOR te deja tener un disco en las bahias i</div></div><p class="message-text">si sería esto entonces no?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">si sería esto entonces no?</div></div><p class="message-text">eso te permitiria desmontar y montar el disco a voluntad, pero no va a desconectarle la alimentacion mientras esté en la bahía interna</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">ahhh</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 2</div><div class="reply-text">no alimentes los discos por USB, los discos mecanicos necesitan una buena cantidad de amperios</div></div><p class="message-text">entonces tendría q hacer un mix, sabes si eso existe como adaptador?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">entonces tendría q hacer un mix, sabes si eso existe como adaptador?</div></div><p class="message-text">https://es.aliexpress.com/item/1005005594204689.html</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><p class="message-text">https://es.aliexpress.com/item/1005007786917996.html</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><p class="message-text">ya depende de gustos</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">pero para conectarlo a la fuente de alimentación</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><p class="message-text">mira lo que te pase</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><p class="message-text">incluye fuente de poder</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">lo miré, eso va a la pared con otro enchufe</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><p class="message-text">y donde pretendes conectarlo?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">dentro del NAS, a la alimentación de una de las bahías</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">dentro del NAS, a la alimentación de una de las bahías</div></div><p class="message-text">y como vas a controlar el apagado?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">no me di cuenta</p></div></div>
+    <footer>Academia Tech &copy; 2026</footer>
+  </div>
+</div>
+</body></html>

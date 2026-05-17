@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html><head>
+<title>Consideración del ruido de discos duros en NAS | SupportBot</title>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta property="og:title" content="Consideración del ruido de discos duros en NAS">
+<meta property="og:description" content="Al seleccionar un NAS, es fundamental tener en cuenta el nivel de ruido de los discos duros, especialmente si el dispositivo se instalará en un entorno sensible al ruido. Se discuten varias estrategia">
+<link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+<style>
+:root {
+  --signal-blue: #2c6bed;
+  --page-bg: #f6f7f9;
+  --card-bg: #ffffff;
+  --text: #0d0d0d;
+  --text-sec: #5c5c5c;
+  --border: #d8d8d8;
+  --radius: 12px;
+  --green: #16a34a;
+  --yellow: #ca8a04;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  background: var(--page-bg); color: var(--text);
+  min-height: 100vh; padding: 48px 20px;
+  -webkit-font-smoothing: antialiased;
+}
+@media (max-width: 520px) { body { padding: 24px 12px; } }
+.shell { max-width: 640px; margin: 0 auto; }
+.card {
+  background: var(--card-bg); border: 1px solid var(--border);
+  border-radius: var(--radius); overflow: hidden; margin-bottom: 16px;
+}
+header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 20px; border-bottom: 1px solid var(--border);
+}
+.header-left { display: flex; align-items: center; gap: 10px; text-decoration: none; color: inherit; }
+.logo { width: 28px; height: 28px; }
+.brand { font-size: 15px; font-weight: 600; letter-spacing: -0.02em; }
+.chat-header { padding: 14px 20px; border-bottom: 1px solid var(--border); background: var(--page-bg); }
+.chat-header h2 { font-size: 14px; font-weight: 600; color: var(--text); display: flex; align-items: center; gap: 8px; }
+.chat-header h2 svg { width: 16px; height: 16px; color: var(--signal-blue); }
+.messages { padding: 0; }
+.message { padding: 16px 20px; border-bottom: 1px solid var(--border); }
+.message:last-child { border-bottom: none; }
+.message-header { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+.avatar { width: 28px; height: 28px; border-radius: 50%; color: white; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 600; flex-shrink: 0; }
+.sender-info { flex: 1; min-width: 0; }
+.sender-name { font-size: 13px; font-weight: 600; color: var(--text); }
+.message-text { font-size: 15px; line-height: 1.55; color: var(--text); white-space: pre-wrap; margin-left: 38px; }
+.reply-bubble { margin-left: 38px; margin-bottom: 6px; padding: 6px 10px; background: #f0f2f5; border-left: 3px solid var(--signal-blue); border-radius: 4px; font-size: 13px; color: var(--text-sec); }
+.reply-sender { font-weight: 600; color: var(--signal-blue); font-size: 12px; margin-bottom: 2px; }
+.reply-text { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.status-badge {
+  padding: 4px 10px; font-size: 11px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.04em; border-radius: 4px;
+}
+.status-solved { background: #dcfce7; color: var(--green); }
+.status-recommendation { background: #fef3c7; color: #b45309; }
+main { padding: 24px 20px; }
+h1 { font-size: 20px; font-weight: 700; letter-spacing: -0.025em; margin-bottom: 12px; line-height: 1.3; }
+.meta { font-size: 12px; color: var(--text-sec); margin-bottom: 16px; }
+.tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 20px; }
+.tag {
+  background: rgba(44, 107, 237, 0.08); color: var(--signal-blue);
+  padding: 4px 10px; border-radius: 4px; font-size: 12px; font-weight: 500;
+}
+.section-title {
+  font-size: 11px; font-weight: 600; text-transform: uppercase;
+  letter-spacing: 0.06em; color: var(--text-sec); margin-bottom: 10px;
+  display: flex; align-items: center; gap: 6px;
+}
+.section-title svg { width: 14px; height: 14px; }
+.section-content { font-size: 15px; line-height: 1.6; color: var(--text); white-space: pre-wrap; }
+.problem-section { padding-bottom: 20px; border-bottom: 1px solid var(--border); margin-bottom: 20px; }
+.solution-section {
+  background: #f0fdf4; margin: -24px -20px -24px -20px; padding: 20px;
+  border-top: 1px solid #bbf7d0;
+}
+.solution-section .section-title { color: var(--green); }
+.recommendation-solution { background: #fffbeb; border-top-color: #fde68a; }
+.recommendation-solution .section-title { color: #b45309; }
+.empty-chat {
+  padding: 32px 20px; text-align: center; color: var(--text-sec); font-size: 14px;
+}
+footer {
+  padding: 14px 20px; border-top: 1px solid var(--border);
+  color: var(--text-sec); font-size: 12px; text-align: center;
+}
+@media (max-width: 520px) {
+  main { padding: 20px 16px; }
+  h1 { font-size: 18px; }
+  .solution-section { margin: -20px -16px -20px -16px; padding: 16px; }
+}
+</style>
+</head><body>
+<div class="shell">
+  <div class="card">
+    <header>
+      <a href="https://academia-tech.github.io/SupportBot" class="header-left">
+        <img src="/SupportBot/supportbot-logo-128.png" alt="SupportBot" class="logo">
+        <span class="brand">SupportBot</span>
+      </a>
+      <span class="status-recommendation status-badge">Рекомендація</span>
+    </header>
+    <main>
+      <h1>Consideración del ruido de discos duros en NAS</h1>
+      <p class="meta">Case d4523dad6628 &middot; naseros</p>
+      <div class='tags'><span class="tag">#NAS</span><span class="tag">#discos duros</span><span class="tag">#ruido</span><span class="tag">#hardware</span><span class="tag">#consideraciones</span><span class="tag">#silencio</span></div>
+      <div class="problem-section">
+        <h2 class="section-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/>
+            <line x1="12" y1="16" x2="12.01" y2="16"/>
+          </svg>
+          Проблема
+        </h2>
+        <p class="section-content">El usuario comparte una consideración importante al elegir un NAS: el ruido generado por los discos duros, especialmente si el dispositivo se ubica en un espacio común como el salón.</p>
+      </div>
+      <div class="solution-section recommendation-solution">
+        <h2 class="section-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7c.6.4 1 1.1 1 1.8V17h6v-.5c0-.7.4-1.4 1-1.8A7 7 0 0 0 12 2z"/></svg>
+          Рекомендація (не підтверджено)
+        </h2>
+        <p class="section-content">Al seleccionar un NAS, es fundamental tener en cuenta el nivel de ruido de los discos duros, especialmente si el dispositivo se instalará en un entorno sensible al ruido. Se discuten varias estrategias:
+- **Elección de discos**: Los discos de tipo &#x27;enterprise&#x27; (como los Exos) son inherentemente más ruidosos que los diseñados para NAS (como los WD Red Plus, de unos 29dB), independientemente de si son nuevos o reacondicionados.
+- **Aislamiento acústico**: Para mitigar las vibraciones y el ruido, se recomienda colocar el NAS sobre una base de espuma. Se mencionan como efectivas tanto las espumas de insonorización (ej. las de color verde) como la propia espuma protectora que viene en el embalaje del NAS.
+- **Ubicación**: Si el ruido es un problema, se debe evitar colocar el NAS en dormitorios, optando por salones o armarios.</p>
+      </div>
+    </main>
+  </div>
+  <div class="card">
+    <div class="chat-header"><h2><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Історія чату</h2></div><div class="messages"><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Ah, por cierto, otro punto a tener en cuenta era el ruido de los discos duros, que el mío está en el salón y me interesaba que lo hiciesen ruido.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><p class="message-text">Una pregunta, ¿alguno de vosotros ha comprado discos de estos reacondicionados o renewed? De estos enterprised, ¿os ha salido bien la jugada? Quiero comprar 4 y nuevos están imposible, sería para un NAS de respaldo, seguiría usando mi synology con 4x10TB WD Helio y el Nas este de Ugreen ponerle los discos estos renewed y montar plex+series y pelis que están en el synology, que está casi al tope de capacidad...</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 2</div><div class="reply-text">Una pregunta, ¿alguno de vosotros ha comprado discos de estos reacondicionados o renewed? De estos enterprised, ¿os ha s</div></div><p class="message-text">Yo si, una vez lo hice.<br>Y los devolví a los 2 días, hacían mucho ruido.<br>Me salieron mal.<br><br>Pero puedo ser el caso de cada mil 😜</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 2</div><div class="reply-text">Una pregunta, ¿alguno de vosotros ha comprado discos de estos reacondicionados o renewed? De estos enterprised, ¿os ha s</div></div><p class="message-text">yo tb...  ni de coña...</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><p class="message-text">Gracias a ambos, pues voy a devolver el NAS entonces y eliminaré cosas, los precios actuales son demasiado altos, no solo no han bajado los precios respecto a hace algunos años, sino que han subido</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><p class="message-text">Me quedaré con lo que más interesante me parezca y eliminaré el resto</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><p class="message-text">a ver es que estan mas usados que la pipa de un indio..</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><p class="message-text">Yo le metí 4x12Tb y si, son caros de narices 😔</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 3</div><div class="reply-text">Yo le metí 4x12Tb y si, son caros de narices 😔</div></div><p class="message-text">Es que es eso, si me costaron a mi 180€ o así 10TB hace 5 años, ahora están incluso más caros, antes cuando sacaban tamaños superiores, los tamaños inferiores bajaban de precio, pero parece ser que eso ya no es así</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><p class="message-text">Al final cada uno con lo suyo, existe el diógenes físico y en mi caso el diógenes digital jajaja, tengo ahí mil cosas que jamás veré (necesitaría 3 vidas) pero cuando quiero ver algo, me gusta tenerlo a mano, como por ejemplo ahora que estoy viendo el anime de Bleach, que lo tenía descargado de hace un par de años ya</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 2</div><div class="reply-text">Es que es eso, si me costaron a mi 180€ o así 10TB hace 5 años, ahora están incluso más caros, antes cuando sacaban tama</div></div><p class="message-text">Debería, debería 😔</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 2</div><div class="reply-text">Al final cada uno con lo suyo, existe el diógenes físico y en mi caso el diógenes digital jajaja, tengo ahí mil cosas qu</div></div><p class="message-text">Nos pasa a muchos 🤣🤣🤣</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#0891b2">M5</div><div class="sender-info"><span class="sender-name">Учасник 5</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 2</div><div class="reply-text">Al final cada uno con lo suyo, existe el diógenes físico y en mi caso el diógenes digital jajaja, tengo ahí mil cosas qu</div></div><p class="message-text">MUCHOS DE AQUII</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#9333ea">M6</div><div class="sender-info"><span class="sender-name">Учасник 6</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 2</div><div class="reply-text">Una pregunta, ¿alguno de vosotros ha comprado discos de estos reacondicionados o renewed? De estos enterprised, ¿os ha s</div></div><p class="message-text">Yo tengo varios exos de 16TB recertificados y ningun problema. Lo que algunos han comentado del ruido no es porque sean recertificados, es porque acostumbrado a discos WD Red y cosas asi los exos y similares hacen mucho ruido</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#9333ea">M6</div><div class="sender-info"><span class="sender-name">Учасник 6</span></div></div><p class="message-text">Los discos NAS son silenciosos, los enterprise estan pensados para entornos donde el ruido no es un problema</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#9333ea">M6</div><div class="sender-info"><span class="sender-name">Учасник 6</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 2</div><div class="reply-text">Al final cada uno con lo suyo, existe el diógenes físico y en mi caso el diógenes digital jajaja, tengo ahí mil cosas qu</div></div><p class="message-text">Me siento igual que lo que comentas, diogenes digital. Tengo monton de cosas que probablemente nunca vea 😂</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 6</div><div class="reply-text">Yo tengo varios exos de 16TB recertificados y ningun problema. Lo que algunos han comentado del ruido no es porque sean </div></div><p class="message-text">Hombre yo lo voy a tener en el cuarto de al lado, ya los WD Helio de 10TB hace que vibren el synology, entonces esos enterprise los escuchará hasta mi vecina jajaja</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 6</div><div class="reply-text">Me siento igual que lo que comentas, diogenes digital. Tengo monton de cosas que probablemente nunca vea 😂</div></div><p class="message-text">Para yo ver todo lo que tengo actualmente en el NAS y jugar a todos los juegos que tengo en mi cuenta de steam, tendría que vivir hasta los 189 años</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 2</div><div class="reply-text">Hombre yo lo voy a tener en el cuarto de al lado, ya los WD Helio de 10TB hace que vibren el synology, entonces esos ent</div></div><p class="message-text">Te recomiendo que pongas el NAS sobre una capa de espuma. Se nota mucho.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Te recomiendo que pongas el NAS sobre una capa de espuma. Se nota mucho.</div></div><p class="message-text">Yo lo tengo con una espuma gorda de esas verdes de las que se ponen para insonorizar</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 2</div><div class="reply-text">Yo lo tengo con una espuma gorda de esas verdes de las que se ponen para insonorizar</div></div><p class="message-text">Yo lo tengo sobre una de las espumas protectoras que traía en propio NAS.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Al final, entre eso y la elección del disco, no se oye nada.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Al final, entre eso y la elección del disco, no se oye nada.</div></div><p class="message-text">Pero que discos? Los enterprises</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 2</div><div class="reply-text">Pero que discos? Los enterprises</div></div><p class="message-text">Nooo. Esos hacen mucho ruido. <br><br>Estuve buscando y los WD Red Plus eran los que menos ruido hacían: 29dB</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#9333ea">M6</div><div class="sender-info"><span class="sender-name">Учасник 6</span></div></div><p class="message-text">En el caso de tenerlo en el salon, que es habitual, es un factor importante.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 6</div><div class="reply-text">En el caso de tenerlo en el salon, que es habitual, es un factor importante.</div></div><p class="message-text">Yo el mío lo tenía en el mismo cuarto donde duermo</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><p class="message-text">Y tuve que quitarlo y mudarlo al salón</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><p class="message-text">yo lo tengo dentro de un hueco en un armario..</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><p class="message-text">os mando una foto...</p></div></div>
+    <footer>Academia Tech &copy; 2026</footer>
+  </div>
+</div>
+</body></html>

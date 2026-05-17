@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html><head>
+<title>Configuración de red con doble NAT, Pi-hole y WireGuard en router de ISP | SupportBot</title>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta property="og:title" content="Configuración de red con doble NAT, Pi-hole y WireGuard en router de ISP">
+<meta property="og:description" content="Se proponen varias soluciones arquitectónicas para resolver el conflicto de doble NAT y la limitación del router del ISP:
+1. Desactivar el servidor DHCP en el router principal y utilizar el servidor D">
+<link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+<style>
+:root {
+  --signal-blue: #2c6bed;
+  --page-bg: #f6f7f9;
+  --card-bg: #ffffff;
+  --text: #0d0d0d;
+  --text-sec: #5c5c5c;
+  --border: #d8d8d8;
+  --radius: 12px;
+  --green: #16a34a;
+  --yellow: #ca8a04;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  background: var(--page-bg); color: var(--text);
+  min-height: 100vh; padding: 48px 20px;
+  -webkit-font-smoothing: antialiased;
+}
+@media (max-width: 520px) { body { padding: 24px 12px; } }
+.shell { max-width: 640px; margin: 0 auto; }
+.card {
+  background: var(--card-bg); border: 1px solid var(--border);
+  border-radius: var(--radius); overflow: hidden; margin-bottom: 16px;
+}
+header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 20px; border-bottom: 1px solid var(--border);
+}
+.header-left { display: flex; align-items: center; gap: 10px; text-decoration: none; color: inherit; }
+.logo { width: 28px; height: 28px; }
+.brand { font-size: 15px; font-weight: 600; letter-spacing: -0.02em; }
+.chat-header { padding: 14px 20px; border-bottom: 1px solid var(--border); background: var(--page-bg); }
+.chat-header h2 { font-size: 14px; font-weight: 600; color: var(--text); display: flex; align-items: center; gap: 8px; }
+.chat-header h2 svg { width: 16px; height: 16px; color: var(--signal-blue); }
+.messages { padding: 0; }
+.message { padding: 16px 20px; border-bottom: 1px solid var(--border); }
+.message:last-child { border-bottom: none; }
+.message-header { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+.avatar { width: 28px; height: 28px; border-radius: 50%; color: white; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 600; flex-shrink: 0; }
+.sender-info { flex: 1; min-width: 0; }
+.sender-name { font-size: 13px; font-weight: 600; color: var(--text); }
+.message-text { font-size: 15px; line-height: 1.55; color: var(--text); white-space: pre-wrap; margin-left: 38px; }
+.reply-bubble { margin-left: 38px; margin-bottom: 6px; padding: 6px 10px; background: #f0f2f5; border-left: 3px solid var(--signal-blue); border-radius: 4px; font-size: 13px; color: var(--text-sec); }
+.reply-sender { font-weight: 600; color: var(--signal-blue); font-size: 12px; margin-bottom: 2px; }
+.reply-text { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.status-badge {
+  padding: 4px 10px; font-size: 11px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.04em; border-radius: 4px;
+}
+.status-solved { background: #dcfce7; color: var(--green); }
+.status-recommendation { background: #fef3c7; color: #b45309; }
+main { padding: 24px 20px; }
+h1 { font-size: 20px; font-weight: 700; letter-spacing: -0.025em; margin-bottom: 12px; line-height: 1.3; }
+.meta { font-size: 12px; color: var(--text-sec); margin-bottom: 16px; }
+.tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 20px; }
+.tag {
+  background: rgba(44, 107, 237, 0.08); color: var(--signal-blue);
+  padding: 4px 10px; border-radius: 4px; font-size: 12px; font-weight: 500;
+}
+.section-title {
+  font-size: 11px; font-weight: 600; text-transform: uppercase;
+  letter-spacing: 0.06em; color: var(--text-sec); margin-bottom: 10px;
+  display: flex; align-items: center; gap: 6px;
+}
+.section-title svg { width: 14px; height: 14px; }
+.section-content { font-size: 15px; line-height: 1.6; color: var(--text); white-space: pre-wrap; }
+.problem-section { padding-bottom: 20px; border-bottom: 1px solid var(--border); margin-bottom: 20px; }
+.solution-section {
+  background: #f0fdf4; margin: -24px -20px -24px -20px; padding: 20px;
+  border-top: 1px solid #bbf7d0;
+}
+.solution-section .section-title { color: var(--green); }
+.recommendation-solution { background: #fffbeb; border-top-color: #fde68a; }
+.recommendation-solution .section-title { color: #b45309; }
+.empty-chat {
+  padding: 32px 20px; text-align: center; color: var(--text-sec); font-size: 14px;
+}
+footer {
+  padding: 14px 20px; border-top: 1px solid var(--border);
+  color: var(--text-sec); font-size: 12px; text-align: center;
+}
+@media (max-width: 520px) {
+  main { padding: 20px 16px; }
+  h1 { font-size: 18px; }
+  .solution-section { margin: -20px -16px -20px -16px; padding: 16px; }
+}
+</style>
+</head><body>
+<div class="shell">
+  <div class="card">
+    <header>
+      <a href="https://academia-tech.github.io/SupportBot" class="header-left">
+        <img src="/SupportBot/supportbot-logo-128.png" alt="SupportBot" class="logo">
+        <span class="brand">SupportBot</span>
+      </a>
+      <span class="status-recommendation status-badge">Рекомендація</span>
+    </header>
+    <main>
+      <h1>Configuración de red con doble NAT, Pi-hole y WireGuard en router de ISP</h1>
+      <p class="meta">Case 45ceb180433e &middot; naseros</p>
+      <div class='tags'><span class="tag">#doble NAT</span><span class="tag">#Pi-hole</span><span class="tag">#WireGuard</span><span class="tag">#router ISP</span><span class="tag">#DHCP</span><span class="tag">#redes</span><span class="tag">#configuración de red</span><span class="tag">#AP</span></div>
+      <div class="problem-section">
+        <h2 class="section-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/>
+            <line x1="12" y1="16" x2="12.01" y2="16"/>
+          </svg>
+          Проблема
+        </h2>
+        <p class="section-content">Un usuario describe una configuración de red compleja con un router principal del ISP que no permite cambiar el DNS, y un router secundario. Al poner el router secundario en modo AP, Pi-hole deja de funcionar porque no puede configurar el DNS en el router principal. Además, tiene problemas para que WireGuard funcione en esta configuración de doble NAT.</p>
+      </div>
+      <div class="solution-section recommendation-solution">
+        <h2 class="section-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7c.6.4 1 1.1 1 1.8V17h6v-.5c0-.7.4-1.4 1-1.8A7 7 0 0 0 12 2z"/></svg>
+          Рекомендація (не підтверджено)
+        </h2>
+        <p class="section-content">Se proponen varias soluciones arquitectónicas para resolver el conflicto de doble NAT y la limitación del router del ISP:
+1. Desactivar el servidor DHCP en el router principal y utilizar el servidor DHCP integrado en Pi-hole (corriendo en modo &#x27;host&#x27; en Docker).
+2. Poner el router secundario en modo AP (el usuario ya lo tiene así) y buscar una forma de forzar el DNS en la red.
+3. Investigar si es posible desactivar el NAT en el router principal (modo bridge/monopuesto) y delegar las funciones de NAT y DHCP completamente al router secundario.</p>
+      </div>
+    </main>
+  </div>
+  <div class="card">
+    <div class="chat-header"><h2><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Історія чату</h2></div><div class="messages"><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Tengo una red de domotica en docker con Zigbeea la cual quiero acceder desde el exterior...en mi router secundario en modo router. Pi-hole me funciona bien, a eso se suma que le debo cambiar la configuracion a este router colocando en DNS primario: IP/Pi-hole<br>Pero en esta red que tengo WG no funciona y lo que me dice IA es que es porque el trafico se pierde al tener el router primario.<br>Me sugiere colocar el router secundario que ya funciona todo en AP, lo cual procedo hacer. Pero cuando voy al router primario para cambiar la configuracion de DNS primario: IP/Pi-hole, no deja hacerlo porque es el router primario de la ISP y no deja hacerlo...entonces ya Pi-hole no me bloquea</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Ya he visto varios tutoriales pero en ninguno hace referencia tener un AP de por medio...<br>Bueno lo otro es que mis conocimientos de informatica son basicos, no entiendo tampoco muchos terminos, solo se asignar IP&#x27;s manuales el resto lo hago con IA</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Tengo una red de domotica en docker con Zigbeea la cual quiero acceder desde el exterior...en mi router secundario en mo</div></div><p class="message-text">en el router de isp y en el otro router tienes ip del mismo rango? es decir, por lan tu puedes llegar al router 1 si te conectas al router 2?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 2</div><div class="reply-text">en el router de isp y en el otro router tienes ip del mismo rango? es decir, por lan tu puedes llegar al router 1 si te </div></div><p class="message-text">Si...tengo el ordenador por cable en el segundo router y entro a ambos. Al primario por la IP:xxxx.18.1 y al secundario IP:xxxx.18.2</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Hoy he estado leyendo un poco mas y me dice de desactivar el DHCP del primario y correr el docker de Pi-hole en modo: host. Luego hacer la config de DHCP directamente en la interfaces web de Pi-hole...</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><p class="message-text">Tienes muchas soluciones diferentes</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><p class="message-text">En tu caso</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><p class="message-text">Deberias de poner el router 2 como AP ( para que herede las ips del dhcp (router 1)</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><p class="message-text">O quitar el nat del router 1 y pasar el nat al router 2 y el dhcp al router 2</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><p class="message-text">O subdivisión de sibneting</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Si...tengo el ordenador por cable en el segundo router y entro a ambos. Al primario por la IP:xxxx.18.1 y al secundario </div></div><p class="message-text">y si lo haces al reves, del router 1 entras en el router 2¿</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><p class="message-text">Que se te joda un disco y perder los datos es una historia.<br><br>¿Qué sentido tendrían los NAS con RAID para todo si no te dan redundancia? Es precisamente la gracia...</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><p class="message-text">Dejar al router 1 un rango de .18.xx hasta.18.xx+20</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><p class="message-text">Y el router 2 desde .18.xx+23 hasta.18.xx+60</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 3</div><div class="reply-text">O subdivisión de sibneting</div></div><p class="message-text">eso no tiene sentido 192.168.1.0/27 en una red y 192.168.1.32/27 las redes no se van a ver entre si</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#0891b2">M5</div><div class="sender-info"><span class="sender-name">Учасник 5</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 4</div><div class="reply-text">Que se te joda un disco y perder los datos es una historia.  ¿Qué sentido tendrían los NAS con RAID para todo si no te d</div></div><p class="message-text">Yo tengo un DS224+ en casa con un solo disco de 12 TB, la otra bahía está libre para cuando necesite más espacio. <br><br>En casa de mi padre puse mi viejo DS218j con un disco de 8 TB. <br><br>Cada noche se hace copia de seguridad del primero en el segundo. <br><br>Adicionalmente tengo un disco USB donde se vez en cuando también hago copia. <br><br>Si se me jode el disco principal como mucho habré perdido las cosas del día. Y los documentos importantes los gestiono a través de Synology Drive por lo que siempre tendría copia en local del día de hoy. <br><br>Adicionalmente, el RAID no se usa siempre para redundancia: se usa también para sumar capacidad o doblar velocidad. <br><br>Donde si veo redundancia necesaria es donde no puedes permitirte perder lo de estas horas o no puedes permitirte tener a gente parada: una empresa.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 5</div><div class="reply-text">Yo tengo un DS224+ en casa con un solo disco de 12 TB, la otra bahía está libre para cuando necesite más espacio.   En c</div></div><p class="message-text">Está bien planteada y sí, la disponibilidad en casa es más una inconveniencia cuando pasa que un requisito.<br><br>En mi caso lo tengo porque tengo alguna VM, servicios (entre ellos la domótica) y porque soy un tiquismiquis. 😆<br><br>En su caso, algo como 8 o 12TB le cuesta más que tener dos discos que como bien dices, ayuda a la velocidad de lectura, pero para la sincro de las fotos (que era su propósito original) tampoco es tanto lo que iba a ganar.<br><br>Independientemente, el tema es que por poco que gaste, es bastante más lío (y más caro) para su caso de uso específico que es muy simple.<br><br>Lo que le comentaba al compañero es que tenga una estrategia para recuperar ante desastres, porque mi amigo se compraba el NAS sin tener en cuenta nada de esto. 🙃</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#0891b2">M5</div><div class="sender-info"><span class="sender-name">Учасник 5</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 4</div><div class="reply-text">Está bien planteada y sí, la disponibilidad en casa es más una inconveniencia cuando pasa que un requisito.  En mi caso </div></div><p class="message-text">Efectivamente, si no tienes un volumen de datos muy grande, te sale mejor una nube pública.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 3</div><div class="reply-text">Deberias de poner el router 2 como AP ( para que herede las ips del dhcp (router 1)</div></div><p class="message-text">Esto ya esta...<br>Lo del NAT debo investigar porque no se como hacerlo</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 2</div><div class="reply-text">y si lo haces al reves, del router 1 entras en el router 2¿</div></div><p class="message-text">Si tambien, puedo acceder a cualquiera de los dos desde cualquiera de ellos</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#0891b2">M5</div><div class="sender-info"><span class="sender-name">Учасник 5</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 4</div><div class="reply-text">Está bien planteada y sí, la disponibilidad en casa es más una inconveniencia cuando pasa que un requisito.  En mi caso </div></div><p class="message-text">Sí, siempre hay que pensar en dos NAS, aunque sean sencillos. Porque copias a mano no te vas a acordar.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 2</div><div class="reply-text">eso no tiene sentido 192.168.1.0/27 en una red y 192.168.1.32/27 las redes no se van a ver entre si</div></div><p class="message-text">Con un porforward</p></div></div>
+    <footer>Academia Tech &copy; 2026</footer>
+  </div>
+</div>
+</body></html>

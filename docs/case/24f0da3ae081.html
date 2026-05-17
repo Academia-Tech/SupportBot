@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html><head>
+<title>Configuring Ethernet on M5Stack PoEsp32 with Custom Tasmota Firmware | SupportBot</title>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta property="og:title" content="Configuring Ethernet on M5Stack PoEsp32 with Custom Tasmota Firmware">
+<meta property="og:description" content="Several troubleshooting steps were suggested to enable Ethernet and bypass the default Wi-Fi setup:
+1. Use the `EthIPAddress` command via the serial console to manually configure the IP settings. Docu">
+<link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+<style>
+:root {
+  --signal-blue: #2c6bed;
+  --page-bg: #f6f7f9;
+  --card-bg: #ffffff;
+  --text: #0d0d0d;
+  --text-sec: #5c5c5c;
+  --border: #d8d8d8;
+  --radius: 12px;
+  --green: #16a34a;
+  --yellow: #ca8a04;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  background: var(--page-bg); color: var(--text);
+  min-height: 100vh; padding: 48px 20px;
+  -webkit-font-smoothing: antialiased;
+}
+@media (max-width: 520px) { body { padding: 24px 12px; } }
+.shell { max-width: 640px; margin: 0 auto; }
+.card {
+  background: var(--card-bg); border: 1px solid var(--border);
+  border-radius: var(--radius); overflow: hidden; margin-bottom: 16px;
+}
+header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 20px; border-bottom: 1px solid var(--border);
+}
+.header-left { display: flex; align-items: center; gap: 10px; text-decoration: none; color: inherit; }
+.logo { width: 28px; height: 28px; }
+.brand { font-size: 15px; font-weight: 600; letter-spacing: -0.02em; }
+.chat-header { padding: 14px 20px; border-bottom: 1px solid var(--border); background: var(--page-bg); }
+.chat-header h2 { font-size: 14px; font-weight: 600; color: var(--text); display: flex; align-items: center; gap: 8px; }
+.chat-header h2 svg { width: 16px; height: 16px; color: var(--signal-blue); }
+.messages { padding: 0; }
+.message { padding: 16px 20px; border-bottom: 1px solid var(--border); }
+.message:last-child { border-bottom: none; }
+.message-header { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+.avatar { width: 28px; height: 28px; border-radius: 50%; color: white; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 600; flex-shrink: 0; }
+.sender-info { flex: 1; min-width: 0; }
+.sender-name { font-size: 13px; font-weight: 600; color: var(--text); }
+.message-text { font-size: 15px; line-height: 1.55; color: var(--text); white-space: pre-wrap; margin-left: 38px; }
+.reply-bubble { margin-left: 38px; margin-bottom: 6px; padding: 6px 10px; background: #f0f2f5; border-left: 3px solid var(--signal-blue); border-radius: 4px; font-size: 13px; color: var(--text-sec); }
+.reply-sender { font-weight: 600; color: var(--signal-blue); font-size: 12px; margin-bottom: 2px; }
+.reply-text { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.status-badge {
+  padding: 4px 10px; font-size: 11px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.04em; border-radius: 4px;
+}
+.status-solved { background: #dcfce7; color: var(--green); }
+.status-recommendation { background: #fef3c7; color: #b45309; }
+main { padding: 24px 20px; }
+h1 { font-size: 20px; font-weight: 700; letter-spacing: -0.025em; margin-bottom: 12px; line-height: 1.3; }
+.meta { font-size: 12px; color: var(--text-sec); margin-bottom: 16px; }
+.tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 20px; }
+.tag {
+  background: rgba(44, 107, 237, 0.08); color: var(--signal-blue);
+  padding: 4px 10px; border-radius: 4px; font-size: 12px; font-weight: 500;
+}
+.section-title {
+  font-size: 11px; font-weight: 600; text-transform: uppercase;
+  letter-spacing: 0.06em; color: var(--text-sec); margin-bottom: 10px;
+  display: flex; align-items: center; gap: 6px;
+}
+.section-title svg { width: 14px; height: 14px; }
+.section-content { font-size: 15px; line-height: 1.6; color: var(--text); white-space: pre-wrap; }
+.problem-section { padding-bottom: 20px; border-bottom: 1px solid var(--border); margin-bottom: 20px; }
+.solution-section {
+  background: #f0fdf4; margin: -24px -20px -24px -20px; padding: 20px;
+  border-top: 1px solid #bbf7d0;
+}
+.solution-section .section-title { color: var(--green); }
+.recommendation-solution { background: #fffbeb; border-top-color: #fde68a; }
+.recommendation-solution .section-title { color: #b45309; }
+.empty-chat {
+  padding: 32px 20px; text-align: center; color: var(--text-sec); font-size: 14px;
+}
+footer {
+  padding: 14px 20px; border-top: 1px solid var(--border);
+  color: var(--text-sec); font-size: 12px; text-align: center;
+}
+@media (max-width: 520px) {
+  main { padding: 20px 16px; }
+  h1 { font-size: 18px; }
+  .solution-section { margin: -20px -16px -20px -16px; padding: 16px; }
+}
+</style>
+</head><body>
+<div class="shell">
+  <div class="card">
+    <header>
+      <a href="https://academia-tech.github.io/SupportBot" class="header-left">
+        <img src="/SupportBot/supportbot-logo-128.png" alt="SupportBot" class="logo">
+        <span class="brand">SupportBot</span>
+      </a>
+      <span class="status-recommendation status-badge">Рекомендація</span>
+    </header>
+    <main>
+      <h1>Configuring Ethernet on M5Stack PoEsp32 with Custom Tasmota Firmware</h1>
+      <p class="meta">Case 24f0da3ae081 &middot; tasmota</p>
+      <div class='tags'><span class="tag">#ethernet</span><span class="tag">#esp32</span><span class="tag">#m5stack</span><span class="tag">#poe</span><span class="tag">#custom firmware</span><span class="tag">#user_config_override</span><span class="tag">#networking</span><span class="tag">#troubleshooting</span></div>
+      <div class="problem-section">
+        <h2 class="section-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/>
+            <line x1="12" y1="16" x2="12.01" y2="16"/>
+          </svg>
+          Проблема
+        </h2>
+        <p class="section-content">A user is unable to get the Ethernet interface working on an M5Stack PoEsp32 after flashing a custom-compiled Tasmota firmware. The provided serial logs show Tasmota starting in Wi-Fi AP mode, and the physical Ethernet port LEDs are not active. The user shared their `user_config_override.h` for diagnosis.</p>
+      </div>
+      <div class="solution-section recommendation-solution">
+        <h2 class="section-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7c.6.4 1 1.1 1 1.8V17h6v-.5c0-.7.4-1.4 1-1.8A7 7 0 0 0 12 2z"/></svg>
+          Рекомендація (не підтверджено)
+        </h2>
+        <p class="section-content">Several troubleshooting steps were suggested to enable Ethernet and bypass the default Wi-Fi setup:
+1. Use the `EthIPAddress` command via the serial console to manually configure the IP settings. Documentation is available at: https://tasmota.github.io/docs/Commands/#ethernet
+2. Disable the Wi-Fi manager at startup using a rule, for example: `Rule1 ON system#boot DO wifi 0 ENDON`.
+3. A link to a relevant GitHub discussion on the topic was also shared: https://github.com/arendst/Tasmota/discussions/17794</p>
+      </div>
+    </main>
+  </div>
+  <div class="card">
+    <div class="chat-header"><h2><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Історія чату</h2></div><div class="messages"><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Hi, I am trying to get Tasmota running on a M5Stack PoEsp32 (a device on which I already managed to flash ESPHome). It only has Ethernet connectivity so I&#x27;ve been trying to compile a firmware with the template included. I used https://templates.blakadder.com/olimex_ESP32-POE.html and https://esphome.io/components/ethernet.html?highlight=ethernet#configuration-examples as reference. The firmware runs but the Ethernet is not configured.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Here is the content of my `user_config_override.h`:<br>```#ifdef MODULE<br>#undef MODULE<br>#endif<br>#define MODULE USER_MODULE<br><br>#ifdef FALLBACK_MODULE<br>#undef FALLBACK_MODULE<br>#endif<br>#define FALLBACK_MODULE USER_MODULE<br><br>#ifdef USER_TEMPLATE<br>#undef USER_TEMPLATE<br>#endif<br>#define USER_TEMPLATE &quot;{\&quot;NAME\&quot;:\&quot;M5Stack PoEsp32\&quot;,\&quot;GPIO\&quot;:[0,0,0,0,0,5536,0,0,0,0,0,0,0,210,5600,0,0,0,0,5568,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],\&quot;FLAG\&quot;:0,\&quot;BASE\&quot;:1}&quot;<br> <br>#define USER_RULE1 &quot;ON system#boot DO wifi 0 ENDON&quot;<br>#define USER_BACKLOG &quot;Rule1 1&quot;<br><br>#ifndef USE_ETHERNET<br>#define USE_ETHERNET<br>#endif<br><br>#ifdef ETH_TYPE<br>#undef ETH_TYPE<br>#endif<br>#define ETH_TYPE          1                    // [EthType] 0 = ETH_PHY_LAN8720, 1 = ETH_PHY_TLK110/ETH_PHY_IP101, 2 = ETH_PHY_RTL8201, 3 = ETH_PHY_DP83848, 4 = ETH_PHY_DM9051, 5 = ETH_PHY_KSZ8081<br><br>#ifdef ETH_CLKMODE<br>#undef ETH_CLKMODE<br>#endif<br>#define ETH_CLKMODE       0                    // [EthClockMode] 0 = ETH_CLOCK_GPIO0_IN, 1 = ETH_CLOCK_GPIO0_OUT, 2 = ETH_CLOCK_GPIO16_OUT, 3 = ETH_CLOCK_GPIO17_OUT<br><br>#ifdef ETH_ADDRESS<br>#undef ETH_ADDRESS<br>#endif<br>#define ETH_ADDRESS       1                    // [EthAddress] 0 = PHY0 .. 31 = PHY31```</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">any idea on why it is not working ? Thanks</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><p class="message-text">**ouinouin**: @Ben_J: what is the default behavior? a dhcp?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><p class="message-text">**ouinouin**: i can give a try with an olimex board to have some clue</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 2</div><div class="reply-text">**ouinouin**: @Ben_J: what is the default behavior? a dhcp?</div></div><p class="message-text">I haven&#x27;t figured out where to configure the IP address for the Ethernet</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><p class="message-text">**ouinouin**: @Ben_J:</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><p class="message-text">**ouinouin**: https://tasmota.github.io/docs/Commands/#ethernet</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><p class="message-text">**ouinouin**: EthIPAddress seems a good candidate</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><p class="message-text">**ouinouin**: maybe to set in a rule</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">the Ethernet physical interface does not seems to be up (no LED blinking)</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">this is what I get on the serial:<br>```00:00:00.002 HDW: ESP32-D0WD<br>00:00:00.035 UFS: FlashFS mounted with 308 kB free<br>00:00:00.079 CFG: Loaded from File, Compte 8<br>00:00:00.089 QPC: Count 1<br>00:00:00.176 BRY: Berry initialized, RAM used=4041 bytes<br>00:00:00.199 Projet tasmota - Tasmota Version 12.3.1(tasmota)-2_0_5_3(2023-01-26T12:11:55)<br>00:00:04.557 WIF: WifiManager actif pour 3 minutes<br>00:00:05.421 HTP: Serveur web actif sur tasmota-13CE80-3712 avec l&#x27;adresse IP 192.168.4.1<br>00:00:11.302 QPC: Reset```</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><p class="message-text">**ouinouin**: @Ben_J: this is the wifi side of tasmota, you shall set the ip address of your ethernet module manually</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><p class="message-text">**ouinouin**: another thing might be to escape frome the wifimanager</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">https://github.com/arendst/Tasmota/discussions/17794</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><p class="message-text">**ouinouin**: i think there is a wifi command for that</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><p class="message-text">**ouinouin**: cause at first boot tasmota shows the menu to select wifi on the web interface</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><p class="message-text">**ouinouin**: did you tryto dens some ip commands through sriel ?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><p class="message-text">**ouinouin**: serial</p></div></div>
+    <footer>Academia Tech &copy; 2026</footer>
+  </div>
+</div>
+</body></html>

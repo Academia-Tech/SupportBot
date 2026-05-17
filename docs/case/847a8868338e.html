@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html><head>
+<title>Recuperación de discos virtuales y estrategia de backup | SupportBot</title>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta property="og:title" content="Recuperación de discos virtuales y estrategia de backup">
+<meta property="og:description" content="Se discute la importancia de tener backups y se menciona que Proxmox puede gestionar todo, con TrueNAS para servicios NAS. Para protección contra fallos de disco sin necesidad de duplicar el espacio c">
+<link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+<style>
+:root {
+  --signal-blue: #2c6bed;
+  --page-bg: #f6f7f9;
+  --card-bg: #ffffff;
+  --text: #0d0d0d;
+  --text-sec: #5c5c5c;
+  --border: #d8d8d8;
+  --radius: 12px;
+  --green: #16a34a;
+  --yellow: #ca8a04;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  background: var(--page-bg); color: var(--text);
+  min-height: 100vh; padding: 48px 20px;
+  -webkit-font-smoothing: antialiased;
+}
+@media (max-width: 520px) { body { padding: 24px 12px; } }
+.shell { max-width: 640px; margin: 0 auto; }
+.card {
+  background: var(--card-bg); border: 1px solid var(--border);
+  border-radius: var(--radius); overflow: hidden; margin-bottom: 16px;
+}
+header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 20px; border-bottom: 1px solid var(--border);
+}
+.header-left { display: flex; align-items: center; gap: 10px; text-decoration: none; color: inherit; }
+.logo { width: 28px; height: 28px; }
+.brand { font-size: 15px; font-weight: 600; letter-spacing: -0.02em; }
+.chat-header { padding: 14px 20px; border-bottom: 1px solid var(--border); background: var(--page-bg); }
+.chat-header h2 { font-size: 14px; font-weight: 600; color: var(--text); display: flex; align-items: center; gap: 8px; }
+.chat-header h2 svg { width: 16px; height: 16px; color: var(--signal-blue); }
+.messages { padding: 0; }
+.message { padding: 16px 20px; border-bottom: 1px solid var(--border); }
+.message:last-child { border-bottom: none; }
+.message-header { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+.avatar { width: 28px; height: 28px; border-radius: 50%; color: white; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 600; flex-shrink: 0; }
+.sender-info { flex: 1; min-width: 0; }
+.sender-name { font-size: 13px; font-weight: 600; color: var(--text); }
+.message-text { font-size: 15px; line-height: 1.55; color: var(--text); white-space: pre-wrap; margin-left: 38px; }
+.reply-bubble { margin-left: 38px; margin-bottom: 6px; padding: 6px 10px; background: #f0f2f5; border-left: 3px solid var(--signal-blue); border-radius: 4px; font-size: 13px; color: var(--text-sec); }
+.reply-sender { font-weight: 600; color: var(--signal-blue); font-size: 12px; margin-bottom: 2px; }
+.reply-text { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.status-badge {
+  padding: 4px 10px; font-size: 11px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.04em; border-radius: 4px;
+}
+.status-solved { background: #dcfce7; color: var(--green); }
+.status-recommendation { background: #fef3c7; color: #b45309; }
+main { padding: 24px 20px; }
+h1 { font-size: 20px; font-weight: 700; letter-spacing: -0.025em; margin-bottom: 12px; line-height: 1.3; }
+.meta { font-size: 12px; color: var(--text-sec); margin-bottom: 16px; }
+.tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 20px; }
+.tag {
+  background: rgba(44, 107, 237, 0.08); color: var(--signal-blue);
+  padding: 4px 10px; border-radius: 4px; font-size: 12px; font-weight: 500;
+}
+.section-title {
+  font-size: 11px; font-weight: 600; text-transform: uppercase;
+  letter-spacing: 0.06em; color: var(--text-sec); margin-bottom: 10px;
+  display: flex; align-items: center; gap: 6px;
+}
+.section-title svg { width: 14px; height: 14px; }
+.section-content { font-size: 15px; line-height: 1.6; color: var(--text); white-space: pre-wrap; }
+.problem-section { padding-bottom: 20px; border-bottom: 1px solid var(--border); margin-bottom: 20px; }
+.solution-section {
+  background: #f0fdf4; margin: -24px -20px -24px -20px; padding: 20px;
+  border-top: 1px solid #bbf7d0;
+}
+.solution-section .section-title { color: var(--green); }
+.recommendation-solution { background: #fffbeb; border-top-color: #fde68a; }
+.recommendation-solution .section-title { color: #b45309; }
+.empty-chat {
+  padding: 32px 20px; text-align: center; color: var(--text-sec); font-size: 14px;
+}
+footer {
+  padding: 14px 20px; border-top: 1px solid var(--border);
+  color: var(--text-sec); font-size: 12px; text-align: center;
+}
+@media (max-width: 520px) {
+  main { padding: 20px 16px; }
+  h1 { font-size: 18px; }
+  .solution-section { margin: -20px -16px -20px -16px; padding: 16px; }
+}
+</style>
+</head><body>
+<div class="shell">
+  <div class="card">
+    <header>
+      <a href="https://academia-tech.github.io/SupportBot" class="header-left">
+        <img src="/SupportBot/supportbot-logo-128.png" alt="SupportBot" class="logo">
+        <span class="brand">SupportBot</span>
+      </a>
+      <span class="status-recommendation status-badge">Рекомендація</span>
+    </header>
+    <main>
+      <h1>Recuperación de discos virtuales y estrategia de backup</h1>
+      <p class="meta">Case 847a8868338e &middot; naseros</p>
+      <div class='tags'><span class="tag">#Proxmox</span><span class="tag">#discos virtuales</span><span class="tag">#backup</span><span class="tag">#recuperación</span><span class="tag">#Snapraid</span><span class="tag">#NAS</span><span class="tag">#virtualización</span><span class="tag">#TrueNAS</span></div>
+      <div class="problem-section">
+        <h2 class="section-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/>
+            <line x1="12" y1="16" x2="12.01" y2="16"/>
+          </svg>
+          Проблема
+        </h2>
+        <p class="section-content">Se plantea la dificultad de recuperar discos virtuales de gran tamaño si el sistema de virtualización (Proxmox) falla, y cómo gestionar las copias de seguridad de terabytes de datos.</p>
+      </div>
+      <div class="solution-section recommendation-solution">
+        <h2 class="section-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7c.6.4 1 1.1 1 1.8V17h6v-.5c0-.7.4-1.4 1-1.8A7 7 0 0 0 12 2z"/></svg>
+          Рекомендація (не підтверджено)
+        </h2>
+        <p class="section-content">Se discute la importancia de tener backups y se menciona que Proxmox puede gestionar todo, con TrueNAS para servicios NAS. Para protección contra fallos de disco sin necesidad de duplicar el espacio con backups completos debido al gran volumen de información (ej. 20TB+ de multimedia), se recomienda el uso de Snapraid. Snapraid ofrece protección contra el fallo de uno o más discos sin requerir una copia completa de los datos, lo que es ideal para colecciones grandes donde la duplicación total es costosa. Un usuario confirmó haber recuperado exitosamente todos sus datos tras el fallo de un disco gracias a Snapraid. Se enfatiza que, aunque no se haga un backup completo, es crucial tener alguna forma de protección contra fallos de hardware, ya que hay contenido que puede ser irrecuperable o muy tedioso de volver a descargar.</p>
+      </div>
+    </main>
+  </div>
+  <div class="card">
+    <div class="chat-header"><h2><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Історія чату</h2></div><div class="messages"><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">pero si se te va proxmox al garete, ¿Como recuperas esos discos?, por que son discos virtuales, y si, puedes hacer copia de la MV, pero una copia con Teras no es algo muy agil</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">pero si se te va proxmox al garete, ¿Como recuperas esos discos?, por que son discos virtuales, y si, puedes hacer copia</div></div><p class="message-text">Vale, entiendo, si todos los discos son discos virtuales y se jode el sistema de virtualizacion se puede perder todo. Si esos discos virtuales estan cada uno en un disco fisico deberia poder volver a montarse pero tampoco lo se.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">pero si se te va proxmox al garete, ¿Como recuperas esos discos?, por que son discos virtuales, y si, puedes hacer copia</div></div><p class="message-text">la idea es tener backups de eso, y si es cierto que el software del nas solo ve &quot;un disco&quot; yo esque el proxmox se ocupa de todo y el nas.. pues es un servicio mas</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><p class="message-text">truenas hace de nas, pero luego otras cosas pues tienen otros servicios, como añadido esta todo compartimentalizado</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 3</div><div class="reply-text">la idea es tener backups de eso, y si es cierto que el software del nas solo ve &quot;un disco&quot; yo esque el proxmox se ocupa </div></div><p class="message-text">Ya pero como haces copias de varios teras?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Ya pero como haces copias de varios teras?</div></div><p class="message-text">pues, igual que si el nas lo gestionase no?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><p class="message-text">quiero decir</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><p class="message-text">copiar el disco virtual o todo el contenido de ese disco... terminos de espacio es lo mismo</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><p class="message-text">y tener tengo muuuuuchos tb jaja</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><p class="message-text">Si copias el disco virtual pues es un bloque grande, pero si es omv o truenas quien hace la copia pues son los ficheros. Yo tengo sistema de copias un poco mas modo paranoia pero 😂</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Yo es que el nas lo tengo más bien para si me falla un disco pero cambiar, la info no es importante. Lo que si hago copias de la vm, aunque a nivel interno, cada vm tiene copia a su manera, por ejemplo HA en onedrive,opnsense en gdrive,etc</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><p class="message-text">pero lo de fallar es raid o zfs o lo que sea, que sea nas es igual</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><p class="message-text">si la info da igual pues intenta ponerlo+- safe</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><p class="message-text">pero dejate de copias</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><p class="message-text">en cuanto a copias de la vm... para que? si la info va a dar igual que le den a esa vm no?<br><br>Luego copiar las otras, lo importante que son las configs pues bien un poco dispersas pero bien. Esto cuando dices VM incluyes docker entiendo porque opnsense..</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Ya pero como haces copias de varios teras?</div></div><p class="message-text">Entiendo tu situacion, quieres proteccion contra fallo de disco pero no hacer backup por ser mucha información y no es tan critica como para necesitar backup si o si. Por eso mismo uso snapraid, hacer backup me supondria una gran inversion en discos para duplicar el espacio.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><p class="message-text">Si te para la vm completa casi seguro que es un problema al pasar dispositivos a la vm. Pero no tengo experiencia en ese uso de snapraid</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 2</div><div class="reply-text">Si te para la vm completa casi seguro que es un problema al pasar dispositivos a la vm. Pero no tengo experiencia en ese</div></div><p class="message-text">No te preocupes, voy haciendo pruebas, que es lo que me gusta. Si no lo dejaré así estable, y haré el seguimiento de salud con scrutiny hub-spoke, que es lo que más me preocupa</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><p class="message-text">El hardware eventualmente se daña <br><br>Los discos<br>La fuente <br>La motherboard <br>Etc<br><br>Si te preocupa eso es porque nO tienes respaldos</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#0891b2">M5</div><div class="sender-info"><span class="sender-name">Учасник 5</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 4</div><div class="reply-text">El hardware eventualmente se daña   Los discos La fuente  La motherboard  Etc  Si te preocupa eso es porque nO tienes re</div></div><p class="message-text">Eso es, eso no lo tengo en RAID y si se pierde lloraré unos días y a seguir jajajaj. Me niego a respaldar 20teras de películas  con los precios que tienen los discos</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 5</div><div class="reply-text">Eso es, eso no lo tengo en RAID y si se pierde lloraré unos días y a seguir jajajaj. Me niego a respaldar 20teras de pel</div></div><p class="message-text">Si te preocupa perderlo protegelo. No digo copia completa, que eso si necesita duplicar espacio, pero proteccion contra fallo de disco si. Yo tengo bastantes mas de 20 TB, unos 40 y pico de multimedia y uso snapraid, al menos tengo proteccion contra el fallo de 1 disco. RAID no me parece adecuado para este caso de uso</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#0891b2">M5</div><div class="sender-info"><span class="sender-name">Учасник 5</span></div></div><p class="message-text">Ya eso si es verdad y si lo pierdes, puedes recuperar porque hay series o películas que ya no encuentras. En mi caso no tengo nada especial pero descargarte 20 Tera’s otra vez sería un coñazo sin pensar que cada una es de un sitio</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 5</div><div class="reply-text">Ya eso si es verdad y si lo pierdes, puedes recuperar porque hay series o películas que ya no encuentras. En mi caso no </div></div><p class="message-text">Correcto. Hay cosas que ya no se encuentran y aun asi seria un rollo. Por eso yo no lo veo tan importante como para hacer backup completo pero si para tener proteccion contra fallo de disco.<br>Hace unos meses un disco fallo y pude recuperarlo todo sin problema gracias a snapraid.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 5</div><div class="reply-text">Ya eso si es verdad y si lo pierdes, puedes recuperar porque hay series o películas que ya no encuentras. En mi caso no </div></div><p class="message-text">En cuantos discos tienes eso repartido?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#0891b2">M5</div><div class="sender-info"><span class="sender-name">Учасник 5</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 2</div><div class="reply-text">En cuantos discos tienes eso repartido?</div></div><p class="message-text">Pues en este tengo solo dos discos de 10 teras</p></div></div>
+    <footer>Academia Tech &copy; 2026</footer>
+  </div>
+</div>
+</body></html>

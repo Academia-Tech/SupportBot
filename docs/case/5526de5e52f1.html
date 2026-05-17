@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html><head>
+<title>Guía para sustituir el router HGU de O2/Movistar por una ONT externa | SupportBot</title>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta property="og:title" content="Guía para sustituir el router HGU de O2/Movistar por una ONT externa">
+<meta property="og:description" content="Para sustituir el router HGU de O2/Movistar por una ONT externa (ej. Huawei EG8120L) y un router neutro, es imprescindible obtener la credencial de la fibra, conocida como Contraseña GPON o PLOAM Pass">
+<link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+<style>
+:root {
+  --signal-blue: #2c6bed;
+  --page-bg: #f6f7f9;
+  --card-bg: #ffffff;
+  --text: #0d0d0d;
+  --text-sec: #5c5c5c;
+  --border: #d8d8d8;
+  --radius: 12px;
+  --green: #16a34a;
+  --yellow: #ca8a04;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  background: var(--page-bg); color: var(--text);
+  min-height: 100vh; padding: 48px 20px;
+  -webkit-font-smoothing: antialiased;
+}
+@media (max-width: 520px) { body { padding: 24px 12px; } }
+.shell { max-width: 640px; margin: 0 auto; }
+.card {
+  background: var(--card-bg); border: 1px solid var(--border);
+  border-radius: var(--radius); overflow: hidden; margin-bottom: 16px;
+}
+header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 20px; border-bottom: 1px solid var(--border);
+}
+.header-left { display: flex; align-items: center; gap: 10px; text-decoration: none; color: inherit; }
+.logo { width: 28px; height: 28px; }
+.brand { font-size: 15px; font-weight: 600; letter-spacing: -0.02em; }
+.chat-header { padding: 14px 20px; border-bottom: 1px solid var(--border); background: var(--page-bg); }
+.chat-header h2 { font-size: 14px; font-weight: 600; color: var(--text); display: flex; align-items: center; gap: 8px; }
+.chat-header h2 svg { width: 16px; height: 16px; color: var(--signal-blue); }
+.messages { padding: 0; }
+.message { padding: 16px 20px; border-bottom: 1px solid var(--border); }
+.message:last-child { border-bottom: none; }
+.message-header { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+.avatar { width: 28px; height: 28px; border-radius: 50%; color: white; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 600; flex-shrink: 0; }
+.sender-info { flex: 1; min-width: 0; }
+.sender-name { font-size: 13px; font-weight: 600; color: var(--text); }
+.message-text { font-size: 15px; line-height: 1.55; color: var(--text); white-space: pre-wrap; margin-left: 38px; }
+.reply-bubble { margin-left: 38px; margin-bottom: 6px; padding: 6px 10px; background: #f0f2f5; border-left: 3px solid var(--signal-blue); border-radius: 4px; font-size: 13px; color: var(--text-sec); }
+.reply-sender { font-weight: 600; color: var(--signal-blue); font-size: 12px; margin-bottom: 2px; }
+.reply-text { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.status-badge {
+  padding: 4px 10px; font-size: 11px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.04em; border-radius: 4px;
+}
+.status-solved { background: #dcfce7; color: var(--green); }
+.status-recommendation { background: #fef3c7; color: #b45309; }
+main { padding: 24px 20px; }
+h1 { font-size: 20px; font-weight: 700; letter-spacing: -0.025em; margin-bottom: 12px; line-height: 1.3; }
+.meta { font-size: 12px; color: var(--text-sec); margin-bottom: 16px; }
+.tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 20px; }
+.tag {
+  background: rgba(44, 107, 237, 0.08); color: var(--signal-blue);
+  padding: 4px 10px; border-radius: 4px; font-size: 12px; font-weight: 500;
+}
+.section-title {
+  font-size: 11px; font-weight: 600; text-transform: uppercase;
+  letter-spacing: 0.06em; color: var(--text-sec); margin-bottom: 10px;
+  display: flex; align-items: center; gap: 6px;
+}
+.section-title svg { width: 14px; height: 14px; }
+.section-content { font-size: 15px; line-height: 1.6; color: var(--text); white-space: pre-wrap; }
+.problem-section { padding-bottom: 20px; border-bottom: 1px solid var(--border); margin-bottom: 20px; }
+.solution-section {
+  background: #f0fdf4; margin: -24px -20px -24px -20px; padding: 20px;
+  border-top: 1px solid #bbf7d0;
+}
+.solution-section .section-title { color: var(--green); }
+.recommendation-solution { background: #fffbeb; border-top-color: #fde68a; }
+.recommendation-solution .section-title { color: #b45309; }
+.empty-chat {
+  padding: 32px 20px; text-align: center; color: var(--text-sec); font-size: 14px;
+}
+footer {
+  padding: 14px 20px; border-top: 1px solid var(--border);
+  color: var(--text-sec); font-size: 12px; text-align: center;
+}
+@media (max-width: 520px) {
+  main { padding: 20px 16px; }
+  h1 { font-size: 18px; }
+  .solution-section { margin: -20px -16px -20px -16px; padding: 16px; }
+}
+</style>
+</head><body>
+<div class="shell">
+  <div class="card">
+    <header>
+      <a href="https://academia-tech.github.io/SupportBot" class="header-left">
+        <img src="/SupportBot/supportbot-logo-128.png" alt="SupportBot" class="logo">
+        <span class="brand">SupportBot</span>
+      </a>
+      <span class="status-recommendation status-badge">Рекомендація</span>
+    </header>
+    <main>
+      <h1>Guía para sustituir el router HGU de O2/Movistar por una ONT externa</h1>
+      <p class="meta">Case 5526de5e52f1 &middot; naseros</p>
+      <div class='tags'><span class="tag">#O2</span><span class="tag">#Movistar</span><span class="tag">#HGU</span><span class="tag">#ONT</span><span class="tag">#Router Neutro</span><span class="tag">#PLOAM Password</span><span class="tag">#VLAN</span><span class="tag">#PPPoE</span><span class="tag">#Fibra Óptica</span></div>
+      <div class="problem-section">
+        <h2 class="section-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/>
+            <line x1="12" y1="16" x2="12.01" y2="16"/>
+          </svg>
+          Проблема
+        </h2>
+        <p class="section-content">Un usuario quiere reemplazar el router de su proveedor O2 por una ONT externa (modelo EG8120L) y un sistema WiFi mesh. Pregunta sobre la viabilidad, los pasos y la configuración necesaria para que funcione el servicio de internet y telefonía.</p>
+      </div>
+      <div class="solution-section recommendation-solution">
+        <h2 class="section-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7c.6.4 1 1.1 1 1.8V17h6v-.5c0-.7.4-1.4 1-1.8A7 7 0 0 0 12 2z"/></svg>
+          Рекомендація (не підтверджено)
+        </h2>
+        <p class="section-content">Para sustituir el router HGU de O2/Movistar por una ONT externa (ej. Huawei EG8120L) y un router neutro, es imprescindible obtener la credencial de la fibra, conocida como Contraseña GPON o PLOAM Password. Esta clave autentica la ONT en la red del operador.
+
+**Pasos para la configuración:**
+1.  **Obtener la Contraseña GPON:** Se extrae del HGU original del operador, accediendo a su interfaz web (normalmente 192.168.1.1). A veces es necesario desconectar el cable de fibra para que la muestre en la sección de estado o mantenimiento GPON.
+2.  **Configurar la ONT externa:** Introducir la Contraseña GPON obtenida en la interfaz de configuración de la nueva ONT para que sincronice con la OLT del operador.
+3.  **Configurar el Router Neutro:** Se deben configurar las VLANs correspondientes:
+    *   **VLAN ID 6:** Para Internet, usando PPPoE con usuario `adslppp@telefonicanetpa` y contraseña `adslppp`.
+    *   **VLAN ID 3:** Para telefonía VoIP (si se tiene contratada).
+
+Se advierte que O2 no da soporte a esta configuración. Se compartió una lista de reproducción de YouTube como guía adicional: https://youtube.com/playlist?list=PLSvxAUzJ-XSf4mmX0McqKVUDfIYLGDOH-&amp;si=HOyKoiDjMclIxSCk</p>
+      </div>
+    </main>
+  </div>
+  <div class="card">
+    <div class="chat-header"><h2><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Історія чату</h2></div><div class="messages"><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Buenas noches. A ver si alguien me puede echar una mano con un poco de paciencia conmigo que soy bastante básico en el mundo de las redes.<br><br>Quiero sustituir mi router de proveedor de o2. <br>Tengo un ONT EG8120L para que reciba la señal de la fibra y configurarlo para que, desde aquí, le conecte por ethernet un wifi mesh de tp-link que es el que uso en casa para emitir la señal de wifi (el router del proveedor lo tengo desactivado).<br><br>Está ont tiene dos puertos ethernet. Uno ge y otro fe.<br><br>Mi idea sería claramente, conectar al puerto ge, un switch y usarlo como repartidor de conexiones ethernet de 1 gbit en el cual, uno de esos puertos quedaría ocupado evidentemente por la conexión ethernet del tp-link que me da el wifi.<br><br>No sé si me he explicado bien y si hay algún impedimento. <br><br>En mi cabeza claramente queda idónea la estructura😅, pero desconecto si hay impedimentos de algo y si es posible.<br><br>Muchas gracias de ante mano</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Buenas noches. A ver si alguien me puede echar una mano con un poco de paciencia conmigo que soy bastante básico en el m</div></div><p class="message-text">Solo tiene el Internet, o también tiene telefonía y televisión? <br>Por lo general la señal Internet, tv y telf vienen separadas en vlans desde la ont, además necesita un router para conectarse con el servicio de su proveedor.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 2</div><div class="reply-text">Solo tiene el Internet, o también tiene telefonía y televisión?  Por lo general la señal Internet, tv y telf vienen sepa</div></div><p class="message-text">Tengo línea telefónica también y el ont que compré trae entrada para la línea. TV del proveedor no tengo contratado. Uso un TV box pero que simplemente lo conectaría al puerto FE que trae este ont</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Tengo línea telefónica también y el ont que compré trae entrada para la línea. TV del proveedor no tengo contratado. Uso</div></div><p class="message-text">Ok. Creo que necesitaras la credencial para conectar la ont a tu proveedor.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 2</div><div class="reply-text">Ok. Creo que necesitaras la credencial para conectar la ont a tu proveedor.</div></div><p class="message-text">Conoces algún tutorial para la co figuración? Porque supongo que no será solo colocar la credencial en el nuevo y a funcionar no? Habrá que configurar algo sobre las ips estáticas, o algunas cosas así?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Conoces algún tutorial para la co figuración? Porque supongo que no será solo colocar la credencial en el nuevo y a func</div></div><p class="message-text">La verdad nunca que usado O2. Pero creo que la credencial la podrías obtener del router qué te dio la operadora. Déjame ver si consigo algo. Sino tocara esperar a ver si algún compañero que lo haya hecho te pueda ayudar mejor.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Conoces algún tutorial para la co figuración? Porque supongo que no será solo colocar la credencial en el nuevo y a func</div></div><p class="message-text">Sí, si deseas utilizar una ONT externa con O2 (o Movistar, ya que comparten la misma infraestructura de fibra), sí se requiere una credencial específica para la ONT. Esta credencial se conoce comúnmente como ID ONT, Contraseña GPON o PLOAM Password.<br>¿Por qué se necesita esta credencial?<br>Cuando tu fibra óptica llega a tu casa, la OLT (Optical Line Terminal) del operador en la central necesita identificar y autenticar tu ONT para permitirle el acceso a la red. Esta autenticación se realiza mediante esta credencial única. Sin ella, tu ONT externa no podrá sincronizarse correctamente con la red de O2 y no tendrás servicio.<br>¿Cómo se obtiene esta credencial?<br>La forma más común de obtener la Contraseña GPON es extrayéndola del HGU (Home Gateway Unit) que te proporciona O2. El HGU ya tiene esta información programada.<br>El proceso para extraerla suele ser el siguiente:<br> * Acceder al HGU: Necesitarás acceder a la interfaz de configuración web de tu router HGU de O2 (normalmente en 192.168.1.1).<br> * Buscar la sección de GPON/ONT: Dentro de la configuración, suele haber una sección dedicada a la fibra óptica o GPON, a veces bajo menús como &quot;Mantenimiento&quot; o &quot;Estado&quot;.<br> * Localizar la contraseña: En algunos modelos, es posible que necesites desconectar el cable de fibra del HGU para que te muestre la opción o el campo donde se visualiza el ID ONT o la contraseña GPON. Es una clave alfanumérica, a menudo de 10 o 20 caracteres.<br>Importante: Este proceso no siempre es oficial ni soportado por O2. Se considera una &quot;modificación&quot; de la configuración que te proporcionan, y O2 siempre recomendará usar su HGU. Sin embargo, es una práctica común entre usuarios avanzados que desean utilizar su propio equipo.<br>¿Qué se hace con la credencial una vez obtenida?<br>Una vez que tengas el ID ONT o Contraseña GPON, deberás introducirla en la configuración de tu ONT externa. El proceso exacto dependerá del modelo y fabricante de tu ONT. Generalmente, accedes a la interfaz web de la ONT y buscas una sección de &quot;GPON&quot;, &quot;WAN&quot; o &quot;System&quot; donde puedas introducir esta credencial para que se sincronice con la red del operador.<br>Consideraciones adicionales:<br> * VLANs: Además de la contraseña GPON de la ONT, si usas un router neutro después de tu ONT externa, necesitarás configurar las VLANs de O2/Movistar:<br>   * VLAN ID 6: Para el servicio de Internet (PPPoE con usuario adslppp@telefonicanetpa y contraseña adslppp).<br>   * VLAN ID 3: Para el servicio de VoIP (teléfono fijo), si lo tienes contratado. Esto es más complejo y a menudo requiere un adaptador ATA SIP y configurar credenciales SIP específicas.<br> * Soporte: O2 no ofrece soporte para configuraciones con ONTs externas o routers neutros, ya que su servicio está diseñado para funcionar con el HGU que proporcionan. Cualquier problema que surja de esta configuración será tu responsabilidad.<br>En resumen, sí, la ONT externa requiere una credencial (ID ONT/Contraseña GPON) para conectarse a la red de O2, y esta debe extraerse del HGU suministrado por el operador.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 2</div><div class="reply-text">Sí, si deseas utilizar una ONT externa con O2 (o Movistar, ya que comparten la misma infraestructura de fibra), sí se re</div></div><p class="message-text">Gracias por la info. Igualmente tendré que seguir investigando para ver si consigo info para la configuración paso a paso.<br>He buscado en YouTube tutoriales pero claro, no con el mismo Ont que tengo yo con lo que se complica porque cada cacharrito tiene su funcionamiento</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Gracias por la info. Igualmente tendré que seguir investigando para ver si consigo info para la configuración paso a pas</div></div><p class="message-text">https://youtube.com/playlist?list=PLSvxAUzJ-XSf4mmX0McqKVUDfIYLGDOH-&amp;si=HOyKoiDjMclIxSCk</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Gracias por la info. Igualmente tendré que seguir investigando para ver si consigo info para la configuración paso a pas</div></div><p class="message-text">Tienes que ver si esa ONT que tienes es compatible con O2 también.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 2</div><div class="reply-text">Tienes que ver si esa ONT que tienes es compatible con O2 también.</div></div><p class="message-text">Entiendo que si lo es…. Es este <br><br>He encontrado esto en AliExpress: 16,29€ | Original nuevo EG8120L 1GE + 1FE + 1 puerto SC UPC/APC FTTH módem GPON ONU ONT enrutador versión en inglés <br>https://a.aliexpress.com/_Eu1HaQi</p></div></div>
+    <footer>Academia Tech &copy; 2026</footer>
+  </div>
+</div>
+</body></html>

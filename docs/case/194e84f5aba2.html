@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html><head>
+<title>Conectar dispositivos Tuya WiFi y Bluetooth a Home Assistant sin hub | SupportBot</title>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta property="og:title" content="Conectar dispositivos Tuya WiFi y Bluetooth a Home Assistant sin hub">
+<meta property="og:description" content="Para el enchufe Tuya WiFi, se recomienda usar la integración `LocalTuya` en Home Assistant, ya que la integración oficial de Tuya requiere la app y la nube. No es posible enlazar dispositivos WiFi Tuy">
+<link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+<style>
+:root {
+  --signal-blue: #2c6bed;
+  --page-bg: #f6f7f9;
+  --card-bg: #ffffff;
+  --text: #0d0d0d;
+  --text-sec: #5c5c5c;
+  --border: #d8d8d8;
+  --radius: 12px;
+  --green: #16a34a;
+  --yellow: #ca8a04;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  background: var(--page-bg); color: var(--text);
+  min-height: 100vh; padding: 48px 20px;
+  -webkit-font-smoothing: antialiased;
+}
+@media (max-width: 520px) { body { padding: 24px 12px; } }
+.shell { max-width: 640px; margin: 0 auto; }
+.card {
+  background: var(--card-bg); border: 1px solid var(--border);
+  border-radius: var(--radius); overflow: hidden; margin-bottom: 16px;
+}
+header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 20px; border-bottom: 1px solid var(--border);
+}
+.header-left { display: flex; align-items: center; gap: 10px; text-decoration: none; color: inherit; }
+.logo { width: 28px; height: 28px; }
+.brand { font-size: 15px; font-weight: 600; letter-spacing: -0.02em; }
+.chat-header { padding: 14px 20px; border-bottom: 1px solid var(--border); background: var(--page-bg); }
+.chat-header h2 { font-size: 14px; font-weight: 600; color: var(--text); display: flex; align-items: center; gap: 8px; }
+.chat-header h2 svg { width: 16px; height: 16px; color: var(--signal-blue); }
+.messages { padding: 0; }
+.message { padding: 16px 20px; border-bottom: 1px solid var(--border); }
+.message:last-child { border-bottom: none; }
+.message-header { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+.avatar { width: 28px; height: 28px; border-radius: 50%; color: white; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 600; flex-shrink: 0; }
+.sender-info { flex: 1; min-width: 0; }
+.sender-name { font-size: 13px; font-weight: 600; color: var(--text); }
+.message-text { font-size: 15px; line-height: 1.55; color: var(--text); white-space: pre-wrap; margin-left: 38px; }
+.reply-bubble { margin-left: 38px; margin-bottom: 6px; padding: 6px 10px; background: #f0f2f5; border-left: 3px solid var(--signal-blue); border-radius: 4px; font-size: 13px; color: var(--text-sec); }
+.reply-sender { font-weight: 600; color: var(--signal-blue); font-size: 12px; margin-bottom: 2px; }
+.reply-text { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.status-badge {
+  padding: 4px 10px; font-size: 11px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.04em; border-radius: 4px;
+}
+.status-solved { background: #dcfce7; color: var(--green); }
+.status-recommendation { background: #fef3c7; color: #b45309; }
+main { padding: 24px 20px; }
+h1 { font-size: 20px; font-weight: 700; letter-spacing: -0.025em; margin-bottom: 12px; line-height: 1.3; }
+.meta { font-size: 12px; color: var(--text-sec); margin-bottom: 16px; }
+.tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 20px; }
+.tag {
+  background: rgba(44, 107, 237, 0.08); color: var(--signal-blue);
+  padding: 4px 10px; border-radius: 4px; font-size: 12px; font-weight: 500;
+}
+.section-title {
+  font-size: 11px; font-weight: 600; text-transform: uppercase;
+  letter-spacing: 0.06em; color: var(--text-sec); margin-bottom: 10px;
+  display: flex; align-items: center; gap: 6px;
+}
+.section-title svg { width: 14px; height: 14px; }
+.section-content { font-size: 15px; line-height: 1.6; color: var(--text); white-space: pre-wrap; }
+.problem-section { padding-bottom: 20px; border-bottom: 1px solid var(--border); margin-bottom: 20px; }
+.solution-section {
+  background: #f0fdf4; margin: -24px -20px -24px -20px; padding: 20px;
+  border-top: 1px solid #bbf7d0;
+}
+.solution-section .section-title { color: var(--green); }
+.recommendation-solution { background: #fffbeb; border-top-color: #fde68a; }
+.recommendation-solution .section-title { color: #b45309; }
+.empty-chat {
+  padding: 32px 20px; text-align: center; color: var(--text-sec); font-size: 14px;
+}
+footer {
+  padding: 14px 20px; border-top: 1px solid var(--border);
+  color: var(--text-sec); font-size: 12px; text-align: center;
+}
+@media (max-width: 520px) {
+  main { padding: 20px 16px; }
+  h1 { font-size: 18px; }
+  .solution-section { margin: -20px -16px -20px -16px; padding: 16px; }
+}
+</style>
+</head><body>
+<div class="shell">
+  <div class="card">
+    <header>
+      <a href="https://academia-tech.github.io/SupportBot" class="header-left">
+        <img src="/SupportBot/supportbot-logo-128.png" alt="SupportBot" class="logo">
+        <span class="brand">SupportBot</span>
+      </a>
+      <span class="status-recommendation status-badge">Рекомендація</span>
+    </header>
+    <main>
+      <h1>Conectar dispositivos Tuya WiFi y Bluetooth a Home Assistant sin hub</h1>
+      <p class="meta">Case 194e84f5aba2 &middot; domotica_es</p>
+      <div class='tags'><span class="tag">#Tuya</span><span class="tag">#Home Assistant</span><span class="tag">#WiFi</span><span class="tag">#Bluetooth</span><span class="tag">#Zigbee</span><span class="tag">#SLZB-06</span><span class="tag">#LocalTuya</span><span class="tag">#ESP32</span><span class="tag">#reverse proxy</span></div>
+      <div class="problem-section">
+        <h2 class="section-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/>
+            <line x1="12" y1="16" x2="12.01" y2="16"/>
+          </svg>
+          Проблема
+        </h2>
+        <p class="section-content">El usuario busca integrar un enchufe Tuya WiFi y un termómetro Tuya Bluetooth con Home Assistant, utilizando un coordinador SLZB-06, sin necesidad de un hub Tuya. El enchufe WiFi no aparece directamente en la red y el usuario duda sobre activar BLE en el SLZB.</p>
+      </div>
+      <div class="solution-section recommendation-solution">
+        <h2 class="section-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7c.6.4 1 1.1 1 1.8V17h6v-.5c0-.7.4-1.4 1-1.8A7 7 0 0 0 12 2z"/></svg>
+          Рекомендація (не підтверджено)
+        </h2>
+        <p class="section-content">Para el enchufe Tuya WiFi, se recomienda usar la integración `LocalTuya` en Home Assistant, ya que la integración oficial de Tuya requiere la app y la nube. No es posible enlazar dispositivos WiFi Tuya directamente a Home Assistant sin una integración. Para el termómetro Tuya Bluetooth, se puede activar el BLE en el coordinador SLZB-06, aunque esto requiere un firmware específico para multiprotocolo (Zigbee y BLE) y puede eliminar la interfaz gráfica del SLZB-06, por lo que no se recomienda para evitar inestabilidad. Una alternativa más estable es usar un ESP32 con un reverse proxy dedicado para BLE (disponibles por unos 5€). Algunos dispositivos Bluetooth pueden tener el tráfico encriptado, requiriendo una clave para su integración.</p>
+      </div>
+    </main>
+  </div>
+  <div class="card">
+    <div class="chat-header"><h2><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Історія чату</h2></div><div class="messages"><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Hola, soy bastante novato😅<br>Tengo HA con un zlb-06 en modo coordinador funcionando en zigbee2mqtt.<br>Me han regalado un enchufe tuya wifi y un termómetro tuya bluetooth: se pueden enlazar sin un hub tuya?<br>De momento no lo he conseguido.<br>Gracias</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Hola, soy bastante novato😅 Tengo HA con un zlb-06 en modo coordinador funcionando en zigbee2mqtt. Me han regalado un enc</div></div><p class="message-text">Para el enchufe WiFi, solo conéctalo a la misma red que el HA. Para el Bluetooth, activa el BLE en el SLZB o ponte un reverse proxy</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Hola, soy bastante novato😅 Tengo HA con un zlb-06 en modo coordinador funcionando en zigbee2mqtt. Me han regalado un enc</div></div><p class="message-text">Wifi no.  Bluetooth alguien que sepa nos diga</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 2</div><div class="reply-text">Para el enchufe WiFi, solo conéctalo a la misma red que el HA. Para el Bluetooth, activa el BLE en el SLZB o ponte un re</div></div><p class="message-text">Pues el wifi están en la misma red y no aparecen.<br>El bluetooth al ir a darle a activar el reverse proxy dice que cambiará a esp32 y no me atrevo por si me deja de funcionar el resto de cosas😅</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 3</div><div class="reply-text">Wifi no.  Bluetooth alguien que sepa nos diga</div></div><p class="message-text">Como? Que lo que he dicho no sirve? Mira las specs del SLZB-06</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Pues el wifi están en la misma red y no aparecen. El bluetooth al ir a darle a activar el reverse proxy dice que cambiar</div></div><p class="message-text">Es un firmware distinto para poder tener Zigbee y BLE. Yo sinceramente… multiprotocolo… no lo recomiendo, pero cada uno en su casa que haga lo que quiera.<br><br>Mi consejo:<br>- El SLZB-06 para Zigbee<br>- Un ESP32 con un reverse proxy (busca en google y en aliexpress, valen como 5€)<br>- Para el WiFi, has puesto la integración Tuya?<br><br>Último consejo: ChatGPT y muchos videos de HA vas a necesitar</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 2</div><div class="reply-text">Es un firmware distinto para poder tener Zigbee y BLE. Yo sinceramente… multiprotocolo… no lo recomiendo, pero cada uno </div></div><p class="message-text">Con la integración tuya (el enchufe wifi) lo enlazo en la app tuya y funciona. Pero quería saber si se podía enlazar &quot;directamente&quot;.<br>Miraré lo del reverse proxy en Ali.<br>Gracias.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Con la integración tuya (el enchufe wifi) lo enlazo en la app tuya y funciona. Pero quería saber si se podía enlazar &quot;di</div></div><p class="message-text">La integración Tuya en HA o la app tuya en el movil? Busca LocalTuya para que se integre en HA.<br><br>Integración nativa en HA no hay de Tuya</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Gracias</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 2</div><div class="reply-text">La integración Tuya en HA o la app tuya en el movil? Busca LocalTuya para que se integre en HA.  Integración nativa en H</div></div><p class="message-text">Tengo la app y la integración &quot;oficial&quot;</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Algún reverse proxy recomendado de Ali?<br>Gracias</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">El adaptador bluetooth del propio dispositivo no podría usarse?<br>La integración bluetooth passive monitor me detecta dispositivos bluetooth, pero el termómetro no.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Algún reverse proxy recomendado de Ali? Gracias</div></div><p class="message-text">Busca en el histórico, he posteado varias veces este tema</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">El adaptador bluetooth del propio dispositivo no podría usarse? La integración bluetooth passive monitor me detecta disp</div></div><p class="message-text">Seguramente si está cerca te funcione. Integración BLE.<br><br>A veces tienen el tráfico encriptado y necesitas una key</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 2</div><div class="reply-text">Seguramente si está cerca te funcione. Integración BLE.  A veces tienen el tráfico encriptado y necesitas una key</div></div><p class="message-text">Pues lo mismo es eso. Los he puesto pegados y nada.<br>Muchas gracias</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Pues el wifi están en la misma red y no aparecen. El bluetooth al ir a darle a activar el reverse proxy dice que cambiar</div></div><p class="message-text">Si activas el BLE te vas a quedar sin interface gráfica.<br>Busca otra alternativa, en mi opinión.<br><br>El dispositivo wifi, es muy extraño que no esté en tu red.<br>O no acabo de entender el problema.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 4</div><div class="reply-text">Si activas el BLE te vas a quedar sin interface gráfica. Busca otra alternativa, en mi opinión.  El dispositivo wifi, es</div></div><p class="message-text">Por eso no me atreví a activar ble.<br><br>El dispositivo wifi está en la red wifi... Pero buscaba si una vez ahí se podía enlazar a ha de forma directa, sin usar la integración tuya.<br>Gracias</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Por eso no me atreví a activar ble.  El dispositivo wifi está en la red wifi... Pero buscaba si una vez ahí se podía enl</div></div><p class="message-text">No se puede directamente, como acabo de leer que te han recomendado, usa tuya o tuya local o local tuya.<br>🤣🤣<br>Si solamente tienes un dispositivo, usa Tuya, que es la oficial</p></div></div>
+    <footer>Academia Tech &copy; 2026</footer>
+  </div>
+</div>
+</body></html>

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html><head>
+<title>Zigbee2MQTT deja de funcionar tras actualizar Home Assistant y la restauración no lo soluciona | SupportBot</title>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta property="og:title" content="Zigbee2MQTT deja de funcionar tras actualizar Home Assistant y la restauración no lo soluciona">
+<meta property="og:description" content="La solución final al problema fue re-emparejar todos los dispositivos Zigbee. Sin embargo, se compartió una medida preventiva crucial para el futuro: se recomienda encarecidamente hacer una copia de s">
+<link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+<style>
+:root {
+  --signal-blue: #2c6bed;
+  --page-bg: #f6f7f9;
+  --card-bg: #ffffff;
+  --text: #0d0d0d;
+  --text-sec: #5c5c5c;
+  --border: #d8d8d8;
+  --radius: 12px;
+  --green: #16a34a;
+  --yellow: #ca8a04;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  background: var(--page-bg); color: var(--text);
+  min-height: 100vh; padding: 48px 20px;
+  -webkit-font-smoothing: antialiased;
+}
+@media (max-width: 520px) { body { padding: 24px 12px; } }
+.shell { max-width: 640px; margin: 0 auto; }
+.card {
+  background: var(--card-bg); border: 1px solid var(--border);
+  border-radius: var(--radius); overflow: hidden; margin-bottom: 16px;
+}
+header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 20px; border-bottom: 1px solid var(--border);
+}
+.header-left { display: flex; align-items: center; gap: 10px; text-decoration: none; color: inherit; }
+.logo { width: 28px; height: 28px; }
+.brand { font-size: 15px; font-weight: 600; letter-spacing: -0.02em; }
+.chat-header { padding: 14px 20px; border-bottom: 1px solid var(--border); background: var(--page-bg); }
+.chat-header h2 { font-size: 14px; font-weight: 600; color: var(--text); display: flex; align-items: center; gap: 8px; }
+.chat-header h2 svg { width: 16px; height: 16px; color: var(--signal-blue); }
+.messages { padding: 0; }
+.message { padding: 16px 20px; border-bottom: 1px solid var(--border); }
+.message:last-child { border-bottom: none; }
+.message-header { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+.avatar { width: 28px; height: 28px; border-radius: 50%; color: white; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 600; flex-shrink: 0; }
+.sender-info { flex: 1; min-width: 0; }
+.sender-name { font-size: 13px; font-weight: 600; color: var(--text); }
+.message-text { font-size: 15px; line-height: 1.55; color: var(--text); white-space: pre-wrap; margin-left: 38px; }
+.reply-bubble { margin-left: 38px; margin-bottom: 6px; padding: 6px 10px; background: #f0f2f5; border-left: 3px solid var(--signal-blue); border-radius: 4px; font-size: 13px; color: var(--text-sec); }
+.reply-sender { font-weight: 600; color: var(--signal-blue); font-size: 12px; margin-bottom: 2px; }
+.reply-text { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.status-badge {
+  padding: 4px 10px; font-size: 11px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.04em; border-radius: 4px;
+}
+.status-solved { background: #dcfce7; color: var(--green); }
+.status-recommendation { background: #fef3c7; color: #b45309; }
+main { padding: 24px 20px; }
+h1 { font-size: 20px; font-weight: 700; letter-spacing: -0.025em; margin-bottom: 12px; line-height: 1.3; }
+.meta { font-size: 12px; color: var(--text-sec); margin-bottom: 16px; }
+.tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 20px; }
+.tag {
+  background: rgba(44, 107, 237, 0.08); color: var(--signal-blue);
+  padding: 4px 10px; border-radius: 4px; font-size: 12px; font-weight: 500;
+}
+.section-title {
+  font-size: 11px; font-weight: 600; text-transform: uppercase;
+  letter-spacing: 0.06em; color: var(--text-sec); margin-bottom: 10px;
+  display: flex; align-items: center; gap: 6px;
+}
+.section-title svg { width: 14px; height: 14px; }
+.section-content { font-size: 15px; line-height: 1.6; color: var(--text); white-space: pre-wrap; }
+.problem-section { padding-bottom: 20px; border-bottom: 1px solid var(--border); margin-bottom: 20px; }
+.solution-section {
+  background: #f0fdf4; margin: -24px -20px -24px -20px; padding: 20px;
+  border-top: 1px solid #bbf7d0;
+}
+.solution-section .section-title { color: var(--green); }
+.recommendation-solution { background: #fffbeb; border-top-color: #fde68a; }
+.recommendation-solution .section-title { color: #b45309; }
+.empty-chat {
+  padding: 32px 20px; text-align: center; color: var(--text-sec); font-size: 14px;
+}
+footer {
+  padding: 14px 20px; border-top: 1px solid var(--border);
+  color: var(--text-sec); font-size: 12px; text-align: center;
+}
+@media (max-width: 520px) {
+  main { padding: 20px 16px; }
+  h1 { font-size: 18px; }
+  .solution-section { margin: -20px -16px -20px -16px; padding: 16px; }
+}
+</style>
+</head><body>
+<div class="shell">
+  <div class="card">
+    <header>
+      <a href="https://academia-tech.github.io/SupportBot" class="header-left">
+        <img src="/SupportBot/supportbot-logo-128.png" alt="SupportBot" class="logo">
+        <span class="brand">SupportBot</span>
+      </a>
+      <span class="status-solved status-badge">Вирішено</span>
+    </header>
+    <main>
+      <h1>Zigbee2MQTT deja de funcionar tras actualizar Home Assistant y la restauración no lo soluciona</h1>
+      <p class="meta">Case f31be2da0636 &middot; domotica_es</p>
+      <div class='tags'><span class="tag">#Zigbee2MQTT</span><span class="tag">#Home Assistant</span><span class="tag">#Actualización</span><span class="tag">#Fallo</span><span class="tag">#Backup</span><span class="tag">#Restauración</span><span class="tag">#Z2M</span><span class="tag">#Prevención</span></div>
+      <div class="problem-section">
+        <h2 class="section-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/>
+            <line x1="12" y1="16" x2="12.01" y2="16"/>
+          </svg>
+          Проблема
+        </h2>
+        <p class="section-content">Un usuario informa que después de realizar varias actualizaciones en Home Assistant, su red Zigbee2MQTT dejó de funcionar. Intentó solucionar el problema restaurando una versión anterior de Home Assistant, pero esto no resolvió el fallo. Finalmente, tuvo que volver a emparejar todos sus dispositivos para que el sistema volviera a funcionar.</p>
+      </div>
+      <div class="solution-section">
+        <h2 class="section-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          Рішення
+        </h2>
+        <p class="section-content">La solución final al problema fue re-emparejar todos los dispositivos Zigbee. Sin embargo, se compartió una medida preventiva crucial para el futuro: se recomienda encarecidamente hacer una copia de seguridad manual de los archivos de configuración de Zigbee2MQTT, que se encuentran en la carpeta `share/zigbee2mqtt/`. Esta acción es fundamental porque las copias de seguridad estándar de Home Assistant no siempre incluyen toda la configuración de Z2M, y tener esta copia manual puede evitar tener que re-emparejar todos los dispositivos después de una actualización fallida o un problema en el sistema. El usuario agradeció el consejo.</p>
+      </div>
+    </main>
+  </div>
+  <div class="card">
+    <div class="chat-header"><h2><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Історія чату</h2></div><div class="messages"><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">He restaurado a una versión anterior de HA revertirndo todos los cambios de las actualizaciones y tal pero sigue sin funcionar z2m 🤔🤔</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Raro.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Bueno, todo no. Toda la red ZigBee hasta donde he podido comprobar. Tampoco es que ande con mucho tiempo para mirar mejor porque para colmo me ha cogido en mal momento 😅😅😅. Pero vamos, teniendo en cuenta que prácticamente toda la casa la tengo montada con ZigBee, diría que el 80% del sistema lo tengo inservible 😬😅</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">He restaurado a una versión anterior de HA revertirndo todos los cambios de las actualizaciones y tal pero sigue sin fun</div></div><p class="message-text">O sea, que vas para atrás y cuando actualices de nuevo , te vas a dar de frente, de nuevo, con los problemas.<br><br>Mi planteamiento en este asunto es , siempre para adelante.<br>Pero claro, con la documentación leída</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 2</div><div class="reply-text">O sea, que vas para atrás y cuando actualices de nuevo , te vas a dar de frente, de nuevo, con los problemas.  Mi plante</div></div><p class="message-text">Te equivocas, he ido para atrás, pero sin que acabe por funcionar ni de esa forma XD. Osea, estoy en la misma versión de cuando funcionaba, pero sigue sin funcionar 😂</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Es peor aún XD</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Demasiado pronto he dicho que estaba arreglao 👀😅</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Demasiado pronto he dicho que estaba arreglao 👀😅</div></div><p class="message-text">Ahora parece que sí, lo vigilaré unos días para asegurarme, pero parece que ya está.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Ahora parece que sí, lo vigilaré unos días para asegurarme, pero parece que ya está.</div></div><p class="message-text">Qué has hecho al final? Te ha tocado emparejar todo de nuevo?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 3</div><div class="reply-text">Qué has hecho al final? Te ha tocado emparejar todo de nuevo?</div></div><p class="message-text">Basicamente, sí.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">La segunda vez que actualicé el sistema, ya prevenido de que podía pasar, volvió a pasar de nuevo</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Basicamente, sí.</div></div><p class="message-text">Para la próxima cópiate los ficheros configuration en carpeta share de tu Z2M, antes de actualizar, te puede evitar una buena, y no solo el backup de HA, que no tiene todo</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Hace 2 meses cuando no sabía que me tengo que mudar de casa me habría puesto a investigar a ver qué lo ha provocado y tal, ahora sabiendo que voy a tener que montar prácticamente todo de cero otra vez cuando me mude, pago de liarme más de la cuenta😅😂 (si encuentro casa y no me quedo a vivir debajo de un puente porque está la cosa difícil con los alquileres 👀)</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 3</div><div class="reply-text">Para la próxima cópiate los ficheros configuration en carpeta share de tu Z2M, antes de actualizar, te puede evitar una </div></div><p class="message-text">Lo tengo en cuenta, gracias 😁</p></div></div>
+    <footer>Academia Tech &copy; 2026</footer>
+  </div>
+</div>
+</body></html>

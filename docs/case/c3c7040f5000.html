@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html><head>
+<title>Red Mesh inalámbrica Omada en casa de varias plantas | SupportBot</title>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta property="og:title" content="Red Mesh inalámbrica Omada en casa de varias plantas">
+<meta property="og:description" content="La plataforma Omada está diseñada principalmente para configuraciones cableadas. Para redes Mesh inalámbricas, se sugieren otras marcas como Ubiquiti, Mikrotik o Ruijie Reyee, que ofrecen más opciones">
+<link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+<style>
+:root {
+  --signal-blue: #2c6bed;
+  --page-bg: #f6f7f9;
+  --card-bg: #ffffff;
+  --text: #0d0d0d;
+  --text-sec: #5c5c5c;
+  --border: #d8d8d8;
+  --radius: 12px;
+  --green: #16a34a;
+  --yellow: #ca8a04;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  background: var(--page-bg); color: var(--text);
+  min-height: 100vh; padding: 48px 20px;
+  -webkit-font-smoothing: antialiased;
+}
+@media (max-width: 520px) { body { padding: 24px 12px; } }
+.shell { max-width: 640px; margin: 0 auto; }
+.card {
+  background: var(--card-bg); border: 1px solid var(--border);
+  border-radius: var(--radius); overflow: hidden; margin-bottom: 16px;
+}
+header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 20px; border-bottom: 1px solid var(--border);
+}
+.header-left { display: flex; align-items: center; gap: 10px; text-decoration: none; color: inherit; }
+.logo { width: 28px; height: 28px; }
+.brand { font-size: 15px; font-weight: 600; letter-spacing: -0.02em; }
+.chat-header { padding: 14px 20px; border-bottom: 1px solid var(--border); background: var(--page-bg); }
+.chat-header h2 { font-size: 14px; font-weight: 600; color: var(--text); display: flex; align-items: center; gap: 8px; }
+.chat-header h2 svg { width: 16px; height: 16px; color: var(--signal-blue); }
+.messages { padding: 0; }
+.message { padding: 16px 20px; border-bottom: 1px solid var(--border); }
+.message:last-child { border-bottom: none; }
+.message-header { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+.avatar { width: 28px; height: 28px; border-radius: 50%; color: white; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 600; flex-shrink: 0; }
+.sender-info { flex: 1; min-width: 0; }
+.sender-name { font-size: 13px; font-weight: 600; color: var(--text); }
+.message-text { font-size: 15px; line-height: 1.55; color: var(--text); white-space: pre-wrap; margin-left: 38px; }
+.reply-bubble { margin-left: 38px; margin-bottom: 6px; padding: 6px 10px; background: #f0f2f5; border-left: 3px solid var(--signal-blue); border-radius: 4px; font-size: 13px; color: var(--text-sec); }
+.reply-sender { font-weight: 600; color: var(--signal-blue); font-size: 12px; margin-bottom: 2px; }
+.reply-text { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.status-badge {
+  padding: 4px 10px; font-size: 11px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.04em; border-radius: 4px;
+}
+.status-solved { background: #dcfce7; color: var(--green); }
+.status-recommendation { background: #fef3c7; color: #b45309; }
+main { padding: 24px 20px; }
+h1 { font-size: 20px; font-weight: 700; letter-spacing: -0.025em; margin-bottom: 12px; line-height: 1.3; }
+.meta { font-size: 12px; color: var(--text-sec); margin-bottom: 16px; }
+.tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 20px; }
+.tag {
+  background: rgba(44, 107, 237, 0.08); color: var(--signal-blue);
+  padding: 4px 10px; border-radius: 4px; font-size: 12px; font-weight: 500;
+}
+.section-title {
+  font-size: 11px; font-weight: 600; text-transform: uppercase;
+  letter-spacing: 0.06em; color: var(--text-sec); margin-bottom: 10px;
+  display: flex; align-items: center; gap: 6px;
+}
+.section-title svg { width: 14px; height: 14px; }
+.section-content { font-size: 15px; line-height: 1.6; color: var(--text); white-space: pre-wrap; }
+.problem-section { padding-bottom: 20px; border-bottom: 1px solid var(--border); margin-bottom: 20px; }
+.solution-section {
+  background: #f0fdf4; margin: -24px -20px -24px -20px; padding: 20px;
+  border-top: 1px solid #bbf7d0;
+}
+.solution-section .section-title { color: var(--green); }
+.recommendation-solution { background: #fffbeb; border-top-color: #fde68a; }
+.recommendation-solution .section-title { color: #b45309; }
+.empty-chat {
+  padding: 32px 20px; text-align: center; color: var(--text-sec); font-size: 14px;
+}
+footer {
+  padding: 14px 20px; border-top: 1px solid var(--border);
+  color: var(--text-sec); font-size: 12px; text-align: center;
+}
+@media (max-width: 520px) {
+  main { padding: 20px 16px; }
+  h1 { font-size: 18px; }
+  .solution-section { margin: -20px -16px -20px -16px; padding: 16px; }
+}
+</style>
+</head><body>
+<div class="shell">
+  <div class="card">
+    <header>
+      <a href="https://academia-tech.github.io/SupportBot" class="header-left">
+        <img src="/SupportBot/supportbot-logo-128.png" alt="SupportBot" class="logo">
+        <span class="brand">SupportBot</span>
+      </a>
+      <span class="status-recommendation status-badge">Рекомендація</span>
+    </header>
+    <main>
+      <h1>Red Mesh inalámbrica Omada en casa de varias plantas</h1>
+      <p class="meta">Case c3c7040f5000 &middot; naseros</p>
+      <div class='tags'><span class="tag">#Red Mesh</span><span class="tag">#Omada</span><span class="tag">#TP-Link</span><span class="tag">#WiFi</span><span class="tag">#Router</span><span class="tag">#VLAN</span><span class="tag">#VPN</span><span class="tag">#Hogar</span></div>
+      <div class="problem-section">
+        <h2 class="section-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/>
+            <line x1="12" y1="16" x2="12.01" y2="16"/>
+          </svg>
+          Проблема
+        </h2>
+        <p class="section-content">Un usuario quiere crear una red Mesh inalámbrica en una casa de dos plantas usando un router Omada ER706W y dos APs adicionales, sin cableado, pero manteniendo funcionalidades avanzadas como VLANs, portal y VPN.</p>
+      </div>
+      <div class="solution-section recommendation-solution">
+        <h2 class="section-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7c.6.4 1 1.1 1 1.8V17h6v-.5c0-.7.4-1.4 1-1.8A7 7 0 0 0 12 2z"/></svg>
+          Рекомендація (не підтверджено)
+        </h2>
+        <p class="section-content">La plataforma Omada está diseñada principalmente para configuraciones cableadas. Para redes Mesh inalámbricas, se sugieren otras marcas como Ubiquiti, Mikrotik o Ruijie Reyee, que ofrecen más opciones. También se recomienda considerar combos de nodos Mesh preconfigurados. El usuario busca una solución menos intrusiva que permita futuras mejoras con cableado y que soporte las funciones avanzadas de Omada.</p>
+      </div>
+    </main>
+  </div>
+  <div class="card">
+    <div class="chat-header"><h2><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Історія чату</h2></div><div class="messages"><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Buenas tardes..... Estoy con la idea de hacerme con un router omada. Por no cablear , la idea es que este disponga de wifi , y parece ser que sólo existe uno el er706w con wifi 6. El planteamiento es crear una red mesh con otros 2 aps mesh, siendo un total de 3, entre ellos sin cablear. Alguien dispondré de este modelo de router? Sabéis si hay nueva gama de routers por salir de esta serie?.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Buenas tardes..... Estoy con la idea de hacerme con un router omada. Por no cablear , la idea es que este disponga de wi</div></div><p class="message-text">Saludos me parece que en Omada la idea es todo cableado, puedes fijarte en otras marcas como Ubiquiti, Mikrotik o Rujie Reyee que si tienen más opciones para hacer lo que planteas, espero te sirva 👍🏼</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Buenas tardes..... Estoy con la idea de hacerme con un router omada. Por no cablear , la idea es que este disponga de wi</div></div><p class="message-text">Sino, tienes las opciones de combos mesh de 2, 3 o 4 nodos que compras, instalas y listo 👍🏼</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 2</div><div class="reply-text">Saludos me parece que en Omada la idea es todo cableado, puedes fijarte en otras marcas como Ubiquiti, Mikrotik o Rujie </div></div><p class="message-text">Simplemente me centro en omada, porque he mirado bastante e incluso he probado y devuelto otras soluciones. Básicamente como comentas lo cableado es más rápido,fiable, pero no precisamente cómodo y práctico de instaurar. Así pues una malla mesh es totalmente inalámbrico con la ventaja de su rooming, es cierto que omada el 99% de su topología de libro es cableado y su malla mesh alimentada y gestionada por poe, implicando switch gestor poe o router con poe, demasiada inversión para un hogar de 2 plantas siendo mi caso. Al tener una buena ubicación del router  un ap se podría evitar. Porque no ser el mismo router una AP? Que opinas??</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Simplemente me centro en omada, porque he mirado bastante e incluso he probado y devuelto otras soluciones. Básicamente </div></div><p class="message-text">Si, creería que con los combos de nodos mesh vas bien. Ahí tienes varias opciones y marcas 👍🏼</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 2</div><div class="reply-text">Si, creería que con los combos de nodos mesh vas bien. Ahí tienes varias opciones y marcas 👍🏼</div></div><p class="message-text">Digamos que una opcion menos intrusiva pero que en un futuro cableando que se pueda mejorar, es lo que busco. Y omada,  porque busco gestión de vlans, portal, vpn,..... Pero cablear variar plantas con cable de red en una vivienda ya construida no es fácil.<br>Pd:. He editado el mensaje anterior &quot;ilegible&quot;.  Te agradezco la voluntad de ayudar con tu opinión y el esfuerzo por entenderlo. 🙏👏</p></div></div>
+    <footer>Academia Tech &copy; 2026</footer>
+  </div>
+</div>
+</body></html>

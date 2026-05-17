@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html><head>
+<title>Recomendación de equipamiento de red para casa de varias plantas con VLANs | SupportBot</title>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta property="og:title" content="Recomendación de equipamiento de red para casa de varias plantas con VLANs">
+<meta property="og:description" content="Para una gestión de red avanzada y centralizada, se recomienda utilizar una única línea de productos (Ubiquiti, TP-Link Omada o Ruijie Reyee). Para la necesidad específica de que una VLAN (ej. gestión">
+<link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+<style>
+:root {
+  --signal-blue: #2c6bed;
+  --page-bg: #f6f7f9;
+  --card-bg: #ffffff;
+  --text: #0d0d0d;
+  --text-sec: #5c5c5c;
+  --border: #d8d8d8;
+  --radius: 12px;
+  --green: #16a34a;
+  --yellow: #ca8a04;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  background: var(--page-bg); color: var(--text);
+  min-height: 100vh; padding: 48px 20px;
+  -webkit-font-smoothing: antialiased;
+}
+@media (max-width: 520px) { body { padding: 24px 12px; } }
+.shell { max-width: 640px; margin: 0 auto; }
+.card {
+  background: var(--card-bg); border: 1px solid var(--border);
+  border-radius: var(--radius); overflow: hidden; margin-bottom: 16px;
+}
+header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 20px; border-bottom: 1px solid var(--border);
+}
+.header-left { display: flex; align-items: center; gap: 10px; text-decoration: none; color: inherit; }
+.logo { width: 28px; height: 28px; }
+.brand { font-size: 15px; font-weight: 600; letter-spacing: -0.02em; }
+.chat-header { padding: 14px 20px; border-bottom: 1px solid var(--border); background: var(--page-bg); }
+.chat-header h2 { font-size: 14px; font-weight: 600; color: var(--text); display: flex; align-items: center; gap: 8px; }
+.chat-header h2 svg { width: 16px; height: 16px; color: var(--signal-blue); }
+.messages { padding: 0; }
+.message { padding: 16px 20px; border-bottom: 1px solid var(--border); }
+.message:last-child { border-bottom: none; }
+.message-header { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+.avatar { width: 28px; height: 28px; border-radius: 50%; color: white; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 600; flex-shrink: 0; }
+.sender-info { flex: 1; min-width: 0; }
+.sender-name { font-size: 13px; font-weight: 600; color: var(--text); }
+.message-text { font-size: 15px; line-height: 1.55; color: var(--text); white-space: pre-wrap; margin-left: 38px; }
+.reply-bubble { margin-left: 38px; margin-bottom: 6px; padding: 6px 10px; background: #f0f2f5; border-left: 3px solid var(--signal-blue); border-radius: 4px; font-size: 13px; color: var(--text-sec); }
+.reply-sender { font-weight: 600; color: var(--signal-blue); font-size: 12px; margin-bottom: 2px; }
+.reply-text { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.status-badge {
+  padding: 4px 10px; font-size: 11px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.04em; border-radius: 4px;
+}
+.status-solved { background: #dcfce7; color: var(--green); }
+.status-recommendation { background: #fef3c7; color: #b45309; }
+main { padding: 24px 20px; }
+h1 { font-size: 20px; font-weight: 700; letter-spacing: -0.025em; margin-bottom: 12px; line-height: 1.3; }
+.meta { font-size: 12px; color: var(--text-sec); margin-bottom: 16px; }
+.tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 20px; }
+.tag {
+  background: rgba(44, 107, 237, 0.08); color: var(--signal-blue);
+  padding: 4px 10px; border-radius: 4px; font-size: 12px; font-weight: 500;
+}
+.section-title {
+  font-size: 11px; font-weight: 600; text-transform: uppercase;
+  letter-spacing: 0.06em; color: var(--text-sec); margin-bottom: 10px;
+  display: flex; align-items: center; gap: 6px;
+}
+.section-title svg { width: 14px; height: 14px; }
+.section-content { font-size: 15px; line-height: 1.6; color: var(--text); white-space: pre-wrap; }
+.problem-section { padding-bottom: 20px; border-bottom: 1px solid var(--border); margin-bottom: 20px; }
+.solution-section {
+  background: #f0fdf4; margin: -24px -20px -24px -20px; padding: 20px;
+  border-top: 1px solid #bbf7d0;
+}
+.solution-section .section-title { color: var(--green); }
+.recommendation-solution { background: #fffbeb; border-top-color: #fde68a; }
+.recommendation-solution .section-title { color: #b45309; }
+.empty-chat {
+  padding: 32px 20px; text-align: center; color: var(--text-sec); font-size: 14px;
+}
+footer {
+  padding: 14px 20px; border-top: 1px solid var(--border);
+  color: var(--text-sec); font-size: 12px; text-align: center;
+}
+@media (max-width: 520px) {
+  main { padding: 20px 16px; }
+  h1 { font-size: 18px; }
+  .solution-section { margin: -20px -16px -20px -16px; padding: 16px; }
+}
+</style>
+</head><body>
+<div class="shell">
+  <div class="card">
+    <header>
+      <a href="https://academia-tech.github.io/SupportBot" class="header-left">
+        <img src="/SupportBot/supportbot-logo-128.png" alt="SupportBot" class="logo">
+        <span class="brand">SupportBot</span>
+      </a>
+      <span class="status-recommendation status-badge">Рекомендація</span>
+    </header>
+    <main>
+      <h1>Recomendación de equipamiento de red para casa de varias plantas con VLANs</h1>
+      <p class="meta">Case 4abc6a4734ba &middot; naseros</p>
+      <div class='tags'><span class="tag">#redes</span><span class="tag">#VLAN</span><span class="tag">#segmentación de red</span><span class="tag">#puntos de acceso</span><span class="tag">#router</span><span class="tag">#Ubiquiti</span><span class="tag">#TP-Link Omada</span><span class="tag">#Ruijie Reyee</span></div>
+      <div class="problem-section">
+        <h2 class="section-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/>
+            <line x1="12" y1="16" x2="12.01" y2="16"/>
+          </svg>
+          Проблема
+        </h2>
+        <p class="section-content">Un usuario con una casa de tres plantas y un servidor Proxmox busca recomendaciones de router y puntos de acceso para reemplazar el de la operadora. Necesita crear VLANs para segmentar la red (principal, invitados, domótica, servidor) y permitir comunicación unidireccional entre ellas (ej. Home Assistant a dispositivos IoT).</p>
+      </div>
+      <div class="solution-section recommendation-solution">
+        <h2 class="section-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7c.6.4 1 1.1 1 1.8V17h6v-.5c0-.7.4-1.4 1-1.8A7 7 0 0 0 12 2z"/></svg>
+          Рекомендація (не підтверджено)
+        </h2>
+        <p class="section-content">Para una gestión de red avanzada y centralizada, se recomienda utilizar una única línea de productos (Ubiquiti, TP-Link Omada o Ruijie Reyee). Para la necesidad específica de que una VLAN (ej. gestión) pueda ver los dispositivos de otra (ej. domótica), pero no al revés, la solución es usar Listas de Control de Acceso (ACLs). Esto requiere un sistema de gestión centralizado como un router o switch gestionable. Una solución avanzada es implementar un router virtualizado en Proxmox (usando OpenWRT, OPNsense, etc.) para configurar las reglas de firewall entre VLANs; OpenWRT se destaca por su facilidad para esta tarea. Para extender VLANs a través de WiFi, se necesita un router o AP que lo soporte explícitamente, como los de MikroTik.</p>
+      </div>
+    </main>
+  </div>
+  <div class="card">
+    <div class="chat-header"><h2><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Історія чату</h2></div><div class="messages"><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Buenas a todos, vivo en una casa de 2 plantas y un garaje en otra planta de abajo y aun sigo con el router de la operadora (O2). Me gustaria cambiar el router de la compañía y poner 2 puntos de acceso arriba y en el garaje de abajo. He estado viendo los videos de FritzBox, Asus Smart Home, Keenetic y el de Ruijie y la verdad es que tengo dudas de cual comprarme. Os pongo en situación, tengo un servidor con proxmox donde tengo instalado homeassistant, jellyfin, adguard, wireguard, nginx proxy manager, etc. De infraestructura, tengo conectado en la planta principal el router de la operadora conectado a un switch tp-link gestionado (planta principal), esta a su vez conectado a 2 switches: un switch tp-link no gestionado (planta superior) y otro switch tp-link gestionado (garaje inferior) que es donde tengo el servidor. Me gustaria crear vlans para crear redes principales, invitados, domotica y para el servidor, de momento. ¿Se puede hacer que una vlan_A acceda a dispositivos vlan_B pero no al reves, es decir quiero que homeassistant pueda acceder a los dispositivos domoticos pero que esos dispositivos no accedan a la red que esta homeassistant? y ¿Qué Router y puntos de acceso comprar que pueda hacer lo que comento?. Espero haberme explicado bien. Muchas gracias de antemano y pediros perdón por la chapa.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Buenas a todos, vivo en una casa de 2 plantas y un garaje en otra planta de abajo y aun sigo con el router de la operado</div></div><p class="message-text">Saludos, los 2 Switch TP-link gestionados que mencionas son Omada?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">No</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Son los **TL-SG605**E</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><p class="message-text">Vale para la infraestructura y posible topología que mencionas, yo te recomendaría montar todo con alguna de las líneas de productos: Ubiquiti, TP-link Omada o Rujie Reyee. Si te decides por alguna, ya debes comprar todo de esa línea para que la gestión sea centralizada y puedas hacer lo que mencionas de manera más fácil y sin dolores de cabeza. Espero te sirva 👍🏼</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><p class="message-text">https://t.me/NASeros/582280/716755<br><br>https://t.me/NASeros/582280/716756<br><br>Acá los links para las líneas de productos mencionados 👆🏼</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Son los **TL-SG605**E</div></div><p class="message-text">Este es un switch básico NO gestionado (se puede agregar a cualquier punto de tu topología, sin alterar la configuración que tengas) es solo un splitter digámos.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 2</div><div class="reply-text">Este es un switch básico NO gestionado (se puede agregar a cualquier punto de tu topología, sin alterar la configuración</div></div><p class="message-text">Si es gestionado, puedo gestionar vlans</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Si es gestionado, puedo gestionar vlans</div></div><p class="message-text">Vale, pero no para la configuración que mencionas que deseas montar</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Son los **TL-SG605**E</div></div><p class="message-text">El switch es bastante básico, no logro encontrar ni la guía de usuario, solo una guía de instalación y una nota que dice: “El switch es plug and play. Para necesidades avanzadas o preguntas, contacte a nuestro equipo de soporte técnico.”<br><br>De manera que para las cosas que mencionas que deseas configurar, estos no te van a servir.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Pero se puede hacer lo que comenté de que una vlan_a escuche los dispositivos de vlan_b pero no al revés?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Pero se puede hacer lo que comenté de que una vlan_a escuche los dispositivos de vlan_b pero no al revés?</div></div><p class="message-text">Hola, sin ánimo de crear polémica ¿para que queremos que se produzca esta situación en la que los paquetes de la VLAN-10 vean los de la VLAN-20 y no al revés?<br>No lo termino de ver, cosas de la edad, supongo...<br>Salud</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Pero se puede hacer lo que comenté de que una vlan_a escuche los dispositivos de vlan_b pero no al revés?</div></div><p class="message-text">Si se puede hacer, con ACLs (access control list). Ahí estableces las reglas y permisos de tu red. Para eso necesitas un sistema centralizado como los que te comenté 👍🏼</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 3</div><div class="reply-text">Hola, sin ánimo de crear polémica ¿para que queremos que se produzca esta situación en la que los paquetes de la VLAN-10</div></div><p class="message-text">Saludos, no creas polémica, es una duda común. El escenario más fácil para que lo visualices sería: que alguien acceda a alguna vulnerabilidad (bug, virus, puerto abierto, etc) desde alguno de tus dispositivos de domótica (justamente básicos y con poca seguridad) y desde ahí pueda tener acceso al resto de tu red u otras VLANs (si no están estos permisos bien configurados). Al configurar una VLAN “de gestión” o “principal” y otras VLANs para domótica, invitados, distintos sectores de tu empresa, etc. y configurar estas ACLs. Entonces puede, el usuario que gestiona, acceder a todos los dispositivos, pero nadie (o los que quieras) pueden acceder a él 👍🏼 Espero te sirva. Si es confuso, te invito a mirar los videos del curso de redes de @macjosan  en YT donde lo explica mucho mejor que yo 😎</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 2</div><div class="reply-text">Saludos, no creas polémica, es una duda común. El escenario más fácil para que lo visualices sería: que alguien acceda a</div></div><p class="message-text">Correcto, Gracias por la rápida respuesta.<br>Más Salud.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 3</div><div class="reply-text">Hola, sin ánimo de crear polémica ¿para que queremos que se produzca esta situación en la que los paquetes de la VLAN-10</div></div><p class="message-text">Si la idea es que quiero que homeassistant vea los dispositivos domóticos como sensores, relés, etc pero que esos dispositivos como tuya no pueda acceder a homeassistant</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Si la idea es que quiero que homeassistant vea los dispositivos domóticos como sensores, relés, etc pero que esos dispos</div></div><p class="message-text">Necesitas un router tipo Mikrotik wifi para tener vlan domótica desde wifi, para eso no te vale cualquier router</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#0891b2">M5</div><div class="sender-info"><span class="sender-name">Учасник 5</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Buenas a todos, vivo en una casa de 2 plantas y un garaje en otra planta de abajo y aun sigo con el router de la operado</div></div><p class="message-text">Con lo que tienes, yo no andaría comprando nada, de momento. En el proxmox te puedes instalar una MV con un sistema operativo de router. Te recomiendo OpenWRT, pero puede usar OPNsense, pfsense, RouterOS, vyos... Puedes hacer pruebas con MVs en distintas VLAN, o configurando los switches gestionables que ya tienes. Tira de doble NAT al principio y, cuando lo tengas claro, conectas el router virtual a la ONT o te compras un cacharrito dedicado.<br>Respecto a los puntos de acceso, yo te recomendaría comprar equipos profesionales de segunda mano. Yo tendo arubas y estoy encantado, pero seguro que de otras marcas también hay equipos buenos. También puedes comprarte alguno nuevo con openwrt, aunque el tema mesh está más complicado.<br>Lo de que desde una VLAN se vea otra y no al contrario, con OpenWRT se hace tirado. Luego, puedes ser más fino y establecer desde qué máquinas de una, se puede acceder a qué máquinas/servicios de otra, pero eso ya para cuando lo tengas todo funcionando.<br>Eso sí, te va a tocar pegarte la chapada sobre el tema de redes y firewalls. En OpenWRT, hay muchísima documentación y tutoriales. En el resto, supongo que también, pero no lo tengo tan trillado.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 5</div><div class="reply-text">Con lo que tienes, yo no andaría comprando nada, de momento. En el proxmox te puedes instalar una MV con un sistema oper</div></div><p class="message-text">Lo revisaré, aunque será difícil ya que la ont está en la planta principal y el servidor está en el garaje planta de abajo, por eso de comprar un router que sea capaz de hacer lo de las vlan y que sea wifi mesh con sus puntos de acceso, pero le echaré un vistazo por curiosidad, muchas gracias, por lo menos se que se puede hacer lo de las vlan</p></div></div>
+    <footer>Academia Tech &copy; 2026</footer>
+  </div>
+</div>
+</body></html>

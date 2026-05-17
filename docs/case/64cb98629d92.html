@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html><head>
+<title>Añadir un pulsador inalámbrico para abrir un telefonillo de portero automático | SupportBot</title>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta property="og:title" content="Añadir un pulsador inalámbrico para abrir un telefonillo de portero automático">
+<meta property="og:description" content="Se proponen varias soluciones, pero la más recomendada y detallada es el uso de **Ring Intercom**. Varios usuarios, como `user_44ef7f8336`, explican sus ventajas: permite abrir en remoto desde el móvi">
+<link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+<style>
+:root {
+  --signal-blue: #2c6bed;
+  --page-bg: #f6f7f9;
+  --card-bg: #ffffff;
+  --text: #0d0d0d;
+  --text-sec: #5c5c5c;
+  --border: #d8d8d8;
+  --radius: 12px;
+  --green: #16a34a;
+  --yellow: #ca8a04;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  background: var(--page-bg); color: var(--text);
+  min-height: 100vh; padding: 48px 20px;
+  -webkit-font-smoothing: antialiased;
+}
+@media (max-width: 520px) { body { padding: 24px 12px; } }
+.shell { max-width: 640px; margin: 0 auto; }
+.card {
+  background: var(--card-bg); border: 1px solid var(--border);
+  border-radius: var(--radius); overflow: hidden; margin-bottom: 16px;
+}
+header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 20px; border-bottom: 1px solid var(--border);
+}
+.header-left { display: flex; align-items: center; gap: 10px; text-decoration: none; color: inherit; }
+.logo { width: 28px; height: 28px; }
+.brand { font-size: 15px; font-weight: 600; letter-spacing: -0.02em; }
+.chat-header { padding: 14px 20px; border-bottom: 1px solid var(--border); background: var(--page-bg); }
+.chat-header h2 { font-size: 14px; font-weight: 600; color: var(--text); display: flex; align-items: center; gap: 8px; }
+.chat-header h2 svg { width: 16px; height: 16px; color: var(--signal-blue); }
+.messages { padding: 0; }
+.message { padding: 16px 20px; border-bottom: 1px solid var(--border); }
+.message:last-child { border-bottom: none; }
+.message-header { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+.avatar { width: 28px; height: 28px; border-radius: 50%; color: white; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 600; flex-shrink: 0; }
+.sender-info { flex: 1; min-width: 0; }
+.sender-name { font-size: 13px; font-weight: 600; color: var(--text); }
+.message-text { font-size: 15px; line-height: 1.55; color: var(--text); white-space: pre-wrap; margin-left: 38px; }
+.reply-bubble { margin-left: 38px; margin-bottom: 6px; padding: 6px 10px; background: #f0f2f5; border-left: 3px solid var(--signal-blue); border-radius: 4px; font-size: 13px; color: var(--text-sec); }
+.reply-sender { font-weight: 600; color: var(--signal-blue); font-size: 12px; margin-bottom: 2px; }
+.reply-text { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.status-badge {
+  padding: 4px 10px; font-size: 11px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.04em; border-radius: 4px;
+}
+.status-solved { background: #dcfce7; color: var(--green); }
+.status-recommendation { background: #fef3c7; color: #b45309; }
+main { padding: 24px 20px; }
+h1 { font-size: 20px; font-weight: 700; letter-spacing: -0.025em; margin-bottom: 12px; line-height: 1.3; }
+.meta { font-size: 12px; color: var(--text-sec); margin-bottom: 16px; }
+.tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 20px; }
+.tag {
+  background: rgba(44, 107, 237, 0.08); color: var(--signal-blue);
+  padding: 4px 10px; border-radius: 4px; font-size: 12px; font-weight: 500;
+}
+.section-title {
+  font-size: 11px; font-weight: 600; text-transform: uppercase;
+  letter-spacing: 0.06em; color: var(--text-sec); margin-bottom: 10px;
+  display: flex; align-items: center; gap: 6px;
+}
+.section-title svg { width: 14px; height: 14px; }
+.section-content { font-size: 15px; line-height: 1.6; color: var(--text); white-space: pre-wrap; }
+.problem-section { padding-bottom: 20px; border-bottom: 1px solid var(--border); margin-bottom: 20px; }
+.solution-section {
+  background: #f0fdf4; margin: -24px -20px -24px -20px; padding: 20px;
+  border-top: 1px solid #bbf7d0;
+}
+.solution-section .section-title { color: var(--green); }
+.recommendation-solution { background: #fffbeb; border-top-color: #fde68a; }
+.recommendation-solution .section-title { color: #b45309; }
+.empty-chat {
+  padding: 32px 20px; text-align: center; color: var(--text-sec); font-size: 14px;
+}
+footer {
+  padding: 14px 20px; border-top: 1px solid var(--border);
+  color: var(--text-sec); font-size: 12px; text-align: center;
+}
+@media (max-width: 520px) {
+  main { padding: 20px 16px; }
+  h1 { font-size: 18px; }
+  .solution-section { margin: -20px -16px -20px -16px; padding: 16px; }
+}
+</style>
+</head><body>
+<div class="shell">
+  <div class="card">
+    <header>
+      <a href="https://academia-tech.github.io/SupportBot" class="header-left">
+        <img src="/SupportBot/supportbot-logo-128.png" alt="SupportBot" class="logo">
+        <span class="brand">SupportBot</span>
+      </a>
+      <span class="status-solved status-badge">Вирішено</span>
+    </header>
+    <main>
+      <h1>Añadir un pulsador inalámbrico para abrir un telefonillo de portero automático</h1>
+      <p class="meta">Case 64cb98629d92 &middot; domotica_es</p>
+      <div class='tags'><span class="tag">#telefonillo</span><span class="tag">#portero automático</span><span class="tag">#ring intercom</span><span class="tag">#abrir puerta</span><span class="tag">#inalámbrico</span><span class="tag">#pulsador</span><span class="tag">#oficina</span><span class="tag">#relé</span></div>
+      <div class="problem-section">
+        <h2 class="section-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/>
+            <line x1="12" y1="16" x2="12.01" y2="16"/>
+          </svg>
+          Проблема
+        </h2>
+        <p class="section-content">Un usuario necesita una solución para abrir la puerta de una empresa desde un escritorio sin tener que levantarse constantemente hasta el telefonillo. Busca añadir un pulsador inalámbrico que active la apertura de la puerta. La opción de abrir desde el móvil es secundaria pero bienvenida.</p>
+      </div>
+      <div class="solution-section">
+        <h2 class="section-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          Рішення
+        </h2>
+        <p class="section-content">Se proponen varias soluciones, pero la más recomendada y detallada es el uso de **Ring Intercom**. Varios usuarios, como `user_44ef7f8336`, explican sus ventajas: permite abrir en remoto desde el móvil (confirmado por otro usuario), hablar a través de él, es integrable en Home Assistant y se puede compartir el acceso. Se proporciona un enlace al verificador de compatibilidad de Ring. También se confirma que se puede controlar con Alexa. Como alternativa a Ring, se menciona el uso de un relé RF 433 con un pulsador inalámbrico. Una tercera opción sugerida es usar un mecanismo de cierre eléctrico como el que se vende en Leroy Merlin (`https://www.leroymerlin.es/productos/cierre-electrico-cerradura-desbloqueo-automatico-y-corriente-alterna-11954663.html`). Se aconseja en todo caso averiguar primero el modelo de telefonillo instalado.</p>
+      </div>
+    </main>
+  </div>
+  <div class="card">
+    <div class="chat-header"><h2><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Історія чату</h2></div><div class="messages"><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Buenas tardes, he estado buscando un poco por el grupo pero no encuentro exactamente lo que necesito, quiero poner un pulsador inalámbrico a un telefonillo de portero automático, para ponerlo por ejemplo en el escritorio, realmente me bastaría con eso, si a la vez puede ser para abrir desde el teléfono y demás pues bien pero no sería importante.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Muchas gracias!</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Buenas tardes, he estado buscando un poco por el grupo pero no encuentro exactamente lo que necesito, quiero poner un pu</div></div><p class="message-text">Pero no aclaras que que función quieres que tenga?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 2</div><div class="reply-text">Pero no aclaras que que función quieres que tenga?</div></div><p class="message-text">Necesito poder abrir la puerta desde ese pulsador, es para una empresa, que viene bastante gente y se pasa el dia levantándose para ir hasta el telefonillo a abrir</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Puede ser que haya telefonillos que ya lo incluyan?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Puede ser que haya telefonillos que ya lo incluyan?</div></div><p class="message-text">El que, el pulsador?<br>😂 Es broma.<br>No lo sé, pero la opción, siempre que sea compatible el telefonillo, es poner un relé en el telefonillo y un botón, compatible con el relé, donde lo necesites.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 2</div><div class="reply-text">El que, el pulsador? 😂 Es broma. No lo sé, pero la opción, siempre que sea compatible el telefonillo, es poner un relé e</div></div><p class="message-text">Los hay que quepan dentro de la caja del telefonillo? Si puedes indicarme algun modelo que sea conocido (perdón, pero estoy muy muy pez en tema de domotica)</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Los hay que quepan dentro de la caja del telefonillo? Si puedes indicarme algun modelo que sea conocido (perdón, pero es</div></div><p class="message-text">A estas pez en eso y en electricidad, mejor que busques a un profesional.<br>Seguramente también se podrá llevar un cable desde el telefonillo.<br>Y además, todos los telefonillos no son compatibles.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">En electricidad no estoy pez</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Solo en domotica y en lo que pueda poner para hacerlo inalámbrico, es que llevar un cable hasta el escritorio es un poco incomodo, la verdad</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Y ademas quedaria feo porque el escritorio esta en medio digamos de la sala, tendria que tirarlo por el suelo o bajarlo colgando del techo</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">En electricidad no estoy pez</div></div><p class="message-text">Pues empieza por averiguar el modelo del telefonillo y en internet busca domotizar telefonillo modelo tal de la marca cuál.<br>Otra opcion es usar el ring intercom</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 2</div><div class="reply-text">Pues empieza por averiguar el modelo del telefonillo y en internet busca domotizar telefonillo modelo tal de la marca cu</div></div><p class="message-text">Voy a echar un vistazo</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Muchas gracias! 👍</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Voy a echar un vistazo</div></div><p class="message-text">Cuando tengas más info, pregunta a ver si te podemos ayudar</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Voy a echar un vistazo</div></div><p class="message-text">Como te han dicho un relé sería la solución, una opcion tambien es usar Ring, tienes que mirar compatibilidad con tu telefonillo, esta ahora de oferta en amazon al 50%</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><p class="message-text">permite abrir en remoto, incluso hablar a traves del movil</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Lo del relé lo unico que tengo que mirar es que entre en el hueco que hay, ya sea dentro de la caja o detras... He mirado lo del ring y parece interesante</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><p class="message-text">Incluso puedes compartir ring con empresas que vengan con frecuencia a determinadas horas y en determinadas fechas</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><p class="message-text">Y por supuesto es integrable en HA</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><p class="message-text">Y aqui ves si vale para tu portero actual https://ring.com/intercom-compatibility-checker/?srsltid=AfmBOopLA2KA90_RrLK-hMVQ-66-8l1pKJZeTrDz0C7wYBfW9KzGD15l Ring Intercom Compatibility Checker</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Muchisimas gracias! Mañana me acerco a la empresa y miro bien todo, la verdad que parece muy interesante y además mucho mas flexible.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><p class="message-text">Un relé te da maxima flexibilidad si sabes, pued lo pones a tu manera, esto está pensado para que sea mas sencillo de montar</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Buenas tardes, he estado buscando un poco por el grupo pero no encuentro exactamente lo que necesito, quiero poner un pu</div></div><p class="message-text">Con algún relé RF 433 lo harias</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><p class="message-text">A lo mejor hasta con algún kit de timbre de esos con pulsador alejado y a pilas lo harías.<br>Sustituyes el altavoz por algún relé y andando.<br>Pero mejor un relé RF por ejemplo</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 4</div><div class="reply-text">Con algún relé RF 433 lo harias</div></div><p class="message-text">A ver realmente el ring me cumple perfecto, mañana miro también a ver si hay hueco dentro, que tamaño puede tener un relé rf?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Lo del relé lo unico que tengo que mirar es que entre en el hueco que hay, ya sea dentro de la caja o detras... He mirad</div></div><p class="message-text">Lo del relé, da igual donde, pero cabe.<br>Lo que tienes que mirar es lo que tienes instalado.<br>A partir de ahí, necesitas un relé y también un pulsador inalámbrico, los cuales sean compatibles entre ellos, claro</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 2</div><div class="reply-text">Lo del relé, da igual donde, pero cabe. Lo que tienes que mirar es lo que tienes instalado. A partir de ahí, necesitas u</div></div><p class="message-text">Para el ring también tendria que comprar un pulsador a parte... Nose si les vale la opcion de tenerlo siempre en el telefono</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Para el ring también tendria que comprar un pulsador a parte... Nose si les vale la opcion de tenerlo siempre en el tele</div></div><p class="message-text">Pues olvídate, no hay</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 2</div><div class="reply-text">Pues olvídate, no hay</div></div><p class="message-text">Solo valdria el movil? O alexa no?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Solo valdria el movil? O alexa no?</div></div><p class="message-text">Alexa si</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Pues preguntare a ver que prefieren, si quieren tener pulsador me toca poner relé si o si entonces 😓</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Pues preguntare a ver que prefieren, si quieren tener pulsador me toca poner relé si o si entonces 😓</div></div><p class="message-text">Estás haciéndote una paja mental.<br>Todavía no sabes que tienes allí y hasta que no lo veas, no sabrás que puedes poner.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 2</div><div class="reply-text">Estás haciéndote una paja mental. Todavía no sabes que tienes allí y hasta que no lo veas, no sabrás que puedes poner.</div></div><p class="message-text">Justo, hasta que sepas si vale o no Ring, es mejor esperar.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 2</div><div class="reply-text">Estás haciéndote una paja mental. Todavía no sabes que tienes allí y hasta que no lo veas, no sabrás que puedes poner.</div></div><p class="message-text">Mañana veo, y decido.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#0891b2">M5</div><div class="sender-info"><span class="sender-name">Учасник 5</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Voy a echar un vistazo</div></div><p class="message-text">Yo tengo un ring y lo abres desde el teléfono</p></div></div>
+    <footer>Academia Tech &copy; 2026</footer>
+  </div>
+</div>
+</body></html>

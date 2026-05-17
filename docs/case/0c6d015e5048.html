@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html><head>
+<title>Проблема зі збереженням налаштувань OSD &#x27;HD Layout&#x27; в Mission Planner | SupportBot</title>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta property="og:title" content="Проблема зі збереженням налаштувань OSD &#x27;HD Layout&#x27; в Mission Planner">
+<meta property="og:description" content="Проблема була вирішена шляхом встановлення &#x27;Ms display port&#x27; та швидкості порту (baud rate) на 115200. Також було зазначено, що галочка &#x27;HD Layout&#x27; може і не зберігатись, а для відображення OSD потріб">
+<link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+<style>
+:root {
+  --signal-blue: #2c6bed;
+  --page-bg: #f6f7f9;
+  --card-bg: #ffffff;
+  --text: #0d0d0d;
+  --text-sec: #5c5c5c;
+  --border: #d8d8d8;
+  --radius: 12px;
+  --green: #16a34a;
+  --yellow: #ca8a04;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  background: var(--page-bg); color: var(--text);
+  min-height: 100vh; padding: 48px 20px;
+  -webkit-font-smoothing: antialiased;
+}
+@media (max-width: 520px) { body { padding: 24px 12px; } }
+.shell { max-width: 640px; margin: 0 auto; }
+.card {
+  background: var(--card-bg); border: 1px solid var(--border);
+  border-radius: var(--radius); overflow: hidden; margin-bottom: 16px;
+}
+header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 20px; border-bottom: 1px solid var(--border);
+}
+.header-left { display: flex; align-items: center; gap: 10px; text-decoration: none; color: inherit; }
+.logo { width: 28px; height: 28px; }
+.brand { font-size: 15px; font-weight: 600; letter-spacing: -0.02em; }
+.chat-header { padding: 14px 20px; border-bottom: 1px solid var(--border); background: var(--page-bg); }
+.chat-header h2 { font-size: 14px; font-weight: 600; color: var(--text); display: flex; align-items: center; gap: 8px; }
+.chat-header h2 svg { width: 16px; height: 16px; color: var(--signal-blue); }
+.messages { padding: 0; }
+.message { padding: 16px 20px; border-bottom: 1px solid var(--border); }
+.message:last-child { border-bottom: none; }
+.message-header { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+.avatar { width: 28px; height: 28px; border-radius: 50%; color: white; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 600; flex-shrink: 0; }
+.sender-info { flex: 1; min-width: 0; }
+.sender-name { font-size: 13px; font-weight: 600; color: var(--text); }
+.message-text { font-size: 15px; line-height: 1.55; color: var(--text); white-space: pre-wrap; margin-left: 38px; }
+.reply-bubble { margin-left: 38px; margin-bottom: 6px; padding: 6px 10px; background: #f0f2f5; border-left: 3px solid var(--signal-blue); border-radius: 4px; font-size: 13px; color: var(--text-sec); }
+.reply-sender { font-weight: 600; color: var(--signal-blue); font-size: 12px; margin-bottom: 2px; }
+.reply-text { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.status-badge {
+  padding: 4px 10px; font-size: 11px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.04em; border-radius: 4px;
+}
+.status-solved { background: #dcfce7; color: var(--green); }
+.status-recommendation { background: #fef3c7; color: #b45309; }
+main { padding: 24px 20px; }
+h1 { font-size: 20px; font-weight: 700; letter-spacing: -0.025em; margin-bottom: 12px; line-height: 1.3; }
+.meta { font-size: 12px; color: var(--text-sec); margin-bottom: 16px; }
+.tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 20px; }
+.tag {
+  background: rgba(44, 107, 237, 0.08); color: var(--signal-blue);
+  padding: 4px 10px; border-radius: 4px; font-size: 12px; font-weight: 500;
+}
+.section-title {
+  font-size: 11px; font-weight: 600; text-transform: uppercase;
+  letter-spacing: 0.06em; color: var(--text-sec); margin-bottom: 10px;
+  display: flex; align-items: center; gap: 6px;
+}
+.section-title svg { width: 14px; height: 14px; }
+.section-content { font-size: 15px; line-height: 1.6; color: var(--text); white-space: pre-wrap; }
+.problem-section { padding-bottom: 20px; border-bottom: 1px solid var(--border); margin-bottom: 20px; }
+.solution-section {
+  background: #f0fdf4; margin: -24px -20px -24px -20px; padding: 20px;
+  border-top: 1px solid #bbf7d0;
+}
+.solution-section .section-title { color: var(--green); }
+.recommendation-solution { background: #fffbeb; border-top-color: #fde68a; }
+.recommendation-solution .section-title { color: #b45309; }
+.empty-chat {
+  padding: 32px 20px; text-align: center; color: var(--text-sec); font-size: 14px;
+}
+footer {
+  padding: 14px 20px; border-top: 1px solid var(--border);
+  color: var(--text-sec); font-size: 12px; text-align: center;
+}
+@media (max-width: 520px) {
+  main { padding: 20px 16px; }
+  h1 { font-size: 18px; }
+  .solution-section { margin: -20px -16px -20px -16px; padding: 16px; }
+}
+</style>
+</head><body>
+<div class="shell">
+  <div class="card">
+    <header>
+      <a href="https://academia-tech.github.io/SupportBot" class="header-left">
+        <img src="/SupportBot/supportbot-logo-128.png" alt="SupportBot" class="logo">
+        <span class="brand">SupportBot</span>
+      </a>
+      <span class="status-solved status-badge">Вирішено</span>
+    </header>
+    <main>
+      <h1>Проблема зі збереженням налаштувань OSD &#x27;HD Layout&#x27; в Mission Planner</h1>
+      <p class="meta">Case 0c6d015e5048 &middot; ua_ardupilot</p>
+      <div class='tags'><span class="tag">#Mission Planner</span><span class="tag">#OSD</span><span class="tag">#налаштування</span><span class="tag">#HD Layout</span><span class="tag">#serial</span><span class="tag">#швидкість порту</span></div>
+      <div class="problem-section">
+        <h2 class="section-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/>
+            <line x1="12" y1="16" x2="12.01" y2="16"/>
+          </svg>
+          Проблема
+        </h2>
+        <p class="section-content">Користувач зіткнувся з проблемою, коли налаштування OSD &#x27;HD Layout&#x27; в Mission Planner не зберігається після переходу на інший екран і повернення. Також були загальні проблеми з відображенням OSD.</p>
+      </div>
+      <div class="solution-section">
+        <h2 class="section-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          Рішення
+        </h2>
+        <p class="section-content">Проблема була вирішена шляхом встановлення &#x27;Ms display port&#x27; та швидкості порту (baud rate) на 115200. Також було зазначено, що галочка &#x27;HD Layout&#x27; може і не зберігатись, а для відображення OSD потрібно змінити налаштування serial.</p>
+      </div>
+    </main>
+  </div>
+  <div class="card">
+    <div class="chat-header"><h2><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Історія чату</h2></div><div class="messages"><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text"><br><br>[Відео: 8689.mp4 — The video displays a computer screen running Mission Planner 1.3.81 (ArduPlane V4.3.7, fbee7f67 on MatekH743).<br><br>**What is shown:**<br>The primary application interface is &quot;Mission Planner,&quot; configured for &quot;ArduPilot&quot; and connected via &quot;COM5-FIXED WING.&quot; The left panel shows navigation options, with &quot;Базове Налаштування&quot; (Basic Setup) and &quot;OSD&quot; selected. The main content area shows the OSD (On-Screen Display) layout editor, specifically &quot;Screen 1,&quot; displaying various telemetry data points: &quot;ARMINGAT&quot;, &quot;FUSE 32&quot;, &quot;3.85v&quot;, &quot;8.3A&quot;, &quot;MESSAGE&quot;, &quot;STAB&quot;, &quot;11%&quot;, &quot;0&quot;, &quot;10&quot;, &quot;17&quot;, &quot;25%&quot;. The right-hand panel contains &quot;Editor Options&quot; and &quot;Screen Options&quot; for OSD configuration.<br><br>**Visible Text (OCR):**<br>- **Top Bar:** &quot;Mission Planner 1.3.81 build 1.3.8184.36258 devs via ArduPlane V4.3.7 (fbee7f67) on MatekH743 002A0026 33315054 31303437&quot;<br>- **Left Panel:** &quot;Базове Налаштування&quot;, &quot;OSD&quot;, &quot;Загальний дисплей&quot;, &quot;MAVLink&quot;<br>- **OSD Screen Data:** &quot;ARMINGAT&quot;, &quot;FUSE 32&quot;, &quot;3.85v&quot;, &quot;8.3A&quot;, &quot;MESSAGE&quot;, &quot;STAB&quot;, &quot;11%&quot;, &quot;0&quot;, &quot;10&quot;, &quot;17&quot;, &quot;25%&quot;<br>- **Right Panel (Editor Options):** &quot;Decrease&quot;, &quot;Show Names&quot;, &quot;HD Layout&quot;, &quot;Copy Layout&quot;, &quot;Paste Layout&quot;, &quot;Clear All&quot;<br>- **Right Panel (Screen Options):** &quot;OSD1_ENABLE&quot; (checked), &quot;OSD1_ESC_IDX&quot;, &quot;OSD1_FONT&quot;, &quot;OSD1_TXT_RES&quot;, &quot;OSD1_CHAN_MAX&quot;, &quot;OSD1_CHAN_MIN&quot;<br>- **Right Panel (Other):** &quot;Write parameters&quot;, &quot;Refresh&quot;, &quot;Discard all changes&quot;<br><br>**What happens over time:**<br>1. At 0:06, the user clicks the &quot;HD Layout&quot; checkbox in the &quot;Editor Options&quot; panel, successfully checking it.<br>2. At 0:12, the user clicks &quot;Загальний дисплей&quot; (General Display) in the left navigation panel. The main content area changes to a different OSD settings screen, displaying parameters like &quot;OSD_TYPE&quot;, &quot;OSD_UNITS&quot;, &quot;OSD_FONT&quot;, etc., in a black background.<br>3. At 0:19, the user clicks the &quot;Screen 1&quot; tab. The main content area returns to the OSD layout editor.<br><br>**Problems or Anomalies:**<br>Upon returning to the &quot;Screen 1&quot; layout editor at 0:20, the &quot;HD Layout&quot; checkbox is no longer checked; its state has reverted to unchecked. This indicates a failure to persist or save the &quot;HD Layout&quot; setting after navigating away from the screen.]<br>[Транскрипт відео: а, если літачок, а, на ньому поміняли, е-е, камеру з аналога на цифру. Я і не має, не показує OSD. Я ось його ставлю галочку таку вот, HDR Layer. То есть вот, я ставлю. Ну, воно на цьогось не сохраняється. Ось, клац. Назад і воно не сохраняється. Підкажіть, будь ласка, що може бути проблема?]</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Підкажіть будьласка з osd</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Підкажіть будьласка з osd</div></div><p class="message-text">В чому саме проблема?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><p class="message-text">Якщо не видно osd то треба змінити налаштування serial <br>А та галочка і не має зберігатись</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Вирішив</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">коли я постав Ms display port , треба було швидкість плота поставити 115200</p></div></div>
+    <footer>Academia Tech &copy; 2026</footer>
+  </div>
+</div>
+</body></html>

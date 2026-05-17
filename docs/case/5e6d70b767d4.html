@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html><head>
+<title>Problemas de conexión de Router Fritzbox Fibra con Movistar | SupportBot</title>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta property="og:title" content="Problemas de conexión de Router Fritzbox Fibra con Movistar">
+<meta property="og:description" content="Para conectar un router Fritzbox Fibra en España (ej. con Movistar), se necesita un cable (latiguillo) de fibra con conectores LC/APC y SC/APC. Es crucial usar el módulo SFP GPON original de Fritzbox,">
+<link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+<style>
+:root {
+  --signal-blue: #2c6bed;
+  --page-bg: #f6f7f9;
+  --card-bg: #ffffff;
+  --text: #0d0d0d;
+  --text-sec: #5c5c5c;
+  --border: #d8d8d8;
+  --radius: 12px;
+  --green: #16a34a;
+  --yellow: #ca8a04;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  background: var(--page-bg); color: var(--text);
+  min-height: 100vh; padding: 48px 20px;
+  -webkit-font-smoothing: antialiased;
+}
+@media (max-width: 520px) { body { padding: 24px 12px; } }
+.shell { max-width: 640px; margin: 0 auto; }
+.card {
+  background: var(--card-bg); border: 1px solid var(--border);
+  border-radius: var(--radius); overflow: hidden; margin-bottom: 16px;
+}
+header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 20px; border-bottom: 1px solid var(--border);
+}
+.header-left { display: flex; align-items: center; gap: 10px; text-decoration: none; color: inherit; }
+.logo { width: 28px; height: 28px; }
+.brand { font-size: 15px; font-weight: 600; letter-spacing: -0.02em; }
+.chat-header { padding: 14px 20px; border-bottom: 1px solid var(--border); background: var(--page-bg); }
+.chat-header h2 { font-size: 14px; font-weight: 600; color: var(--text); display: flex; align-items: center; gap: 8px; }
+.chat-header h2 svg { width: 16px; height: 16px; color: var(--signal-blue); }
+.messages { padding: 0; }
+.message { padding: 16px 20px; border-bottom: 1px solid var(--border); }
+.message:last-child { border-bottom: none; }
+.message-header { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+.avatar { width: 28px; height: 28px; border-radius: 50%; color: white; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 600; flex-shrink: 0; }
+.sender-info { flex: 1; min-width: 0; }
+.sender-name { font-size: 13px; font-weight: 600; color: var(--text); }
+.message-text { font-size: 15px; line-height: 1.55; color: var(--text); white-space: pre-wrap; margin-left: 38px; }
+.reply-bubble { margin-left: 38px; margin-bottom: 6px; padding: 6px 10px; background: #f0f2f5; border-left: 3px solid var(--signal-blue); border-radius: 4px; font-size: 13px; color: var(--text-sec); }
+.reply-sender { font-weight: 600; color: var(--signal-blue); font-size: 12px; margin-bottom: 2px; }
+.reply-text { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.status-badge {
+  padding: 4px 10px; font-size: 11px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.04em; border-radius: 4px;
+}
+.status-solved { background: #dcfce7; color: var(--green); }
+.status-recommendation { background: #fef3c7; color: #b45309; }
+main { padding: 24px 20px; }
+h1 { font-size: 20px; font-weight: 700; letter-spacing: -0.025em; margin-bottom: 12px; line-height: 1.3; }
+.meta { font-size: 12px; color: var(--text-sec); margin-bottom: 16px; }
+.tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 20px; }
+.tag {
+  background: rgba(44, 107, 237, 0.08); color: var(--signal-blue);
+  padding: 4px 10px; border-radius: 4px; font-size: 12px; font-weight: 500;
+}
+.section-title {
+  font-size: 11px; font-weight: 600; text-transform: uppercase;
+  letter-spacing: 0.06em; color: var(--text-sec); margin-bottom: 10px;
+  display: flex; align-items: center; gap: 6px;
+}
+.section-title svg { width: 14px; height: 14px; }
+.section-content { font-size: 15px; line-height: 1.6; color: var(--text); white-space: pre-wrap; }
+.problem-section { padding-bottom: 20px; border-bottom: 1px solid var(--border); margin-bottom: 20px; }
+.solution-section {
+  background: #f0fdf4; margin: -24px -20px -24px -20px; padding: 20px;
+  border-top: 1px solid #bbf7d0;
+}
+.solution-section .section-title { color: var(--green); }
+.recommendation-solution { background: #fffbeb; border-top-color: #fde68a; }
+.recommendation-solution .section-title { color: #b45309; }
+.empty-chat {
+  padding: 32px 20px; text-align: center; color: var(--text-sec); font-size: 14px;
+}
+footer {
+  padding: 14px 20px; border-top: 1px solid var(--border);
+  color: var(--text-sec); font-size: 12px; text-align: center;
+}
+@media (max-width: 520px) {
+  main { padding: 20px 16px; }
+  h1 { font-size: 18px; }
+  .solution-section { margin: -20px -16px -20px -16px; padding: 16px; }
+}
+</style>
+</head><body>
+<div class="shell">
+  <div class="card">
+    <header>
+      <a href="https://academia-tech.github.io/SupportBot" class="header-left">
+        <img src="/SupportBot/supportbot-logo-128.png" alt="SupportBot" class="logo">
+        <span class="brand">SupportBot</span>
+      </a>
+      <span class="status-solved status-badge">Вирішено</span>
+    </header>
+    <main>
+      <h1>Problemas de conexión de Router Fritzbox Fibra con Movistar</h1>
+      <p class="meta">Case 5e6d70b767d4 &middot; naseros</p>
+      <div class='tags'><span class="tag">#Fritzbox</span><span class="tag">#fibra</span><span class="tag">#Movistar</span><span class="tag">#GPON</span><span class="tag">#router</span><span class="tag">#conexión</span><span class="tag">#cable</span><span class="tag">#redes</span><span class="tag">#configuración</span></div>
+      <div class="problem-section">
+        <h2 class="section-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/>
+            <line x1="12" y1="16" x2="12.01" y2="16"/>
+          </svg>
+          Проблема
+        </h2>
+        <p class="section-content">El usuario tiene dificultades para conectar un router Fritzbox de fibra con su conexión Movistar, preguntando sobre el tipo de cable (SC-SC vs LC/SC) y la compatibilidad con IPTV. A pesar de usar el cable recomendado, la conexión no funciona.</p>
+      </div>
+      <div class="solution-section">
+        <h2 class="section-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          Рішення
+        </h2>
+        <p class="section-content">Para conectar un router Fritzbox Fibra en España (ej. con Movistar), se necesita un cable (latiguillo) de fibra con conectores LC/APC y SC/APC. Es crucial usar el módulo SFP GPON original de Fritzbox, ya que uno genérico o de otra marca podría no funcionar. El usuario descubrió que su equipo de segunda mano venía con un módulo AON en lugar del GPON necesario. Tras seguir el consejo, el usuario ha encargado el módulo GPON correcto y está a la espera de recibirlo para probar la solución.</p>
+      </div>
+    </main>
+  </div>
+  <div class="card">
+    <div class="chat-header"><h2><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Історія чату</h2></div><div class="messages"><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Buenas, me acabo de aventurar a comprar un Router Fritzbox fibra. El router tiene dos adaptadores...para conexión LC y SC. Mi conexión y cable del proveedor es SC-SC, pero en casi todos los tutoriales que veo para instalar router neutro usan cable LC/SC, no se si eso tiene que ser así o da igual?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><p class="message-text">a ti lo que te importa es que desde tu PTRO va un cable con salida SC, y es la que tienes que conectar al router, lo que haya en la otra punta te da igual</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Buenas, me acabo de aventurar a comprar un Router Fritzbox fibra. El router tiene dos adaptadores...para conexión LC y S</div></div><p class="message-text">Hay un grupo de usuarios fritzbox en español de Telegram ahí te pueden ayudar con la configuración y tipo de conexión de cable.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Buenas, me acabo de aventurar a comprar un Router Fritzbox fibra. El router tiene dos adaptadores...para conexión LC y S</div></div><p class="message-text">Te hace falta un latiguillo de fibra con dos conectores; uno LC/APC  y otro SC/APC. <br>Los que te vienen con el router no te sirven en España</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 4</div><div class="reply-text">Te hace falta un latiguillo de fibra con dos conectores; uno LC/APC  y otro SC/APC.  Los que te vienen con el router no </div></div><p class="message-text">Pues ni con ese cable</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 4</div><div class="reply-text">Te hace falta un latiguillo de fibra con dos conectores; uno LC/APC  y otro SC/APC.  Los que te vienen con el router no </div></div><p class="message-text">https://es.fritz.com/servicio/fritzbox-para-cada-conexion/configurar-su-fritzbox-para-ser-utilizado-en-una-conexion-de-movistar/</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">El fabricante dice que no se puede hacer funcionar con Movistar con aIPTV, o que el IPTV no funcionarían, no lo deja claro así como se expresa. No quiero la IPTV de Movistar para nada.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Pues ni con ese cable</div></div><p class="message-text">¿Tienes el cable? Yo lo tuve en su día y funciono a la primera…</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Tengo otro adaptador GPON y e usado el cable de Movistar, pero nada.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><p class="message-text">El cable parece correcto. El SFP creo que no…</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Tengo otro adaptador GPON y e usado el cable de Movistar, pero nada.</div></div><p class="message-text">Necesitas el GPON</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><p class="message-text">Ese GPON no parece de Fritzbox</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 4</div><div class="reply-text">Ese GPON no parece de Fritzbox</div></div><p class="message-text">Tiene que ser fritzbox?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Tiene que ser fritzbox?</div></div><p class="message-text">Claro</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Pues me han colado, compre el equipo de 2da mano.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><p class="message-text">Ese no es el original de Fritzbox que es LC/APC, ese es SC/APC. De hecho no puedes usar el latiguillo que te indique al principio.<br><br>¿Donde lo has comprado?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 4</div><div class="reply-text">Ese no es el original de Fritzbox que es LC/APC, ese es SC/APC. De hecho no puedes usar el latiguillo que te indique al </div></div><p class="message-text">Wallapop</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Wallapop</div></div><p class="message-text">Vaya, quien lo podia imaginar 😎</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">A ver donde pillo ese adaptador GPON original ahora</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">A ver donde pillo ese adaptador GPON original ahora</div></div><p class="message-text">Te he puesto un enlace en el privado de un canal  que pueden ayudar.Tambien puedes usar ont externa mientras</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">A ver donde pillo ese adaptador GPON original ahora</div></div><p class="message-text">Suerte 👍</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 4</div><div class="reply-text">Suerte 👍</div></div><p class="message-text">Ha tenido un poco de mala suerte pero todo tiene solución.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 3</div><div class="reply-text">Ha tenido un poco de mala suerte pero todo tiene solución.</div></div><p class="message-text">Desde luego, solo hay algo que no tiene solución, de momento, y no es este problema… 😎</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 4</div><div class="reply-text">Desde luego, solo hay algo que no tiene solución, de momento, y no es este problema… 😎</div></div><p class="message-text">Correcto puede usar ont externa en wallapop hay por 10-15€ o solicitar un módulo sfp Gpon al fabricante</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 3</div><div class="reply-text">Correcto puede usar ont externa en wallapop hay por 10-15€ o solicitar un módulo sfp Gpon al fabricante</div></div><p class="message-text">Hombre lo suyo seria pedir el modulo SFP al fabricante, desde luego</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 4</div><div class="reply-text">Hombre lo suyo seria pedir el modulo SFP al fabricante, desde luego</div></div><p class="message-text">porque? yo uso SFP+ genéricos en cisco y en mikrotik y cero problemas</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><p class="message-text">https://www.amazon.es/CONBIC%C2%AE-AON-M%C3%B3dulo-%C3%B3ptica-compatible/dp/B0DP4QYHQH<br>con esto debería llegar</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 2</div><div class="reply-text">porque? yo uso SFP+ genéricos en cisco y en mikrotik y cero problemas</div></div><p class="message-text">El lunes me llega el GPON de Fritz!, a ver si no era solo eso...</p></div></div>
+    <footer>Academia Tech &copy; 2026</footer>
+  </div>
+</div>
+</body></html>

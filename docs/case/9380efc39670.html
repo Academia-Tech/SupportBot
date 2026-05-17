@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html><head>
+<title>Налаштування порядку моторів та доступу до конфігуратора AM32 ESC | SupportBot</title>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta property="og:title" content="Налаштування порядку моторів та доступу до конфігуратора AM32 ESC">
+<meta property="og:description" content="Оригінальні поради (підсумок попередніх рішень): встановити правильний порядок моторів у Servo Output (наприклад 1,2,3,4) та за потреби в Full Parameter List увімкнути автонастройку SERVO_BLH_AUTO/інш">
+<link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+<style>
+:root {
+  --signal-blue: #2c6bed;
+  --page-bg: #f6f7f9;
+  --card-bg: #ffffff;
+  --text: #0d0d0d;
+  --text-sec: #5c5c5c;
+  --border: #d8d8d8;
+  --radius: 12px;
+  --green: #16a34a;
+  --yellow: #ca8a04;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  background: var(--page-bg); color: var(--text);
+  min-height: 100vh; padding: 48px 20px;
+  -webkit-font-smoothing: antialiased;
+}
+@media (max-width: 520px) { body { padding: 24px 12px; } }
+.shell { max-width: 640px; margin: 0 auto; }
+.card {
+  background: var(--card-bg); border: 1px solid var(--border);
+  border-radius: var(--radius); overflow: hidden; margin-bottom: 16px;
+}
+header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 20px; border-bottom: 1px solid var(--border);
+}
+.header-left { display: flex; align-items: center; gap: 10px; text-decoration: none; color: inherit; }
+.logo { width: 28px; height: 28px; }
+.brand { font-size: 15px; font-weight: 600; letter-spacing: -0.02em; }
+.chat-header { padding: 14px 20px; border-bottom: 1px solid var(--border); background: var(--page-bg); }
+.chat-header h2 { font-size: 14px; font-weight: 600; color: var(--text); display: flex; align-items: center; gap: 8px; }
+.chat-header h2 svg { width: 16px; height: 16px; color: var(--signal-blue); }
+.messages { padding: 0; }
+.message { padding: 16px 20px; border-bottom: 1px solid var(--border); }
+.message:last-child { border-bottom: none; }
+.message-header { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+.avatar { width: 28px; height: 28px; border-radius: 50%; color: white; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 600; flex-shrink: 0; }
+.sender-info { flex: 1; min-width: 0; }
+.sender-name { font-size: 13px; font-weight: 600; color: var(--text); }
+.message-text { font-size: 15px; line-height: 1.55; color: var(--text); white-space: pre-wrap; margin-left: 38px; }
+.reply-bubble { margin-left: 38px; margin-bottom: 6px; padding: 6px 10px; background: #f0f2f5; border-left: 3px solid var(--signal-blue); border-radius: 4px; font-size: 13px; color: var(--text-sec); }
+.reply-sender { font-weight: 600; color: var(--signal-blue); font-size: 12px; margin-bottom: 2px; }
+.reply-text { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.status-badge {
+  padding: 4px 10px; font-size: 11px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.04em; border-radius: 4px;
+}
+.status-solved { background: #dcfce7; color: var(--green); }
+.status-recommendation { background: #fef3c7; color: #b45309; }
+main { padding: 24px 20px; }
+h1 { font-size: 20px; font-weight: 700; letter-spacing: -0.025em; margin-bottom: 12px; line-height: 1.3; }
+.meta { font-size: 12px; color: var(--text-sec); margin-bottom: 16px; }
+.tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 20px; }
+.tag {
+  background: rgba(44, 107, 237, 0.08); color: var(--signal-blue);
+  padding: 4px 10px; border-radius: 4px; font-size: 12px; font-weight: 500;
+}
+.section-title {
+  font-size: 11px; font-weight: 600; text-transform: uppercase;
+  letter-spacing: 0.06em; color: var(--text-sec); margin-bottom: 10px;
+  display: flex; align-items: center; gap: 6px;
+}
+.section-title svg { width: 14px; height: 14px; }
+.section-content { font-size: 15px; line-height: 1.6; color: var(--text); white-space: pre-wrap; }
+.problem-section { padding-bottom: 20px; border-bottom: 1px solid var(--border); margin-bottom: 20px; }
+.solution-section {
+  background: #f0fdf4; margin: -24px -20px -24px -20px; padding: 20px;
+  border-top: 1px solid #bbf7d0;
+}
+.solution-section .section-title { color: var(--green); }
+.recommendation-solution { background: #fffbeb; border-top-color: #fde68a; }
+.recommendation-solution .section-title { color: #b45309; }
+.empty-chat {
+  padding: 32px 20px; text-align: center; color: var(--text-sec); font-size: 14px;
+}
+footer {
+  padding: 14px 20px; border-top: 1px solid var(--border);
+  color: var(--text-sec); font-size: 12px; text-align: center;
+}
+@media (max-width: 520px) {
+  main { padding: 20px 16px; }
+  h1 { font-size: 18px; }
+  .solution-section { margin: -20px -16px -20px -16px; padding: 16px; }
+}
+</style>
+</head><body>
+<div class="shell">
+  <div class="card">
+    <header>
+      <a href="https://academia-tech.github.io/SupportBot" class="header-left">
+        <img src="/SupportBot/supportbot-logo-128.png" alt="SupportBot" class="logo">
+        <span class="brand">SupportBot</span>
+      </a>
+      <span class="status-solved status-badge">Вирішено</span>
+    </header>
+    <main>
+      <h1>Налаштування порядку моторів та доступу до конфігуратора AM32 ESC</h1>
+      <p class="meta">Case 9380efc39670 &middot; ua_ardupilot</p>
+      <div class='tags'><span class="tag">#am32</span><span class="tag">#esc</span><span class="tag">#servo output</span><span class="tag">#motor order</span><span class="tag">#frame_type</span><span class="tag">#servo_blh_auto</span><span class="tag">#конфігуратор</span><span class="tag">#вирій про</span></div>
+      <div class="problem-section">
+        <h2 class="section-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/>
+            <line x1="12" y1="16" x2="12.01" y2="16"/>
+          </svg>
+          Проблема
+        </h2>
+        <p class="section-content">Користувач зіткнувся з двома проблемами на квадрокоптері з ESC 4-в-1 (Вирій Про 15):
+1. Неправильний порядок та/або напрямок обертання моторів при різних значеннях FRAME_TYPE.
+2. Неможливість підключитися до конфігуратора AM32 для зміни налаштувань ESC.</p>
+      </div>
+      <div class="solution-section">
+        <h2 class="section-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          Рішення
+        </h2>
+        <p class="section-content">Оригінальні поради (підсумок попередніх рішень): встановити правильний порядок моторів у Servo Output (наприклад 1,2,3,4) та за потреби в Full Parameter List увімкнути автонастройку SERVO_BLH_AUTO/інші параметри доступу до ESC. Додано (оновлення): практичні кроки діагностики та виправлення непередбачених проблем з моторами. Важливо розрізняти порядок розміщення моторів та напрям їх обертів. Для діагностики рекомендовано намалювати схему, зайти в мотор-тест і по черзі запускати мотори, відмічаючи результат. Реверсні пропелери (reversed props) встановлюють для того, щоб відштовхувати гілки від дрона, а також для зменшення забруднення камери, хоча є думка, що польотний контролер все одно забруднюється. На зображеннях показано класичну схему QUAD X та реверсну схему QUAD X (Betaflight) з відповідними напрямками обертання пропелерів.</p>
+      </div>
+    </main>
+  </div>
+  <div class="card">
+    <div class="chat-header"><h2><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Історія чату</h2></div><div class="messages"><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Панове,  допоможіть з налаштуванням моторів квадрокоптера. Маю ЄСЦ 4 в 1 на Вирій Про 15. Servo Output порядок моторів 4, 1, 2, 3. При FRAME_TYPE 1 порядок моторів правильний (згідно картинки). Але вони крутяться не в ту сторону, бо в ЄСЦ мабуть виставлений реверс (чомусь не можу зайти в AM32 для зміни напрямку обертів).<br>Пішов іншим шляхом і виставив FRAME_TYPE 18, але тепер порядок моторів не відповідає картинці.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Панове,  допоможіть з налаштуванням моторів квадрокоптера. Маю ЄСЦ 4 в 1 на Вирій Про 15. Servo Output порядок моторів 4</div></div><p class="message-text">В налаштуваннях Servo Output поставте 1 2 3 4</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 2</div><div class="reply-text">В налаштуваннях Servo Output поставте 1 2 3 4</div></div><p class="message-text">Допомогло, дякую. А чому я не можу потрапити в конфігуратор AM32?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Допомогло, дякую. А чому я не можу потрапити в конфігуратор AM32?</div></div><p class="message-text">Спробуйте це <br>Йдете в Config-&gt;Full Parameter List<br>Далі вписуєте servo_blh_auto і ставите значення 1</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 2</div><div class="reply-text">Спробуйте це  Йдете в Config-&gt;Full Parameter List Далі вписуєте servo_blh_auto і ставите значення 1</div></div><p class="message-text">Працює, дякую!</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Панове,  допоможіть з налаштуванням моторів квадрокоптера. Маю ЄСЦ 4 в 1 на Вирій Про 15. Servo Output порядок моторів 4</div></div><p class="message-text">А змінити дві фази між собою?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Панове,  допоможіть з налаштуванням моторів квадрокоптера. Маю ЄСЦ 4 в 1 на Вирій Про 15. Servo Output порядок моторів 4</div></div><p class="message-text">Заходити в esc треба після повного ребуту</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><p class="message-text">На більшості пк, коли вони налаштовані - порт закритий</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><p class="message-text">Не було часу розібратись, яке саме налаштування закриває порт</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><p class="message-text">Для заходу в ЕСЦ можна тримати політник з Беткою</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><p class="message-text">Щоб не скидати в 0 ардупілот</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#0891b2">M5</div><div class="sender-info"><span class="sender-name">Учасник 5</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 4</div><div class="reply-text">Для заходу в ЕСЦ можна тримати політник з Беткою</div></div><p class="message-text">Вчора теж так робив)</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#9333ea">M6</div><div class="sender-info"><span class="sender-name">Учасник 6</span></div></div><p class="message-text">Усім доброго дня!<br>В мене вірно на регулі розпаяні мотори, рама обрана бетафлайт_х але біда - мотори обертаються у мотор тесті не за встановленим порядком. SERVOx_FUNCTION не дозволяє змінити порядок. Бо зміна є, але плаваюча, неконтрольована. Встановити бажаний порядок не вдається. Speedybee405V4 D_Shot300 ( 600 взагалі мотори не обертаються)<br>Як виходити з цієї ситуації?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#dc2626">M7</div><div class="sender-info"><span class="sender-name">Учасник 7</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 6</div><div class="reply-text">Усім доброго дня! В мене вірно на регулі розпаяні мотори, рама обрана бетафлайт_х але біда - мотори обертаються у мотор </div></div><p class="message-text">Додавайте по одному мотору. Інші відпаяйте, або відключіть. Або трьохи пізніше скину, які серви на яких моторах) 4, 1, 2, 3 здається, але не точно)</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#dc2626">M7</div><div class="sender-info"><span class="sender-name">Учасник 7</span></div></div><p class="message-text">Якщо у вас окремі регулі вам не обов&#x27;язково обирати раму бетафлай (це як на мене для регулей 4в1. Можете взяти H. Тоді по порядку м1-м4.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#9333ea">M6</div><div class="sender-info"><span class="sender-name">Учасник 6</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 7</div><div class="reply-text">Додавайте по одному мотору. Інші відпаяйте, або відключіть. Або трьохи пізніше скину, які серви на яких моторах) 4, 1, 2</div></div><p class="message-text">В мене стек speedybee. Відпаяти звісно можна, але не хотілося б( Буду вдячний, якщо допоможете софтово налагодити</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#0d9488">M8</div><div class="sender-info"><span class="sender-name">Учасник 8</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 6</div><div class="reply-text">В мене стек speedybee. Відпаяти звісно можна, але не хотілося б( Буду вдячний, якщо допоможете софтово налагодити</div></div><p class="message-text">Для X можливо зворотній порядок потрібен</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#9333ea">M6</div><div class="sender-info"><span class="sender-name">Учасник 6</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 8</div><div class="reply-text">Для X можливо зворотній порядок потрібен</div></div><p class="message-text">Нажаль, це не працюе. Як тільки ви встановлюєте, воно само знов пливе, змінючісь на іншу комбінацію, й це  те саме що у fullparameter list SERVOx_FUNCTION</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#0d9488">M8</div><div class="sender-info"><span class="sender-name">Учасник 8</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 6</div><div class="reply-text">Нажаль, це не працюе. Як тільки ви встановлюєте, воно само знов пливе, змінючісь на іншу комбінацію, й це  те саме що у </div></div><p class="message-text">Я не знаю як виглядає &quot;само пливе&quot; навіть приблизно ) Встановили, перезавантажились, а там вже інший порядок?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#9333ea">M6</div><div class="sender-info"><span class="sender-name">Учасник 6</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 8</div><div class="reply-text">Я не знаю як виглядає &quot;само пливе&quot; навіть приблизно ) Встановили, перезавантажились, а там вже інший порядок?</div></div><p class="message-text">так. ви запустили тест, побачили що не так, переналаштували... а воно вже інакше., не так як мало б бути</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#0d9488">M8</div><div class="sender-info"><span class="sender-name">Учасник 8</span></div></div><p class="message-text">без тестів, встановили 4123 , перезавантажили польотнік, а там який порядок?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ca8a04">M9</div><div class="sender-info"><span class="sender-name">Учасник 9</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 6</div><div class="reply-text">так. ви запустили тест, побачили що не так, переналаштували... а воно вже інакше., не так як мало б бути</div></div><p class="message-text">Перепінуйте роз&#x27;єм тоді</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#dc2626">M7</div><div class="sender-info"><span class="sender-name">Учасник 7</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 9</div><div class="reply-text">Перепінуйте роз&#x27;єм тоді</div></div><p class="message-text">Краще не треба — це ще Одна змінна. Там просто треба зрозуміти, що таке номер мотора та як він мапиться на A B C D.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#9333ea">M6</div><div class="sender-info"><span class="sender-name">Учасник 6</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 7</div><div class="reply-text">Краще не треба — це ще Одна змінна. Там просто треба зрозуміти, що таке номер мотора та як він мапиться на A B C D.</div></div><p class="message-text">я спробую якщо вийде зняти коротке відео. Відповідність змінюється. Наприклад, 1 та 4 ок, а 23 переплутані. Змінюю місцями 2 та 3, але змінюється все, й 2 та 3 вже якісь інщв</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#0d9488">M8</div><div class="sender-info"><span class="sender-name">Учасник 8</span></div></div><p class="message-text">Це класична, 4123</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#0d9488">M8</div><div class="sender-info"><span class="sender-name">Учасник 8</span></div></div><p class="message-text">Це реверсна бетки, 1234</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#dc2626">M7</div><div class="sender-info"><span class="sender-name">Учасник 7</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 8</div><div class="reply-text">Це реверсна бетки, 1234</div></div><p class="message-text">Це звічайна. Реверсна бетки зі словом «reversed». Але порядок моторів на ній той самий</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#475569">M10</div><div class="sender-info"><span class="sender-name">Учасник 10</span></div></div><p class="message-text">Розділяйте порядок розміщення моторів і напрям обертів - це дві різні проблеми.<br>Намалюйте на листку бумаги схему яка потрібна, зайліть в мотор тест і по черзі позапускайте мотри і на схемі відмідьте що вийшло.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><p class="message-text">На цій пропи загрібають<br>А на реверсед - вигрібають від камери</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><p class="message-text">Реверсед роблять для того щоб гілки відштовхувати від дрона.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#65a30d">M11</div><div class="sender-info"><span class="sender-name">Учасник 11</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 4</div><div class="reply-text">Реверсед роблять для того щоб гілки відштовхувати від дрона.</div></div><p class="message-text">А ще краплі води, пил, бруд, пісок</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><p class="message-text">Ніхт</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><p class="message-text">Ніяк не впливає</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#65a30d">M11</div><div class="sender-info"><span class="sender-name">Учасник 11</span></div></div><p class="message-text">Камеру засирає</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><p class="message-text">Ні</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#65a30d">M11</div><div class="sender-info"><span class="sender-name">Учасник 11</span></div></div><p class="message-text">ні?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><p class="message-text">Перевіряли багато разів</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#0d9488">M8</div><div class="sender-info"><span class="sender-name">Учасник 8</span></div></div><p class="message-text">воно хоч так хоч так засирає, не камеру так польотнік.. камеру легче протерти.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#9333ea">M6</div><div class="sender-info"><span class="sender-name">Учасник 6</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 11</div><div class="reply-text">Камеру засирає</div></div><p class="message-text">камеру не те щоб дуже, а от польотник - так. Весь у кузнечіках ( кониках? )</p></div></div>
+    <footer>Academia Tech &copy; 2026</footer>
+  </div>
+</div>
+</body></html>

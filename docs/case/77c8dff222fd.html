@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html><head>
+<title>Puntos de acceso WiFi TP-Link Omada no funcionan tras configurar router ER605 | SupportBot</title>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta property="og:title" content="Puntos de acceso WiFi TP-Link Omada no funcionan tras configurar router ER605">
+<meta property="og:description" content="Se diagnostica que el problema no está en el router TP-Link ER605 configurado en modo PPPoE con Movistar, sino en la configuración de los puntos de acceso (APs) o en la gestión centralizada. El intern">
+<link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+<style>
+:root {
+  --signal-blue: #2c6bed;
+  --page-bg: #f6f7f9;
+  --card-bg: #ffffff;
+  --text: #0d0d0d;
+  --text-sec: #5c5c5c;
+  --border: #d8d8d8;
+  --radius: 12px;
+  --green: #16a34a;
+  --yellow: #ca8a04;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  background: var(--page-bg); color: var(--text);
+  min-height: 100vh; padding: 48px 20px;
+  -webkit-font-smoothing: antialiased;
+}
+@media (max-width: 520px) { body { padding: 24px 12px; } }
+.shell { max-width: 640px; margin: 0 auto; }
+.card {
+  background: var(--card-bg); border: 1px solid var(--border);
+  border-radius: var(--radius); overflow: hidden; margin-bottom: 16px;
+}
+header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 20px; border-bottom: 1px solid var(--border);
+}
+.header-left { display: flex; align-items: center; gap: 10px; text-decoration: none; color: inherit; }
+.logo { width: 28px; height: 28px; }
+.brand { font-size: 15px; font-weight: 600; letter-spacing: -0.02em; }
+.chat-header { padding: 14px 20px; border-bottom: 1px solid var(--border); background: var(--page-bg); }
+.chat-header h2 { font-size: 14px; font-weight: 600; color: var(--text); display: flex; align-items: center; gap: 8px; }
+.chat-header h2 svg { width: 16px; height: 16px; color: var(--signal-blue); }
+.messages { padding: 0; }
+.message { padding: 16px 20px; border-bottom: 1px solid var(--border); }
+.message:last-child { border-bottom: none; }
+.message-header { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+.avatar { width: 28px; height: 28px; border-radius: 50%; color: white; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 600; flex-shrink: 0; }
+.sender-info { flex: 1; min-width: 0; }
+.sender-name { font-size: 13px; font-weight: 600; color: var(--text); }
+.message-text { font-size: 15px; line-height: 1.55; color: var(--text); white-space: pre-wrap; margin-left: 38px; }
+.reply-bubble { margin-left: 38px; margin-bottom: 6px; padding: 6px 10px; background: #f0f2f5; border-left: 3px solid var(--signal-blue); border-radius: 4px; font-size: 13px; color: var(--text-sec); }
+.reply-sender { font-weight: 600; color: var(--signal-blue); font-size: 12px; margin-bottom: 2px; }
+.reply-text { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.status-badge {
+  padding: 4px 10px; font-size: 11px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.04em; border-radius: 4px;
+}
+.status-solved { background: #dcfce7; color: var(--green); }
+.status-recommendation { background: #fef3c7; color: #b45309; }
+main { padding: 24px 20px; }
+h1 { font-size: 20px; font-weight: 700; letter-spacing: -0.025em; margin-bottom: 12px; line-height: 1.3; }
+.meta { font-size: 12px; color: var(--text-sec); margin-bottom: 16px; }
+.tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 20px; }
+.tag {
+  background: rgba(44, 107, 237, 0.08); color: var(--signal-blue);
+  padding: 4px 10px; border-radius: 4px; font-size: 12px; font-weight: 500;
+}
+.section-title {
+  font-size: 11px; font-weight: 600; text-transform: uppercase;
+  letter-spacing: 0.06em; color: var(--text-sec); margin-bottom: 10px;
+  display: flex; align-items: center; gap: 6px;
+}
+.section-title svg { width: 14px; height: 14px; }
+.section-content { font-size: 15px; line-height: 1.6; color: var(--text); white-space: pre-wrap; }
+.problem-section { padding-bottom: 20px; border-bottom: 1px solid var(--border); margin-bottom: 20px; }
+.solution-section {
+  background: #f0fdf4; margin: -24px -20px -24px -20px; padding: 20px;
+  border-top: 1px solid #bbf7d0;
+}
+.solution-section .section-title { color: var(--green); }
+.recommendation-solution { background: #fffbeb; border-top-color: #fde68a; }
+.recommendation-solution .section-title { color: #b45309; }
+.empty-chat {
+  padding: 32px 20px; text-align: center; color: var(--text-sec); font-size: 14px;
+}
+footer {
+  padding: 14px 20px; border-top: 1px solid var(--border);
+  color: var(--text-sec); font-size: 12px; text-align: center;
+}
+@media (max-width: 520px) {
+  main { padding: 20px 16px; }
+  h1 { font-size: 18px; }
+  .solution-section { margin: -20px -16px -20px -16px; padding: 16px; }
+}
+</style>
+</head><body>
+<div class="shell">
+  <div class="card">
+    <header>
+      <a href="https://academia-tech.github.io/SupportBot" class="header-left">
+        <img src="/SupportBot/supportbot-logo-128.png" alt="SupportBot" class="logo">
+        <span class="brand">SupportBot</span>
+      </a>
+      <span class="status-recommendation status-badge">Рекомендація</span>
+    </header>
+    <main>
+      <h1>Puntos de acceso WiFi TP-Link Omada no funcionan tras configurar router ER605</h1>
+      <p class="meta">Case 77c8dff222fd &middot; naseros</p>
+      <div class='tags'><span class="tag">#tp-link</span><span class="tag">#omada</span><span class="tag">#er605</span><span class="tag">#eap650</span><span class="tag">#oc200</span><span class="tag">#wifi</span><span class="tag">#pppoe</span><span class="tag">#troubleshooting</span><span class="tag">#vlan</span></div>
+      <div class="problem-section">
+        <h2 class="section-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/>
+            <line x1="12" y1="16" x2="12.01" y2="16"/>
+          </svg>
+          Проблема
+        </h2>
+        <p class="section-content">Un usuario ha configurado un router TP-Link ER605 en modo PPPoE para Movistar. La conexión a Internet por cable funciona correctamente, pero los puntos de acceso WiFi (modelos EAP250 y EAP650) no dan conexión. El usuario también dispone de un controlador Omada OC200 pero no sabe cómo empezar a configurarlo.</p>
+      </div>
+      <div class="solution-section recommendation-solution">
+        <h2 class="section-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7c.6.4 1 1.1 1 1.8V17h6v-.5c0-.7.4-1.4 1-1.8A7 7 0 0 0 12 2z"/></svg>
+          Рекомендація (не підтверджено)
+        </h2>
+        <p class="section-content">Se diagnostica que el problema no está en el router TP-Link ER605 configurado en modo PPPoE con Movistar, sino en la configuración de los puntos de acceso (APs) o en la gestión centralizada. El internet funciona por cable, pero no por WiFi. Se ofrecen dos vías de solución: 1. **Configuración en modo Standalone**: Se sugiere revisar el manual de configuración de los APs (ej. EAP650: https://support.omadanetworks.com/es/document/4601/) para los primeros pasos y opciones. 2. **Configuración con Controlador Omada OC200 (Recomendado)**: Se aconseja usar el controlador OC200 para una gestión centralizada. Para ello, se debe reiniciar el router ER605 y los APs (EAP225 y EAP650) a valores de fábrica. La topología de red recomendada es: Internet &gt; Router Omada ER605 &gt; switch Omada (ej. ES208G) &gt; todo conectado al switch: los APs y el OC200. Una vez conectados, se accede a la IP del controlador para adoptar los dispositivos. La configuración del controlador se aplicará automáticamente a los dispositivos adoptados. El controlador funciona localmente, incluso sin internet, pero se puede configurar el PPPoE de Movistar en el OC200 para asegurar la conexión. El usuario confirma que tiene un switch ES208G y un EAP225 compatible con el controlador. El usuario agradece la ayuda.</p>
+      </div>
+    </main>
+  </div>
+  <div class="card">
+    <div class="chat-header"><h2><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Історія чату</h2></div><div class="messages"><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Tengo una pregunta configure un router tp lin er605 de router neutro con el modo PPPoE Movistar y solo funciona por cable el internet no me funciona los ap o wifi que he hecho mal</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Tengo una pregunta configure un router tp lin er605 de router neutro con el modo PPPoE Movistar y solo funciona por cabl</div></div><p class="message-text">Hola, si puedes, pasa un pantallazo de cómo tienes configurado los puntos de acceso y también, los datos de la Lan del router R605</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 2</div><div class="reply-text">Hola, si puedes, pasa un pantallazo de cómo tienes configurado los puntos de acceso y también, los datos de la Lan del r</div></div><p class="message-text">Ok estoy trabajando cuando puedas adjunto la foto gracias</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Buenas la configuración de router</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Me ha sido imposible antes lo siento</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Tengo una pregunta configure un router tp lin er605 de router neutro con el modo PPPoE Movistar y solo funciona por cabl</div></div><p class="message-text">Creo que hay un modo Bridge en el que lo puedes configurar</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><p class="message-text">Si va por cable</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Tengo una pregunta configure un router tp lin er605 de router neutro con el modo PPPoE Movistar y solo funciona por cabl</div></div><p class="message-text">Los routers para conectarlos directamente, tienen que tener una ONT instalada</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><p class="message-text">Que tienes en ports?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Tengo una pregunta configure un router tp lin er605 de router neutro con el modo PPPoE Movistar y solo funciona por cabl</div></div><p class="message-text">Por otro lado, que APs tienes?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 3</div><div class="reply-text">Los routers para conectarlos directamente, tienen que tener una ONT instalada</div></div><p class="message-text">Al de Movistar mono Puesto</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 4</div><div class="reply-text">Por otro lado, que APs tienes?</div></div><p class="message-text">Tp lim eap 250 eap 650</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Buenas la configuración de router</div></div><p class="message-text">Buenas tardes, veo que tienes el router TP-Link en modo Standalone, a mí personalmente me gusta más que el modo Omada en la nube. Como has comentado que internet tienes y en la configuración que has enviado, no veo nada raro.<br><br>Sobre la configuración de los puntos de acceso, por ejemplo, en este enlace, está el manual de configuración de los dos, el EAP650, https://support.omadanetworks.com/es/document/4601/, si te descargas el PDF aparece como configurarlo, los primeros pasos y demás opciones. Supongo que el otro punto de acceso, se configurará aproximadamente igual, ¿lo has seguido ya o tienes algún otro problema?, saludos.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 2</div><div class="reply-text">Buenas tardes, veo que tienes el router TP-Link en modo Standalone, a mí personalmente me gusta más que el modo Omada en</div></div><p class="message-text">Exactamente, si bien es posible configurar todo en standalone (uno por uno individual), es mejor usar un controlador, ya sea en la nube o en un servidor vía software o los OC200-OC300 (dependiendo de la capacidad que necesites). Dependerá de tus necesidades. <br><br>Luego, haciéndolo en standalone: si tienes bien las salidas en “ports”. Debes ver en los APs si les estas asignando la vlan que corresponda para el AP en si y la vlan para los SSID que te están dando el wifi. Es posible que valla por ahí el problema.<br><br>Si puedes comparte imagen de la configuración que tienes en el/los APs, y las salidas en “ports” del router. A ver si te podemos seguir ayudando 👍🏼</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 4</div><div class="reply-text">Exactamente, si bien es posible configurar todo en standalone (uno por uno individual), es mejor usar un controlador, ya</div></div><p class="message-text">Tengo el controlador oc 200 pero no sé por donde empezar  como se configura el oc 200 que tengo pero sin configurar adecuadamente no se si me explico</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><p class="message-text">https://t.me/NASeros/582280/715910<br><br>https://t.me/NASeros/582280/715911<br><br>Acá el manual del OC200</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Tengo el controlador oc 200 pero no sé por donde empezar  como se configura el oc 200 que tengo pero sin configurar adec</div></div><p class="message-text">Debes comenzar por reiniciar el router de fábrica y los APs (no se si el 250 sea compatible con el controlador, debes ver eso), pero el AP 650 si 👍🏼</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><p class="message-text">La topología de red debe ser: <br>Internet &gt; Router Omada ER605 &gt; switch Omada &gt; todo conectado al switch: los AP y el OC200</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><p class="message-text">Una vez que lo tengas así, accedes a la dirección IP del controlador y entras (ve el manual), luego debes adoptar los distintos dispositivos: router, switch y APs. Una vez que lo tengas así, tu vida será más fácil y toda la configuración la haces desde un solo lugar: el controlador.<br>Espero te sirva</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 4</div><div class="reply-text">Una vez que lo tengas así, accedes a la dirección IP del controlador y entras (ve el manual), luego debes adoptar los di</div></div><p class="message-text">Cuando puedas  reinicio todos los dispositivos hasta la configuración que tengo en el oc 200 también?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Cuando puedas  reinicio todos los dispositivos hasta la configuración que tengo en el oc 200 también?</div></div><p class="message-text">Es que por la imagen que enviaste del router, no está adoptado en el controlador, lo tienes por separado en modo standalone, si ya tienes acceso al controlador y has hecho alguna configuración, cuando reinicies los dispositivos y los adoptes al controlador, automáticamente van a asumir la configuración que les indique el controlador. Entonces lo que tengas configurado actualmente en el controlador va a ser la configuración definitiva 👍🏼</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 4</div><div class="reply-text">Es que por la imagen que enviaste del router, no está adoptado en el controlador, lo tienes por separado en modo standal</div></div><p class="message-text">Entonces el router er 605  a la red y le configuro con el controlador o eso no me sirve</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 4</div><div class="reply-text">La topología de red debe ser:  Internet &gt; Router Omada ER605 &gt; switch Omada &gt; todo conectado al switch: los AP y el OC20</div></div><p class="message-text">👆🏼 acá</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Entonces el router er 605  a la red y le configuro con el controlador o eso no me sirve</div></div><p class="message-text">Necesitas un switch</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Tengo el es208g</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Tp lim eap 250 eap 650</div></div><p class="message-text">Fíjate si está bien el modelo pues en la página de productos de Omada no existe un EAP-250</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Es el 225 que me confundí</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Tengo el es208g</div></div><p class="message-text">Si en la especificación dice que puede ser manejado con un controlador 👍🏼</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Es el 225 que me confundí</div></div><p class="message-text">El 225 outdoor o el 225 v3 si son compatibles con el controlador 👍🏼</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Entonces el router er 605  a la red y le configuro con el controlador o eso no me sirve</div></div><p class="message-text">Reinicia todo de fábrica, conéctalo como se muestra en la foto y adoptas los dispositivos desde el controlador 👍🏼 de ahí en adelante configuras todo en el controlador</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 4</div><div class="reply-text">El 225 outdoor o el 225 v3 si son compatibles con el controlador 👍🏼</div></div><p class="message-text">Si ese tengo en el congelador</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 4</div><div class="reply-text">Reinicia todo de fábrica, conéctalo como se muestra en la foto y adoptas los dispositivos desde el controlador 👍🏼 de ahí</div></div><p class="message-text">Pero me va a detectar  el controlador si no tengo configurado el er 605  sin red</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Pero me va a detectar  el controlador si no tengo configurado el er 605  sin red</div></div><p class="message-text">El controlador es el cerebro de todo, y la configuración con los dispositivos es local, puedes tener toda la red montada y andando (sin internet digamos). De todas formas y si quieres para asegurarte: colócale al OC200 la configuración PPPoE de Movistar, lo mismo que tienes actualmente en el ER605. La salida a internet digamos, y con eso ya quedas conectado 👍🏼</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 4</div><div class="reply-text">El controlador es el cerebro de todo, y la configuración con los dispositivos es local, puedes tener toda la red montada</div></div><p class="message-text">Ok  y las IP se pueden asesinar  el controlador me estudiará el manual y a ver que lio</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 4</div><div class="reply-text">El controlador es el cerebro de todo, y la configuración con los dispositivos es local, puedes tener toda la red montada</div></div><p class="message-text">Gracias por la ayuda</p></div></div>
+    <footer>Academia Tech &copy; 2026</footer>
+  </div>
+</div>
+</body></html>

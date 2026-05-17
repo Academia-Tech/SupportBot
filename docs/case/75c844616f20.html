@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html><head>
+<title>Recomendaciones de gestor de contraseñas para iOS y Windows | SupportBot</title>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta property="og:title" content="Recomendaciones de gestor de contraseñas para iOS y Windows">
+<meta property="og:description" content="Se recomiendan varias opciones:
+- **Bitwarden / Vaultwarden**: Es la opción más recomendada. Bitwarden es un servicio en la nube (con plan gratuito y de pago), mientras que Vaultwarden es una implemen">
+<link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+<style>
+:root {
+  --signal-blue: #2c6bed;
+  --page-bg: #f6f7f9;
+  --card-bg: #ffffff;
+  --text: #0d0d0d;
+  --text-sec: #5c5c5c;
+  --border: #d8d8d8;
+  --radius: 12px;
+  --green: #16a34a;
+  --yellow: #ca8a04;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  background: var(--page-bg); color: var(--text);
+  min-height: 100vh; padding: 48px 20px;
+  -webkit-font-smoothing: antialiased;
+}
+@media (max-width: 520px) { body { padding: 24px 12px; } }
+.shell { max-width: 640px; margin: 0 auto; }
+.card {
+  background: var(--card-bg); border: 1px solid var(--border);
+  border-radius: var(--radius); overflow: hidden; margin-bottom: 16px;
+}
+header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 20px; border-bottom: 1px solid var(--border);
+}
+.header-left { display: flex; align-items: center; gap: 10px; text-decoration: none; color: inherit; }
+.logo { width: 28px; height: 28px; }
+.brand { font-size: 15px; font-weight: 600; letter-spacing: -0.02em; }
+.chat-header { padding: 14px 20px; border-bottom: 1px solid var(--border); background: var(--page-bg); }
+.chat-header h2 { font-size: 14px; font-weight: 600; color: var(--text); display: flex; align-items: center; gap: 8px; }
+.chat-header h2 svg { width: 16px; height: 16px; color: var(--signal-blue); }
+.messages { padding: 0; }
+.message { padding: 16px 20px; border-bottom: 1px solid var(--border); }
+.message:last-child { border-bottom: none; }
+.message-header { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+.avatar { width: 28px; height: 28px; border-radius: 50%; color: white; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 600; flex-shrink: 0; }
+.sender-info { flex: 1; min-width: 0; }
+.sender-name { font-size: 13px; font-weight: 600; color: var(--text); }
+.message-text { font-size: 15px; line-height: 1.55; color: var(--text); white-space: pre-wrap; margin-left: 38px; }
+.reply-bubble { margin-left: 38px; margin-bottom: 6px; padding: 6px 10px; background: #f0f2f5; border-left: 3px solid var(--signal-blue); border-radius: 4px; font-size: 13px; color: var(--text-sec); }
+.reply-sender { font-weight: 600; color: var(--signal-blue); font-size: 12px; margin-bottom: 2px; }
+.reply-text { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.status-badge {
+  padding: 4px 10px; font-size: 11px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.04em; border-radius: 4px;
+}
+.status-solved { background: #dcfce7; color: var(--green); }
+.status-recommendation { background: #fef3c7; color: #b45309; }
+main { padding: 24px 20px; }
+h1 { font-size: 20px; font-weight: 700; letter-spacing: -0.025em; margin-bottom: 12px; line-height: 1.3; }
+.meta { font-size: 12px; color: var(--text-sec); margin-bottom: 16px; }
+.tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 20px; }
+.tag {
+  background: rgba(44, 107, 237, 0.08); color: var(--signal-blue);
+  padding: 4px 10px; border-radius: 4px; font-size: 12px; font-weight: 500;
+}
+.section-title {
+  font-size: 11px; font-weight: 600; text-transform: uppercase;
+  letter-spacing: 0.06em; color: var(--text-sec); margin-bottom: 10px;
+  display: flex; align-items: center; gap: 6px;
+}
+.section-title svg { width: 14px; height: 14px; }
+.section-content { font-size: 15px; line-height: 1.6; color: var(--text); white-space: pre-wrap; }
+.problem-section { padding-bottom: 20px; border-bottom: 1px solid var(--border); margin-bottom: 20px; }
+.solution-section {
+  background: #f0fdf4; margin: -24px -20px -24px -20px; padding: 20px;
+  border-top: 1px solid #bbf7d0;
+}
+.solution-section .section-title { color: var(--green); }
+.recommendation-solution { background: #fffbeb; border-top-color: #fde68a; }
+.recommendation-solution .section-title { color: #b45309; }
+.empty-chat {
+  padding: 32px 20px; text-align: center; color: var(--text-sec); font-size: 14px;
+}
+footer {
+  padding: 14px 20px; border-top: 1px solid var(--border);
+  color: var(--text-sec); font-size: 12px; text-align: center;
+}
+@media (max-width: 520px) {
+  main { padding: 20px 16px; }
+  h1 { font-size: 18px; }
+  .solution-section { margin: -20px -16px -20px -16px; padding: 16px; }
+}
+</style>
+</head><body>
+<div class="shell">
+  <div class="card">
+    <header>
+      <a href="https://academia-tech.github.io/SupportBot" class="header-left">
+        <img src="/SupportBot/supportbot-logo-128.png" alt="SupportBot" class="logo">
+        <span class="brand">SupportBot</span>
+      </a>
+      <span class="status-solved status-badge">Вирішено</span>
+    </header>
+    <main>
+      <h1>Recomendaciones de gestor de contraseñas para iOS y Windows</h1>
+      <p class="meta">Case 75c844616f20 &middot; naseros</p>
+      <div class='tags'><span class="tag">#Gestor de contraseñas</span><span class="tag">#Seguridad</span><span class="tag">#Bitwarden</span><span class="tag">#Vaultwarden</span><span class="tag">#Keepass</span><span class="tag">#1Password</span><span class="tag">#Self-hosting</span></div>
+      <div class="problem-section">
+        <h2 class="section-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/>
+            <line x1="12" y1="16" x2="12.01" y2="16"/>
+          </svg>
+          Проблема
+        </h2>
+        <p class="section-content">Un usuario busca recomendaciones de un sistema para gestionar contraseñas, ya que usaba Microsoft Authenticator y este va a dejar de funcionar como tal. Necesita una solución compatible con iOS y Windows.</p>
+      </div>
+      <div class="solution-section">
+        <h2 class="section-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          Рішення
+        </h2>
+        <p class="section-content">Se recomiendan varias opciones:
+- **Bitwarden / Vaultwarden**: Es la opción más recomendada. Bitwarden es un servicio en la nube (con plan gratuito y de pago), mientras que Vaultwarden es una implementación auto-alojable (self-hosted) del servidor de Bitwarden, que se puede instalar en un NAS o Raspberry Pi. Un usuario confirma que usa la versión gratuita de Bitwarden para dos personas y funciona bien, y planea migrar a Vaultwarden si el servicio gratuito se restringe.
+- **KeePass**: Es una opción gratuita y offline, donde la base de datos se guarda como un archivo local que se puede sincronizar con servicios en la nube.
+- **1Password**: Es una opción de pago muy popular.
+- **Gestor de contraseñas de Apple/Google**: Son opciones integradas en los ecosistemas, pero menos flexibles.</p>
+      </div>
+    </main>
+  </div>
+  <div class="card">
+    <div class="chat-header"><h2><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Історія чату</h2></div><div class="messages"><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Hola buenas tardes! No sé si es el lugar adecuado, pero me gustaría lanzar una consulta: ¿Podéis recomendarme algún gestor o sistema de creación y gestión de contraseñas? Hasta ahora he utilizado Microsoft Authenticator, pero parece ser que deja de funcionar como tal. <br>No obstante desde que leo por aquí empiezo a darme cuenta de los riesgos que voy corriendo y me gustaría saber qué sistema podría utilizar, siendo usuario de iOS y windows. Muchas gracias por adelantado</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Hola buenas tardes! No sé si es el lugar adecuado, pero me gustaría lanzar una consulta: ¿Podéis recomendarme algún gest</div></div><p class="message-text">vaultwarden/bitwarden...</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Muchas gracias! Lo miro a ver qué tal</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Hola buenas tardes! No sé si es el lugar adecuado, pero me gustaría lanzar una consulta: ¿Podéis recomendarme algún gest</div></div><p class="message-text">Keepass si quieres algo en local sin servidor</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Hola buenas tardes! No sé si es el lugar adecuado, pero me gustaría lanzar una consulta: ¿Podéis recomendarme algún gest</div></div><p class="message-text">1Password es una posible solución, aunque tiene un coste pequeño anual, unos 35€ al año creo… tiene aplicación para iOS, doble factor, etc… a mi me es más que suficiente</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Muchas gracias</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Pues voy a estudiar todas las opciones, me gusta mucho la de vaultwarden/bitwarden, pero aún no tengo nas ni nada parecido (es mi próximo objetivo) así que luego veo las opciones y miro. No me importa pagar un año 35€ mientras monto algo</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Pues voy a estudiar todas las opciones, me gusta mucho la de vaultwarden/bitwarden, pero aún no tengo nas ni nada pareci</div></div><p class="message-text">Puedes pagar bitwarden mientras montas vaultwarden: https://bitwarden.com/pricing/</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#0891b2">M5</div><div class="sender-info"><span class="sender-name">Учасник 5</span></div></div><p class="message-text">[C S](tg://user?id=7852723892) [`7852723892`] Ha sido reportado a los Administradores.[​](tg://user?id=859064230)[​](tg://user?id=3946383)[​](tg://user?id=119676995)[​](tg://user?id=281059775)[​](tg://user?id=212637734)[​](tg://user?id=6045262)[​](tg://user?id=220960379)[​](tg://user?id=11315481)</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#9333ea">M6</div><div class="sender-info"><span class="sender-name">Учасник 6</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Hola buenas tardes! No sé si es el lugar adecuado, pero me gustaría lanzar una consulta: ¿Podéis recomendarme algún gest</div></div><p class="message-text">yo uso vaultwarden/bitwarden y aegis para eso</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#9333ea">M6</div><div class="sender-info"><span class="sender-name">Учасник 6</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Pues voy a estudiar todas las opciones, me gusta mucho la de vaultwarden/bitwarden, pero aún no tengo nas ni nada pareci</div></div><p class="message-text">lo puedes montar en una raspberry incluso,<br><br>lo importante es que hagas respaldos frecuentes &quot;por si acaso&quot;</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#dc2626">M7</div><div class="sender-info"><span class="sender-name">Учасник 7</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Hola buenas tardes! No sé si es el lugar adecuado, pero me gustaría lanzar una consulta: ¿Podéis recomendarme algún gest</div></div><p class="message-text">https://youtu.be/ejgcJ4NOFnQ?si=XKrGBu0avGL8U5AE</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#dc2626">M7</div><div class="sender-info"><span class="sender-name">Учасник 7</span></div></div><p class="message-text">Yo estoy aprendido con este chico, me parece genial lo que hace. Te recomiendo que le eches un ojo a su canal.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 7</div><div class="reply-text">Yo estoy aprendido con este chico, me parece genial lo que hace. Te recomiendo que le eches un ojo a su canal.</div></div><p class="message-text">Pues te lo agradezco muchísimo porque aun no he puesto nada con las vacaciones, solo me cree la cuenta de bitwarden, al final me estoy viniendo arriba y me voy a montar un nas antes de lo que pensaba</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#0d9488">M8</div><div class="sender-info"><span class="sender-name">Учасник 8</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Hola buenas tardes! No sé si es el lugar adecuado, pero me gustaría lanzar una consulta: ¿Podéis recomendarme algún gest</div></div><p class="message-text">synology tiene una aplicación mejor que la de Microsoft</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ca8a04">M9</div><div class="sender-info"><span class="sender-name">Учасник 9</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Hola buenas tardes! No sé si es el lugar adecuado, pero me gustaría lanzar una consulta: ¿Podéis recomendarme algún gest</div></div><p class="message-text">Yo tengo vaultwarden es un poco complicado de montar (necesitas https) pero te ahorras el pago de la suscripción de bitwarden (vaultwarden es un clon).</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#475569">M10</div><div class="sender-info"><span class="sender-name">Учасник 10</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 9</div><div class="reply-text">Yo tengo vaultwarden es un poco complicado de montar (necesitas https) pero te ahorras el pago de la suscripción de bitw</div></div><p class="message-text">Yo lo sopesé en su día y me quedé con el Bitwarden gratuito. Para uso doméstico, 2 personas con un puñados de dispositivos funciona bien. Si acaban capándolo para pagar suscripción, acabaré migrando a Vaultwarden</p></div></div>
+    <footer>Academia Tech &copy; 2026</footer>
+  </div>
+</div>
+</body></html>

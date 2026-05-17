@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html><head>
+<title>Автоматичний поворотний механізм для антен дрона | SupportBot</title>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta property="og:title" content="Автоматичний поворотний механізм для антен дрона">
+<meta property="og:description" content="Поворотний механізм для антен VTX та RX автоматично тримає напрямок на точку зльоту, використовуючи вбудований компас та RSSI. Він калібрується 1 раз на секунду в межах 10 градусів, сканує при раптові">
+<link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+<style>
+:root {
+  --signal-blue: #2c6bed;
+  --page-bg: #f6f7f9;
+  --card-bg: #ffffff;
+  --text: #0d0d0d;
+  --text-sec: #5c5c5c;
+  --border: #d8d8d8;
+  --radius: 12px;
+  --green: #16a34a;
+  --yellow: #ca8a04;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  background: var(--page-bg); color: var(--text);
+  min-height: 100vh; padding: 48px 20px;
+  -webkit-font-smoothing: antialiased;
+}
+@media (max-width: 520px) { body { padding: 24px 12px; } }
+.shell { max-width: 640px; margin: 0 auto; }
+.card {
+  background: var(--card-bg); border: 1px solid var(--border);
+  border-radius: var(--radius); overflow: hidden; margin-bottom: 16px;
+}
+header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 20px; border-bottom: 1px solid var(--border);
+}
+.header-left { display: flex; align-items: center; gap: 10px; text-decoration: none; color: inherit; }
+.logo { width: 28px; height: 28px; }
+.brand { font-size: 15px; font-weight: 600; letter-spacing: -0.02em; }
+.chat-header { padding: 14px 20px; border-bottom: 1px solid var(--border); background: var(--page-bg); }
+.chat-header h2 { font-size: 14px; font-weight: 600; color: var(--text); display: flex; align-items: center; gap: 8px; }
+.chat-header h2 svg { width: 16px; height: 16px; color: var(--signal-blue); }
+.messages { padding: 0; }
+.message { padding: 16px 20px; border-bottom: 1px solid var(--border); }
+.message:last-child { border-bottom: none; }
+.message-header { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+.avatar { width: 28px; height: 28px; border-radius: 50%; color: white; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 600; flex-shrink: 0; }
+.sender-info { flex: 1; min-width: 0; }
+.sender-name { font-size: 13px; font-weight: 600; color: var(--text); }
+.message-text { font-size: 15px; line-height: 1.55; color: var(--text); white-space: pre-wrap; margin-left: 38px; }
+.reply-bubble { margin-left: 38px; margin-bottom: 6px; padding: 6px 10px; background: #f0f2f5; border-left: 3px solid var(--signal-blue); border-radius: 4px; font-size: 13px; color: var(--text-sec); }
+.reply-sender { font-weight: 600; color: var(--signal-blue); font-size: 12px; margin-bottom: 2px; }
+.reply-text { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.status-badge {
+  padding: 4px 10px; font-size: 11px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.04em; border-radius: 4px;
+}
+.status-solved { background: #dcfce7; color: var(--green); }
+.status-recommendation { background: #fef3c7; color: #b45309; }
+main { padding: 24px 20px; }
+h1 { font-size: 20px; font-weight: 700; letter-spacing: -0.025em; margin-bottom: 12px; line-height: 1.3; }
+.meta { font-size: 12px; color: var(--text-sec); margin-bottom: 16px; }
+.tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 20px; }
+.tag {
+  background: rgba(44, 107, 237, 0.08); color: var(--signal-blue);
+  padding: 4px 10px; border-radius: 4px; font-size: 12px; font-weight: 500;
+}
+.section-title {
+  font-size: 11px; font-weight: 600; text-transform: uppercase;
+  letter-spacing: 0.06em; color: var(--text-sec); margin-bottom: 10px;
+  display: flex; align-items: center; gap: 6px;
+}
+.section-title svg { width: 14px; height: 14px; }
+.section-content { font-size: 15px; line-height: 1.6; color: var(--text); white-space: pre-wrap; }
+.problem-section { padding-bottom: 20px; border-bottom: 1px solid var(--border); margin-bottom: 20px; }
+.solution-section {
+  background: #f0fdf4; margin: -24px -20px -24px -20px; padding: 20px;
+  border-top: 1px solid #bbf7d0;
+}
+.solution-section .section-title { color: var(--green); }
+.recommendation-solution { background: #fffbeb; border-top-color: #fde68a; }
+.recommendation-solution .section-title { color: #b45309; }
+.empty-chat {
+  padding: 32px 20px; text-align: center; color: var(--text-sec); font-size: 14px;
+}
+footer {
+  padding: 14px 20px; border-top: 1px solid var(--border);
+  color: var(--text-sec); font-size: 12px; text-align: center;
+}
+@media (max-width: 520px) {
+  main { padding: 20px 16px; }
+  h1 { font-size: 18px; }
+  .solution-section { margin: -20px -16px -20px -16px; padding: 16px; }
+}
+</style>
+</head><body>
+<div class="shell">
+  <div class="card">
+    <header>
+      <a href="https://academia-tech.github.io/SupportBot" class="header-left">
+        <img src="/SupportBot/supportbot-logo-128.png" alt="SupportBot" class="logo">
+        <span class="brand">SupportBot</span>
+      </a>
+      <span class="status-recommendation status-badge">Рекомендація</span>
+    </header>
+    <main>
+      <h1>Автоматичний поворотний механізм для антен дрона</h1>
+      <p class="meta">Case 32ce726f7d81 &middot; ua_ardupilot</p>
+      <div class='tags'><span class="tag">#антена</span><span class="tag">#ротатор</span><span class="tag">#RSSI</span><span class="tag">#компас</span><span class="tag">#VTX</span><span class="tag">#RX</span><span class="tag">#автоматизація</span></div>
+      <div class="problem-section">
+        <h2 class="section-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/>
+            <line x1="12" y1="16" x2="12.01" y2="16"/>
+          </svg>
+          Проблема
+        </h2>
+        <p class="section-content">Опис поворотного механізму для антен VTX та RX на дрон, що автоматично тримає напрямок на точку зльоту, використовуючи вбудований компас та RSSI.</p>
+      </div>
+      <div class="solution-section recommendation-solution">
+        <h2 class="section-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7c.6.4 1 1.1 1 1.8V17h6v-.5c0-.7.4-1.4 1-1.8A7 7 0 0 0 12 2z"/></svg>
+          Рекомендація (не підтверджено)
+        </h2>
+        <p class="section-content">Поворотний механізм для антен VTX та RX автоматично тримає напрямок на точку зльоту, використовуючи вбудований компас та RSSI. Він калібрується 1 раз на секунду в межах 10 градусів, сканує при раптовій зміні RSSI. Дозволяє підсилити сигнал направленими антенами та має ручне коригування азимуту. RX антена розміщується в горизонтальній поляризації. Інший користувач поділився досвідом тестування схожої системи, яка працювала на основі даних про курс (yaw) та нахил (pitch) дрона, без пошуку по RSSI. Така система показала ефективність на дистанції до 20 км (15 км до і 5 км після ввімкнення РЕБ).</p>
+      </div>
+    </main>
+  </div>
+  <div class="card">
+    <div class="chat-header"><h2><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Історія чату</h2></div><div class="messages"><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">А без gps воно куди крутитись буде?)</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><p class="message-text">Воно здається не по жпс працює, по рссіай</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">А без gps воно куди крутитись буде?)</div></div><p class="message-text">Не потрібно жпс</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">А без gps воно куди крутитись буде?)</div></div><p class="message-text">Використовує вбудований компас</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Ну незнаю, без привязки поворотки до наземки сумнівне рішення, можна полетіти 5км вперед і 3вбік, по компасу воно небуде на наземку дивитись</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Ну незнаю, без привязки поворотки до наземки сумнівне рішення, можна полетіти 5км вперед і 3вбік, по компасу воно небуде</div></div><p class="message-text">Якщо без фрістайлу,то по рссі повинно скоригувати кут.Якщо зовсім край,то можна рукою підлаштувати)</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 3</div><div class="reply-text">Якщо без фрістайлу,то по рссі повинно скоригувати кут.Якщо зовсім край,то можна рукою підлаштувати)</div></div><p class="message-text">рссі чого? це передаюча відеоантена. в ролику показано, що треба підкручувати з тумблера пульта.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 4</div><div class="reply-text">рссі чого? це передаюча відеоантена. в ролику показано, що треба підкручувати з тумблера пульта.</div></div><p class="message-text">Антена рх розміщена повинна бути в горизонтальній орієнтації.в ролику антена втх для загального виду,антена рх не встановлена,бо в кімнаті від неї толку великого немає</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 4</div><div class="reply-text">рссі чого? це передаюча відеоантена. в ролику показано, що треба підкручувати з тумблера пульта.</div></div><p class="message-text">Ось опис.Поворотний механізм для антен втх та рх на дрон.Автоматично тримає напрямок на точку злету.При встановленні направлених антен,дасть змогу підсилити сигнал та менше відсвічувати.Додатково додана можливість коригувати напрямок антен з пульта крутілкою з автоматичним збереженням встановленного азимута. Антена рх розміщується в горизонтальній поляризації,так як значення рссі також використовується. В новій версії зменшили розмір механізму.Підключення на вільні рх/тх на контролері та живлення</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><p class="message-text">Це від норди?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 3</div><div class="reply-text">Ось опис.Поворотний механізм для антен втх та рх на дрон.Автоматично тримає напрямок на точку злету.При встановленні нап</div></div><p class="message-text">Як часто він калібрується (крутиться, перевіряючи рссі), з якою швидкістю та на який кут?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><p class="message-text">Калібрується 1раз в сек в межах 10 градусів.пошуку як такого немає,щоб не зникло відео.якщо є сумнів,то є ручне налаштування азимуту</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 3</div><div class="reply-text">Калібрується 1раз в сек в межах 10 градусів.пошуку як такого немає,щоб не зникло відео.якщо є сумнів,то є ручне налаштув</div></div><p class="message-text">Це не викликає погіршення відео? Особливо на дальніх дистанціях.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><p class="message-text">На дальні дистанції поки немає відгуків.Але,в теорії,не повинно</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Тобто воно тримає образно якийсь кут азимуту при взльоті, а потім кожну секунду вліво вправо щоб зрозуміти по рссі куди крутити підкориговує?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Тобто воно тримає образно якийсь кут азимуту при взльоті, а потім кожну секунду вліво вправо щоб зрозуміти по рссі куди </div></div><p class="message-text">Так.але сканує тоді,коли посадка рссі не лінійна,а раптова.в більшості випадків азимута вистачати повинно</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#0891b2">M5</div><div class="sender-info"><span class="sender-name">Учасник 5</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 3</div><div class="reply-text">На дальні дистанції поки немає відгуків.Але,в теорії,не повинно</div></div><p class="message-text">Тестили схожу систему, ніякого пошуку по рссі не було, брався яв і пітч дрона від цього уже рахувались шим для серв.<br>Підари пізніше побачили, пізніше включили штору, дистанція 15 км і до початку штори, + 5км уже зі шторою, потім здох мавік-ретрік)</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#0891b2">M5</div><div class="sender-info"><span class="sender-name">Учасник 5</span></div></div><p class="message-text"><br><br>[Відео: 7976.mp4 — The video displays a custom-built electronic project on a workbench.<br><br>1.  **What is shown:** A 3D-printed, bright green pan-tilt mechanism supports a small PCB, likely a sensor or camera module, secured by zip ties. This mechanism is wired to a central control board, which appears to be an F4/F7-style flight controller, mounted on a wooden block. The flight controller is powered via a USB-C cable and displays a solid red LED, a solid blue LED, and several flickering white/yellow indicator LEDs. A smaller, secondary PCB with a prominent green LED and a red LED is also connected to the main control board. In the background, a black computer speaker with red rings, a gaming mouse with a pulsing purple light, various USB cables, and a screwdriver are present.<br>2.  **Visible text:** &quot;TOLSEM&quot; on a yellow-handled screwdriver. &quot;DOOOOD&quot; or similar (possibly &quot;DOOGEE&quot;) is faintly visible on a green plastic item. No explicit error messages or significant text on the PCBs.<br>3.  **What happens over time:**<br>    *   0:00-0:07: The 3D-printed mechanism performs a continuous horizontal panning motion.<br>    *   0:07-0:18: The mechanism then adds vertical tilting (up and down) to its horizontal panning.<br>    *   0:18-0:25: A hand enters the frame, briefly touching the wooden block, then picks up and displays the secondary PCB. All system LEDs remain illuminated throughout the video.<br>4.  **Problems/anomalies:** No apparent problems or anomalies are visible. The system demonstrates controlled pan and tilt movements, and all connected electronic components show active power and status indicators.]</p></div></div>
+    <footer>Academia Tech &copy; 2026</footer>
+  </div>
+</div>
+</body></html>

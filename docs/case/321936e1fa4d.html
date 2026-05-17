@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html><head>
+<title>Instalar Home Assistant en Mini PC con Windows 11 | SupportBot</title>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta property="og:title" content="Instalar Home Assistant en Mini PC con Windows 11">
+<meta property="og:description" content="Se confirma que VirtualBox es una buena opción para instalar Home Assistant en un Mini PC con Windows 11, permitiendo el uso concurrente de ambos sistemas. Se recomienda realizar copias de seguridad h">
+<link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+<style>
+:root {
+  --signal-blue: #2c6bed;
+  --page-bg: #f6f7f9;
+  --card-bg: #ffffff;
+  --text: #0d0d0d;
+  --text-sec: #5c5c5c;
+  --border: #d8d8d8;
+  --radius: 12px;
+  --green: #16a34a;
+  --yellow: #ca8a04;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  background: var(--page-bg); color: var(--text);
+  min-height: 100vh; padding: 48px 20px;
+  -webkit-font-smoothing: antialiased;
+}
+@media (max-width: 520px) { body { padding: 24px 12px; } }
+.shell { max-width: 640px; margin: 0 auto; }
+.card {
+  background: var(--card-bg); border: 1px solid var(--border);
+  border-radius: var(--radius); overflow: hidden; margin-bottom: 16px;
+}
+header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 20px; border-bottom: 1px solid var(--border);
+}
+.header-left { display: flex; align-items: center; gap: 10px; text-decoration: none; color: inherit; }
+.logo { width: 28px; height: 28px; }
+.brand { font-size: 15px; font-weight: 600; letter-spacing: -0.02em; }
+.chat-header { padding: 14px 20px; border-bottom: 1px solid var(--border); background: var(--page-bg); }
+.chat-header h2 { font-size: 14px; font-weight: 600; color: var(--text); display: flex; align-items: center; gap: 8px; }
+.chat-header h2 svg { width: 16px; height: 16px; color: var(--signal-blue); }
+.messages { padding: 0; }
+.message { padding: 16px 20px; border-bottom: 1px solid var(--border); }
+.message:last-child { border-bottom: none; }
+.message-header { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+.avatar { width: 28px; height: 28px; border-radius: 50%; color: white; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 600; flex-shrink: 0; }
+.sender-info { flex: 1; min-width: 0; }
+.sender-name { font-size: 13px; font-weight: 600; color: var(--text); }
+.message-text { font-size: 15px; line-height: 1.55; color: var(--text); white-space: pre-wrap; margin-left: 38px; }
+.reply-bubble { margin-left: 38px; margin-bottom: 6px; padding: 6px 10px; background: #f0f2f5; border-left: 3px solid var(--signal-blue); border-radius: 4px; font-size: 13px; color: var(--text-sec); }
+.reply-sender { font-weight: 600; color: var(--signal-blue); font-size: 12px; margin-bottom: 2px; }
+.reply-text { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.status-badge {
+  padding: 4px 10px; font-size: 11px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.04em; border-radius: 4px;
+}
+.status-solved { background: #dcfce7; color: var(--green); }
+.status-recommendation { background: #fef3c7; color: #b45309; }
+main { padding: 24px 20px; }
+h1 { font-size: 20px; font-weight: 700; letter-spacing: -0.025em; margin-bottom: 12px; line-height: 1.3; }
+.meta { font-size: 12px; color: var(--text-sec); margin-bottom: 16px; }
+.tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 20px; }
+.tag {
+  background: rgba(44, 107, 237, 0.08); color: var(--signal-blue);
+  padding: 4px 10px; border-radius: 4px; font-size: 12px; font-weight: 500;
+}
+.section-title {
+  font-size: 11px; font-weight: 600; text-transform: uppercase;
+  letter-spacing: 0.06em; color: var(--text-sec); margin-bottom: 10px;
+  display: flex; align-items: center; gap: 6px;
+}
+.section-title svg { width: 14px; height: 14px; }
+.section-content { font-size: 15px; line-height: 1.6; color: var(--text); white-space: pre-wrap; }
+.problem-section { padding-bottom: 20px; border-bottom: 1px solid var(--border); margin-bottom: 20px; }
+.solution-section {
+  background: #f0fdf4; margin: -24px -20px -24px -20px; padding: 20px;
+  border-top: 1px solid #bbf7d0;
+}
+.solution-section .section-title { color: var(--green); }
+.recommendation-solution { background: #fffbeb; border-top-color: #fde68a; }
+.recommendation-solution .section-title { color: #b45309; }
+.empty-chat {
+  padding: 32px 20px; text-align: center; color: var(--text-sec); font-size: 14px;
+}
+footer {
+  padding: 14px 20px; border-top: 1px solid var(--border);
+  color: var(--text-sec); font-size: 12px; text-align: center;
+}
+@media (max-width: 520px) {
+  main { padding: 20px 16px; }
+  h1 { font-size: 18px; }
+  .solution-section { margin: -20px -16px -20px -16px; padding: 16px; }
+}
+</style>
+</head><body>
+<div class="shell">
+  <div class="card">
+    <header>
+      <a href="https://academia-tech.github.io/SupportBot" class="header-left">
+        <img src="/SupportBot/supportbot-logo-128.png" alt="SupportBot" class="logo">
+        <span class="brand">SupportBot</span>
+      </a>
+      <span class="status-solved status-badge">Вирішено</span>
+    </header>
+    <main>
+      <h1>Instalar Home Assistant en Mini PC con Windows 11</h1>
+      <p class="meta">Case 321936e1fa4d &middot; domotica_es</p>
+      <div class='tags'><span class="tag">#Home Assistant</span><span class="tag">#Mini PC</span><span class="tag">#Windows 11</span><span class="tag">#VirtualBox</span><span class="tag">#Proxmox</span><span class="tag">#instalación</span><span class="tag">#copias de seguridad</span></div>
+      <div class="problem-section">
+        <h2 class="section-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/>
+            <line x1="12" y1="16" x2="12.01" y2="16"/>
+          </svg>
+          Проблема
+        </h2>
+        <p class="section-content">Un usuario ha adquirido un Mini PC con Windows 11 y desea instalar Home Assistant, pero quiere seguir utilizando Windows para otras tareas. Pregunta si VirtualBox es la opción adecuada para esta configuración.</p>
+      </div>
+      <div class="solution-section">
+        <h2 class="section-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          Рішення
+        </h2>
+        <p class="section-content">Se confirma que VirtualBox es una buena opción para instalar Home Assistant en un Mini PC con Windows 11, permitiendo el uso concurrente de ambos sistemas. Se recomienda realizar copias de seguridad habituales, por ejemplo, en Google Cloud.
+Como alternativa superior, se recomienda encarecidamente instalar Proxmox en el Mini PC. Para seguir usando Windows, se puede instalar Windows 10 u 11 como una máquina virtual (VM) dentro de Proxmox, junto con otra VM para Home Assistant. Esta configuración es más estable para un servidor 24/7, ya que Proxmox está basado en Debian (Linux) y evita reinicios inesperados por actualizaciones de Windows. El usuario `user_1d812dc9b7` confirmó que investigaría esta opción.</p>
+      </div>
+    </main>
+  </div>
+  <div class="card">
+    <div class="chat-header"><h2><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Історія чату</h2></div><div class="messages"><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Buenos dias, hoy me ha llegado el Mini PC con W11 y voy a empezar a instalar home assistant, como voy a aprovechar el mini PC para otras cosas entiendo que HA debo instalarlo en un virtual box, no?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Buenos dias, hoy me ha llegado el Mini PC con W11 y voy a empezar a instalar home assistant, como voy a aprovechar el mi</div></div><p class="message-text">Vas a dejarlo con W11 siempre encendido? Es crítica tu domótica?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 2</div><div class="reply-text">Vas a dejarlo con W11 siempre encendido? Es crítica tu domótica?</div></div><p class="message-text">si, siempre estará encendido, de momento no es crítica</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">si, siempre estará encendido, de momento no es crítica</div></div><p class="message-text">Pues Virtual Box por ahora te irá bien. Eso si, copias de seguridad habituales sobre Google Cloud por ejemplo</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Buenos dias, hoy me ha llegado el Mini PC con W11 y voy a empezar a instalar home assistant, como voy a aprovechar el mi</div></div><p class="message-text">Ponle Proxmox</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Buenos dias, hoy me ha llegado el Mini PC con W11 y voy a empezar a instalar home assistant, como voy a aprovechar el mi</div></div><p class="message-text">Proxmox</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#0891b2">M5</div><div class="sender-info"><span class="sender-name">Учасник 5</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Buenos dias, hoy me ha llegado el Mini PC con W11 y voy a empezar a instalar home assistant, como voy a aprovechar el mi</div></div><p class="message-text">Proxmox</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 5</div><div class="reply-text">Proxmox</div></div><p class="message-text">El problema es que quiero seguir usando el miniPC con el windows para otros temas, si le pongo proxmox no podría hacerlo</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">El problema es que quiero seguir usando el miniPC con el windows para otros temas, si le pongo proxmox no podría hacerlo</div></div><p class="message-text">Por qué no?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">El problema es que quiero seguir usando el miniPC con el windows para otros temas, si le pongo proxmox no podría hacerlo</div></div><p class="message-text">Le pones un VM que sea Windows 10 o 11 y listo.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">El problema es que quiero seguir usando el miniPC con el windows para otros temas, si le pongo proxmox no podría hacerlo</div></div><p class="message-text">Busca Windows 11 para proxmox y te saldrán videos de como hacerlo.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 4</div><div class="reply-text">Busca Windows 11 para proxmox y te saldrán videos de como hacerlo.</div></div><p class="message-text">Vale vale, entonces la idea es instalar proxmox en el minipc y meterle una VM con windows y otra VM con HA, no?<br><br>Pues voy a investigarlo que nunca he usado proxmox</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Vale vale, entonces la idea es instalar proxmox en el minipc y meterle una VM con windows y otra VM con HA, no?  Pues vo</div></div><p class="message-text">Eso</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#0891b2">M5</div><div class="sender-info"><span class="sender-name">Учасник 5</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">El problema es que quiero seguir usando el miniPC con el windows para otros temas, si le pongo proxmox no podría hacerlo</div></div><p class="message-text">Es que quieres que tu servidor de domótica se reinicie con alguna actualización de Windows?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#9333ea">M6</div><div class="sender-info"><span class="sender-name">Учасник 6</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">El problema es que quiero seguir usando el miniPC con el windows para otros temas, si le pongo proxmox no podría hacerlo</div></div><p class="message-text">La cosa más estable que te puedes tirar a la cara. Sigue funcionando exactamente igual que el día 1, 3 años después es un Linux.<br>Y si te pones un debían. Por ejemplo.<br>Las instalaciones de Windows y los años no se llevan bien.<br>Y algo para 24/7 x 365 x varios años opina lo que quieras pero yo no pondría un Windows</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#0891b2">M5</div><div class="sender-info"><span class="sender-name">Учасник 5</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 6</div><div class="reply-text">La cosa más estable que te puedes tirar a la cara. Sigue funcionando exactamente igual que el día 1, 3 años después es u</div></div><p class="message-text">Eh, sabes que está basado en debian?<br><br><br><br>PROXMOX</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#9333ea">M6</div><div class="sender-info"><span class="sender-name">Учасник 6</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 5</div><div class="reply-text">Eh, sabes que está basado en debian?    PROXMOX</div></div><p class="message-text">Pues no. Pero no me extraña.<br>Y confirma lo que digo. Xddd</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#dc2626">M7</div><div class="sender-info"><span class="sender-name">Учасник 7</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 6</div><div class="reply-text">La cosa más estable que te puedes tirar a la cara. Sigue funcionando exactamente igual que el día 1, 3 años después es u</div></div><p class="message-text">No defiendo ningún sistema pero cualquier sistema empresarial dura años hasta obsoleto🤣</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#9333ea">M6</div><div class="sender-info"><span class="sender-name">Учасник 6</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 7</div><div class="reply-text">No defiendo ningún sistema pero cualquier sistema empresarial dura años hasta obsoleto🤣</div></div><p class="message-text">Correcto.<br>Si lo usas para un solo programa todos los días y fin<br>No si navegas por internet <br>Instalas esto <br>Instalas lo otro.<br>Quitas esto. Etc etc</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#dc2626">M7</div><div class="sender-info"><span class="sender-name">Учасник 7</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 6</div><div class="reply-text">Correcto. Si lo usas para un solo programa todos los días y fin No si navegas por internet  Instalas esto  Instalas lo o</div></div><p class="message-text">Ninguno es fiable haciendo eso</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#dc2626">M7</div><div class="sender-info"><span class="sender-name">Учасник 7</span></div></div><p class="message-text">He visto reventar de todo, Linux, Windows... Mac...</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#9333ea">M6</div><div class="sender-info"><span class="sender-name">Учасник 6</span></div></div><p class="message-text">Bueno.<br>Que haga lo que quiera.</p></div></div>
+    <footer>Academia Tech &copy; 2026</footer>
+  </div>
+</div>
+</body></html>

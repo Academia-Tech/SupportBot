@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html><head>
+<title>Alternativas a Synology para usuario que busca NAS de 8 bahías sin restricción de discos | SupportBot</title>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta property="og:title" content="Alternativas a Synology para usuario que busca NAS de 8 bahías sin restricción de discos">
+<meta property="og:description" content="Varios usuarios coinciden en que, para un perfil no técnico que valora un ecosistema de software pulido y fácil de usar, Synology sigue siendo superior. Sin embargo, el usuario principal expresa frust">
+<link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+<style>
+:root {
+  --signal-blue: #2c6bed;
+  --page-bg: #f6f7f9;
+  --card-bg: #ffffff;
+  --text: #0d0d0d;
+  --text-sec: #5c5c5c;
+  --border: #d8d8d8;
+  --radius: 12px;
+  --green: #16a34a;
+  --yellow: #ca8a04;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  background: var(--page-bg); color: var(--text);
+  min-height: 100vh; padding: 48px 20px;
+  -webkit-font-smoothing: antialiased;
+}
+@media (max-width: 520px) { body { padding: 24px 12px; } }
+.shell { max-width: 640px; margin: 0 auto; }
+.card {
+  background: var(--card-bg); border: 1px solid var(--border);
+  border-radius: var(--radius); overflow: hidden; margin-bottom: 16px;
+}
+header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 20px; border-bottom: 1px solid var(--border);
+}
+.header-left { display: flex; align-items: center; gap: 10px; text-decoration: none; color: inherit; }
+.logo { width: 28px; height: 28px; }
+.brand { font-size: 15px; font-weight: 600; letter-spacing: -0.02em; }
+.chat-header { padding: 14px 20px; border-bottom: 1px solid var(--border); background: var(--page-bg); }
+.chat-header h2 { font-size: 14px; font-weight: 600; color: var(--text); display: flex; align-items: center; gap: 8px; }
+.chat-header h2 svg { width: 16px; height: 16px; color: var(--signal-blue); }
+.messages { padding: 0; }
+.message { padding: 16px 20px; border-bottom: 1px solid var(--border); }
+.message:last-child { border-bottom: none; }
+.message-header { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+.avatar { width: 28px; height: 28px; border-radius: 50%; color: white; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 600; flex-shrink: 0; }
+.sender-info { flex: 1; min-width: 0; }
+.sender-name { font-size: 13px; font-weight: 600; color: var(--text); }
+.message-text { font-size: 15px; line-height: 1.55; color: var(--text); white-space: pre-wrap; margin-left: 38px; }
+.reply-bubble { margin-left: 38px; margin-bottom: 6px; padding: 6px 10px; background: #f0f2f5; border-left: 3px solid var(--signal-blue); border-radius: 4px; font-size: 13px; color: var(--text-sec); }
+.reply-sender { font-weight: 600; color: var(--signal-blue); font-size: 12px; margin-bottom: 2px; }
+.reply-text { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.status-badge {
+  padding: 4px 10px; font-size: 11px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.04em; border-radius: 4px;
+}
+.status-solved { background: #dcfce7; color: var(--green); }
+.status-recommendation { background: #fef3c7; color: #b45309; }
+main { padding: 24px 20px; }
+h1 { font-size: 20px; font-weight: 700; letter-spacing: -0.025em; margin-bottom: 12px; line-height: 1.3; }
+.meta { font-size: 12px; color: var(--text-sec); margin-bottom: 16px; }
+.tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 20px; }
+.tag {
+  background: rgba(44, 107, 237, 0.08); color: var(--signal-blue);
+  padding: 4px 10px; border-radius: 4px; font-size: 12px; font-weight: 500;
+}
+.section-title {
+  font-size: 11px; font-weight: 600; text-transform: uppercase;
+  letter-spacing: 0.06em; color: var(--text-sec); margin-bottom: 10px;
+  display: flex; align-items: center; gap: 6px;
+}
+.section-title svg { width: 14px; height: 14px; }
+.section-content { font-size: 15px; line-height: 1.6; color: var(--text); white-space: pre-wrap; }
+.problem-section { padding-bottom: 20px; border-bottom: 1px solid var(--border); margin-bottom: 20px; }
+.solution-section {
+  background: #f0fdf4; margin: -24px -20px -24px -20px; padding: 20px;
+  border-top: 1px solid #bbf7d0;
+}
+.solution-section .section-title { color: var(--green); }
+.recommendation-solution { background: #fffbeb; border-top-color: #fde68a; }
+.recommendation-solution .section-title { color: #b45309; }
+.empty-chat {
+  padding: 32px 20px; text-align: center; color: var(--text-sec); font-size: 14px;
+}
+footer {
+  padding: 14px 20px; border-top: 1px solid var(--border);
+  color: var(--text-sec); font-size: 12px; text-align: center;
+}
+@media (max-width: 520px) {
+  main { padding: 20px 16px; }
+  h1 { font-size: 18px; }
+  .solution-section { margin: -20px -16px -20px -16px; padding: 16px; }
+}
+</style>
+</head><body>
+<div class="shell">
+  <div class="card">
+    <header>
+      <a href="https://academia-tech.github.io/SupportBot" class="header-left">
+        <img src="/SupportBot/supportbot-logo-128.png" alt="SupportBot" class="logo">
+        <span class="brand">SupportBot</span>
+      </a>
+      <span class="status-recommendation status-badge">Рекомендація</span>
+    </header>
+    <main>
+      <h1>Alternativas a Synology para usuario que busca NAS de 8 bahías sin restricción de discos</h1>
+      <p class="meta">Case f85da4e64abe &middot; naseros</p>
+      <div class='tags'><span class="tag">#NAS</span><span class="tag">#Synology</span><span class="tag">#Asustor</span><span class="tag">#QNAP</span><span class="tag">#Ugreen</span><span class="tag">#recomendación de compra</span><span class="tag">#ecosistema</span><span class="tag">#restricción de discos</span></div>
+      <div class="problem-section">
+        <h2 class="section-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/>
+            <line x1="12" y1="16" x2="12.01" y2="16"/>
+          </svg>
+          Проблема
+        </h2>
+        <p class="section-content">Un usuario experimentado con el ecosistema Synology busca un nuevo NAS de 8 bahías. Está descontento con la nueva política de Synology que obliga a usar sus propios discos duros, que considera de precio excesivo. Busca alternativas como Asustor, Ugreen u otras marcas. El usuario se define como &quot;básico&quot;, no utiliza Docker ni la línea de comandos y valora la facilidad de uso y la robustez del software al que está acostumbrado.</p>
+      </div>
+      <div class="solution-section recommendation-solution">
+        <h2 class="section-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7c.6.4 1 1.1 1 1.8V17h6v-.5c0-.7.4-1.4 1-1.8A7 7 0 0 0 12 2z"/></svg>
+          Рекомендація (не підтверджено)
+        </h2>
+        <p class="section-content">Varios usuarios coinciden en que, para un perfil no técnico que valora un ecosistema de software pulido y fácil de usar, Synology sigue siendo superior. Sin embargo, el usuario principal expresa frustración con las nuevas políticas de Synology respecto a la restricción de discos duros de terceros y sus altos precios, lo que considera un &quot;dislate&quot; y una razón para buscar alternativas. Las alternativas tienen puntos fuertes pero también carencias: - **Synology:** Se recomienda seguir con la marca, pero buscando un modelo de segunda mano o anterior que no tenga las limitaciones de discos. Se destaca su software completo y fácil de usar. - **Qnap:** Se menciona que sus aplicaciones no son tan completas como las de Synology y hay preocupaciones sobre fallas de seguridad y ransomware. Sin embargo, un usuario recomienda el modelo TS-464 y destaca su amplio abanico de aplicaciones y funcionalidades. - **Asustor:** Se considera un buen balance, con apps nativas como Nextcloud y AiFoto, aunque algunas requieren más configuración. Se elogia por no tener el historial de ransomware de QNAP ni las limitaciones de hardware de Synology, e incluso permite cambiar el sistema operativo. Se recomienda probar su demo en línea. - **Ugreen:** Se valora su hardware potente, pero se señala que le faltan aplicaciones nativas y que el software aún necesita madurar, aunque es bueno para Docker. - **General:** Se sugiere que si el usuario no quiere aprender Docker o terminal, Synology sigue siendo la opción más sencilla. Sin embargo, otro usuario con experiencia en Synology y Docker sugiere que aprender Docker facilita la migración entre marcas y reduce la dependencia del software nativo del NAS. Se recomienda esperar a ver si el software de las nuevas marcas mejora.</p>
+      </div>
+    </main>
+  </div>
+  <div class="card">
+    <div class="chat-header"><h2><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Історія чату</h2></div><div class="messages"><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Voy a plantearos un dilema. Tengo 4 Nas Synology 918+ 1522+ 1819+ y 1821+. Hace muchos años tuve un Qnap pero el sistema no me termino de convencer.<br>Soy un usuario muy basico, no uso Docker ni me manejo por terminal ni similar.<br>Uso los paquetes de Synology y algunos que hacen terceros para Synology.<br>Por supuesto uso backups locales y en otras ubicaciones fuera de casa.<br>Ademas realizo instantaneas, copias del PC y intercambio ficheros entre los Nas que tengo atraves de Synology Drive.<br>Tambien uso Jellyfin y fundamentamnete Kodi.<br>Tengo una camara conectada al sistema y uso programas de fotos y de bloc de notas.<br>Logicamente desde fuera de casa me conecto al nas con moviles y pc´s y veo las peliculas que tengo en el nas en casa atraves del televisor usando firestick y fuera en vacaciones con el mismo sistema con un router que funciona por sim.<br><br>La historia es ¿que compro ahora con 8 slots?, que no use esos discos duros de precio absurdo de Synology y que la migracion a un nuevo sistema operativo no me cause un infarto despues de llevar muchos años con algo que para mi es ya muy facil y muy robusto.<br><br>¿Asustor, Ugreen, Otros?.<br><br>Gracias por soportar el toston. Un saludo.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Voy a plantearos un dilema. Tengo 4 Nas Synology 918+ 1522+ 1819+ y 1821+. Hace muchos años tuve un Qnap pero el sistema</div></div><p class="message-text">La respuesta depende de la pregunta: estás dispuesto a salir del ecosistema de Synology y aprender a usar la terminal y Docker?<br><br>Porque los otros NAS comerciales no brillan precisamente por sus apps nativas.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Honestamente, bucear en otro sistema operativo y sus aplicaciones nativas podria estar a mi alcance. Pero a mi edad (67 años) meterme a aprender terminal, Docker etcetera se me hace muy cuesta arriba.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Por ello preguntaba si Qnap, Asustor, Ugreen podrian ser una alternativa razonable para mi.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Gracias JFC</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Voy a plantearos un dilema. Tengo 4 Nas Synology 918+ 1522+ 1819+ y 1821+. Hace muchos años tuve un Qnap pero el sistema</div></div><p class="message-text">Yo te recomendaria vender los synologys usados y comprar un Synology nuevo de 8 o mas bahias, digo, ya conoces la marca y los discos los puedes seguir usando o igual venderlos.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Por ello preguntaba si Qnap, Asustor, Ugreen podrian ser una alternativa razonable para mi.</div></div><p class="message-text">El tema son las apps,<br><br>No son igual de completas<br><br>Yo te recomiendo mantenerte con Synology de momento al menos</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 2</div><div class="reply-text">El tema son las apps,  No son igual de completas  Yo te recomiendo mantenerte con Synology de momento al menos</div></div><p class="message-text">Y todos dicen AMEN</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 2</div><div class="reply-text">El tema son las apps,  No son igual de completas  Yo te recomiendo mantenerte con Synology de momento al menos</div></div><p class="message-text">Al menos otros 10 años</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><p class="message-text">Si 20 años no son nada, 10 es la mitad de nada</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Gerardo, los Synology que tengo funcionan perfectamente y los tengo repartidos en casas de 2 familiares y otros 2 en mi casa. Los discos que tengo van de 16GB a 24GB tambien funcionando perfectamente. El problema es que en los nuevos Synology los discos duros que tengo no son de synology y evidentemente aun migrando tendria avisos constantes, cosa que no estoy dispuesto a soportar. Por otro lado el precio de los discos de la marca son alucinantes y encima creo recordar que solo tienen como maximo 20gb</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Tengo que optar por mirar otra marca o aguantar o comprar algun synology antiguo que no tenga esas limitaciones estupidas.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Tengo que optar por mirar otra marca o aguantar o comprar algun synology antiguo que no tenga esas limitaciones estupida</div></div><p class="message-text">Tambien, un equipo usado en buenas condiciones</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Gerardo, los Synology que tengo funcionan perfectamente y los tengo repartidos en casas de 2 familiares y otros 2 en mi </div></div><p class="message-text">1,2 Millones de Horas de vida</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Tambien es verdad que si los nas que tengo no se joden puedo tirar un buen tiempo con ellos y a lo mejor y dada mi edad ya no uso nada de esto y estoy en una residencai.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">¿Cuando probe Qnap no iba mal, aunque era mas facil Synology, hoy que tal es Qnap con respecto a Synology</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">¿Cuando probe Qnap no iba mal, aunque era mas facil Synology, hoy que tal es Qnap con respecto a Synology</div></div><p class="message-text">yo no uso Qnap, siendote honesto, pero internet esta lleno de malas noticias sobre fallas en su seguridad y ransomware, lee en internet acerca de ambas marcas</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Si lo del Ransmware ya lo habia leido. Bueno tengo que seguir pensando, pero lo que si tengo muy claro es que no pienso pasar por las horcas caudinas de esos discos.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><p class="message-text">Pues a mí me parece muy interesante lo que comentas voy a estar pendiente de qué puedo aprender desde la experiencia. Como fotos qnap de app nativa está bien, asustor ya si lo tienes pensado más tipo streaming plex / jellyfin y synology está muy bien en cuento a software, es lo que debería ser el resto bueno algo tienen pero no es lo mismo y ya si necesitas extras pues el docker.... En cuanto pegas synology lo de los discos como otras políticas de compartir tu Nas con la nube estoy bastante desacuerdo. Lo de ugreen dentro de 1 año pues tal vez tengan más apps, en hw es muy bueno pero le faltan varias cosillas. <br><br>En cuanto si te va bien pues sigue con lo que tengas cuando ya te vaya a fallar si que miraría hacia la función que vayas a hacer. En cuanto al synology nuevo pues veo más desventajas que ventajas.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Si Sergio, para mi Synology , si no quitan estas limitaciones esta R.I.P. salvo comprar alguno anterior a buen precio y estirarlo. Por lo demas veo que tengo que esperar y ver si el Software de las nuevas firmas se depura y mejora por lo que contais por aqui y en otros sitios. Meterme con Docker y terminal y historias similares esta fuera de mi alcance y conocimientos.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">En cualquier caso gracias a todos, si quereis hacerme alguna otra sugerencia estoy receptivo.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><p class="message-text">Te entiendo perfectamente y te agradezco tu opinión. Lo que veo sobretodo que en apps como synology drive por ejemplo es complicado algo similar en asustor tienes de serie nextcloud pero ya has de tocar cosas, de fotos si tienes el aifoto pero le fallaría lo ordenar alfabéticamente los álbumes y plex de cine. <br>Qnap me hiria sobretodo por las fotos el quumagie está muy bien pero ya usas el qnotes y le falta bastante y como ofimática más avanzada pues ya fuera. Los contactos ya ni existen (qcontactz), calendario y correo más o menos. <br>Y synology pues es muy redondo tienes de todo pero demasiado cerrado. El más balanceado en general según mi opinión es asustor pero ya hay que tocar y depende del propósito. <br>A ti muchas gracias por la aportación y dar más luz sobre estos temas</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Gracias de nuevo. Me temia estas respuestas. A lo mejor me animo en comprar mas adelante algo de Asustor o Qnap no muy caro y veo si me adapto.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><p class="message-text">Gracias a ti</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Si, jeje. Gracias por tu optimismo.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Ah, eso es una buena idea. Echare un vistazo. Muchas personas hablan bien de Asustor.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Ah, eso es una buena idea. Echare un vistazo. Muchas personas hablan bien de Asustor.</div></div><p class="message-text">yo soy uno de ellos.<br>pero reconozco que las APPs nativas no estan a la altura de Synology,<br>pero no tiene el historial de rasonnware de QNAP y tampoco limita el uso del hardware como Synology<br><br>de hecho es su propia web te explica como cambiarle incluso el sistema operativo</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#0891b2">M5</div><div class="sender-info"><span class="sender-name">Учасник 5</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Ah, eso es una buena idea. Echare un vistazo. Muchas personas hablan bien de Asustor.</div></div><p class="message-text">yo sólo te digo una cosa...Soy tan negado como tú..hace 5 años que tengo synology...y si tengo que comprar otro nas en vista de la guarrada de synology me busco otra marca...Eso sí....si aprendes un poco de docker (que no es difícil) te da casi igual la marca ...yo de synology nativo apenas uso nada, hoy en día puedes tener todo lo necesario mediante contenedores y mucho más facil de hacer backup para poder volver a la normalidad en cualquier otro nas</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Curioso que no te impidan salir de la carcel y te animen incluso. Lo de Synology es una lastima, empece con ellos hace 13 años mas o menos con un 212 y funcionan de maravilla, pero... pagar 850 pavos por 20TB cuando se puede sacar un disco igual o mejor por 450 € es un dislate.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#9333ea">M6</div><div class="sender-info"><span class="sender-name">Учасник 6</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Si lo del Ransmware ya lo habia leido. Bueno tengo que seguir pensando, pero lo que si tengo muy claro es que no pienso </div></div><p class="message-text">Los Nases no se deben abrir a Internet, hace 4 años le pasó a Qnap, otro día le pasará a otro o simplemente, una mala configuración nuestra y dejes una puerta abierta o que sea fácil de abrir. Lo ideal es conectarse por VPN a tu Red por ejemplo con WireGuard u otras <br><br>Cualquier marca puedes hacer de todo, pero unas vienen con más Apps y servicios integrados y otros, menos y tienes que andar investigando y echarle rato <br><br>Es una pena lo de Synology, porque tenían un software excelente y se están dando ellos mismos, un tiro en el pie, por el  hardware y sobre todo, por compatibilidad, por ejemplo con los discos.<br><br>Cambiar de plataforma/sistema operativo , siempre cuesta, vayas a la que vayas, pero Qnap tiene un muy buen abanico de aplicaciones ya que llevan muchos años en esto, también un completo abanico de funcionalidades y servicios en el propio sistema operativo, la que más velocidad de su categoría puede llegar a dar, etc. Echa un vistazo si quieres a este modelo, no creo que eches nada en falta, saludos <br><br>https://www.qnap.com/es-es/product/ts-464</p></div></div>
+    <footer>Academia Tech &copy; 2026</footer>
+  </div>
+</div>
+</body></html>

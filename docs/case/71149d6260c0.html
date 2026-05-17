@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html><head>
+<title>Configurar router Asus como cliente VPN para enrutar todo el tráfico de la red | SupportBot</title>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta property="og:title" content="Configurar router Asus como cliente VPN para enrutar todo el tráfico de la red">
+<meta property="og:description" content="Se aclara que la función que el usuario necesita es la de &quot;cliente VPN&quot; en el router. En los routers Asus, esta característica se llama &quot;VPN Fusion&quot; y permite enrutar el tráfico de dispositivos especí">
+<link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+<style>
+:root {
+  --signal-blue: #2c6bed;
+  --page-bg: #f6f7f9;
+  --card-bg: #ffffff;
+  --text: #0d0d0d;
+  --text-sec: #5c5c5c;
+  --border: #d8d8d8;
+  --radius: 12px;
+  --green: #16a34a;
+  --yellow: #ca8a04;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  background: var(--page-bg); color: var(--text);
+  min-height: 100vh; padding: 48px 20px;
+  -webkit-font-smoothing: antialiased;
+}
+@media (max-width: 520px) { body { padding: 24px 12px; } }
+.shell { max-width: 640px; margin: 0 auto; }
+.card {
+  background: var(--card-bg); border: 1px solid var(--border);
+  border-radius: var(--radius); overflow: hidden; margin-bottom: 16px;
+}
+header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 20px; border-bottom: 1px solid var(--border);
+}
+.header-left { display: flex; align-items: center; gap: 10px; text-decoration: none; color: inherit; }
+.logo { width: 28px; height: 28px; }
+.brand { font-size: 15px; font-weight: 600; letter-spacing: -0.02em; }
+.chat-header { padding: 14px 20px; border-bottom: 1px solid var(--border); background: var(--page-bg); }
+.chat-header h2 { font-size: 14px; font-weight: 600; color: var(--text); display: flex; align-items: center; gap: 8px; }
+.chat-header h2 svg { width: 16px; height: 16px; color: var(--signal-blue); }
+.messages { padding: 0; }
+.message { padding: 16px 20px; border-bottom: 1px solid var(--border); }
+.message:last-child { border-bottom: none; }
+.message-header { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+.avatar { width: 28px; height: 28px; border-radius: 50%; color: white; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 600; flex-shrink: 0; }
+.sender-info { flex: 1; min-width: 0; }
+.sender-name { font-size: 13px; font-weight: 600; color: var(--text); }
+.message-text { font-size: 15px; line-height: 1.55; color: var(--text); white-space: pre-wrap; margin-left: 38px; }
+.reply-bubble { margin-left: 38px; margin-bottom: 6px; padding: 6px 10px; background: #f0f2f5; border-left: 3px solid var(--signal-blue); border-radius: 4px; font-size: 13px; color: var(--text-sec); }
+.reply-sender { font-weight: 600; color: var(--signal-blue); font-size: 12px; margin-bottom: 2px; }
+.reply-text { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.status-badge {
+  padding: 4px 10px; font-size: 11px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.04em; border-radius: 4px;
+}
+.status-solved { background: #dcfce7; color: var(--green); }
+.status-recommendation { background: #fef3c7; color: #b45309; }
+main { padding: 24px 20px; }
+h1 { font-size: 20px; font-weight: 700; letter-spacing: -0.025em; margin-bottom: 12px; line-height: 1.3; }
+.meta { font-size: 12px; color: var(--text-sec); margin-bottom: 16px; }
+.tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 20px; }
+.tag {
+  background: rgba(44, 107, 237, 0.08); color: var(--signal-blue);
+  padding: 4px 10px; border-radius: 4px; font-size: 12px; font-weight: 500;
+}
+.section-title {
+  font-size: 11px; font-weight: 600; text-transform: uppercase;
+  letter-spacing: 0.06em; color: var(--text-sec); margin-bottom: 10px;
+  display: flex; align-items: center; gap: 6px;
+}
+.section-title svg { width: 14px; height: 14px; }
+.section-content { font-size: 15px; line-height: 1.6; color: var(--text); white-space: pre-wrap; }
+.problem-section { padding-bottom: 20px; border-bottom: 1px solid var(--border); margin-bottom: 20px; }
+.solution-section {
+  background: #f0fdf4; margin: -24px -20px -24px -20px; padding: 20px;
+  border-top: 1px solid #bbf7d0;
+}
+.solution-section .section-title { color: var(--green); }
+.recommendation-solution { background: #fffbeb; border-top-color: #fde68a; }
+.recommendation-solution .section-title { color: #b45309; }
+.empty-chat {
+  padding: 32px 20px; text-align: center; color: var(--text-sec); font-size: 14px;
+}
+footer {
+  padding: 14px 20px; border-top: 1px solid var(--border);
+  color: var(--text-sec); font-size: 12px; text-align: center;
+}
+@media (max-width: 520px) {
+  main { padding: 20px 16px; }
+  h1 { font-size: 18px; }
+  .solution-section { margin: -20px -16px -20px -16px; padding: 16px; }
+}
+</style>
+</head><body>
+<div class="shell">
+  <div class="card">
+    <header>
+      <a href="https://academia-tech.github.io/SupportBot" class="header-left">
+        <img src="/SupportBot/supportbot-logo-128.png" alt="SupportBot" class="logo">
+        <span class="brand">SupportBot</span>
+      </a>
+      <span class="status-solved status-badge">Вирішено</span>
+    </header>
+    <main>
+      <h1>Configurar router Asus como cliente VPN para enrutar todo el tráfico de la red</h1>
+      <p class="meta">Case 71149d6260c0 &middot; naseros</p>
+      <div class='tags'><span class="tag">#VPN</span><span class="tag">#Asus</span><span class="tag">#VPN Fusion</span><span class="tag">#cliente VPN</span><span class="tag">#router</span><span class="tag">#Wireguard</span><span class="tag">#redes</span></div>
+      <div class="problem-section">
+        <h2 class="section-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/>
+            <line x1="12" y1="16" x2="12.01" y2="16"/>
+          </svg>
+          Проблема
+        </h2>
+        <p class="section-content">Un usuario quiere configurar un router Asus para que todo el tráfico de su red salga a través de una VPN, sin tener que configurar cada dispositivo individualmente. Inicialmente, el usuario confunde los conceptos de VPN cliente/servidor y su relación con herramientas como Pi-hole.</p>
+      </div>
+      <div class="solution-section">
+        <h2 class="section-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          Рішення
+        </h2>
+        <p class="section-content">Se aclara que la función que el usuario necesita es la de &quot;cliente VPN&quot; en el router. En los routers Asus, esta característica se llama &quot;VPN Fusion&quot; y permite enrutar el tráfico de dispositivos específicos o de toda la red a través de un servicio de VPN externo contratado. Se explica que no todos los modelos de Asus tienen esta función, por lo que se debe verificar antes de la compra. Se advierte que el tráfico a través de la VPN puede ralentizarse. Adicionalmente, se comparte un tutorial de RedesZone sobre cómo configurar VPN Fusion: https://www.redeszone.net/marcas/asus/configurar-fusion-vpn-asus-clientes-vpn/</p>
+      </div>
+    </main>
+  </div>
+  <div class="card">
+    <div class="chat-header"><h2><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Історія чату</h2></div><div class="messages"><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Hola, estaba pensando cambiar el router de mi compañía por un asus, pero no tengo claro cómo funciona exactamente el tema de poner una VPN, yo pensaba que al estar configurado en el asus el wireguard ya todo el tráfico que sale estaría filtrado, pero parece que no es así. Que tengo que configurar el cliente en cada dispositivo. Alguien puede darme lucidez</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Hola, estaba pensando cambiar el router de mi compañía por un asus, pero no tengo claro cómo funciona exactamente el tem</div></div><p class="message-text">Quieres el server en el router??</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><p class="message-text">O quieres que el router sea el cliente??</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 2</div><div class="reply-text">O quieres que el router sea el cliente??</div></div><p class="message-text">Creo que el router sea cliente. No quiero configurar nada en los dispositivos, simplemente que el tráfico salga filtrado/oculto</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Por lo que me voy informando por ahí, creo que lo que necesito sería pihole ya que el wireguard es para que el router sea el server</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Por lo que me voy informando por ahí, creo que lo que necesito sería pihole ya que el wireguard es para que el router se</div></div><p class="message-text">Confundes conceptos. Wireguard es el protocolo. Puedes tener un servidor vpn en tu router para acceder desde fuera a tu red o puedes configurar un cliente vpn en el router para que el trafico de tu red salga por la vpn. Los asus pueden hacer ambas cosas.<br>Pihole es otra cosa, es un servidor dns para filtrar ciertos dominios</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 3</div><div class="reply-text">Confundes conceptos. Wireguard es el protocolo. Puedes tener un servidor vpn en tu router para acceder desde fuera a tu </div></div><p class="message-text">vaaaale asi pos si!!!! perdonar, pero como ya os habréis dado cuenta estoy muy pez en esto. Quiero opción B 😂, configurar un cliente vpn en el router para que el trafico de mi red salga por la vpn.<br>todos los router asus tienen esa opción? que cliente tendría que configurar?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">vaaaale asi pos si!!!! perdonar, pero como ya os habréis dado cuenta estoy muy pez en esto. Quiero opción B 😂, configura</div></div><p class="message-text">Creo que no todos tienen esa funcion, los mas bajos de gama creo que no pero no estoy seguro. Asus lo llama &quot;vpn fusion&quot; a esa funcion.<br>Tienes que tener contratado un servicio de vpn com algun proveedor para configurarlo en el router y puedes definir que quieres que salga por la vpn y que no</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 3</div><div class="reply-text">Creo que no todos tienen esa funcion, los mas bajos de gama creo que no pero no estoy seguro. Asus lo llama &quot;vpn fusion&quot;</div></div><p class="message-text">joder gracias, empiezo a ver la luz al final del tunel!!! pues si puedo elegir lo que sale y lo que no mejor aun!!!</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">joder gracias, empiezo a ver la luz al final del tunel!!! pues si puedo elegir lo que sale y lo que no mejor aun!!!</div></div><p class="message-text">Piensa que el tráfico que pase por la VPN se relentiza mucho. Hazlo y comprueba las velocidades</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 4</div><div class="reply-text">Piensa que el tráfico que pase por la VPN se relentiza mucho. Hazlo y comprueba las velocidades</div></div><p class="message-text">si si lo se!!! pero si puedo elegir lo sale por ahi y lo que no ya me vale.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">si si lo se!!! pero si puedo elegir lo sale por ahi y lo que no ya me vale.</div></div><p class="message-text">Eso sí podrás hacerlo. 👍</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">ahora toca buscar cacharro.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">sabiendo lo que buscar es mas facil aclararse las ideas muchas gracias a todos por la ayuda!!<br>https://www.redeszone.net/marcas/asus/configurar-fusion-vpn-asus-clientes-vpn/</p></div></div>
+    <footer>Academia Tech &copy; 2026</footer>
+  </div>
+</div>
+</body></html>

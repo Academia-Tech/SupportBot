@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html><head>
+<title>Guía para principiantes sobre cómo domotizar interruptores de luz | SupportBot</title>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta property="og:title" content="Guía para principiantes sobre cómo domotizar interruptores de luz">
+<meta property="og:description" content="Se recomienda encarecidamente el uso de relés inteligentes, especialmente de la marca Shelly (WiFi), en lugar de interruptores domóticos. Para encendido/apagado simple se usa el Shelly 1, y para regul">
+<link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+<style>
+:root {
+  --signal-blue: #2c6bed;
+  --page-bg: #f6f7f9;
+  --card-bg: #ffffff;
+  --text: #0d0d0d;
+  --text-sec: #5c5c5c;
+  --border: #d8d8d8;
+  --radius: 12px;
+  --green: #16a34a;
+  --yellow: #ca8a04;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  background: var(--page-bg); color: var(--text);
+  min-height: 100vh; padding: 48px 20px;
+  -webkit-font-smoothing: antialiased;
+}
+@media (max-width: 520px) { body { padding: 24px 12px; } }
+.shell { max-width: 640px; margin: 0 auto; }
+.card {
+  background: var(--card-bg); border: 1px solid var(--border);
+  border-radius: var(--radius); overflow: hidden; margin-bottom: 16px;
+}
+header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 20px; border-bottom: 1px solid var(--border);
+}
+.header-left { display: flex; align-items: center; gap: 10px; text-decoration: none; color: inherit; }
+.logo { width: 28px; height: 28px; }
+.brand { font-size: 15px; font-weight: 600; letter-spacing: -0.02em; }
+.chat-header { padding: 14px 20px; border-bottom: 1px solid var(--border); background: var(--page-bg); }
+.chat-header h2 { font-size: 14px; font-weight: 600; color: var(--text); display: flex; align-items: center; gap: 8px; }
+.chat-header h2 svg { width: 16px; height: 16px; color: var(--signal-blue); }
+.messages { padding: 0; }
+.message { padding: 16px 20px; border-bottom: 1px solid var(--border); }
+.message:last-child { border-bottom: none; }
+.message-header { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+.avatar { width: 28px; height: 28px; border-radius: 50%; color: white; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 600; flex-shrink: 0; }
+.sender-info { flex: 1; min-width: 0; }
+.sender-name { font-size: 13px; font-weight: 600; color: var(--text); }
+.message-text { font-size: 15px; line-height: 1.55; color: var(--text); white-space: pre-wrap; margin-left: 38px; }
+.reply-bubble { margin-left: 38px; margin-bottom: 6px; padding: 6px 10px; background: #f0f2f5; border-left: 3px solid var(--signal-blue); border-radius: 4px; font-size: 13px; color: var(--text-sec); }
+.reply-sender { font-weight: 600; color: var(--signal-blue); font-size: 12px; margin-bottom: 2px; }
+.reply-text { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.status-badge {
+  padding: 4px 10px; font-size: 11px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.04em; border-radius: 4px;
+}
+.status-solved { background: #dcfce7; color: var(--green); }
+.status-recommendation { background: #fef3c7; color: #b45309; }
+main { padding: 24px 20px; }
+h1 { font-size: 20px; font-weight: 700; letter-spacing: -0.025em; margin-bottom: 12px; line-height: 1.3; }
+.meta { font-size: 12px; color: var(--text-sec); margin-bottom: 16px; }
+.tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 20px; }
+.tag {
+  background: rgba(44, 107, 237, 0.08); color: var(--signal-blue);
+  padding: 4px 10px; border-radius: 4px; font-size: 12px; font-weight: 500;
+}
+.section-title {
+  font-size: 11px; font-weight: 600; text-transform: uppercase;
+  letter-spacing: 0.06em; color: var(--text-sec); margin-bottom: 10px;
+  display: flex; align-items: center; gap: 6px;
+}
+.section-title svg { width: 14px; height: 14px; }
+.section-content { font-size: 15px; line-height: 1.6; color: var(--text); white-space: pre-wrap; }
+.problem-section { padding-bottom: 20px; border-bottom: 1px solid var(--border); margin-bottom: 20px; }
+.solution-section {
+  background: #f0fdf4; margin: -24px -20px -24px -20px; padding: 20px;
+  border-top: 1px solid #bbf7d0;
+}
+.solution-section .section-title { color: var(--green); }
+.recommendation-solution { background: #fffbeb; border-top-color: #fde68a; }
+.recommendation-solution .section-title { color: #b45309; }
+.empty-chat {
+  padding: 32px 20px; text-align: center; color: var(--text-sec); font-size: 14px;
+}
+footer {
+  padding: 14px 20px; border-top: 1px solid var(--border);
+  color: var(--text-sec); font-size: 12px; text-align: center;
+}
+@media (max-width: 520px) {
+  main { padding: 20px 16px; }
+  h1 { font-size: 18px; }
+  .solution-section { margin: -20px -16px -20px -16px; padding: 16px; }
+}
+</style>
+</head><body>
+<div class="shell">
+  <div class="card">
+    <header>
+      <a href="https://academia-tech.github.io/SupportBot" class="header-left">
+        <img src="/SupportBot/supportbot-logo-128.png" alt="SupportBot" class="logo">
+        <span class="brand">SupportBot</span>
+      </a>
+      <span class="status-recommendation status-badge">Рекомендація</span>
+    </header>
+    <main>
+      <h1>Guía para principiantes sobre cómo domotizar interruptores de luz</h1>
+      <p class="meta">Case c88fbdf8ed5b &middot; domotica_es</p>
+      <div class='tags'><span class="tag">#interruptor</span><span class="tag">#relé</span><span class="tag">#shelly</span><span class="tag">#sonoff</span><span class="tag">#domótica</span><span class="tag">#principiante</span><span class="tag">#conmutador</span><span class="tag">#detached mode</span><span class="tag">#wifi</span></div>
+      <div class="problem-section">
+        <h2 class="section-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/>
+            <line x1="12" y1="16" x2="12.01" y2="16"/>
+          </svg>
+          Проблема
+        </h2>
+        <p class="section-content">Un usuario nuevo en domótica pregunta cómo resolver el problema de los interruptores tradicionales, que al apagarlos cortan la corriente a las bombillas inteligentes, inutilizándolas. Pide información sobre relés, su tamaño y cuáles usar, incluyendo para interruptores conmutados.</p>
+      </div>
+      <div class="solution-section recommendation-solution">
+        <h2 class="section-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7c.6.4 1 1.1 1 1.8V17h6v-.5c0-.7.4-1.4 1-1.8A7 7 0 0 0 12 2z"/></svg>
+          Рекомендація (не підтверджено)
+        </h2>
+        <p class="section-content">Se recomienda encarecidamente el uso de relés inteligentes, especialmente de la marca Shelly (WiFi), en lugar de interruptores domóticos. Para encendido/apagado simple se usa el Shelly 1, y para regular intensidad, el Shelly Dimmer con bombillas dimmables. Para circuitos conmutados (varios interruptores controlando un mismo punto de luz), se puede instalar un solo Shelly. La forma más sencilla de cablear en conmutadas es localizar la caja de empalmes más cercana a la lámpara. Se proporcionan enlaces a videos explicativos para la instalación: https://youtu.be/ZB3DpzqX32M y https://youtu.be/IJ9YVPVLF6U.</p>
+      </div>
+    </main>
+  </div>
+  <div class="card">
+    <div class="chat-header"><h2><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Історія чату</h2></div><div class="messages"><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Buenas! soy nuevo en el mundillo del home asistant y voy a empezar domotizar &quot;fuerte&quot; mi casa y necesito algo de ayuda, alguien me podría explicar un poco como ha resuelto el problema de los interruptores?<br><br>Quiero decir, por inercia cuando entramos a una habitación le damos al interruptor tradicional, que en el caso de que este la lámpara domotizada se carga todo el chiringuito al apagarla.<br><br>He visto que hay interruptores inteligentes (40€ por cada uno, están locos) y luego que hay una especie de relés de 15€ pero no sé si eso es solo para enchufes o para interruptores tambien</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Buenas! soy nuevo en el mundillo del home asistant y voy a empezar domotizar &quot;fuerte&quot; mi casa y necesito algo de ayuda, </div></div><p class="message-text">Para las luces y persianas relés domoticos</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><p class="message-text">Y si vas a montar chiringuito guapo.<br>Decide si zigbee o WiFi.<br>Si vas a ir por WiFi prepara buena Wi-Fi<br>(Ruter de operadora no)<br><br><br>Gusto mío personal.<br>Buen chiringuito de wifi.<br>Relés domoticos wifi para luces <br>Enchufes zigbee.<br>Más algún que otro botón zigbee.<br>Sensores varios. Etc</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 2</div><div class="reply-text">Para las luces y persianas relés domoticos</div></div><p class="message-text">Voy a empezar con wifi, he visto lo de los relés pero no encuentro buena info de cuales hay que usar, ya que veo que hay de diferentes tipos, con tierra sin tierra y no sé que tamaño son parecen bastante grandes para integrar en un interruptor existente</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><p class="message-text">Estate una temporada leyendo por aquí. Xdd<br>Espera a ver qué te dicen los demas</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Sí, me voy a empezar a empapar, tambien estoy leyendo por reddit lo que se monta la gente</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Voy a empezar con wifi, he visto lo de los relés pero no encuentro buena info de cuales hay que usar, ya que veo que hay</div></div><p class="message-text">En su día empecé con bombillas zigbee, anulando los interruptores y pegando encima botones zigbee. Menuda chapuza...<br>Yo me iría directamente a relés Shelly, wifi. Shelly 1 para luces que solo sea encender y apagar (cocina, espejo baño). Y Shelly Dimmer para las que quieras regular intensidad (salón, dormitorio, baño para hacer pis por la noche con poca luz...), con bombillas normales regulables o dimmables (plafones, etc.)<br>Si ya quieres bombillas de colores, cambiar la temperatura (más blanca o amarilla), etc. Una idea que sería sencilla podría ser poner dicha bombilla zigbee (wifi o similar) y poner un Shelly 1 en el interruptor igualmente. El relé lo dejaría configurado como &quot;Detached&quot;, es decir, separas la acción del botón (al darle al interruptor podrías hacer cualquier cosa), quedando separado del corte de electricidad. Así mantendrías los interruptores normales. Luego ya con botones zigbee extra o por la app de HA le das juego extra a colores y demás.<br>Solo ideas!<br>Pero relés, para mí Shelly sin dudarlo</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 3</div><div class="reply-text">En su día empecé con bombillas zigbee, anulando los interruptores y pegando encima botones zigbee. Menuda chapuza... Yo </div></div><p class="message-text">Gracias! Entiendo lo que me dices pero no encuentro ningún esquema &quot;para tontos&quot; de cómo se tendría que conectar el relé dependiendo del interruptor, o conmutador. Entiendo que si es conmutado lo más sencillo es poner un shelly por interruptor</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Gracias! Entiendo lo que me dices pero no encuentro ningún esquema &quot;para tontos&quot; de cómo se tendría que conectar el relé</div></div><p class="message-text">Es un relé para todo el circuito. Tengo conmutados hasta de 3 interruptores con un solo relé. El relé digamos que está en el último interruptor que le da fase a la bombilla.<br>Yo no sabía nada de electricidad hace 4 años, he montado 25 relés en mi casa y no han explotado en ese tiempo. Aquí te iremos ayudando</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Gracias! Entiendo lo que me dices pero no encuentro ningún esquema &quot;para tontos&quot; de cómo se tendría que conectar el relé</div></div><p class="message-text">En la propia web del producto de Shelly, Sonoff y otros más, pone los detalles</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Gracias! Entiendo lo que me dices pero no encuentro ningún esquema &quot;para tontos&quot; de cómo se tendría que conectar el relé</div></div><p class="message-text">Es lo mismo.<br>Al cable que se va ya a la lámpara.<br>Tema detached.<br>Yo puse la luz de la habitación.<br>De día la bestia del techo.<br>De noche una bombilla zigbee en una lámpara de pie</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Gracias! Entiendo lo que me dices pero no encuentro ningún esquema &quot;para tontos&quot; de cómo se tendría que conectar el relé</div></div><p class="message-text">No.<br>Tanto si tienes interruptor por punto de luz o como si tienes un punto de luz mandado por tres teclas pones un solo shelly.<br>Lo más fácil en el caso de la conmutadas es irte a buscar la caja de empalmes más cercana a la lámpara si seguir cables.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><p class="message-text">https://youtu.be/ZB3DpzqX32M?si=zarVVsOk5nlLVuvF</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><p class="message-text">https://youtu.be/IJ9YVPVLF6U?si=LSYYet_c6U_u-0LE</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 2</div><div class="reply-text">https://youtu.be/IJ9YVPVLF6U?si=LSYYet_c6U_u-0LE</div></div><p class="message-text">Gracias! Lo echaré un ojo</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 2</div><div class="reply-text">Es lo mismo. Al cable que se va ya a la lámpara. Tema detached. Yo puse la luz de la habitación. De día la bestia del te</div></div><p class="message-text">Joder macho, te explicas que da gusto. Pues si miraras las instrucciones de la web del fabricante, verías tanto tu como el compañero que hay dispositivos que soportan conmutada.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 4</div><div class="reply-text">Joder macho, te explicas que da gusto. Pues si miraras las instrucciones de la web del fabricante, verías tanto tu como </div></div><p class="message-text">No me digas.<br>En serio???<br>Me domotice yo solo mi casa. Enterita <br>Dejad de pensar que la conmutada es una cosa rara etc etc.<br>Quieres videos tb???</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 2</div><div class="reply-text">No me digas. En serio??? Me domotice yo solo mi casa. Enterita  Dejad de pensar que la conmutada es una cosa rara etc et</div></div><p class="message-text">Medallita para ti. Yo no he dicho que la conmutada sea una cosa rara, solo he dicho que de tu mensaje no se entiende nada y que hay dispositivos que soportan conmutada, nada mas</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 4</div><div class="reply-text">Medallita para ti. Yo no he dicho que la conmutada sea una cosa rara, solo he dicho que de tu mensaje no se entiende nad</div></div><p class="message-text">Ahhhhh.<br>Pues claro suelo ser un rato.<br>Breve tb un poco.<br>Sigo pensando que está claro.<br>No sé que sabes pero investiga como funciona conmutada.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 2</div><div class="reply-text">Ahhhhh. Pues claro suelo ser un rato. Breve tb un poco. Sigo pensando que está claro. No sé que sabes pero investiga com</div></div><p class="message-text">Sigues sin explicar nada, y yo se perfectamente como funcionan las conmutadas, tengo una triple con sonoff mini con tasmota, son pulsadores y controlo la potencia de la luz. Te parece que necesito investigar como funciona una conmutada?</p></div></div>
+    <footer>Academia Tech &copy; 2026</footer>
+  </div>
+</div>
+</body></html>

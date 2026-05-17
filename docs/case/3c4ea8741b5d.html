@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html><head>
+<title>Cómo ejecutar un temporizador en una automatización sin bloquear otras ejecuciones paralelas | SupportBot</title>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta property="og:title" content="Cómo ejecutar un temporizador en una automatización sin bloquear otras ejecuciones paralelas">
+<meta property="og:description" content="La solución es configurar el modo de ejecución de la automatización a &quot;paralelo&quot; (parallel). Un usuario (`user_edae2508a6`) explica que si el modo es &quot;único&quot; (single), la primera ejecución bloquea cua">
+<link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+<style>
+:root {
+  --signal-blue: #2c6bed;
+  --page-bg: #f6f7f9;
+  --card-bg: #ffffff;
+  --text: #0d0d0d;
+  --text-sec: #5c5c5c;
+  --border: #d8d8d8;
+  --radius: 12px;
+  --green: #16a34a;
+  --yellow: #ca8a04;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  background: var(--page-bg); color: var(--text);
+  min-height: 100vh; padding: 48px 20px;
+  -webkit-font-smoothing: antialiased;
+}
+@media (max-width: 520px) { body { padding: 24px 12px; } }
+.shell { max-width: 640px; margin: 0 auto; }
+.card {
+  background: var(--card-bg); border: 1px solid var(--border);
+  border-radius: var(--radius); overflow: hidden; margin-bottom: 16px;
+}
+header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 20px; border-bottom: 1px solid var(--border);
+}
+.header-left { display: flex; align-items: center; gap: 10px; text-decoration: none; color: inherit; }
+.logo { width: 28px; height: 28px; }
+.brand { font-size: 15px; font-weight: 600; letter-spacing: -0.02em; }
+.chat-header { padding: 14px 20px; border-bottom: 1px solid var(--border); background: var(--page-bg); }
+.chat-header h2 { font-size: 14px; font-weight: 600; color: var(--text); display: flex; align-items: center; gap: 8px; }
+.chat-header h2 svg { width: 16px; height: 16px; color: var(--signal-blue); }
+.messages { padding: 0; }
+.message { padding: 16px 20px; border-bottom: 1px solid var(--border); }
+.message:last-child { border-bottom: none; }
+.message-header { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+.avatar { width: 28px; height: 28px; border-radius: 50%; color: white; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 600; flex-shrink: 0; }
+.sender-info { flex: 1; min-width: 0; }
+.sender-name { font-size: 13px; font-weight: 600; color: var(--text); }
+.message-text { font-size: 15px; line-height: 1.55; color: var(--text); white-space: pre-wrap; margin-left: 38px; }
+.reply-bubble { margin-left: 38px; margin-bottom: 6px; padding: 6px 10px; background: #f0f2f5; border-left: 3px solid var(--signal-blue); border-radius: 4px; font-size: 13px; color: var(--text-sec); }
+.reply-sender { font-weight: 600; color: var(--signal-blue); font-size: 12px; margin-bottom: 2px; }
+.reply-text { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.status-badge {
+  padding: 4px 10px; font-size: 11px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.04em; border-radius: 4px;
+}
+.status-solved { background: #dcfce7; color: var(--green); }
+.status-recommendation { background: #fef3c7; color: #b45309; }
+main { padding: 24px 20px; }
+h1 { font-size: 20px; font-weight: 700; letter-spacing: -0.025em; margin-bottom: 12px; line-height: 1.3; }
+.meta { font-size: 12px; color: var(--text-sec); margin-bottom: 16px; }
+.tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 20px; }
+.tag {
+  background: rgba(44, 107, 237, 0.08); color: var(--signal-blue);
+  padding: 4px 10px; border-radius: 4px; font-size: 12px; font-weight: 500;
+}
+.section-title {
+  font-size: 11px; font-weight: 600; text-transform: uppercase;
+  letter-spacing: 0.06em; color: var(--text-sec); margin-bottom: 10px;
+  display: flex; align-items: center; gap: 6px;
+}
+.section-title svg { width: 14px; height: 14px; }
+.section-content { font-size: 15px; line-height: 1.6; color: var(--text); white-space: pre-wrap; }
+.problem-section { padding-bottom: 20px; border-bottom: 1px solid var(--border); margin-bottom: 20px; }
+.solution-section {
+  background: #f0fdf4; margin: -24px -20px -24px -20px; padding: 20px;
+  border-top: 1px solid #bbf7d0;
+}
+.solution-section .section-title { color: var(--green); }
+.recommendation-solution { background: #fffbeb; border-top-color: #fde68a; }
+.recommendation-solution .section-title { color: #b45309; }
+.empty-chat {
+  padding: 32px 20px; text-align: center; color: var(--text-sec); font-size: 14px;
+}
+footer {
+  padding: 14px 20px; border-top: 1px solid var(--border);
+  color: var(--text-sec); font-size: 12px; text-align: center;
+}
+@media (max-width: 520px) {
+  main { padding: 20px 16px; }
+  h1 { font-size: 18px; }
+  .solution-section { margin: -20px -16px -20px -16px; padding: 16px; }
+}
+</style>
+</head><body>
+<div class="shell">
+  <div class="card">
+    <header>
+      <a href="https://academia-tech.github.io/SupportBot" class="header-left">
+        <img src="/SupportBot/supportbot-logo-128.png" alt="SupportBot" class="logo">
+        <span class="brand">SupportBot</span>
+      </a>
+      <span class="status-solved status-badge">Вирішено</span>
+    </header>
+    <main>
+      <h1>Cómo ejecutar un temporizador en una automatización sin bloquear otras ejecuciones paralelas</h1>
+      <p class="meta">Case 3c4ea8741b5d &middot; domotica_es</p>
+      <div class='tags'><span class="tag">#home assistant</span><span class="tag">#automatización</span><span class="tag">#delay</span><span class="tag">#paralelo</span><span class="tag">#modo single</span><span class="tag">#temporizador</span><span class="tag">#triggers</span></div>
+      <div class="problem-section">
+        <h2 class="section-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/>
+            <line x1="12" y1="16" x2="12.01" y2="16"/>
+          </svg>
+          Проблема
+        </h2>
+        <p class="section-content">Un usuario pregunta cómo puede encender un enchufe y apagarlo tras un retardo (ej. 30 segundos) dentro de una automatización con múltiples disparadores (triggers), sin que el `delay` bloquee la ejecución de otros triggers que puedan activarse en paralelo. Quiere evitar el modo de ejecución &quot;único&quot; (single) porque necesita que las llamadas de diferentes triggers no se queden en cola.</p>
+      </div>
+      <div class="solution-section">
+        <h2 class="section-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          Рішення
+        </h2>
+        <p class="section-content">La solución es configurar el modo de ejecución de la automatización a &quot;paralelo&quot; (parallel). Un usuario (`user_edae2508a6`) explica que si el modo es &quot;único&quot; (single), la primera ejecución bloquea cualquier otra hasta que finaliza, incluyendo el tiempo de espera del `delay`. En modo &quot;paralelo&quot;, cada disparo de un trigger inicia una nueva ejecución independiente que no interfiere con las demás. Por lo tanto, para que un `delay` en una rama de la automatización no impida que otras se ejecuten, el modo debe ser `parallel`.</p>
+      </div>
+    </main>
+  </div>
+  <div class="card">
+    <div class="chat-header"><h2><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Історія чату</h2></div><div class="messages"><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Hola, alguien sabe la forma más sencilla y que no use delays para dentro de una automatización encender un enchufe y apagarlo a los 30 segundos?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Hola, alguien sabe la forma más sencilla y que no use delays para dentro de una automatización encender un enchufe y apa</div></div><p class="message-text">Contar cuanto tiempo lleva encendida la auto desde que se ejecuta, pero porque no quieres delays? Si es lo más fácil</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 2</div><div class="reply-text">Contar cuanto tiempo lleva encendida la auto desde que se ejecuta, pero porque no quieres delays? Si es lo más fácil</div></div><p class="message-text">Dentro de la automatización tengo varios triggers y para que no se solapen las llamadas.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Igual puedo cambiar el modo de ejecución de la automatización?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Igual puedo cambiar el modo de ejecución de la automatización?</div></div><p class="message-text">Hombre claro, ponlo que hasta que no acabe una no empieza otra. Lo que pasa es que te puedes ver en la tesitura que no sean 30 segundos</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Ya pero quiero que puedan ir en paralelo las llamadas de los diferentes triggers de la automatización.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Ya pero quiero que puedan ir en paralelo las llamadas de los diferentes triggers de la automatización.</div></div><p class="message-text">mucho pides tu ya. Sin más datos… no sabría</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 2</div><div class="reply-text">mucho pides tu ya. Sin más datos… no sabría</div></div><p class="message-text">Jajaja, quiero que si pulsas el botón a pues se encienda un enchufe y a los 30 segundos se apague, pero que si pulsas otros botones que están como otros triggers de la automatización, pues que ejecuten lo que tengan que ejecutar, que no se queden esperendo a que pasen los 30 segundos.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><p class="message-text">pero eso se puede hacer con ids en los triggers</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><p class="message-text">creo que puse aqui un pdf con autos anidadas, busca a ver si te sirve</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><p class="message-text">Tal y como prometí, aquí os dejo una Guía de creación de Automatizaciones anidadas/agrupadas. Se ruega que se respeten los derechos de Autor si se utiliza para cualquier Blog, Video, Foro, Canal, etc.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 2</div><div class="reply-text">Tal y como prometí, aquí os dejo una Guía de creación de Automatizaciones anidadas/agrupadas. Se ruega que se respeten l</div></div><p class="message-text">A ver...</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Gracias, le hecho un ojo. El tema de elegir y triggers sí uso. Reviso el pdf y te digo algo.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 2</div><div class="reply-text">Tal y como prometí, aquí os dejo una Guía de creación de Automatizaciones anidadas/agrupadas. Se ruega que se respeten l</div></div><p class="message-text">Muy guay el pdf, muchas gracias.<br>La pregunta que tengo ahora es. Si tengo una automatización anidada con varios triggers en modo único y:<br>1.- Ejecuto algo que lanza el trigger 1 que hace encender un enchufe, delay de 5 minutos y apagar el enchufe.<br>2.- Antes de que pasen los 5 minutos, ejecuto otro trigger, el trigger 2 que enciende una luz.<br>Qué pasa? La luz se enciende? O se enciende después de los 5 minutos? El enchufe del trigger 1 se apaga o se cancela la ejecución y se queda encendido?<br>Muchas gracias</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 2</div><div class="reply-text">Tal y como prometí, aquí os dejo una Guía de creación de Automatizaciones anidadas/agrupadas. Se ruega que se respeten l</div></div><p class="message-text">Muy guay el pdf, muchas gracias.<br>La pregunta que tengo ahora es. Si tengo una automatización anidada con varios triggers en modo único y:<br>1.- Ejecuto algo que lanza el trigger 1 que hace encender un enchufe, delay de 5 minutos y apagar el enchufe.<br>2.- Antes de que pasen los 5 minutos, ejecuto otro trigger, el trigger 2 que enciende una luz.<br>Qué pasa? La luz se enciende? O se enciende después de los 5 minutos? El enchufe del trigger 1 se apaga o se cancela la ejecución y se queda encendido?<br>Muchas gracias!</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><p class="message-text">yo la verdad que las automatizaciones ya no me lio mucho la cabeza, le digo a chatgpt que me las haga dandoles las entidades o lo que necesite y que me de el codigo para pegarlo en yaml, y si se la explicas bien en dos o tres veces la tienes hecha, y no hablo de automatizaciones sencillas, son jodidas</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 3</div><div class="reply-text">yo la verdad que las automatizaciones ya no me lio mucho la cabeza, le digo a chatgpt que me las haga dandoles las entid</div></div><p class="message-text">Vaya vaya.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Muy guay el pdf, muchas gracias. La pregunta que tengo ahora es. Si tengo una automatización anidada con varios triggers</div></div><p class="message-text">Ponle una evaluación de una plantilla para que siga, es decir, ponle si disparado por trigger 1 y si trigger 2 o la luz está en off. No es tan complicado</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Muy guay el pdf, muchas gracias. La pregunta que tengo ahora es. Si tengo una automatización anidada con varios triggers</div></div><p class="message-text">Si la automatización está en modo single, cuando se dispara el primer trigger (por ejemplo, el que enciende un enchufe y espera 5 minutos), se bloquea el resto hasta que termine.<br><br>Así que si luego se lanza el segundo trigger (como encender una luz), no hará nada, porque la automatización ya está en curso y el nuevo disparo se ignora.<br><br>El enchufe sí se apaga tras los 5 minutos como estaba previsto, pero la luz no se llega a encender.<br><br>Si quieres que ambos triggers funcionen aunque se lancen casi a la vez, pon la automatización en modo parallel o separa cada lógica en automatizaciones distintas. 😉</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 4</div><div class="reply-text">Si la automatización está en modo single, cuando se dispara el primer trigger (por ejemplo, el que enciende un enchufe y</div></div><p class="message-text">Muchas gracias!</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><p class="message-text">De nada😊</p></div></div>
+    <footer>Academia Tech &copy; 2026</footer>
+  </div>
+</div>
+</body></html>

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html><head>
+<title>Порівняння складності та надійності ArduPilot та INAV для польотів без GPS | SupportBot</title>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta property="og:title" content="Порівняння складності та надійності ArduPilot та INAV для польотів без GPS">
+<meta property="og:description" content="Досвідчений користувач зазначає, що ArduPilot значно складніший за INAV для польотів без GPS. Наприклад, для автозапуску з катапульти без GPS в ArduPilot потрібні LUA-скрипти, тоді як в INAV це штатна">
+<link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+<style>
+:root {
+  --signal-blue: #2c6bed;
+  --page-bg: #f6f7f9;
+  --card-bg: #ffffff;
+  --text: #0d0d0d;
+  --text-sec: #5c5c5c;
+  --border: #d8d8d8;
+  --radius: 12px;
+  --green: #16a34a;
+  --yellow: #ca8a04;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  background: var(--page-bg); color: var(--text);
+  min-height: 100vh; padding: 48px 20px;
+  -webkit-font-smoothing: antialiased;
+}
+@media (max-width: 520px) { body { padding: 24px 12px; } }
+.shell { max-width: 640px; margin: 0 auto; }
+.card {
+  background: var(--card-bg); border: 1px solid var(--border);
+  border-radius: var(--radius); overflow: hidden; margin-bottom: 16px;
+}
+header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 20px; border-bottom: 1px solid var(--border);
+}
+.header-left { display: flex; align-items: center; gap: 10px; text-decoration: none; color: inherit; }
+.logo { width: 28px; height: 28px; }
+.brand { font-size: 15px; font-weight: 600; letter-spacing: -0.02em; }
+.chat-header { padding: 14px 20px; border-bottom: 1px solid var(--border); background: var(--page-bg); }
+.chat-header h2 { font-size: 14px; font-weight: 600; color: var(--text); display: flex; align-items: center; gap: 8px; }
+.chat-header h2 svg { width: 16px; height: 16px; color: var(--signal-blue); }
+.messages { padding: 0; }
+.message { padding: 16px 20px; border-bottom: 1px solid var(--border); }
+.message:last-child { border-bottom: none; }
+.message-header { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+.avatar { width: 28px; height: 28px; border-radius: 50%; color: white; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 600; flex-shrink: 0; }
+.sender-info { flex: 1; min-width: 0; }
+.sender-name { font-size: 13px; font-weight: 600; color: var(--text); }
+.message-text { font-size: 15px; line-height: 1.55; color: var(--text); white-space: pre-wrap; margin-left: 38px; }
+.reply-bubble { margin-left: 38px; margin-bottom: 6px; padding: 6px 10px; background: #f0f2f5; border-left: 3px solid var(--signal-blue); border-radius: 4px; font-size: 13px; color: var(--text-sec); }
+.reply-sender { font-weight: 600; color: var(--signal-blue); font-size: 12px; margin-bottom: 2px; }
+.reply-text { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.status-badge {
+  padding: 4px 10px; font-size: 11px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.04em; border-radius: 4px;
+}
+.status-solved { background: #dcfce7; color: var(--green); }
+.status-recommendation { background: #fef3c7; color: #b45309; }
+main { padding: 24px 20px; }
+h1 { font-size: 20px; font-weight: 700; letter-spacing: -0.025em; margin-bottom: 12px; line-height: 1.3; }
+.meta { font-size: 12px; color: var(--text-sec); margin-bottom: 16px; }
+.tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 20px; }
+.tag {
+  background: rgba(44, 107, 237, 0.08); color: var(--signal-blue);
+  padding: 4px 10px; border-radius: 4px; font-size: 12px; font-weight: 500;
+}
+.section-title {
+  font-size: 11px; font-weight: 600; text-transform: uppercase;
+  letter-spacing: 0.06em; color: var(--text-sec); margin-bottom: 10px;
+  display: flex; align-items: center; gap: 6px;
+}
+.section-title svg { width: 14px; height: 14px; }
+.section-content { font-size: 15px; line-height: 1.6; color: var(--text); white-space: pre-wrap; }
+.problem-section { padding-bottom: 20px; border-bottom: 1px solid var(--border); margin-bottom: 20px; }
+.solution-section {
+  background: #f0fdf4; margin: -24px -20px -24px -20px; padding: 20px;
+  border-top: 1px solid #bbf7d0;
+}
+.solution-section .section-title { color: var(--green); }
+.recommendation-solution { background: #fffbeb; border-top-color: #fde68a; }
+.recommendation-solution .section-title { color: #b45309; }
+.empty-chat {
+  padding: 32px 20px; text-align: center; color: var(--text-sec); font-size: 14px;
+}
+footer {
+  padding: 14px 20px; border-top: 1px solid var(--border);
+  color: var(--text-sec); font-size: 12px; text-align: center;
+}
+@media (max-width: 520px) {
+  main { padding: 20px 16px; }
+  h1 { font-size: 18px; }
+  .solution-section { margin: -20px -16px -20px -16px; padding: 16px; }
+}
+</style>
+</head><body>
+<div class="shell">
+  <div class="card">
+    <header>
+      <a href="https://academia-tech.github.io/SupportBot" class="header-left">
+        <img src="/SupportBot/supportbot-logo-128.png" alt="SupportBot" class="logo">
+        <span class="brand">SupportBot</span>
+      </a>
+      <span class="status-recommendation status-badge">Рекомендація</span>
+    </header>
+    <main>
+      <h1>Порівняння складності та надійності ArduPilot та INAV для польотів без GPS</h1>
+      <p class="meta">Case 772084faedae &middot; ua_ardupilot</p>
+      <div class='tags'><span class="tag">#ardupilot</span><span class="tag">#inav</span><span class="tag">#gps-less</span><span class="tag">#без gps</span><span class="tag">#порівняння</span><span class="tag">#експертна думка</span><span class="tag">#спуфінг</span><span class="tag">#autolaunch</span></div>
+      <div class="problem-section">
+        <h2 class="section-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/>
+            <line x1="12" y1="16" x2="12.01" y2="16"/>
+          </svg>
+          Проблема
+        </h2>
+        <p class="section-content">Користувач ділиться детальним досвідом та критикою ArduPilot у порівнянні з INAV, особливо в контексті військового застосування. Піднімаються питання складності налаштування для польотів без GPS, реакції на відмову сенсорів та вразливості до спуфінгу.</p>
+      </div>
+      <div class="solution-section recommendation-solution">
+        <h2 class="section-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7c.6.4 1 1.1 1 1.8V17h6v-.5c0-.7.4-1.4 1-1.8A7 7 0 0 0 12 2z"/></svg>
+          Рекомендація (не підтверджено)
+        </h2>
+        <p class="section-content">Досвідчений користувач зазначає, що ArduPilot значно складніший за INAV для польотів без GPS. Наприклад, для автозапуску з катапульти без GPS в ArduPilot потрібні LUA-скрипти, тоді як в INAV це штатна функція. ArduPilot також більш чутливий до відмови датчика повітряної швидкості та вразливіший до спуфінгу. В той же час, INAV вважається більш &quot;сирим&quot; та функціонально поступається як Betaflight (в плані налаштування), так і ArduPilot (в плані автономних місій). Суттєвими недоліками ArduPilot називають відсутність підтримки BDshot та випадкові втрати налаштувань при вимкненні живлення. Обговорюється система донаведення &quot;Норда&quot; для INAV та переваги протоколу Mavlink над MSP.</p>
+      </div>
+    </main>
+  </div>
+  <div class="card">
+    <div class="chat-header"><h2><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Історія чату</h2></div><div class="messages"><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">З приводу чи літає арду без жпс. Одразу скажу я не адепт айнава. Так ми перейшли на арду не тому що це найкраща система для бпла. Навіть не тому що є ekf і це типу дуже круто допомагає навігації. Як на мене то без жпс це просто не працює(екф). Наші крила зараз літають на арду тільки тому що виробники по ліняться зробити системи виведення, донаведення для айнаву у якого рідний протокол msp, а не мавлінк. Щоб запустити перехоплювач на айнаві треба хвилину (щоб під&#x27;єднати акум та відкалібрувалися сенсори). І можна злітати використовуючи автолаунч без жпс. На арду це займає не менше 5 хв і купу додаткових рухів у вигляді скриптів, щоб була можливість злітати без жпс з резинки або катапульти. Далі проблеми з неробочим аірспідом може привести до падіння літака. Спуфінг майже гарантовано що літак буде заморковлений. Всіх цих заморочок немає в айнаві. Більш того працюючий круіз без жпс дозволяє попити чаю поки летиш в зону інтересу або баражуєш в очікуванні/пошуку цілі. Це так трохи пожалітися якщо що )</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Нарешті в мп прибрали дублюючи вкладки(фул параметр лист та трее параметр) і те не всюди. Фул параметр лист початківців вводить в ступор. Відкрили подивилися закрили пішли на айнав ))</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">З приводу чи літає арду без жпс. Одразу скажу я не адепт айнава. Так ми перейшли на арду не тому що це найкраща система </div></div><p class="message-text">Треба робити кастомну прошивку на арду. До речі, на сайті арду можна зручно робити свою кастомну прошивку з функціоналом, котрий пасуватиме</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Нарешті в мп прибрали дублюючи вкладки(фул параметр лист та трее параметр) і те не всюди. Фул параметр лист початківців </div></div><p class="message-text">Фул параметр трі зручна фіча насправді. Але то для тих хто шарить що їм треба щоб не шукати в повному списку</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">З приводу чи літає арду без жпс. Одразу скажу я не адепт айнава. Так ми перейшли на арду не тому що це найкраща система </div></div><p class="message-text">..з неробочим аірспідом і справжні літаки падають</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#0891b2">M5</div><div class="sender-info"><span class="sender-name">Учасник 5</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 4</div><div class="reply-text">..з неробочим аірспідом і справжні літаки падають</div></div><p class="message-text">Та легко. По шуму повітря в форточке зрозуміло яка швидкість. Коли тихо — можна вже штопорнуть</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#0891b2">M5</div><div class="sender-info"><span class="sender-name">Учасник 5</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">З приводу чи літає арду без жпс. Одразу скажу я не адепт айнава. Так ми перейшли на арду не тому що це найкраща система </div></div><p class="message-text">Я знаю пару виробників у кого автонаведення на msp вже працює і вони дороблюють під арду.. Чи це не питання вибору саме автонаведення?)</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">З приводу чи літає арду без жпс. Одразу скажу я не адепт айнава. Так ми перейшли на арду не тому що це найкраща система </div></div><p class="message-text">Дивно, чому виробники ліняться зробити донаведення на msp. Я, коли робив свій варіант донаведення, то робив це відразу на crsf, msp i mavlink. Алгоритми трекінгу і логіка керування дроном однакова. Між crsf, msp i mavlink різниця лише в протоколі комунікації. Яка, відносно, однакова.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#9333ea">M6</div><div class="sender-info"><span class="sender-name">Учасник 6</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 2</div><div class="reply-text">Дивно, чому виробники ліняться зробити донаведення на msp. Я, коли робив свій варіант донаведення, то робив це відразу н</div></div><p class="message-text">Зустрічав що прауює під арду та під msp, але назву не пам&#x27;ятаю</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 6</div><div class="reply-text">Зустрічав що прауює під арду та під msp, але назву не пам&#x27;ятаю</div></div><p class="message-text">р2д2 працює і так і так, мінімум на утриманні позиції, донаведення не пробував</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#dc2626">M7</div><div class="sender-info"><span class="sender-name">Учасник 7</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">З приводу чи літає арду без жпс. Одразу скажу я не адепт айнава. Так ми перейшли на арду не тому що це найкраща система </div></div><p class="message-text">Арду літає без gps і навіть добре)</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#dc2626">M7</div><div class="sender-info"><span class="sender-name">Учасник 7</span></div></div><p class="message-text">Просто треба знати, що робити )))</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 7</div><div class="reply-text">Просто треба знати, що робити )))</div></div><p class="message-text">Так я ж не сказав що воно не літає. Літає і у нас без жпс. Але щоб воно полетіло треба прикласти дуже багато зусиль. В айнаві це літає без луаскриптів.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">В айнаві аірспід зламався літак при цьому не починає теліпати.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Зараз системи виведення працюють виклично на арду. З тих що я знаю більшість використовує режим гайду, який теж є в айнаві.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Ну і по вимогам арду на багато вибагливий до проца та вільної пам&#x27;яти.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#0d9488">M8</div><div class="sender-info"><span class="sender-name">Учасник 8</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">З приводу чи літає арду без жпс. Одразу скажу я не адепт айнава. Так ми перейшли на арду не тому що це найкраща система </div></div><p class="message-text">Норда - донаведення для айнаву. Дартси на айнаві з нею літають</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 8</div><div class="reply-text">Норда - донаведення для айнаву. Дартси на айнаві з нею літають</div></div><p class="message-text">Ми починали то донаведення і досі воно не дуже. Ставити те що працює щоб прилетіти в футбольне поле таке собі.. Це про норду.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">У нас навіть є спільний акт застосування. Де написано: обмежено робоча. Для поодиноких високо контрастних цілей. Доречі це єдина команда яка зробила наведення яке керує по мсп протоколу. Що до виведення перехоплювачів ворожих бпла то немає жодної команди. Всім подавай мавлінк.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ca8a04">M9</div><div class="sender-info"><span class="sender-name">Учасник 9</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">У нас навіть є спільний акт застосування. Де написано: обмежено робоча. Для поодиноких високо контрастних цілей. Доречі </div></div><p class="message-text">А що тут дивного, зробіть хоча би швидке порівння й<br>цих протоколів і вибір буде очевидним. Мавлінк краще документований і розповсюджений. Тому не дивно, що так.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 9</div><div class="reply-text">А що тут дивного, зробіть хоча би швидке порівння й цих протоколів і вибір буде очевидним. Мавлінк краще документований </div></div><p class="message-text">Тобто норда змогла, а решта просто ліниться. Як я і казав. З арду набагато більше гемору. Доречі в айнаві вже є односторонній мавлінк. Думаю що його допиляють до повноцінного. Тоді аду буде не потрібне. Щодо порівняння. Арду заточене під місії. В сучасності це не працює бо є або подавленя жпс або його спотворення (спуфінг). Айнав/бета заточена під фпв. Тому ту мені взагалі не зрозуміло чому системи виведення робляться на арду якщо перехоплювачі здебільшого це фпв.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ca8a04">M9</div><div class="sender-info"><span class="sender-name">Учасник 9</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Тобто норда змогла, а решта просто ліниться. Як я і казав. З арду набагато більше гемору. Доречі в айнаві вже є одностор</div></div><p class="message-text">з моєї практики арду трохи краще орієнтується в просторі ніж айнав і навіть без жпс, але так в налаштуванні складніша. А місії можна робити і без жпс якщо що )</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 9</div><div class="reply-text">з моєї практики арду трохи краще орієнтується в просторі ніж айнав і навіть без жпс, але так в налаштуванні складніша. А</div></div><p class="message-text">Робити місіі без жпс  то можливо, тільки немає сенсу бо похибка дуже велика. Так само і в айнаві можна запускати місіі без жпс тільки от летить воно кудись, а не туди де ти хочеш. Доречі різниці що до краще летить без жпс не побачив. Можливо не туди дивився.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#475569">M10</div><div class="sender-info"><span class="sender-name">Учасник 10</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Тобто норда змогла, а решта просто ліниться. Як я і казав. З арду набагато більше гемору. Доречі в айнаві вже є одностор</div></div><p class="message-text">Імхо, айнав сирий( може за рік щось змінилось, але не дуже віриться).<br>Пробував на ньому робити раз пʼять дрони, двічі перешивав, бо криво ставала прошивка і то двигуни не бачив, то польотник завжди раком.<br>По функціоналу, айнав ні бета ( в плані тонкого налаштування) , ні арду ( в плані мультиплатформеності і автономних місій).</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#65a30d">M11</div><div class="sender-info"><span class="sender-name">Учасник 11</span></div></div><p class="message-text">Суттєвим недоліком проти айнав це те що немає бдшот і що він рандомно губить налаштування коли вимкнути живлення</p></div></div>
+    <footer>Academia Tech &copy; 2026</footer>
+  </div>
+</div>
+</body></html>

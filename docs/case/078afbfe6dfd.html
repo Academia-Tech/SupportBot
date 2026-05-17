@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html><head>
+<title>Configuración de router TP-Link para sustituir router de Jazztel NEBA | SupportBot</title>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta property="og:title" content="Configuración de router TP-Link para sustituir router de Jazztel NEBA">
+<meta property="og:description" content="Para configurar un router neutro (como un TP-Link BE3600) en una conexión de fibra de Jazztel (especialmente NEBA, que usa la red de Movistar), es necesario configurar los identificadores de VLAN corr">
+<link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+<style>
+:root {
+  --signal-blue: #2c6bed;
+  --page-bg: #f6f7f9;
+  --card-bg: #ffffff;
+  --text: #0d0d0d;
+  --text-sec: #5c5c5c;
+  --border: #d8d8d8;
+  --radius: 12px;
+  --green: #16a34a;
+  --yellow: #ca8a04;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  background: var(--page-bg); color: var(--text);
+  min-height: 100vh; padding: 48px 20px;
+  -webkit-font-smoothing: antialiased;
+}
+@media (max-width: 520px) { body { padding: 24px 12px; } }
+.shell { max-width: 640px; margin: 0 auto; }
+.card {
+  background: var(--card-bg); border: 1px solid var(--border);
+  border-radius: var(--radius); overflow: hidden; margin-bottom: 16px;
+}
+header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 20px; border-bottom: 1px solid var(--border);
+}
+.header-left { display: flex; align-items: center; gap: 10px; text-decoration: none; color: inherit; }
+.logo { width: 28px; height: 28px; }
+.brand { font-size: 15px; font-weight: 600; letter-spacing: -0.02em; }
+.chat-header { padding: 14px 20px; border-bottom: 1px solid var(--border); background: var(--page-bg); }
+.chat-header h2 { font-size: 14px; font-weight: 600; color: var(--text); display: flex; align-items: center; gap: 8px; }
+.chat-header h2 svg { width: 16px; height: 16px; color: var(--signal-blue); }
+.messages { padding: 0; }
+.message { padding: 16px 20px; border-bottom: 1px solid var(--border); }
+.message:last-child { border-bottom: none; }
+.message-header { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+.avatar { width: 28px; height: 28px; border-radius: 50%; color: white; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 600; flex-shrink: 0; }
+.sender-info { flex: 1; min-width: 0; }
+.sender-name { font-size: 13px; font-weight: 600; color: var(--text); }
+.message-text { font-size: 15px; line-height: 1.55; color: var(--text); white-space: pre-wrap; margin-left: 38px; }
+.reply-bubble { margin-left: 38px; margin-bottom: 6px; padding: 6px 10px; background: #f0f2f5; border-left: 3px solid var(--signal-blue); border-radius: 4px; font-size: 13px; color: var(--text-sec); }
+.reply-sender { font-weight: 600; color: var(--signal-blue); font-size: 12px; margin-bottom: 2px; }
+.reply-text { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.status-badge {
+  padding: 4px 10px; font-size: 11px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.04em; border-radius: 4px;
+}
+.status-solved { background: #dcfce7; color: var(--green); }
+.status-recommendation { background: #fef3c7; color: #b45309; }
+main { padding: 24px 20px; }
+h1 { font-size: 20px; font-weight: 700; letter-spacing: -0.025em; margin-bottom: 12px; line-height: 1.3; }
+.meta { font-size: 12px; color: var(--text-sec); margin-bottom: 16px; }
+.tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 20px; }
+.tag {
+  background: rgba(44, 107, 237, 0.08); color: var(--signal-blue);
+  padding: 4px 10px; border-radius: 4px; font-size: 12px; font-weight: 500;
+}
+.section-title {
+  font-size: 11px; font-weight: 600; text-transform: uppercase;
+  letter-spacing: 0.06em; color: var(--text-sec); margin-bottom: 10px;
+  display: flex; align-items: center; gap: 6px;
+}
+.section-title svg { width: 14px; height: 14px; }
+.section-content { font-size: 15px; line-height: 1.6; color: var(--text); white-space: pre-wrap; }
+.problem-section { padding-bottom: 20px; border-bottom: 1px solid var(--border); margin-bottom: 20px; }
+.solution-section {
+  background: #f0fdf4; margin: -24px -20px -24px -20px; padding: 20px;
+  border-top: 1px solid #bbf7d0;
+}
+.solution-section .section-title { color: var(--green); }
+.recommendation-solution { background: #fffbeb; border-top-color: #fde68a; }
+.recommendation-solution .section-title { color: #b45309; }
+.empty-chat {
+  padding: 32px 20px; text-align: center; color: var(--text-sec); font-size: 14px;
+}
+footer {
+  padding: 14px 20px; border-top: 1px solid var(--border);
+  color: var(--text-sec); font-size: 12px; text-align: center;
+}
+@media (max-width: 520px) {
+  main { padding: 20px 16px; }
+  h1 { font-size: 18px; }
+  .solution-section { margin: -20px -16px -20px -16px; padding: 16px; }
+}
+</style>
+</head><body>
+<div class="shell">
+  <div class="card">
+    <header>
+      <a href="https://academia-tech.github.io/SupportBot" class="header-left">
+        <img src="/SupportBot/supportbot-logo-128.png" alt="SupportBot" class="logo">
+        <span class="brand">SupportBot</span>
+      </a>
+      <span class="status-solved status-badge">Вирішено</span>
+    </header>
+    <main>
+      <h1>Configuración de router TP-Link para sustituir router de Jazztel NEBA</h1>
+      <p class="meta">Case 078afbfe6dfd &middot; naseros</p>
+      <div class='tags'><span class="tag">#router</span><span class="tag">#Jazztel</span><span class="tag">#NEBA</span><span class="tag">#configuración</span><span class="tag">#VLAN</span><span class="tag">#TP-Link</span><span class="tag">#fibra indirecta</span></div>
+      <div class="problem-section">
+        <h2 class="section-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/>
+            <line x1="12" y1="16" x2="12.01" y2="16"/>
+          </svg>
+          Проблема
+        </h2>
+        <p class="section-content">Un usuario que ha comprado un router TP-Link BE3600 necesita ayuda para configurarlo y sustituir el router de su operador, Jazztel. La conexión es de fibra indirecta (NEBA) y ya dispone de una ONT por separado.</p>
+      </div>
+      <div class="solution-section">
+        <h2 class="section-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          Рішення
+        </h2>
+        <p class="section-content">Para configurar un router neutro (como un TP-Link BE3600) en una conexión de fibra de Jazztel (especialmente NEBA, que usa la red de Movistar), es necesario configurar los identificadores de VLAN correctos. Se logró configurar el TP-Link BE3600 como router neutro para Jazztel NEBA. La clave fue seleccionar la opción &#x27;Personalizada&#x27; en IPTV/LAN y configurar el valor &#x27;20&#x27; para la fibra NEBA de Jazztel. El usuario confirmó que consiguió hacerlo funcionar. Además, se proporciona una explicación detallada sobre las IPs de los routers (WAN y LAN), la configuración DHCP (rango de IPs para dispositivos) y consejos generales para la configuración de routers, como realizar un backup antes de cambios importantes y la opción de restaurar a valores de fábrica.</p>
+      </div>
+    </main>
+  </div>
+  <div class="card">
+    <div class="chat-header"><h2><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Історія чату</h2></div><div class="messages"><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Buenas tardes.<br>Al final, me compré el TP Link.<br><br>Esta tarde, estuve trasteando un poco.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Que tendría que poner en :<br>Puerta de enlace ?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Que tendría que poner en : Puerta de enlace ?</div></div><p class="message-text">Creo que preguntaste en el pasado, <br><br>Para no andar buscando información qué tenías montado, si nos cuentas qué y cómo lo tienes montado actualmente (router, operador, si tienes ONT, etc) y qué quieres montar es más fácil poderte ayudar, un saludo</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Si.<br>Pregunté que router comprar, para quitar el de Jazztel.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Tengo una ONT por separado y mi conexión es NEBA</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Quiero quitar el router de Jazztel e instalar el BE3600</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Si. Pregunté que router comprar, para quitar el de Jazztel.</div></div><p class="message-text">Creo que esta web puede ayudarte, dependiendo de qué tipo de fibra te dé Jazztel, si es directa o s través de Movistar (lo llaman fibra Neba), hay que colocar unos parámetros u otros<br><br>https://wiki.bandaancha.st/Identificadores_VLAN_operadores_FTTH</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">He estado intentando el configurar el TP-LINK, y no he sido capaz</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">No consigo localizar en donde poner el 20, para la conexión NEBA de Jazztel</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">No consigo localizar en donde poner el 20, para la conexión NEBA de Jazztel</div></div><p class="message-text">Se supone que es donde pone IPTV Vlan.Que modelo de router tplink es?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><p class="message-text">Yo diría que es en esta pantalla donde tienes que decirle que tu proveedor de Internet te proporciona una IP dinámica y supongo que en esta pantalla o quizás en otra te vendrán los parámetros de Vlan y prioridad<br><br>Quizás si te descargas el manual y buscas palabras como vlan o prioridad, te ayude a encontrar el menú donde ponerlo, un saludo</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><p class="message-text">Disculpa la pregunta, pero por que colcas en tipo de conexion ip estatica en esa parte de la configuracion, este router no es el principal de tu estructura de red? Si es asi, no deberia ser tipo PPPoE o en su defecto un direccion ip dinamica?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">El router, es un tp-link be3600.<br>Para Jazztel, en los tutoriales que he visto, no hace y poner PPPoE.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">En el vídeo de instalación de Tp-link, es conectar y funcionar.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Esta tarde seguiré trasteando</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#0891b2">M5</div><div class="sender-info"><span class="sender-name">Учасник 5</span></div></div><p class="message-text">Jazztel y Orange, en el router la WAN debe ser DHCP ( si mal no recuerdo… )</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#0891b2">M5</div><div class="sender-info"><span class="sender-name">Учасник 5</span></div></div><p class="message-text">Y digi igualmente ( creo.. )</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><p class="message-text">Exactamente, o es PPPoE o es por DHCP, son las mas comunes que he visto en la mayoria de instalaciones, pero en la imagen que compartio @markbel1976 el tiene el tipo de conexion en ip estatica, eso me causo un poco de ruido para la instalacion que menciona.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">El router, es un tp-link be3600. Para Jazztel, en los tutoriales que he visto, no hace y poner PPPoE.</div></div><p class="message-text">Verifica en tu actual router de Jazztel en el menu de configuracion de la WAN si el tipo de conexion usado es PPPoE o es DHCP. Otra cosa, pordrias compartir el model de router que tienes de jazztel?<br>saludos.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Esto es, lo que aparece en el router</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Libebox 6+ de Jazztel</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Buenas noches.<br>Conseguí hacer funcionar el BE3600, como router neutro</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Lo malo, que me ha puesto una IP , parecida al DNS del ipv4, de manera automática.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Había que poner, en la opción IPTV/LAN, la opción Personalizada, para poner el 20 de la fibra NEBA de Jazztel</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Ahora me toca investigar, para poner la IP  del antiy router de Jazztel</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Buenas noches. Conseguí hacer funcionar el BE3600, como router neutro</div></div><p class="message-text">Buenos días, los routers tienen dos IPs, te intento explicar brevemente <br><br>La que te asigna el proveedor, que es automática. En los menús de configuración del routers suelen llamarla Wan, Internet o similar<br><br>Y otra IP, la interna que tiene en la Red de tu casa, esa la asigna uno mismo, la más habitual y que muchos routers traen por defecto suele ser la 192.168.1.1, o como si eliges otro número o rango, por ejemplo 192.168.70.1, en los routers la suelen denominar Lan. La que elijas, será la que tengan todos los dispositivos de tu Red, es decir todas las IPs comenzarán por 192.168.1.x<br><br>Los routers tienen una zona en la configuración donde se definen las IPs que tendrán el resto de dispositivos que se conecten, suele denominarse DHCP y está relacionado con el rango de IP que elegiste para el router, si el router tiene la 192.168.1.1, por ejemplo el DHCP, yo lo pondría que comience en el 192.168.1.30 hasta la 192.168.1.200, así puedes conectar hasta 170 dispositivos. Pero esto en el futuro puedes ampliarlo hasta el máximo de 254, incluso más de otra forma, que no viene al caso. <br><br>Si sigues liado IP arriba, IP abajo, te sugiero que antes de nada hagas un backup a la configuración actual, por si tuvieras que dar marcha atrás y restaures el router a valores de fábrica. Desde el menú de configuración se puede y también suelen traer los routers un orificio que pulsando unos 8-10 segundos seguidos con algo punzante (por ejemplo un clic), lo dejas como saludo de la caja.<br><br>Los routers, suelen traer un asistente al conectarse la primera vez, bastante sencillo, que te irá pidiendo los datos tuyos, en lugar ir yendo tu a este menú o a aquel otro cambiando parámetros, que muchos de ellos tienen nombres parecidos, pero no hacen lo que tú estás buscando, un saludo</p></div></div>
+    <footer>Academia Tech &copy; 2026</footer>
+  </div>
+</div>
+</body></html>

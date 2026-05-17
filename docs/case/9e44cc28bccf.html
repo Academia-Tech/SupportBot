@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html><head>
+<title>Sustitución de router Vodafone con ONT propia | SupportBot</title>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta property="og:title" content="Sustitución de router Vodafone con ONT propia">
+<meta property="og:description" content="Vodafone no suele proporcionar el PLOAM. La compatibilidad de la ONT depende de la OLT de la central. Es crucial saber si la OLT es propia de Vodafone o compartida con Orange. Si es propia de Vodafone">
+<link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+<style>
+:root {
+  --signal-blue: #2c6bed;
+  --page-bg: #f6f7f9;
+  --card-bg: #ffffff;
+  --text: #0d0d0d;
+  --text-sec: #5c5c5c;
+  --border: #d8d8d8;
+  --radius: 12px;
+  --green: #16a34a;
+  --yellow: #ca8a04;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  background: var(--page-bg); color: var(--text);
+  min-height: 100vh; padding: 48px 20px;
+  -webkit-font-smoothing: antialiased;
+}
+@media (max-width: 520px) { body { padding: 24px 12px; } }
+.shell { max-width: 640px; margin: 0 auto; }
+.card {
+  background: var(--card-bg); border: 1px solid var(--border);
+  border-radius: var(--radius); overflow: hidden; margin-bottom: 16px;
+}
+header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 20px; border-bottom: 1px solid var(--border);
+}
+.header-left { display: flex; align-items: center; gap: 10px; text-decoration: none; color: inherit; }
+.logo { width: 28px; height: 28px; }
+.brand { font-size: 15px; font-weight: 600; letter-spacing: -0.02em; }
+.chat-header { padding: 14px 20px; border-bottom: 1px solid var(--border); background: var(--page-bg); }
+.chat-header h2 { font-size: 14px; font-weight: 600; color: var(--text); display: flex; align-items: center; gap: 8px; }
+.chat-header h2 svg { width: 16px; height: 16px; color: var(--signal-blue); }
+.messages { padding: 0; }
+.message { padding: 16px 20px; border-bottom: 1px solid var(--border); }
+.message:last-child { border-bottom: none; }
+.message-header { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+.avatar { width: 28px; height: 28px; border-radius: 50%; color: white; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 600; flex-shrink: 0; }
+.sender-info { flex: 1; min-width: 0; }
+.sender-name { font-size: 13px; font-weight: 600; color: var(--text); }
+.message-text { font-size: 15px; line-height: 1.55; color: var(--text); white-space: pre-wrap; margin-left: 38px; }
+.reply-bubble { margin-left: 38px; margin-bottom: 6px; padding: 6px 10px; background: #f0f2f5; border-left: 3px solid var(--signal-blue); border-radius: 4px; font-size: 13px; color: var(--text-sec); }
+.reply-sender { font-weight: 600; color: var(--signal-blue); font-size: 12px; margin-bottom: 2px; }
+.reply-text { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.status-badge {
+  padding: 4px 10px; font-size: 11px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.04em; border-radius: 4px;
+}
+.status-solved { background: #dcfce7; color: var(--green); }
+.status-recommendation { background: #fef3c7; color: #b45309; }
+main { padding: 24px 20px; }
+h1 { font-size: 20px; font-weight: 700; letter-spacing: -0.025em; margin-bottom: 12px; line-height: 1.3; }
+.meta { font-size: 12px; color: var(--text-sec); margin-bottom: 16px; }
+.tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 20px; }
+.tag {
+  background: rgba(44, 107, 237, 0.08); color: var(--signal-blue);
+  padding: 4px 10px; border-radius: 4px; font-size: 12px; font-weight: 500;
+}
+.section-title {
+  font-size: 11px; font-weight: 600; text-transform: uppercase;
+  letter-spacing: 0.06em; color: var(--text-sec); margin-bottom: 10px;
+  display: flex; align-items: center; gap: 6px;
+}
+.section-title svg { width: 14px; height: 14px; }
+.section-content { font-size: 15px; line-height: 1.6; color: var(--text); white-space: pre-wrap; }
+.problem-section { padding-bottom: 20px; border-bottom: 1px solid var(--border); margin-bottom: 20px; }
+.solution-section {
+  background: #f0fdf4; margin: -24px -20px -24px -20px; padding: 20px;
+  border-top: 1px solid #bbf7d0;
+}
+.solution-section .section-title { color: var(--green); }
+.recommendation-solution { background: #fffbeb; border-top-color: #fde68a; }
+.recommendation-solution .section-title { color: #b45309; }
+.empty-chat {
+  padding: 32px 20px; text-align: center; color: var(--text-sec); font-size: 14px;
+}
+footer {
+  padding: 14px 20px; border-top: 1px solid var(--border);
+  color: var(--text-sec); font-size: 12px; text-align: center;
+}
+@media (max-width: 520px) {
+  main { padding: 20px 16px; }
+  h1 { font-size: 18px; }
+  .solution-section { margin: -20px -16px -20px -16px; padding: 16px; }
+}
+</style>
+</head><body>
+<div class="shell">
+  <div class="card">
+    <header>
+      <a href="https://academia-tech.github.io/SupportBot" class="header-left">
+        <img src="/SupportBot/supportbot-logo-128.png" alt="SupportBot" class="logo">
+        <span class="brand">SupportBot</span>
+      </a>
+      <span class="status-recommendation status-badge">Рекомендація</span>
+    </header>
+    <main>
+      <h1>Sustitución de router Vodafone con ONT propia</h1>
+      <p class="meta">Case 9e44cc28bccf &middot; naseros</p>
+      <div class='tags'><span class="tag">#Vodafone</span><span class="tag">#ONT</span><span class="tag">#router</span><span class="tag">#fibra</span><span class="tag">#PPPoE</span><span class="tag">#PLOAM</span><span class="tag">#IDONT</span><span class="tag">#Huawei</span><span class="tag">#Nokia</span><span class="tag">#OLT</span><span class="tag">#red</span></div>
+      <div class="problem-section">
+        <h2 class="section-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/>
+            <line x1="12" y1="16" x2="12.01" y2="16"/>
+          </svg>
+          Проблема
+        </h2>
+        <p class="section-content">Un usuario desea reemplazar su router de Vodafone por un TP-Link AX6000 y una ONT Huawei HW8310M. Pregunta sobre la compatibilidad y la dificultad del proceso, ya que tiene el PPPoE y el IDONT, pero no está seguro sobre el PLOAM.</p>
+      </div>
+      <div class="solution-section recommendation-solution">
+        <h2 class="section-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7c.6.4 1 1.1 1 1.8V17h6v-.5c0-.7.4-1.4 1-1.8A7 7 0 0 0 12 2z"/></svg>
+          Рекомендація (не підтверджено)
+        </h2>
+        <p class="section-content">Vodafone no suele proporcionar el PLOAM. La compatibilidad de la ONT depende de la OLT de la central. Es crucial saber si la OLT es propia de Vodafone o compartida con Orange. Si es propia de Vodafone, una ONT Huawei podría funcionar incluso con OLT Alcatel. Sin embargo, si la OLT es de Orange, es obligatorio usar una ONT de marca Nokia. Un usuario confirma que con una OLT de Orange, una ONT Huawei puede parecer que conecta (LED fijo) pero no da salida a Internet. Como alternativa, se puede dejar el router del operador solo para hacer de &#x27;ONT&#x27; y para el teléfono fijo, y poner un router propio detrás en doble NAT.</p>
+      </div>
+    </main>
+  </div>
+  <div class="card">
+    <div class="chat-header"><h2><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Історія чату</h2></div><div class="messages"><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Buenos días. Una pregunta. Ya tengo los pppoe y el idont de vodafone,  quiero cambiar el router a un tplink ax 6000 y una ont hw8310m. Me pdrua alguien decir si es compatible con vodafone y si es muy complicado hacerlo? He visto algún tutorial y con esos datos parece fácil, pero no me fio.<br>Gracias</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Buenos días. Una pregunta. Ya tengo los pppoe y el idont de vodafone,  quiero cambiar el router a un tplink ax 6000 y un</div></div><p class="message-text">vodafone nunca te va a dar el ploam, así que de ont propia olvídate</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Q es el pliam?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">El idont?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Ayer llamé y me dieron el idont y los pppoe.... pensé q con eso era suficiente</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Ayer llamé y me dieron el idont y los pppoe.... pensé q con eso era suficiente</div></div><p class="message-text">si te dieron el ploam si puedes cambiar, tuviste que preguntar que ont son compabiles o el modelo de olt para buscar ont compatibles</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 2</div><div class="reply-text">si te dieron el ploam si puedes cambiar, tuviste que preguntar que ont son compabiles o el modelo de olt para buscar ont</div></div><p class="message-text">Pues si te digo la verdad busque por Internet y me ponía q la huawei era compatible, no pregunte nada a vodafone.... tendré q llamar para preguntar?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Pues si te digo la verdad busque por Internet y me ponía q la huawei era compatible, no pregunte nada a vodafone.... ten</div></div><p class="message-text">en el sac no saben lo q es una ont... así que pilla tu router, tu barrio y pregunta en algún foro específico porque vodafone tiene 3 o 4 ont segun es tirada solo, tirada con orante, en neba... hay muchas casuísticas</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Es directa de Vodafone y acabo de hablar con ellos y huawei  y zte no tienen problemas.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">La ploam puede ser un código alfanumérico de 12 cifras?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">La ploam puede ser un código alfanumérico de 12 cifras?</div></div><p class="message-text">suele ser exadecimal</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 2</div><div class="reply-text">suele ser exadecimal</div></div><p class="message-text">Entonces esta mal si son 12 en vez de 16?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Entonces esta mal si son 12 en vez de 16?</div></div><p class="message-text">no lo se, yo vodafone hace desde 2016 que no lo tengo; yo uso movistar porque me da todo lo que necesito cuando lo necesito</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Para eso  vodafone es una mierda</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Gracias  x  todo, cuando me llegue y lo monte ya os diré si estaba bien. Un saludo</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">La ploam puede ser un código alfanumérico de 12 cifras?</div></div><p class="message-text">El mío es alfanumérico de 10 caracteres.<br>Y la ONT depende de la OLT que te toque.<br>Si te toca una OLT de Nokia/Alcatel la que te serviría es una Nokia G-010G-P<br>Y si te toca una OLT de Huawei pues una ONT Huawei</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 3</div><div class="reply-text">El mío es alfanumérico de 10 caracteres. Y la ONT depende de la OLT que te toque. Si te toca una OLT de Nokia/Alcatel la</div></div><p class="message-text">Voy a probar cuando me lleguen los equipos y ya te diré si puedo y me valen los equipos. Grcias</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Voy a probar cuando me lleguen los equipos y ya te diré si puedo y me valen los equipos. Grcias</div></div><p class="message-text">También depende de si la OLT es propia de Vodafone o de las que comparten con Orange.<br>En una propia de Vodafone podría funcionarte una ONT de Huawei aunque la OLT sea de Alcatel, pero si es de Orange tiene que sel una ONT Nokia sí o sí.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Cruzaré los dedos para q funcione la huawei...</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Cruzaré los dedos para q funcione la huawei...</div></div><p class="message-text">A mí me tocó una OLT de Alcatel de Orange y no hubo manera con una Huawei.<br>Te engaña porque el led de conexión queda fijo, pero no hay salida a Internet con ella.<br>Al final dejé el router que me instalaron ellos solo para hacer de &quot;ONT&quot; y para el fijo y puse detrás el mío en doble nat.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 3</div><div class="reply-text">A mí me tocó una OLT de Alcatel de Orange y no hubo manera con una Huawei. Te engaña porque el led de conexión queda fij</div></div><p class="message-text">Es otra opción. Teniendo en cuenta q me costo 10 euros el ont, no es para tanto</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Es otra opción. Teniendo en cuenta q me costo 10 euros el ont, no es para tanto</div></div><p class="message-text">Una Nokia te costará más o menos igual de segunda mano.<br>Pero si quieres usar el fijo ya tendrías que poner un cacharro más.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">No tengo fijo</p></div></div>
+    <footer>Academia Tech &copy; 2026</footer>
+  </div>
+</div>
+</body></html>

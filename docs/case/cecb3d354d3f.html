@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html><head>
+<title>Configuración y compatibilidad de routers Cudy con EasyMesh y routers Digi | SupportBot</title>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta property="og:title" content="Configuración y compatibilidad de routers Cudy con EasyMesh y routers Digi">
+<meta property="og:description" content="Se explica detalladamente el funcionamiento de EasyMesh. Los routers de Digi solo funcionan como servidor EasyMesh, no como cliente. Algunos routers Cudy pueden actuar como clientes EasyMesh con un fi">
+<link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+<style>
+:root {
+  --signal-blue: #2c6bed;
+  --page-bg: #f6f7f9;
+  --card-bg: #ffffff;
+  --text: #0d0d0d;
+  --text-sec: #5c5c5c;
+  --border: #d8d8d8;
+  --radius: 12px;
+  --green: #16a34a;
+  --yellow: #ca8a04;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  background: var(--page-bg); color: var(--text);
+  min-height: 100vh; padding: 48px 20px;
+  -webkit-font-smoothing: antialiased;
+}
+@media (max-width: 520px) { body { padding: 24px 12px; } }
+.shell { max-width: 640px; margin: 0 auto; }
+.card {
+  background: var(--card-bg); border: 1px solid var(--border);
+  border-radius: var(--radius); overflow: hidden; margin-bottom: 16px;
+}
+header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 20px; border-bottom: 1px solid var(--border);
+}
+.header-left { display: flex; align-items: center; gap: 10px; text-decoration: none; color: inherit; }
+.logo { width: 28px; height: 28px; }
+.brand { font-size: 15px; font-weight: 600; letter-spacing: -0.02em; }
+.chat-header { padding: 14px 20px; border-bottom: 1px solid var(--border); background: var(--page-bg); }
+.chat-header h2 { font-size: 14px; font-weight: 600; color: var(--text); display: flex; align-items: center; gap: 8px; }
+.chat-header h2 svg { width: 16px; height: 16px; color: var(--signal-blue); }
+.messages { padding: 0; }
+.message { padding: 16px 20px; border-bottom: 1px solid var(--border); }
+.message:last-child { border-bottom: none; }
+.message-header { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+.avatar { width: 28px; height: 28px; border-radius: 50%; color: white; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 600; flex-shrink: 0; }
+.sender-info { flex: 1; min-width: 0; }
+.sender-name { font-size: 13px; font-weight: 600; color: var(--text); }
+.message-text { font-size: 15px; line-height: 1.55; color: var(--text); white-space: pre-wrap; margin-left: 38px; }
+.reply-bubble { margin-left: 38px; margin-bottom: 6px; padding: 6px 10px; background: #f0f2f5; border-left: 3px solid var(--signal-blue); border-radius: 4px; font-size: 13px; color: var(--text-sec); }
+.reply-sender { font-weight: 600; color: var(--signal-blue); font-size: 12px; margin-bottom: 2px; }
+.reply-text { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.status-badge {
+  padding: 4px 10px; font-size: 11px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.04em; border-radius: 4px;
+}
+.status-solved { background: #dcfce7; color: var(--green); }
+.status-recommendation { background: #fef3c7; color: #b45309; }
+main { padding: 24px 20px; }
+h1 { font-size: 20px; font-weight: 700; letter-spacing: -0.025em; margin-bottom: 12px; line-height: 1.3; }
+.meta { font-size: 12px; color: var(--text-sec); margin-bottom: 16px; }
+.tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 20px; }
+.tag {
+  background: rgba(44, 107, 237, 0.08); color: var(--signal-blue);
+  padding: 4px 10px; border-radius: 4px; font-size: 12px; font-weight: 500;
+}
+.section-title {
+  font-size: 11px; font-weight: 600; text-transform: uppercase;
+  letter-spacing: 0.06em; color: var(--text-sec); margin-bottom: 10px;
+  display: flex; align-items: center; gap: 6px;
+}
+.section-title svg { width: 14px; height: 14px; }
+.section-content { font-size: 15px; line-height: 1.6; color: var(--text); white-space: pre-wrap; }
+.problem-section { padding-bottom: 20px; border-bottom: 1px solid var(--border); margin-bottom: 20px; }
+.solution-section {
+  background: #f0fdf4; margin: -24px -20px -24px -20px; padding: 20px;
+  border-top: 1px solid #bbf7d0;
+}
+.solution-section .section-title { color: var(--green); }
+.recommendation-solution { background: #fffbeb; border-top-color: #fde68a; }
+.recommendation-solution .section-title { color: #b45309; }
+.empty-chat {
+  padding: 32px 20px; text-align: center; color: var(--text-sec); font-size: 14px;
+}
+footer {
+  padding: 14px 20px; border-top: 1px solid var(--border);
+  color: var(--text-sec); font-size: 12px; text-align: center;
+}
+@media (max-width: 520px) {
+  main { padding: 20px 16px; }
+  h1 { font-size: 18px; }
+  .solution-section { margin: -20px -16px -20px -16px; padding: 16px; }
+}
+</style>
+</head><body>
+<div class="shell">
+  <div class="card">
+    <header>
+      <a href="https://academia-tech.github.io/SupportBot" class="header-left">
+        <img src="/SupportBot/supportbot-logo-128.png" alt="SupportBot" class="logo">
+        <span class="brand">SupportBot</span>
+      </a>
+      <span class="status-recommendation status-badge">Рекомендація</span>
+    </header>
+    <main>
+      <h1>Configuración y compatibilidad de routers Cudy con EasyMesh y routers Digi</h1>
+      <p class="meta">Case cecb3d354d3f &middot; naseros</p>
+      <div class='tags'><span class="tag">#Cudy</span><span class="tag">#EasyMesh</span><span class="tag">#Digi</span><span class="tag">#router</span><span class="tag">#red mesh</span><span class="tag">#firmware</span><span class="tag">#WiFi</span></div>
+      <div class="problem-section">
+        <h2 class="section-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/>
+            <line x1="12" y1="16" x2="12.01" y2="16"/>
+          </svg>
+          Проблема
+        </h2>
+        <p class="section-content">Un usuario pregunta sobre el router Cudy WR3000 y su compatibilidad con EasyMesh, con la intención de usarlo como router principal junto al router de Digi.</p>
+      </div>
+      <div class="solution-section recommendation-solution">
+        <h2 class="section-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7c.6.4 1 1.1 1 1.8V17h6v-.5c0-.7.4-1.4 1-1.8A7 7 0 0 0 12 2z"/></svg>
+          Рекомендація (не підтверджено)
+        </h2>
+        <p class="section-content">Se explica detalladamente el funcionamiento de EasyMesh. Los routers de Digi solo funcionan como servidor EasyMesh, no como cliente. Algunos routers Cudy pueden actuar como clientes EasyMesh con un firmware especial, pero no como servidores. Sin embargo, dos routers Cudy pueden formar su propia red mesh propietaria. Esta solución se recomienda a un usuario que experimenta descargas lentas e intermitentes con la aplicación Epic Games en la red de Digi (un problema que podría estar relacionado con IPv6) y que además necesita una cobertura WiFi sin interrupciones en una vivienda de varias plantas. Si el problema con Epic Games persiste tras instalar los routers Cudy, se aconseja consultar los foros de Epic, ya que podría ser un problema específico de la aplicación con el operador Digi.</p>
+      </div>
+    </main>
+  </div>
+  <div class="card">
+    <div class="chat-header"><h2><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Історія чату</h2></div><div class="messages"><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">¿ Que opináis del cudy wr3000 ? He escrito al fabricante y me dice que tiene wifi easymesh , me ha mandado un firmware beta para utilizarlo.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">¿ Que opináis del cudy wr3000 ? He escrito al fabricante y me dice que tiene wifi easymesh , me ha mandado un firmware b</div></div><p class="message-text">El router principal debe ser EasyMesh también, generalmente los routers de Digi lo son<br><br>Un amigo tiene un modelo similar, el WR3000, va fenomenal, lo tiene como router mesh secundario de con un router Digi de 10Gb<br><br>Cuando le pones el firmware EasyMesh, sólo hace esa función, igual que cualquier router en modo mesh de otras marcas. Si en el futuro, terminas utilizándolo para otra función, hay que instalarle el firmware estándar que tienen publicado.<br><br>El firmware EasyMesh, aunque en la página web dicen que lo tienen para multitud de modelos, al menos, hace un mes que pregunté por otro modelo con wifi 7 WR3600 y ese modelo concreto, no era compatible con Easymesh, pero el que tiene mi amigo WR3000, que yo también lo he probado con un otro router Digi de 1Gb y va fenomenal<br><br>Es este, tiene descuento por si quieres echarle un vistazo https://amzn.eu/d/ci9F8rA</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 2</div><div class="reply-text">El router principal debe ser EasyMesh también, generalmente los routers de Digi lo son  Un amigo tiene un modelo similar</div></div><p class="message-text">Ese router es el que decía.<br><br>Yo lo que tengo pensado es poner un router cudy como el principal y conectar el de digi, los dos son easymesh.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Ese router es el que decía.  Yo lo que tengo pensado es poner un router cudy como el principal y conectar el de digi, lo</div></div><p class="message-text">Lo que comentas, no se puede hacer <br><br>Algunos router Cudy, como por ejemplo el que te comenté o el que tú comentaste, con el firmware especial, pueden ser utilizados como clientes EasyMesh<br><br>Los routers Digi no pueden ser cliente EasyMesh, si lo fueran podrías comprar dos routers Digi y hacer un EasyMesh y que yo sepa, no se puede, solo funcionan como servidor EasyMesh <br><br>Si compras 2 router Cudy, si que entre ellos dos se pueden unir vía mesh, porque Cudy tiene un mesh propio, pero no funcionan como servidor EasyMesh<br><br>Los routers de Digi, que en su mayor parte ya vienen con wifi 6,funcionan decentemente, eso sí, no tienen opciones avanzadas como algunos routers del mercado, pero si sólo necesitas una wifi y ethernet, van bien y si tienes una vivienda un poco amplia, con la ayuda de un segundo router EasyMesh, que es algo muy barato y funciona bien, para la gran mayoría de usuarios sirve perfectamente, un saludo</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 2</div><div class="reply-text">Lo que comentas, no se puede hacer   Algunos router Cudy, como por ejemplo el que te comenté o el que tú comentaste, con</div></div><p class="message-text">El problema, con el router de digi, si está activado ipv6, cuando descargas un juego o una actualización desde la aplicación Epic games, el juego se descarga unos segundos y se para unos segundos, el ciclo se repite.<br>Si desactivas el ipv6 en el router, el juego al descargarse sube y baja la velocidad constantemente.<br><br>En ambos casos, el juego no descarga al máximo de velocidad y tarda más rato en descargarse. En el caso de tener ipv6 activo, la descarga es mucho más lenta.<br><br>Es por eso que quería otro router, para probar si el problema es del router.<br><br>A digi les he llamado un montón de veces, nunca solucionan el problema, se ponen a hacer diferentes pruebas, cambios de configuración de cosas que no tienen que ver. Es como si no supieran lo que pasa.<br><br>Antes tenía o2 y no me pasaba, siempre se descargaba al máximo de velocidad.<br><br>He mirado la aplicación de Epic games, no me aparece nada de cambiar el servidor de descarga. He mirado en la página de Epic games, y sale si los servidores están operativos. No he encontrado nada más.<br><br>No se que hacer, lo que se, es que cada vez que tengo que hacer una actualización y es grande, o cuando tengo que bajar un juego, tarda un montón.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Ahora le tengo puesto un repetidor wifi 5 para conectar la tele. Arriba me conecto al router, abajo me conecto al repetidor, tengo que estar constantemente seleccionado la conexión del móvil y la tablet cada vez que subo y bajo por eso quería poner un router Wi-Fi mesh en la planta de abajo para no tener que estar cambiando todo el rato el Wi-Fi.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">El problema, con el router de digi, si está activado ipv6, cuando descargas un juego o una actualización desde la aplica</div></div><p class="message-text">Digi suele funcionar muy bien, si además a ti te funciona bien todo, excepto la aplicación Epic, tiene pinta que es de la aplicación o de la aplicación + Digi, pero a saber.<br><br>Los Cudy entre ellos hacen mesh, el mesh típico de cada marca, igual que un TP-Link, un Asus, etc, compra 2 routers, el enlace que te pasé salen los dos por menos de 49€ y tienen bastantes funciones extra, que no tienes que utilizarlas a día de hoy, pero quién sabe si algún día te viene bien tener por ejemplo, una VPN u otra cosa que traigan de serie<br><br>Si ves que sigue igual, busca información en foros de la aplicación, por si ha habido gente que haya tenido problemas similares y si no encuentras nada, abre una consulta a Epic y en paralelo en algún foro de Epic, un saludo</p></div></div>
+    <footer>Academia Tech &copy; 2026</footer>
+  </div>
+</div>
+</body></html>

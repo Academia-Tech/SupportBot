@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html><head>
+<title>Protección VPN contra ransomware y acceso remoto a NAS | SupportBot</title>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta property="og:title" content="Protección VPN contra ransomware y acceso remoto a NAS">
+<meta property="og:description" content="Una VPN como Wireguard protege al cifrar la comunicación, haciendo que el acceso remoto sea como si se estuviera en la red local. Sin embargo, la protección contra ransomware también depende de las ba">
+<link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+<style>
+:root {
+  --signal-blue: #2c6bed;
+  --page-bg: #f6f7f9;
+  --card-bg: #ffffff;
+  --text: #0d0d0d;
+  --text-sec: #5c5c5c;
+  --border: #d8d8d8;
+  --radius: 12px;
+  --green: #16a34a;
+  --yellow: #ca8a04;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  background: var(--page-bg); color: var(--text);
+  min-height: 100vh; padding: 48px 20px;
+  -webkit-font-smoothing: antialiased;
+}
+@media (max-width: 520px) { body { padding: 24px 12px; } }
+.shell { max-width: 640px; margin: 0 auto; }
+.card {
+  background: var(--card-bg); border: 1px solid var(--border);
+  border-radius: var(--radius); overflow: hidden; margin-bottom: 16px;
+}
+header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 20px; border-bottom: 1px solid var(--border);
+}
+.header-left { display: flex; align-items: center; gap: 10px; text-decoration: none; color: inherit; }
+.logo { width: 28px; height: 28px; }
+.brand { font-size: 15px; font-weight: 600; letter-spacing: -0.02em; }
+.chat-header { padding: 14px 20px; border-bottom: 1px solid var(--border); background: var(--page-bg); }
+.chat-header h2 { font-size: 14px; font-weight: 600; color: var(--text); display: flex; align-items: center; gap: 8px; }
+.chat-header h2 svg { width: 16px; height: 16px; color: var(--signal-blue); }
+.messages { padding: 0; }
+.message { padding: 16px 20px; border-bottom: 1px solid var(--border); }
+.message:last-child { border-bottom: none; }
+.message-header { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+.avatar { width: 28px; height: 28px; border-radius: 50%; color: white; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 600; flex-shrink: 0; }
+.sender-info { flex: 1; min-width: 0; }
+.sender-name { font-size: 13px; font-weight: 600; color: var(--text); }
+.message-text { font-size: 15px; line-height: 1.55; color: var(--text); white-space: pre-wrap; margin-left: 38px; }
+.reply-bubble { margin-left: 38px; margin-bottom: 6px; padding: 6px 10px; background: #f0f2f5; border-left: 3px solid var(--signal-blue); border-radius: 4px; font-size: 13px; color: var(--text-sec); }
+.reply-sender { font-weight: 600; color: var(--signal-blue); font-size: 12px; margin-bottom: 2px; }
+.reply-text { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.status-badge {
+  padding: 4px 10px; font-size: 11px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.04em; border-radius: 4px;
+}
+.status-solved { background: #dcfce7; color: var(--green); }
+.status-recommendation { background: #fef3c7; color: #b45309; }
+main { padding: 24px 20px; }
+h1 { font-size: 20px; font-weight: 700; letter-spacing: -0.025em; margin-bottom: 12px; line-height: 1.3; }
+.meta { font-size: 12px; color: var(--text-sec); margin-bottom: 16px; }
+.tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 20px; }
+.tag {
+  background: rgba(44, 107, 237, 0.08); color: var(--signal-blue);
+  padding: 4px 10px; border-radius: 4px; font-size: 12px; font-weight: 500;
+}
+.section-title {
+  font-size: 11px; font-weight: 600; text-transform: uppercase;
+  letter-spacing: 0.06em; color: var(--text-sec); margin-bottom: 10px;
+  display: flex; align-items: center; gap: 6px;
+}
+.section-title svg { width: 14px; height: 14px; }
+.section-content { font-size: 15px; line-height: 1.6; color: var(--text); white-space: pre-wrap; }
+.problem-section { padding-bottom: 20px; border-bottom: 1px solid var(--border); margin-bottom: 20px; }
+.solution-section {
+  background: #f0fdf4; margin: -24px -20px -24px -20px; padding: 20px;
+  border-top: 1px solid #bbf7d0;
+}
+.solution-section .section-title { color: var(--green); }
+.recommendation-solution { background: #fffbeb; border-top-color: #fde68a; }
+.recommendation-solution .section-title { color: #b45309; }
+.empty-chat {
+  padding: 32px 20px; text-align: center; color: var(--text-sec); font-size: 14px;
+}
+footer {
+  padding: 14px 20px; border-top: 1px solid var(--border);
+  color: var(--text-sec); font-size: 12px; text-align: center;
+}
+@media (max-width: 520px) {
+  main { padding: 20px 16px; }
+  h1 { font-size: 18px; }
+  .solution-section { margin: -20px -16px -20px -16px; padding: 16px; }
+}
+</style>
+</head><body>
+<div class="shell">
+  <div class="card">
+    <header>
+      <a href="https://academia-tech.github.io/SupportBot" class="header-left">
+        <img src="/SupportBot/supportbot-logo-128.png" alt="SupportBot" class="logo">
+        <span class="brand">SupportBot</span>
+      </a>
+      <span class="status-solved status-badge">Вирішено</span>
+    </header>
+    <main>
+      <h1>Protección VPN contra ransomware y acceso remoto a NAS</h1>
+      <p class="meta">Case 8139ae166185 &middot; naseros</p>
+      <div class='tags'><span class="tag">#VPN</span><span class="tag">#Wireguard</span><span class="tag">#seguridad</span><span class="tag">#ransomware</span><span class="tag">#NAS</span><span class="tag">#acceso remoto</span><span class="tag">#redes</span></div>
+      <div class="problem-section">
+        <h2 class="section-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/>
+            <line x1="12" y1="16" x2="12.01" y2="16"/>
+          </svg>
+          Проблема
+        </h2>
+        <p class="section-content">Un usuario pregunta si el acceso remoto a un NAS mediante Wireguard VPN protege contra ransomware y si el acceso remoto se refiere al sistema operativo del NAS o a las aplicaciones alojadas en él.</p>
+      </div>
+      <div class="solution-section">
+        <h2 class="section-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          Рішення
+        </h2>
+        <p class="section-content">Una VPN como Wireguard protege al cifrar la comunicación, haciendo que el acceso remoto sea como si se estuviera en la red local. Sin embargo, la protección contra ransomware también depende de las barreras de seguridad implementadas (firewall, listas blancas). El acceso remoto se refiere principalmente al sistema operativo del NAS, aunque algunas aplicaciones pueden ser accesibles a través del mismo puerto de administración con un sufijo. WireGuard es una tecnología VPN moderna, rápida y segura, ideal para acceso remoto doméstico y de pequeña empresa, permitiendo acceder a cualquier dispositivo en la red local.</p>
+      </div>
+    </main>
+  </div>
+  <div class="card">
+    <div class="chat-header"><h2><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Історія чату</h2></div><div class="messages"><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">estoy como telegram001, entiendo que si accedes al nas en remoto con wireguard por ejemplo, estas protegido contra ransomware?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">estoy como telegram001, entiendo que si accedes al nas en remoto con wireguard por ejemplo, estas protegido contra ranso</div></div><p class="message-text">Cuando os referís al NAS hablando del acceso remoto a él, ¿os referís al acceso a su sistema operativo verdad? Es decir, no os referís al acceso remoto a las apps alojadas en el NAS, ¿es correcto?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">estoy como telegram001, entiendo que si accedes al nas en remoto con wireguard por ejemplo, estas protegido contra ranso</div></div><p class="message-text">Lo que te refieres sí. Por ejemplo Al usar la app de vpn con wireguard de asustor que tienes incluida te protege (cifra la comunicación) y hace como si estuvieras en casa. Lo de la protección de contra ransomware es las barreras que hayas puesto para que no te entren desde fuera, en asustor creo que habían 3. En qnap se hacía la validación a través de una web externa y después las medidas, en synology muy parecido. En la que pongas al menos lista blanca y solo permitir la de país que permitas y si puedes poner listas grises y otros checkeos pues mejor.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">estoy como telegram001, entiendo que si accedes al nas en remoto con wireguard por ejemplo, estas protegido contra ranso</div></div><p class="message-text">Una VPN, es como si conectases un cable imaginario desde fuera de tu casa a tu casa, aunque realmente hay de dos tipos, las que ponemos en nuestra casas para acceso remoto y las que contratamos para ocultar nuestra IP, cambiar de país, etc, que suelen ser de pago o VPN comerciales, el típico NordVPN, ProtonVPN y similares <br><br>Las VPNs llevan muchos años entre nosotros, por ejemplo, uniendo sedes de empresas o sucursales con la central. Es decir una tienda de una gran cadena, suele tener una fibra con una tecnología estándar y se utiliza una VPN para conectar ese cable imaginario con la central. Otro uso muy frecuente, es para teletrabajo, o para saltarse las famosas restricciones de la Liga, compartir Netflix con la familia, etc <br><br>Dentro de las VPNs, hay distintas tecnologías, por ejemplo IpSec, OpenVPN, WireGuard, etc, en el ámbito doméstico y pequeña empresa, la más moderna, rápida y segura es WireGuard.<br><br>Hay muchos routers (Asus, TP-Link, etc) que la puedes activar y también en Nases, el funcionamiento es igual en cualquiera de ellos , consiste en dar acceso a tu Red (como si tuvieran un cable conectado), a otros dispositivos (PC, móvil, tablet, Android TV, etc), no sólo das acceso al Nas, como lo conectas a tu Red, das acceso a cualquier otro dispositivo o servidor que puedas tener en tu Red de casa (impresora, Home Assistant, etc) y también se utiliza mucho para que desde otra vivienda, por ejemplo tuya o de un familiar, compartir servicios de televisión Netflix, Movistar, ya que para el operador, es como si estuvieras conectado en tu casa, aunque estés en la playa o el extranjero y no es ilegal. <br><br>Si una VPN es la tecnología que utilizan cualquier empresa, que todas ellas tienen Nases y servidores de todo tipo y necesitan la máxima seguridad, es bastante evidente, que debemos seguir el mismo camino, porque ya son tecnologías muy accesibles por cualquiera.<br><br>Hay mucha documentación en Internet, dejo un par de vídeos de ejemplo que no son nuevos pero siguen estando muy vigentes, un saludo <br><br>https://youtu.be/WS1CZ4X7LOM?si=9Qgsf1CajL6saXOc<br><br>https://youtu.be/se5bAh4n6jg?si=v2wbo2DR770i4fLI</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#0891b2">M5</div><div class="sender-info"><span class="sender-name">Учасник 5</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 2</div><div class="reply-text">Cuando os referís al NAS hablando del acceso remoto a él, ¿os referís al acceso a su sistema operativo verdad? Es decir,</div></div><p class="message-text">efectivamente,<br>se refieren a la administración del NAS,<br><br>el tema es que en algunos fabricantes, algunas apps se acceden desde el mismo puerto donde está la adminsitracion pero con un sufijo</p></div></div>
+    <footer>Academia Tech &copy; 2026</footer>
+  </div>
+</div>
+</body></html>

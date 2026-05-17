@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html><head>
+<title>Domotización de campana extractora con Home Assistant | SupportBot</title>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta property="og:title" content="Domotización de campana extractora con Home Assistant">
+<meta property="og:description" content="Para domotizar la campana, se puede usar un switch o relé de 4 canales. El cableado típico es una entrada de fase, 3 salidas para las velocidades del ventilador y una salida para la luz. Se recomienda">
+<link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+<style>
+:root {
+  --signal-blue: #2c6bed;
+  --page-bg: #f6f7f9;
+  --card-bg: #ffffff;
+  --text: #0d0d0d;
+  --text-sec: #5c5c5c;
+  --border: #d8d8d8;
+  --radius: 12px;
+  --green: #16a34a;
+  --yellow: #ca8a04;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  background: var(--page-bg); color: var(--text);
+  min-height: 100vh; padding: 48px 20px;
+  -webkit-font-smoothing: antialiased;
+}
+@media (max-width: 520px) { body { padding: 24px 12px; } }
+.shell { max-width: 640px; margin: 0 auto; }
+.card {
+  background: var(--card-bg); border: 1px solid var(--border);
+  border-radius: var(--radius); overflow: hidden; margin-bottom: 16px;
+}
+header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 20px; border-bottom: 1px solid var(--border);
+}
+.header-left { display: flex; align-items: center; gap: 10px; text-decoration: none; color: inherit; }
+.logo { width: 28px; height: 28px; }
+.brand { font-size: 15px; font-weight: 600; letter-spacing: -0.02em; }
+.chat-header { padding: 14px 20px; border-bottom: 1px solid var(--border); background: var(--page-bg); }
+.chat-header h2 { font-size: 14px; font-weight: 600; color: var(--text); display: flex; align-items: center; gap: 8px; }
+.chat-header h2 svg { width: 16px; height: 16px; color: var(--signal-blue); }
+.messages { padding: 0; }
+.message { padding: 16px 20px; border-bottom: 1px solid var(--border); }
+.message:last-child { border-bottom: none; }
+.message-header { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+.avatar { width: 28px; height: 28px; border-radius: 50%; color: white; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 600; flex-shrink: 0; }
+.sender-info { flex: 1; min-width: 0; }
+.sender-name { font-size: 13px; font-weight: 600; color: var(--text); }
+.message-text { font-size: 15px; line-height: 1.55; color: var(--text); white-space: pre-wrap; margin-left: 38px; }
+.reply-bubble { margin-left: 38px; margin-bottom: 6px; padding: 6px 10px; background: #f0f2f5; border-left: 3px solid var(--signal-blue); border-radius: 4px; font-size: 13px; color: var(--text-sec); }
+.reply-sender { font-weight: 600; color: var(--signal-blue); font-size: 12px; margin-bottom: 2px; }
+.reply-text { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.status-badge {
+  padding: 4px 10px; font-size: 11px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.04em; border-radius: 4px;
+}
+.status-solved { background: #dcfce7; color: var(--green); }
+.status-recommendation { background: #fef3c7; color: #b45309; }
+main { padding: 24px 20px; }
+h1 { font-size: 20px; font-weight: 700; letter-spacing: -0.025em; margin-bottom: 12px; line-height: 1.3; }
+.meta { font-size: 12px; color: var(--text-sec); margin-bottom: 16px; }
+.tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 20px; }
+.tag {
+  background: rgba(44, 107, 237, 0.08); color: var(--signal-blue);
+  padding: 4px 10px; border-radius: 4px; font-size: 12px; font-weight: 500;
+}
+.section-title {
+  font-size: 11px; font-weight: 600; text-transform: uppercase;
+  letter-spacing: 0.06em; color: var(--text-sec); margin-bottom: 10px;
+  display: flex; align-items: center; gap: 6px;
+}
+.section-title svg { width: 14px; height: 14px; }
+.section-content { font-size: 15px; line-height: 1.6; color: var(--text); white-space: pre-wrap; }
+.problem-section { padding-bottom: 20px; border-bottom: 1px solid var(--border); margin-bottom: 20px; }
+.solution-section {
+  background: #f0fdf4; margin: -24px -20px -24px -20px; padding: 20px;
+  border-top: 1px solid #bbf7d0;
+}
+.solution-section .section-title { color: var(--green); }
+.recommendation-solution { background: #fffbeb; border-top-color: #fde68a; }
+.recommendation-solution .section-title { color: #b45309; }
+.empty-chat {
+  padding: 32px 20px; text-align: center; color: var(--text-sec); font-size: 14px;
+}
+footer {
+  padding: 14px 20px; border-top: 1px solid var(--border);
+  color: var(--text-sec); font-size: 12px; text-align: center;
+}
+@media (max-width: 520px) {
+  main { padding: 20px 16px; }
+  h1 { font-size: 18px; }
+  .solution-section { margin: -20px -16px -20px -16px; padding: 16px; }
+}
+</style>
+</head><body>
+<div class="shell">
+  <div class="card">
+    <header>
+      <a href="https://academia-tech.github.io/SupportBot" class="header-left">
+        <img src="/SupportBot/supportbot-logo-128.png" alt="SupportBot" class="logo">
+        <span class="brand">SupportBot</span>
+      </a>
+      <span class="status-recommendation status-badge">Рекомендація</span>
+    </header>
+    <main>
+      <h1>Domotización de campana extractora con Home Assistant</h1>
+      <p class="meta">Case 328c1fb52f19 &middot; domotica_es</p>
+      <div class='tags'><span class="tag">#campana extractora</span><span class="tag">#domótica</span><span class="tag">#Home Assistant</span><span class="tag">#automatización</span><span class="tag">#PM2.5</span><span class="tag">#cableado</span><span class="tag">#ventilación</span><span class="tag">#relé</span><span class="tag">#cocina</span></div>
+      <div class="problem-section">
+        <h2 class="section-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/>
+            <line x1="12" y1="16" x2="12.01" y2="16"/>
+          </svg>
+          Проблема
+        </h2>
+        <p class="section-content">El usuario desea domotizar una campana extractora con 3 velocidades y luz separada, integrándola con Home Assistant para automatizaciones basadas en sensores PM2.5 y, en el futuro, con una placa de inducción inteligente. También busca soluciones para olores externos.</p>
+      </div>
+      <div class="solution-section recommendation-solution">
+        <h2 class="section-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7c.6.4 1 1.1 1 1.8V17h6v-.5c0-.7.4-1.4 1-1.8A7 7 0 0 0 12 2z"/></svg>
+          Рекомендація (не підтверджено)
+        </h2>
+        <p class="section-content">Para domotizar la campana, se puede usar un switch o relé de 4 canales. El cableado típico es una entrada de fase, 3 salidas para las velocidades del ventilador y una salida para la luz. Se recomienda usar una crimpadora de faston y hacer fotos antes de tocar nada. Un vídeo útil es: https://youtu.be/xZ9FGMEFIHk. Si se usa un relé sin entradas de switch (SW), no se podrán mantener los botones físicos directamente. Como alternativa, se pueden usar dos relés de 2 canales. Es crucial verificar con un multímetro si cada velocidad del motor se activa con un solo cable o si requiere una combinación de cables. Además, para mejorar la eficacia, se aconseja dejar una ventana un poco abierta para facilitar la circulación de aire. Para problemas de olores de vecinos, se puede instalar una válvula antirretorno, aunque si el problema persiste, puede ser un defecto en el tiro comunitario que debe tratarse en la junta de vecinos.</p>
+      </div>
+    </main>
+  </div>
+  <div class="card">
+    <div class="chat-header"><h2><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Історія чату</h2></div><div class="messages"><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">**Domotizar campaña extractora**<br>Me he animado a desmontar mi campana y he llegado al actuador o cómo se llame. Tiene 3 velocidades y luego solo luz (que parece conectada por separado). Quería meter un switch o relé de 4 canales.<br>Estoy muy prudente y todavía esto se me queda grande.<br>He hecho una foto de los cables que van a las velocidades, ¿alguien podría darme algo de luz? Cualquier pista</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">**Domotizar campaña extractora** Me he animado a desmontar mi campana y he llegado al actuador o cómo se llame. Tiene 3 </div></div><p class="message-text">Te dejo un vídeo.<br>Te servirá</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><p class="message-text">https://youtu.be/xZ9FGMEFIHk?si=h-2DNyk6DJy1Jj3L</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><p class="message-text">Tendrás una entrada de fase y 3 posibles salidas a ventilador (cada salida es una velocidad) más la salida a luz</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><p class="message-text">Haz 20 fotos antes de tocar nada<br>Y yo me compraria una crimpadora de faston</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 2</div><div class="reply-text">Haz 20 fotos antes de tocar nada Y yo me compraria una crimpadora de faston</div></div><p class="message-text">Muchas gracias, Juan! Tengo ya crimpadora para puntas, de otros relés más sencillos que he montado.<br><br>Alguien más se ha animado con la campana de su cocina?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Muchas gracias, Juan! Tengo ya crimpadora para puntas, de otros relés más sencillos que he montado.  Alguien más se ha a</div></div><p class="message-text">Puntas y faston no creo que se crimpen igual.<br>Mínimo cambia la punta de la herramienta.<br><br>Yo no lo hice.<br>No le vi utilidad real</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">**Domotizar campaña extractora** Me he animado a desmontar mi campana y he llegado al actuador o cómo se llame. Tiene 3 </div></div><p class="message-text">Que buscas hacer con la campana ?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 3</div><div class="reply-text">Que buscas hacer con la campana ?</div></div><p class="message-text">Algunas cosillas:<br>- A veces me entra fritanga de los vecinos, esto lo detecto con un sensor pm2.5 (antes de que sea tarde), y quiero poner la campana a velocidad 1 para contrarrestar.<br>- Tengo la cocina abierta y quiero anticiparme. Cuando me avisa un sensor de humo (por altavoz google), ya tengo la casa hasta arriba. Si el nivel de pm2.5, ya es 100+ (tipo chuletón), poner a velocidad 3 directamente.<br>Y ya por último a tener la luz también domotizada, que es la última mohicana de la casa.<br>Quiero poner una placa de inducción inteligente y podría ya automatizar la campana del todo.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><p class="message-text">Está bueno.. más con la placa prendes la placa arranca la campana</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Algunas cosillas: - A veces me entra fritanga de los vecinos, esto lo detecto con un sensor pm2.5 (antes de que sea tard</div></div><p class="message-text">Has probado a ponerle una válvula antirretorno entre la salida de la campana y el principio del tiro?<br><br>Otra cosa, ojo con las placas de inducción inteligente que no se puede hacer mucho por temas de seguridad. Olvídate de encender y apagar desde HA o desde la propia App</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 4</div><div class="reply-text">Has probado a ponerle una válvula antirretorno entre la salida de la campana y el principio del tiro?  Otra cosa, ojo co</div></div><p class="message-text">Tengo puesta una mariposa pero no me resuelve el problema de olores. <br>Por lo que voy comprobando, todavía no he confirmado, es que cuando tengo el extractor (cocina y baños), la casa cerrada, creo que coge entrada de aire por la chimenea, y esto aumenta la fritanga.<br>Tendré que encontrar a alguien en Madrid que me pueda dar una solución profesional, con alguna válvula más pro, de membrana, o incluso motorizada.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#0891b2">M5</div><div class="sender-info"><span class="sender-name">Учасник 5</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Muchas gracias, Juan! Tengo ya crimpadora para puntas, de otros relés más sencillos que he montado.  Alguien más se ha a</div></div><p class="message-text">Punteras y faston no es la mismo.<br>Y al respecto de animarse con la campana, veo otras cosas más atractivas que domotizar una campana</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Algunas cosillas: - A veces me entra fritanga de los vecinos, esto lo detecto con un sensor pm2.5 (antes de que sea tard</div></div><p class="message-text">Un pequeño detalle que no todo el mundo sabe. Por muy potente que te pongas la campana, el aire tiene que circular, y si tienes todo cerrado (La gente tiende a hacer eso), el extractor no es capaz de sacar el aire/humo de la estancia y no obtenemos el efecto deseado. Prueba a dejar una ventana o similar un poco abierta en la cocina para que entre algo de aire, verás como la succión de la campana mejora.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Tengo puesta una mariposa pero no me resuelve el problema de olores.  Por lo que voy comprobando, todavía no he confirma</div></div><p class="message-text">Puede que te estés obsesionando con sacar el olor de tu casa y puede que la comunidad se deba de preocupar en revisar el tiro, ya que si está bien hecho, no deberías de tener olores de otras cocinas. En caso de que así sea, eso se debe arreglar entre toda la comunidad.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 4</div><div class="reply-text">Puede que te estés obsesionando con sacar el olor de tu casa y puede que la comunidad se deba de preocupar en revisar el</div></div><p class="message-text">Voy a pedir que se añada el tema en siguiente junta</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">**Relé de 4 canales.**<br>No consigo encontrar información Internet para entender cómo funciona esto. Parto de  los Shelly que tienen el SW como input y luego la salida.<br>Pero estos tienen por canal el COM (entiendo que fase) y NO, que iría al motor (tipo Output?).<br>Pensando en una campana o ventilador, quiero que los botones físicos sigan funcionando. Entonces no entiendo cómo iría el relé, teniendo el botón físico (que tiene fase, y luego el cable de cada velocidad 1-2-3, que va al motor).<br>No encuentro nada en internet que me dé luz para lanzarme a comprar ya este relé</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#0891b2">M5</div><div class="sender-info"><span class="sender-name">Учасник 5</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">**Relé de 4 canales.** No consigo encontrar información Internet para entender cómo funciona esto. Parto de  los Shelly </div></div><p class="message-text">Mientras no saques el esquema de la campana, no es sencillo tomar una decisión.<br>Pero ya te digo que ese no tiene entradas sw</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 5</div><div class="reply-text">Mientras no saques el esquema de la campana, no es sencillo tomar una decisión. Pero ya te digo que ese no tiene entrada</div></div><p class="message-text">Voy a intentar dibujarlo o describir el esquema porque creo que ya lo tengo. Otra cosa es que mis conocimientos de electricidad pues son mejorables, y van mejorando claro 😄</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">**Relé de 4 canales.** No consigo encontrar información Internet para entender cómo funciona esto. Parto de  los Shelly </div></div><p class="message-text">Que ganas de complicarte la vida.<br>No vistes el video que pasé???<br>Tb hay relés xhinorros de 4 canales</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 2</div><div class="reply-text">Que ganas de complicarte la vida. No vistes el video que pasé??? Tb hay relés xhinorros de 4 canales</div></div><p class="message-text">Lo vi, y pensaba que este que puse hacía lo mismo. Pero buscaré ese modelo exacto si doy con él</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><p class="message-text">Cuando mire.<br>Los de 1 y dos canales les entrabas fase de tecla <br>Los de 3 y 4 comunicabas un terminal con unos cablecitos.<br>Te valdrá y lo podrás usar.<br>A malas dos de 2. Que son enanos y la campana grande.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 5</div><div class="reply-text">Mientras no saques el esquema de la campana, no es sencillo tomar una decisión. Pero ya te digo que ese no tiene entrada</div></div><p class="message-text">Este es el esquema que he entendido</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#0891b2">M5</div><div class="sender-info"><span class="sender-name">Учасник 5</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Este es el esquema que he entendido</div></div><p class="message-text">Tienes que comprobar en el tema de las velocidades del motor, si funcionan con un solo cable cada una.<br>Creo recordar que en algunas campanas, para que funcione, por ejemplo, la tercera velocidad, se debían alimentar dos cables del motor. Pero como digo, no lo aseguro</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 5</div><div class="reply-text">Tienes que comprobar en el tema de las velocidades del motor, si funcionan con un solo cable cada una. Creo recordar que</div></div><p class="message-text">Esto creo que lo podré revisar con un multímetro</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#0891b2">M5</div><div class="sender-info"><span class="sender-name">Учасник 5</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Esto creo que lo podré revisar con un multímetro</div></div><p class="message-text">Así es, comprueba que en cada velocidad, solamente saca tensión por un cable que va al motor.<br>Así de paso, te aseguras de que cable/s son cada velocidad</p></div></div>
+    <footer>Academia Tech &copy; 2026</footer>
+  </div>
+</div>
+</body></html>

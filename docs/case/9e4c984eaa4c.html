@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html><head>
+<title>Методи калібрування датчика струму в ArduPilot | SupportBot</title>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta property="og:title" content="Методи калібрування датчика струму в ArduPilot">
+<meta property="og:description" content="Існує кілька методів калібрування датчика струму, які обговорювалися:
+1. **Метод &#x27;заряд-розряд&#x27;:** Відлітати певну кількість ємності, а потім зарядити акумулятор, порівнявши показники. Цей метод вважа">
+<link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+<style>
+:root {
+  --signal-blue: #2c6bed;
+  --page-bg: #f6f7f9;
+  --card-bg: #ffffff;
+  --text: #0d0d0d;
+  --text-sec: #5c5c5c;
+  --border: #d8d8d8;
+  --radius: 12px;
+  --green: #16a34a;
+  --yellow: #ca8a04;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  background: var(--page-bg); color: var(--text);
+  min-height: 100vh; padding: 48px 20px;
+  -webkit-font-smoothing: antialiased;
+}
+@media (max-width: 520px) { body { padding: 24px 12px; } }
+.shell { max-width: 640px; margin: 0 auto; }
+.card {
+  background: var(--card-bg); border: 1px solid var(--border);
+  border-radius: var(--radius); overflow: hidden; margin-bottom: 16px;
+}
+header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 20px; border-bottom: 1px solid var(--border);
+}
+.header-left { display: flex; align-items: center; gap: 10px; text-decoration: none; color: inherit; }
+.logo { width: 28px; height: 28px; }
+.brand { font-size: 15px; font-weight: 600; letter-spacing: -0.02em; }
+.chat-header { padding: 14px 20px; border-bottom: 1px solid var(--border); background: var(--page-bg); }
+.chat-header h2 { font-size: 14px; font-weight: 600; color: var(--text); display: flex; align-items: center; gap: 8px; }
+.chat-header h2 svg { width: 16px; height: 16px; color: var(--signal-blue); }
+.messages { padding: 0; }
+.message { padding: 16px 20px; border-bottom: 1px solid var(--border); }
+.message:last-child { border-bottom: none; }
+.message-header { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+.avatar { width: 28px; height: 28px; border-radius: 50%; color: white; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 600; flex-shrink: 0; }
+.sender-info { flex: 1; min-width: 0; }
+.sender-name { font-size: 13px; font-weight: 600; color: var(--text); }
+.message-text { font-size: 15px; line-height: 1.55; color: var(--text); white-space: pre-wrap; margin-left: 38px; }
+.reply-bubble { margin-left: 38px; margin-bottom: 6px; padding: 6px 10px; background: #f0f2f5; border-left: 3px solid var(--signal-blue); border-radius: 4px; font-size: 13px; color: var(--text-sec); }
+.reply-sender { font-weight: 600; color: var(--signal-blue); font-size: 12px; margin-bottom: 2px; }
+.reply-text { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.status-badge {
+  padding: 4px 10px; font-size: 11px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.04em; border-radius: 4px;
+}
+.status-solved { background: #dcfce7; color: var(--green); }
+.status-recommendation { background: #fef3c7; color: #b45309; }
+main { padding: 24px 20px; }
+h1 { font-size: 20px; font-weight: 700; letter-spacing: -0.025em; margin-bottom: 12px; line-height: 1.3; }
+.meta { font-size: 12px; color: var(--text-sec); margin-bottom: 16px; }
+.tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 20px; }
+.tag {
+  background: rgba(44, 107, 237, 0.08); color: var(--signal-blue);
+  padding: 4px 10px; border-radius: 4px; font-size: 12px; font-weight: 500;
+}
+.section-title {
+  font-size: 11px; font-weight: 600; text-transform: uppercase;
+  letter-spacing: 0.06em; color: var(--text-sec); margin-bottom: 10px;
+  display: flex; align-items: center; gap: 6px;
+}
+.section-title svg { width: 14px; height: 14px; }
+.section-content { font-size: 15px; line-height: 1.6; color: var(--text); white-space: pre-wrap; }
+.problem-section { padding-bottom: 20px; border-bottom: 1px solid var(--border); margin-bottom: 20px; }
+.solution-section {
+  background: #f0fdf4; margin: -24px -20px -24px -20px; padding: 20px;
+  border-top: 1px solid #bbf7d0;
+}
+.solution-section .section-title { color: var(--green); }
+.recommendation-solution { background: #fffbeb; border-top-color: #fde68a; }
+.recommendation-solution .section-title { color: #b45309; }
+.empty-chat {
+  padding: 32px 20px; text-align: center; color: var(--text-sec); font-size: 14px;
+}
+footer {
+  padding: 14px 20px; border-top: 1px solid var(--border);
+  color: var(--text-sec); font-size: 12px; text-align: center;
+}
+@media (max-width: 520px) {
+  main { padding: 20px 16px; }
+  h1 { font-size: 18px; }
+  .solution-section { margin: -20px -16px -20px -16px; padding: 16px; }
+}
+</style>
+</head><body>
+<div class="shell">
+  <div class="card">
+    <header>
+      <a href="https://academia-tech.github.io/SupportBot" class="header-left">
+        <img src="/SupportBot/supportbot-logo-128.png" alt="SupportBot" class="logo">
+        <span class="brand">SupportBot</span>
+      </a>
+      <span class="status-recommendation status-badge">Рекомендація</span>
+    </header>
+    <main>
+      <h1>Методи калібрування датчика струму в ArduPilot</h1>
+      <p class="meta">Case 9e4c984eaa4c &middot; ua_ardupilot</p>
+      <div class='tags'><span class="tag">#калібрування</span><span class="tag">#датчик струму</span><span class="tag">#BAT_AMP_PERVOLT</span><span class="tag">#watt meter</span><span class="tag">#current sensor</span><span class="tag">#ESC telemetry</span><span class="tag">#DShot</span></div>
+      <div class="problem-section">
+        <h2 class="section-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/>
+            <line x1="12" y1="16" x2="12.01" y2="16"/>
+          </svg>
+          Проблема
+        </h2>
+        <p class="section-content">Користувач шукає спосіб точно перевірити та відкалібрувати показники сили струму, які відображає польотний контролер, аналогічно до калібрування напруги.</p>
+      </div>
+      <div class="solution-section recommendation-solution">
+        <h2 class="section-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7c.6.4 1 1.1 1 1.8V17h6v-.5c0-.7.4-1.4 1-1.8A7 7 0 0 0 12 2z"/></svg>
+          Рекомендація (не підтверджено)
+        </h2>
+        <p class="section-content">Існує кілька методів калібрування датчика струму, які обговорювалися:
+1. **Метод &#x27;заряд-розряд&#x27;:** Відлітати певну кількість ємності, а потім зарядити акумулятор, порівнявши показники. Цей метод вважається неточним через залежність від температури та стану батареї.
+2. **Зовнішній ватметр/амперметр:** Підключити зовнішній вимірювальний пристрій (наприклад, ватметр, лабораторний блок живлення) в розрив живлення для вимірювання реального струму.
+3. **Регульоване навантаження:** Використовувати регульоване електронне навантаження для калібрування на типовому круїзному струмі, що дає найточніші результати.
+4. **Струмові кліщі:** Для ESC 4-в-1 найпростішим може бути використання струмових кліщів для постійного струму.
+5. **Дані з ESC (DShot):** Отримувати дані про струм напряму з регуляторів через телеметрію DShot. Ці дані є точними для моторів, але не враховують споживання периферії (польотний контролер, VTX тощо).
+
+Важливо також відкалібрувати датчик напруги та розуміти, що аналогові датчики можуть мати неточний offset. Метою калібрування може бути як показ реального споживання, так і підгонка під номінальну ємність батареї для зручності пілота. Залишок заряду краще оцінювати за напругою на банку, а не за спожитими А/г.</p>
+      </div>
+    </main>
+  </div>
+  <div class="card">
+    <div class="chat-header"><h2><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Історія чату</h2></div><div class="messages"><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Добрий вечір. <br>Підкажіть, як можна коригнути або точно перевірити чи коректно показує борт силу струму? <br>Бо напругу коригую просто - тестер і потім batt_volt_mult</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Добрий вечір.  Підкажіть, як можна коригнути або точно перевірити чи коректно показує борт силу струму?  Бо напругу кори</div></div><p class="message-text">Зарядити батку, Відлітати хвилин 5-10, подивитись, скільки скушало мАг. Зарядити батку до повної, подивитись, скільки назад в неї влізло. Відношення — ваш коефіцієнт.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 2</div><div class="reply-text">Зарядити батку, Відлітати хвилин 5-10, подивитись, скільки скушало мАг. Зарядити батку до повної, подивитись, скільки на</div></div><p class="message-text">А де вносити значення?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><p class="message-text">BAT_AMP_PERVOLT здається по пам&#x27;яті</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 2</div><div class="reply-text">Зарядити батку, Відлітати хвилин 5-10, подивитись, скільки скушало мАг. Зарядити батку до повної, подивитись, скільки на</div></div><p class="message-text">або по 2-м точкам амперметр</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><p class="message-text">Там є вже значення. То ви його уточнюєте типа. Бо різні аналогові датчики. Якщо брати дані з esc, то вони точніше, бо цифрові але в них не буде врахована витрата на периферію.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 2</div><div class="reply-text">Там є вже значення. То ви його уточнюєте типа. Бо різні аналогові датчики. Якщо брати дані з esc, то вони точніше, бо ци</div></div><p class="message-text">Може бути корявий offset :)</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 3</div><div class="reply-text">або по 2-м точкам амперметр</div></div><p class="message-text">У мене є амперметр клєщі.. Але він не дуже добре шумний струм міряє..</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 3</div><div class="reply-text">Може бути корявий offset :)</div></div><p class="message-text">Та да, аналогові амперметри це біль)</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 2</div><div class="reply-text">Зарядити батку, Відлітати хвилин 5-10, подивитись, скільки скушало мАг. Зарядити батку до повної, подивитись, скільки на</div></div><p class="message-text">Це дуже не точний спосіб. В папугах вийде. Має значення струм розряду і заряду. Вони мають бути однакові для цього способу. Температура теж. І чим більший аккум убитий, тим більше в нього &quot;влазить&quot; ніж &quot;використано&quot;.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#0891b2">M5</div><div class="sender-info"><span class="sender-name">Учасник 5</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Добрий вечір.  Підкажіть, як можна коригнути або точно перевірити чи коректно показує борт силу струму?  Бо напругу кори</div></div><p class="message-text">Я через паверметр провіряю. Або іноді через лабораторний блок живлення <br>Але то літаки. Їх реально тримати навіть на повному газу</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Добрий вечір.  Підкажіть, як можна коригнути або точно перевірити чи коректно показує борт силу струму?  Бо напругу кори</div></div><p class="message-text">Через таке можна підключити. Перевірити треба в польоті )))<br>(Не знаю як заглянути, треба обережно). Або потім перерахувати вати в ампери, так як напругу можна поміряти, а ватметр покаже скільки W•h через нього пройшло.<br>На ненавантаженому дроні, бо в девайса дроти не сильно товсті. І має бути на хт60/хт90 роз&#x27;ємах, не на крокодилах.<br>Цей девайс реально поверх батареї закріпити.<br>Теоретично, просто заармлений буде теж показувати.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#9333ea">M6</div><div class="sender-info"><span class="sender-name">Учасник 6</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Добрий вечір.  Підкажіть, як можна коригнути або точно перевірити чи коректно показує борт силу струму?  Бо напругу кори</div></div><p class="message-text">Регульоване навантаження і калібрувати на умовно круізному струмі, тоді виходить найточніше.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 4</div><div class="reply-text">Через таке можна підключити. Перевірити треба в польоті ))) (Не знаю як заглянути, треба обережно). Або потім перерахува</div></div><p class="message-text">Але я не знаю як врахований струм vtx. Чи він напряму через батарею, чи через внутрішній вимірювач. Залежить від схеми.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#0891b2">M5</div><div class="sender-info"><span class="sender-name">Учасник 5</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 6</div><div class="reply-text">Регульоване навантаження і калібрувати на умовно круізному струмі, тоді виходить найточніше.</div></div><p class="message-text">Важко буде цифрову нагрузку до 4в1 esc підключити...</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#9333ea">M6</div><div class="sender-info"><span class="sender-name">Учасник 6</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 5</div><div class="reply-text">Важко буде цифрову нагрузку до 4в1 esc підключити...</div></div><p class="message-text">Тут треба подумати як. Там шунт на вході має бути, інакше ми би бачили тільки розрахункове споживання моторів без переферії</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#dc2626">M7</div><div class="sender-info"><span class="sender-name">Учасник 7</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Добрий вечір.  Підкажіть, як можна коригнути або точно перевірити чи коректно показує борт силу струму?  Бо напругу кори</div></div><p class="message-text">А если брать токи с показаний регулей? Если у вас дшот то вполне реально получить телему с регулей. А там показания вполне точные.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#0d9488">M8</div><div class="sender-info"><span class="sender-name">Учасник 8</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 4</div><div class="reply-text">Це дуже не точний спосіб. В папугах вийде. Має значення струм розряду і заряду. Вони мають бути однакові для цього спосо</div></div><p class="message-text">яка різниця в чому міряти, кулонах, папугах чи ампер годинах, головне щоб результат був повторюваний, звісно різні елементи видають різну енергію в залежності від струму, про це треба пам&#x27;ятати.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 8</div><div class="reply-text">яка різниця в чому міряти, кулонах, папугах чи ампер годинах, головне щоб результат був повторюваний, звісно різні елеме</div></div><p class="message-text">Кожного разу папуги різні будуть</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#0d9488">M8</div><div class="sender-info"><span class="sender-name">Учасник 8</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 4</div><div class="reply-text">Кожного разу папуги різні будуть</div></div><p class="message-text">Звідки візьметься різниця?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 8</div><div class="reply-text">Звідки візьметься різниця?</div></div><p class="message-text">Кожного разу струм розрядки, зарядки, температура різні</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#0d9488">M8</div><div class="sender-info"><span class="sender-name">Учасник 8</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 4</div><div class="reply-text">Кожного разу струм розрядки, зарядки, температура різні</div></div><p class="message-text">Але характеристики шунта не змінюються, технічно шунт міряє струм і результат буде сталим, те що батарея при різних температурах і струмах віддає різну енергію це треба розуміти. Ціль же підігнати струм який показує до того що очікує споживач, а він очікує побачити те що написано на батці або зарядці, тому спосіб підходить, хоча і не покаже точний струм споживання.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 8</div><div class="reply-text">Але характеристики шунта не змінюються, технічно шунт міряє струм і результат буде сталим, те що батарея при різних темп</div></div><p class="message-text">Нє. Це для струму на osd робиться. Або телеметрії. Просто пише 40А, а насправді може бути 25</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 8</div><div class="reply-text">Але характеристики шунта не змінюються, технічно шунт міряє струм і результат буде сталим, те що батарея при різних темп</div></div><p class="message-text">Задача порівняти струм з показометра меню і реальний, щоб відкалібрувати.<br>Якщо я вірно зрозумів</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ca8a04">M9</div><div class="sender-info"><span class="sender-name">Учасник 9</span></div></div><p class="message-text">типу реальне споживання міряється якимось іншим способом, такий самий шунт</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#0d9488">M8</div><div class="sender-info"><span class="sender-name">Учасник 8</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 4</div><div class="reply-text">Задача порівняти струм з показометра меню і реальний, щоб відкалібрувати. Якщо я вірно зрозумів</div></div><p class="message-text">Звично завдання це показати споживання щоб користувач міг оцінити скільки заряду залишилось, якщо на батці написано 15000 то треба показати 15000 в кінці польоту, хоча реальний струм може бути менший.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#9333ea">M6</div><div class="sender-info"><span class="sender-name">Учасник 6</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 5</div><div class="reply-text">Важко буде цифрову нагрузку до 4в1 esc підключити...</div></div><p class="message-text">Все ж струмові кліщі під постійний струм для esc 4в1 це найпростіше.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#9333ea">M6</div><div class="sender-info"><span class="sender-name">Учасник 6</span></div></div><p class="message-text">І не забудьте ще датчик напруги відкалібрувати</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#0d9488">M8</div><div class="sender-info"><span class="sender-name">Учасник 8</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 6</div><div class="reply-text">Все ж струмові кліщі під постійний струм для esc 4в1 це найпростіше.</div></div><p class="message-text">Але тоді треба пояснити користувачу чого його батка 15000 видає 12000, але так, це правильний спосіб.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 8</div><div class="reply-text">Звично завдання це показати споживання щоб користувач міг оцінити скільки заряду залишилось, якщо на батці написано 1500</div></div><p class="message-text">По струму наче не дивляться скільки лишилось. Тільки оптімальний режим польоту. А вже в mAh показує залишок</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#9333ea">M6</div><div class="sender-info"><span class="sender-name">Учасник 6</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 8</div><div class="reply-text">Звично завдання це показати споживання щоб користувач міг оцінити скільки заряду залишилось, якщо на батці написано 1500</div></div><p class="message-text">До одного місця ці а/г. Є напруга і розрахункова на банку. Там ми знаємо і катофф і коли почнеться просадка.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#9333ea">M6</div><div class="sender-info"><span class="sender-name">Учасник 6</span></div></div><p class="message-text">А ще в арду є  спожитого із врахуванням опору батареї, котрий типу точніший. Але як воно робе навіть автор нормально не може пояснити)</p></div></div>
+    <footer>Academia Tech &copy; 2026</footer>
+  </div>
+</div>
+</body></html>

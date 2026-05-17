@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html><head>
+<title>Recomendación de discos NVMe para un NAS y debate sobre su viabilidad | SupportBot</title>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta property="og:title" content="Recomendación de discos NVMe para un NAS y debate sobre su viabilidad">
+<meta property="og:description" content="Varios usuarios argumentan que para un NAS con un puerto de red de 2.5GbE, el uso de discos NVMe no ofrece una ventaja real en la velocidad de transferencia de archivos, ya que la red es el cuello de ">
+<link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+<style>
+:root {
+  --signal-blue: #2c6bed;
+  --page-bg: #f6f7f9;
+  --card-bg: #ffffff;
+  --text: #0d0d0d;
+  --text-sec: #5c5c5c;
+  --border: #d8d8d8;
+  --radius: 12px;
+  --green: #16a34a;
+  --yellow: #ca8a04;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  background: var(--page-bg); color: var(--text);
+  min-height: 100vh; padding: 48px 20px;
+  -webkit-font-smoothing: antialiased;
+}
+@media (max-width: 520px) { body { padding: 24px 12px; } }
+.shell { max-width: 640px; margin: 0 auto; }
+.card {
+  background: var(--card-bg); border: 1px solid var(--border);
+  border-radius: var(--radius); overflow: hidden; margin-bottom: 16px;
+}
+header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 20px; border-bottom: 1px solid var(--border);
+}
+.header-left { display: flex; align-items: center; gap: 10px; text-decoration: none; color: inherit; }
+.logo { width: 28px; height: 28px; }
+.brand { font-size: 15px; font-weight: 600; letter-spacing: -0.02em; }
+.chat-header { padding: 14px 20px; border-bottom: 1px solid var(--border); background: var(--page-bg); }
+.chat-header h2 { font-size: 14px; font-weight: 600; color: var(--text); display: flex; align-items: center; gap: 8px; }
+.chat-header h2 svg { width: 16px; height: 16px; color: var(--signal-blue); }
+.messages { padding: 0; }
+.message { padding: 16px 20px; border-bottom: 1px solid var(--border); }
+.message:last-child { border-bottom: none; }
+.message-header { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+.avatar { width: 28px; height: 28px; border-radius: 50%; color: white; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 600; flex-shrink: 0; }
+.sender-info { flex: 1; min-width: 0; }
+.sender-name { font-size: 13px; font-weight: 600; color: var(--text); }
+.message-text { font-size: 15px; line-height: 1.55; color: var(--text); white-space: pre-wrap; margin-left: 38px; }
+.reply-bubble { margin-left: 38px; margin-bottom: 6px; padding: 6px 10px; background: #f0f2f5; border-left: 3px solid var(--signal-blue); border-radius: 4px; font-size: 13px; color: var(--text-sec); }
+.reply-sender { font-weight: 600; color: var(--signal-blue); font-size: 12px; margin-bottom: 2px; }
+.reply-text { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.status-badge {
+  padding: 4px 10px; font-size: 11px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.04em; border-radius: 4px;
+}
+.status-solved { background: #dcfce7; color: var(--green); }
+.status-recommendation { background: #fef3c7; color: #b45309; }
+main { padding: 24px 20px; }
+h1 { font-size: 20px; font-weight: 700; letter-spacing: -0.025em; margin-bottom: 12px; line-height: 1.3; }
+.meta { font-size: 12px; color: var(--text-sec); margin-bottom: 16px; }
+.tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 20px; }
+.tag {
+  background: rgba(44, 107, 237, 0.08); color: var(--signal-blue);
+  padding: 4px 10px; border-radius: 4px; font-size: 12px; font-weight: 500;
+}
+.section-title {
+  font-size: 11px; font-weight: 600; text-transform: uppercase;
+  letter-spacing: 0.06em; color: var(--text-sec); margin-bottom: 10px;
+  display: flex; align-items: center; gap: 6px;
+}
+.section-title svg { width: 14px; height: 14px; }
+.section-content { font-size: 15px; line-height: 1.6; color: var(--text); white-space: pre-wrap; }
+.problem-section { padding-bottom: 20px; border-bottom: 1px solid var(--border); margin-bottom: 20px; }
+.solution-section {
+  background: #f0fdf4; margin: -24px -20px -24px -20px; padding: 20px;
+  border-top: 1px solid #bbf7d0;
+}
+.solution-section .section-title { color: var(--green); }
+.recommendation-solution { background: #fffbeb; border-top-color: #fde68a; }
+.recommendation-solution .section-title { color: #b45309; }
+.empty-chat {
+  padding: 32px 20px; text-align: center; color: var(--text-sec); font-size: 14px;
+}
+footer {
+  padding: 14px 20px; border-top: 1px solid var(--border);
+  color: var(--text-sec); font-size: 12px; text-align: center;
+}
+@media (max-width: 520px) {
+  main { padding: 20px 16px; }
+  h1 { font-size: 18px; }
+  .solution-section { margin: -20px -16px -20px -16px; padding: 16px; }
+}
+</style>
+</head><body>
+<div class="shell">
+  <div class="card">
+    <header>
+      <a href="https://academia-tech.github.io/SupportBot" class="header-left">
+        <img src="/SupportBot/supportbot-logo-128.png" alt="SupportBot" class="logo">
+        <span class="brand">SupportBot</span>
+      </a>
+      <span class="status-recommendation status-badge">Рекомендація</span>
+    </header>
+    <main>
+      <h1>Recomendación de discos NVMe para un NAS y debate sobre su viabilidad</h1>
+      <p class="meta">Case f2e65c2c2d08 &middot; naseros</p>
+      <div class='tags'><span class="tag">#NAS</span><span class="tag">#NVMe</span><span class="tag">#SSD</span><span class="tag">#almacenamiento</span><span class="tag">#cuello de botella</span><span class="tag">#2.5GbE</span><span class="tag">#fanxiang</span><span class="tag">#recomendación</span></div>
+      <div class="problem-section">
+        <h2 class="section-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/>
+            <line x1="12" y1="16" x2="12.01" y2="16"/>
+          </svg>
+          Проблема
+        </h2>
+        <p class="section-content">Un usuario solicita recomendaciones de discos NVMe para montar en un NAS (Minbustor gen 2). Esto genera un debate sobre si realmente vale la pena usar NVMe en un NAS para uso general.</p>
+      </div>
+      <div class="solution-section recommendation-solution">
+        <h2 class="section-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7c.6.4 1 1.1 1 1.8V17h6v-.5c0-.7.4-1.4 1-1.8A7 7 0 0 0 12 2z"/></svg>
+          Рекомендація (не підтверджено)
+        </h2>
+        <p class="section-content">Varios usuarios argumentan que para un NAS con un puerto de red de 2.5GbE, el uso de discos NVMe no ofrece una ventaja real en la velocidad de transferencia de archivos, ya que la red es el cuello de botella. Se considera que el alto coste de los NVMe solo se justifica en casos muy específicos, como la necesidad de un silencio absoluto o si la red interna es de 10G. Se desaconseja un NAS exclusivamente NVMe para la mayoría de los propósitos. Un usuario recomienda el fanxiang S660 4TB PCIe 4.0 NVMe M.2 SSD con disipador de calor (QLC, hasta 5000 MB/s, compatible con PS5) como opción. El usuario que preguntó aclaró que su interés en NVMe era por la velocidad de acceso para gestionar muchas fotos.</p>
+      </div>
+    </main>
+  </div>
+  <div class="card">
+    <div class="chat-header"><h2><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Історія чату</h2></div><div class="messages"><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Buenos días <br><br>Me podríais recomendar discos NVME para montar un NAS ?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><p class="message-text">Qué nas vas a usar?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Pues llevo idea de un Minbustor gen 2 <br>Ya tengo un QNAP y quería probar el otro</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><p class="message-text">Desde el respeto Edu: te compensa??? o mejor dicho, qué mejora crees que vas a obtener con discos Nvme? porque estarás limitado siempre por el ancho de banda del puerto red, que en ese caso es un 2,5..... en número reales, transferir un MKV de 40 gigas, por ejemplo, con Gigabit tardas del orden de 7 minutos. Con 2,5, unos 3 y poco. Los discos Nvme, el más tonto gen3, acepta velocidades de 3500 Mb/s, bastante por encima de lo que permite la red 2,5, y ya no te digo de una red gigabit.<br><br>De ahí la pregunta: te compensa el coste de la unidad + el mayor coste de los Nvme cuando, realmente, no le ganas velocidad de transferencia?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 2</div><div class="reply-text">Desde el respeto Edu: te compensa??? o mejor dicho, qué mejora crees que vas a obtener con discos Nvme? porque estarás l</div></div><p class="message-text">+ cuando seguramente ese MKV ni siquiera lo tenga en el disco principal y si en HDD de seguramente 7200rpm</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><p class="message-text">yo unicamente me iría a NAS con Nvme si el silencio fuera absolutamente primordial y/o mi red interna fuera 10G y estuviera descargando MKVs de 40 gigas para arriba diariamente... en otro caso, el coste el altísimo todavía, y siempre seguiremos limitados por el ancho de banda de la tarjeta de red</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Buenos días   Me podríais recomendar discos NVME para montar un NAS ?</div></div><p class="message-text">Estos utilizó en mis TM F8<br><br>fanxiang S660 4TB PCIe 4.0 NVMe M.2 SSD Unidad Interna de Estado sólido-con disipador de Calor, QLC hasta 5000 MB/s, Compatible con PS5 https://amzn.eu/d/ccOLn3s</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#0891b2">M5</div><div class="sender-info"><span class="sender-name">Учасник 5</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 2</div><div class="reply-text">yo unicamente me iría a NAS con Nvme si el silencio fuera absolutamente primordial y/o mi red interna fuera 10G y estuvi</div></div><p class="message-text">yo omitiria un nas nvme puro directamente en todas y cada una de las situaciones</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#0891b2">M5</div><div class="sender-info"><span class="sender-name">Учасник 5</span></div></div><p class="message-text">sencillamente no tiene sentido para el proposito de un nas que sea solo nvme, ahora si es hibrido si eso es otro tema</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#9333ea">M6</div><div class="sender-info"><span class="sender-name">Учасник 6</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 5</div><div class="reply-text">yo omitiria un nas nvme puro directamente en todas y cada una de las situaciones</div></div><p class="message-text">El tema silencio puede ser importante</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#0891b2">M5</div><div class="sender-info"><span class="sender-name">Учасник 5</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 6</div><div class="reply-text">El tema silencio puede ser importante</div></div><p class="message-text">bueno, yo esque como lo que tengo suena a turbina de caza pues esta en un cuarto bien apartado jaja</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#0891b2">M5</div><div class="sender-info"><span class="sender-name">Учасник 5</span></div></div><p class="message-text">si quieres que sea 0 db pues bueno pero lo vas a pagar a precio de oro eso jaja</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><p class="message-text">Aelf yo no se lo veo la verdad, el sentido a un NAS Nvme exclusivo. De lo que comentas del ruido, no hay nada como un desmontaje cada 10-12 meses para quitar mierda... XD</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#0891b2">M5</div><div class="sender-info"><span class="sender-name">Учасник 5</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 2</div><div class="reply-text">Aelf yo no se lo veo la verdad, el sentido a un NAS Nvme exclusivo. De lo que comentas del ruido, no hay nada como un de</div></div><p class="message-text">no, la clave es no usar un rack pero bueno eso yo que me faltan unos cuantos tornillos. Un nas &quot;normal&quot; o un pc antiguo reconvertido son relativamente silenciosos... pero nunca 0 db si tienen discos mecanicos.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#9333ea">M6</div><div class="sender-info"><span class="sender-name">Учасник 6</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 5</div><div class="reply-text">si quieres que sea 0 db pues bueno pero lo vas a pagar a precio de oro eso jaja</div></div><p class="message-text">Yo era un friky del fanless😅 por eso,</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#0891b2">M5</div><div class="sender-info"><span class="sender-name">Учасник 5</span></div></div><p class="message-text">yo combine en la solución definitiva</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#0891b2">M5</div><div class="sender-info"><span class="sender-name">Учасник 5</span></div></div><p class="message-text">el ruido en la sala &quot;del servidor&quot; y el silencio en el resto, incluso el pc esta lejos de mis monitores (bendiciones de fibra optica)</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#9333ea">M6</div><div class="sender-info"><span class="sender-name">Учасник 6</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 5</div><div class="reply-text">no, la clave es no usar un rack pero bueno eso yo que me faltan unos cuantos tornillos. Un nas &quot;normal&quot; o un pc antiguo </div></div><p class="message-text">De hecho hay algún nas, que entre el disco que hace como eco y el ventilador era ruidosillo<br><br><br>Es lo único que se me ocurre para justificar nve en un nas🤔</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#0891b2">M5</div><div class="sender-info"><span class="sender-name">Учасник 5</span></div></div><p class="message-text">0 db donde interesa , potencia sin restricciones jaja</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#9333ea">M6</div><div class="sender-info"><span class="sender-name">Учасник 6</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 5</div><div class="reply-text">el ruido en la sala &quot;del servidor&quot; y el silencio en el resto, incluso el pc esta lejos de mis monitores (bendiciones de </div></div><p class="message-text">Tú sabes😂😂😂<br><br>¿ Y el vídeo y teclado / ratón?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#0891b2">M5</div><div class="sender-info"><span class="sender-name">Учасник 5</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 6</div><div class="reply-text">Tú sabes😂😂😂  ¿ Y el vídeo y teclado / ratón?</div></div><p class="message-text">optico</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#0891b2">M5</div><div class="sender-info"><span class="sender-name">Учасник 5</span></div></div><p class="message-text">tanto cable como unos usb</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#0891b2">M5</div><div class="sender-info"><span class="sender-name">Учасник 5</span></div></div><p class="message-text">osea un dock+hdmi/dp por fibra optica para que de la distancia</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#9333ea">M6</div><div class="sender-info"><span class="sender-name">Учасник 6</span></div></div><p class="message-text">Homer babeando.gif</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 2</div><div class="reply-text">Desde el respeto Edu: te compensa??? o mejor dicho, qué mejora crees que vas a obtener con discos Nvme? porque estarás l</div></div><p class="message-text">Gracias por tu opinion .<br>Lo de los NVME lo decía más que nada por las fotos . Muchas , muchísimas , y ahí entiendo que estos discos por velocidad de acceso y demás lo harán mucho mejor , por eso decía que los vídeos en discos mecánicos .</p></div></div>
+    <footer>Academia Tech &copy; 2026</footer>
+  </div>
+</div>
+</body></html>

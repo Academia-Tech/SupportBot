@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html><head>
+<title>Instalar cerradura inteligente sin poder cambiar el bombín de embrague simple | SupportBot</title>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta property="og:title" content="Instalar cerradura inteligente sin poder cambiar el bombín de embrague simple">
+<meta property="og:description" content="Varios usuarios explican que es técnicamente imposible usar una cerradura inteligente (tipo Nuki, Tedee) que se acopla a la llave interior si el bombín no es de doble embrague, ya que bloqueará la ape">
+<link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+<style>
+:root {
+  --signal-blue: #2c6bed;
+  --page-bg: #f6f7f9;
+  --card-bg: #ffffff;
+  --text: #0d0d0d;
+  --text-sec: #5c5c5c;
+  --border: #d8d8d8;
+  --radius: 12px;
+  --green: #16a34a;
+  --yellow: #ca8a04;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  background: var(--page-bg); color: var(--text);
+  min-height: 100vh; padding: 48px 20px;
+  -webkit-font-smoothing: antialiased;
+}
+@media (max-width: 520px) { body { padding: 24px 12px; } }
+.shell { max-width: 640px; margin: 0 auto; }
+.card {
+  background: var(--card-bg); border: 1px solid var(--border);
+  border-radius: var(--radius); overflow: hidden; margin-bottom: 16px;
+}
+header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 20px; border-bottom: 1px solid var(--border);
+}
+.header-left { display: flex; align-items: center; gap: 10px; text-decoration: none; color: inherit; }
+.logo { width: 28px; height: 28px; }
+.brand { font-size: 15px; font-weight: 600; letter-spacing: -0.02em; }
+.chat-header { padding: 14px 20px; border-bottom: 1px solid var(--border); background: var(--page-bg); }
+.chat-header h2 { font-size: 14px; font-weight: 600; color: var(--text); display: flex; align-items: center; gap: 8px; }
+.chat-header h2 svg { width: 16px; height: 16px; color: var(--signal-blue); }
+.messages { padding: 0; }
+.message { padding: 16px 20px; border-bottom: 1px solid var(--border); }
+.message:last-child { border-bottom: none; }
+.message-header { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+.avatar { width: 28px; height: 28px; border-radius: 50%; color: white; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 600; flex-shrink: 0; }
+.sender-info { flex: 1; min-width: 0; }
+.sender-name { font-size: 13px; font-weight: 600; color: var(--text); }
+.message-text { font-size: 15px; line-height: 1.55; color: var(--text); white-space: pre-wrap; margin-left: 38px; }
+.reply-bubble { margin-left: 38px; margin-bottom: 6px; padding: 6px 10px; background: #f0f2f5; border-left: 3px solid var(--signal-blue); border-radius: 4px; font-size: 13px; color: var(--text-sec); }
+.reply-sender { font-weight: 600; color: var(--signal-blue); font-size: 12px; margin-bottom: 2px; }
+.reply-text { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.status-badge {
+  padding: 4px 10px; font-size: 11px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.04em; border-radius: 4px;
+}
+.status-solved { background: #dcfce7; color: var(--green); }
+.status-recommendation { background: #fef3c7; color: #b45309; }
+main { padding: 24px 20px; }
+h1 { font-size: 20px; font-weight: 700; letter-spacing: -0.025em; margin-bottom: 12px; line-height: 1.3; }
+.meta { font-size: 12px; color: var(--text-sec); margin-bottom: 16px; }
+.tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 20px; }
+.tag {
+  background: rgba(44, 107, 237, 0.08); color: var(--signal-blue);
+  padding: 4px 10px; border-radius: 4px; font-size: 12px; font-weight: 500;
+}
+.section-title {
+  font-size: 11px; font-weight: 600; text-transform: uppercase;
+  letter-spacing: 0.06em; color: var(--text-sec); margin-bottom: 10px;
+  display: flex; align-items: center; gap: 6px;
+}
+.section-title svg { width: 14px; height: 14px; }
+.section-content { font-size: 15px; line-height: 1.6; color: var(--text); white-space: pre-wrap; }
+.problem-section { padding-bottom: 20px; border-bottom: 1px solid var(--border); margin-bottom: 20px; }
+.solution-section {
+  background: #f0fdf4; margin: -24px -20px -24px -20px; padding: 20px;
+  border-top: 1px solid #bbf7d0;
+}
+.solution-section .section-title { color: var(--green); }
+.recommendation-solution { background: #fffbeb; border-top-color: #fde68a; }
+.recommendation-solution .section-title { color: #b45309; }
+.empty-chat {
+  padding: 32px 20px; text-align: center; color: var(--text-sec); font-size: 14px;
+}
+footer {
+  padding: 14px 20px; border-top: 1px solid var(--border);
+  color: var(--text-sec); font-size: 12px; text-align: center;
+}
+@media (max-width: 520px) {
+  main { padding: 20px 16px; }
+  h1 { font-size: 18px; }
+  .solution-section { margin: -20px -16px -20px -16px; padding: 16px; }
+}
+</style>
+</head><body>
+<div class="shell">
+  <div class="card">
+    <header>
+      <a href="https://academia-tech.github.io/SupportBot" class="header-left">
+        <img src="/SupportBot/supportbot-logo-128.png" alt="SupportBot" class="logo">
+        <span class="brand">SupportBot</span>
+      </a>
+      <span class="status-solved status-badge">Вирішено</span>
+    </header>
+    <main>
+      <h1>Instalar cerradura inteligente sin poder cambiar el bombín de embrague simple</h1>
+      <p class="meta">Case 053bea7d05fb &middot; domotica_es</p>
+      <div class='tags'><span class="tag">#cerradura inteligente</span><span class="tag">#nuki</span><span class="tag">#tedee</span><span class="tag">#bombín</span><span class="tag">#doble embrague</span><span class="tag">#alquiler</span><span class="tag">#inquilino</span><span class="tag">#seguridad</span><span class="tag">#legal</span></div>
+      <div class="problem-section">
+        <h2 class="section-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/>
+            <line x1="12" y1="16" x2="12.01" y2="16"/>
+          </svg>
+          Проблема
+        </h2>
+        <p class="section-content">Un inquilino busca una cerradura inteligente para una puerta con un bombín de embrague simple (si hay una llave puesta por dentro, no se puede abrir por fuera). No puede cambiar el bombín por uno de doble embrague y quiere una solución que permita la apertura inteligente y también con llave desde fuera.</p>
+      </div>
+      <div class="solution-section">
+        <h2 class="section-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          Рішення
+        </h2>
+        <p class="section-content">Varios usuarios explican que es técnicamente imposible usar una cerradura inteligente (tipo Nuki, Tedee) que se acopla a la llave interior si el bombín no es de doble embrague, ya que bloqueará la apertura manual desde el exterior. Se desaconseja esta configuración por el riesgo de quedarse fuera si la cerradura falla.
+**Solución para viviendas de alquiler:** Si el problema es que no se puede cambiar el bombín por estar en una vivienda de alquiler, varios usuarios confirman que es una práctica común cambiar el bombín por uno propio (de doble embrague en este caso) al entrar a vivir y volver a instalar el original al dejar la vivienda. Esto permite instalar la cerradura inteligente de forma segura y reversible.</p>
+      </div>
+    </main>
+  </div>
+  <div class="card">
+    <div class="chat-header"><h2><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Історія чату</h2></div><div class="messages"><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Buenas tardes, me gustaría saber si hay cerraduras inteligentes para puertas en las que, si dejas la llave puesta por dentro, no abran por fuera, ya que no puedo modificar el bombín y poner uno de doble embrague porque estoy de alquiler.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Buenas tardes, me gustaría saber si hay cerraduras inteligentes para puertas en las que, si dejas la llave puesta por de</div></div><p class="message-text">Imposible con cerradura tradicional que actúa sobre el bombín, tienes que buscar una cerradura de barra y confiar en el bombín, pero si la idea es automatizar la apertura, estas en un punto ciego. No puedes cambiar el bombín y cuando te vallas te lo llevas detrás?? Habla con el propietario, mientras tenga una copia... que drama hay?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Buenas tardes, me gustaría saber si hay cerraduras inteligentes para puertas en las que, si dejas la llave puesta por de</div></div><p class="message-text">¿Por qué no puedes? De hecho es lo primero que deberías haber hecho, una vez estás alquilado es tu vivienda a todos los efectos y el propietario no tiene por qué entrar</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Buenas tardes, me gustaría saber si hay cerraduras inteligentes para puertas en las que, si dejas la llave puesta por de</div></div><p class="message-text">Y respecto a tu pregunta, cualquiera cerradura electrónica tipo nuki, teedee... la puedes montar con un bombin de embrague simple y por lo tanto no se podrán abrir desde fuera con la llave, pero no se recomienda porque como se quede sin batería o falle, te quedas en la calle</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 2</div><div class="reply-text">Imposible con cerradura tradicional que actúa sobre el bombín, tienes que buscar una cerradura de barra y confiar en el </div></div><p class="message-text">De hecho el propietario no tiene por qué tener ninguna copia de la llave</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 3</div><div class="reply-text">¿Por qué no puedes? De hecho es lo primero que deberías haber hecho, una vez estás alquilado es tu vivienda a todos los </div></div><p class="message-text">La propietaria no entra eso lo se de buena tinta jejeje</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">La propietaria no entra eso lo se de buena tinta jejeje</div></div><p class="message-text">Puedes cambiar el bombín sin problemas</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 3</div><div class="reply-text">Y respecto a tu pregunta, cualquiera cerradura electrónica tipo nuki, teedee... la puedes montar con un bombin de embrag</div></div><p class="message-text">Si lo que quiero decir es que teniendo cerradura de un embrague quiero una cerradura inteligente que me abra la puerta sin cambiar el bombin y abrir la puerta por fuera con 🔑</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Si lo que quiero decir es que teniendo cerradura de un embrague quiero una cerradura inteligente que me abra la puerta s</div></div><p class="message-text">No, eso no existe</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><p class="message-text">Si tu bombin no permite abrir con llave si hay una llave metida por el otro lado (no es de doble embrague), no puedes abrir con una llave metida por el otro lado si no lo cambias</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Hablaré con la casera aber di puedo cambiar el bombin</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Hablaré con la casera aber di puedo cambiar el bombin</div></div><p class="message-text">Repito: no necesitas su permiso ni tienes por qué comunicárselo, es tu domicilio, tu domicilio es inviolable y la ley te ampara para cambiar el bombin porque no sabes si hay más gente con copias de la llave</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><p class="message-text">Compras uno, lo cambias y listo</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><p class="message-text">Si ella se entera es porque ha intentado entrar sin decirtelo, buena trampa</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><p class="message-text">Si te vas del piso vuelves a poner el que había y listo, yo no duermo tranquilo sin saber quién tiene llaves de mi casa</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 3</div><div class="reply-text">Repito: no necesitas su permiso ni tienes por qué comunicárselo, es tu domicilio, tu domicilio es inviolable y la ley te</div></div><p class="message-text">Eso no es cierto. El propietario puede quedarse con una copia, pero no puede usarla sin tu permiso. Tú tienes derecho a la privacidad total mientras dure el contrato de alquiler.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 2</div><div class="reply-text">Eso no es cierto. El propietario puede quedarse con una copia, pero no puede usarla sin tu permiso. Tú tienes derecho a </div></div><p class="message-text">Y tanto que es cierto, puede quedarse una copia si tu quieres, pero nadie te obliga a dársela</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><p class="message-text">El propietario no tiene por qué tener llaves mientras tú vivas ahí</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Hablaré con la casera aber di puedo cambiar el bombin</div></div><p class="message-text">Tu, cuando devuelvas la casa tiene que estar como estaba. Devolviendolo a su estado original como ha dicho Psycho, listo. Que va a tener nadie las llaves de tu casa.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><p class="message-text">A ver... las cosas como son. Yo alquilo una propiedad y tengo el derecho a quedarme una copia de las llaves pero no tengo derecho a entrar sin tu consentimiento.<br><br>Otra cosa es que tu como inquilino puedes cambiar el bombín y no estas obligado legalmente a darle una copia mientras dure el contrato de arrendamiento, pero por cortesía lo informes.<br><br>El resto de &quot;elucubraciones&quot; las preguntáis a un abogado, que tengo propiedades alquiladas y lo tengo visto este tema.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><p class="message-text">Resumiendo: ¿Puede cambiar el bombin sin decirselo a su casera? Sí. ¿Tiene que darle una copia de la llave nueva? No. No hay más</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 3</div><div class="reply-text">Resumiendo: ¿Puede cambiar el bombin sin decirselo a su casera? Sí. ¿Tiene que darle una copia de la llave nueva? No. No</div></div><p class="message-text">Exactamente, aunque por cortesía se agradece la notificación. Me ha pasado que me ha llamado un vecino cuando el inquilino estaba de viaje por una fuga de agua y te ves de mierda hasta los ojos cuando te cambian la cerradura.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#0891b2">M5</div><div class="sender-info"><span class="sender-name">Учасник 5</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Buenas tardes, me gustaría saber si hay cerraduras inteligentes para puertas en las que, si dejas la llave puesta por de</div></div><p class="message-text">Claro que puedes modificarlo.<br>Guardas el viejo y cuando dejes la casa, lo vuelves a poner</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#9333ea">M6</div><div class="sender-info"><span class="sender-name">Учасник 6</span></div></div><p class="message-text">Yo siempre que he entrado a una casa de alquiler he puesto mi bombín</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#9333ea">M6</div><div class="sender-info"><span class="sender-name">Учасник 6</span></div></div><p class="message-text">Y cuando me iba le ponía el suyo y listo</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#9333ea">M6</div><div class="sender-info"><span class="sender-name">Учасник 6</span></div></div><p class="message-text">Nunca me han dicho nada</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#9333ea">M6</div><div class="sender-info"><span class="sender-name">Учасник 6</span></div></div><p class="message-text">Obvio, mientras pago el piso es mío</p></div></div>
+    <footer>Academia Tech &copy; 2026</footer>
+  </div>
+</div>
+</body></html>

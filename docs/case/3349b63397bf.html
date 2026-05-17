@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html><head>
+<title>Налаштування орієнтації зовнішнього компаса в ArduPilot | SupportBot</title>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta property="og:title" content="Налаштування орієнтації зовнішнього компаса в ArduPilot">
+<meta property="og:description" content="В сучасних версіях ArduPilot ручне налаштування орієнтації зовнішнього компаса (COMPASS_ORIENT) більше не є обов&#x27;язковим, оскільки система автоматично визначає її під час калібрування. Це підтверджуєт">
+<link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+<style>
+:root {
+  --signal-blue: #2c6bed;
+  --page-bg: #f6f7f9;
+  --card-bg: #ffffff;
+  --text: #0d0d0d;
+  --text-sec: #5c5c5c;
+  --border: #d8d8d8;
+  --radius: 12px;
+  --green: #16a34a;
+  --yellow: #ca8a04;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  background: var(--page-bg); color: var(--text);
+  min-height: 100vh; padding: 48px 20px;
+  -webkit-font-smoothing: antialiased;
+}
+@media (max-width: 520px) { body { padding: 24px 12px; } }
+.shell { max-width: 640px; margin: 0 auto; }
+.card {
+  background: var(--card-bg); border: 1px solid var(--border);
+  border-radius: var(--radius); overflow: hidden; margin-bottom: 16px;
+}
+header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 20px; border-bottom: 1px solid var(--border);
+}
+.header-left { display: flex; align-items: center; gap: 10px; text-decoration: none; color: inherit; }
+.logo { width: 28px; height: 28px; }
+.brand { font-size: 15px; font-weight: 600; letter-spacing: -0.02em; }
+.chat-header { padding: 14px 20px; border-bottom: 1px solid var(--border); background: var(--page-bg); }
+.chat-header h2 { font-size: 14px; font-weight: 600; color: var(--text); display: flex; align-items: center; gap: 8px; }
+.chat-header h2 svg { width: 16px; height: 16px; color: var(--signal-blue); }
+.messages { padding: 0; }
+.message { padding: 16px 20px; border-bottom: 1px solid var(--border); }
+.message:last-child { border-bottom: none; }
+.message-header { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+.avatar { width: 28px; height: 28px; border-radius: 50%; color: white; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 600; flex-shrink: 0; }
+.sender-info { flex: 1; min-width: 0; }
+.sender-name { font-size: 13px; font-weight: 600; color: var(--text); }
+.message-text { font-size: 15px; line-height: 1.55; color: var(--text); white-space: pre-wrap; margin-left: 38px; }
+.reply-bubble { margin-left: 38px; margin-bottom: 6px; padding: 6px 10px; background: #f0f2f5; border-left: 3px solid var(--signal-blue); border-radius: 4px; font-size: 13px; color: var(--text-sec); }
+.reply-sender { font-weight: 600; color: var(--signal-blue); font-size: 12px; margin-bottom: 2px; }
+.reply-text { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.status-badge {
+  padding: 4px 10px; font-size: 11px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.04em; border-radius: 4px;
+}
+.status-solved { background: #dcfce7; color: var(--green); }
+.status-recommendation { background: #fef3c7; color: #b45309; }
+main { padding: 24px 20px; }
+h1 { font-size: 20px; font-weight: 700; letter-spacing: -0.025em; margin-bottom: 12px; line-height: 1.3; }
+.meta { font-size: 12px; color: var(--text-sec); margin-bottom: 16px; }
+.tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 20px; }
+.tag {
+  background: rgba(44, 107, 237, 0.08); color: var(--signal-blue);
+  padding: 4px 10px; border-radius: 4px; font-size: 12px; font-weight: 500;
+}
+.section-title {
+  font-size: 11px; font-weight: 600; text-transform: uppercase;
+  letter-spacing: 0.06em; color: var(--text-sec); margin-bottom: 10px;
+  display: flex; align-items: center; gap: 6px;
+}
+.section-title svg { width: 14px; height: 14px; }
+.section-content { font-size: 15px; line-height: 1.6; color: var(--text); white-space: pre-wrap; }
+.problem-section { padding-bottom: 20px; border-bottom: 1px solid var(--border); margin-bottom: 20px; }
+.solution-section {
+  background: #f0fdf4; margin: -24px -20px -24px -20px; padding: 20px;
+  border-top: 1px solid #bbf7d0;
+}
+.solution-section .section-title { color: var(--green); }
+.recommendation-solution { background: #fffbeb; border-top-color: #fde68a; }
+.recommendation-solution .section-title { color: #b45309; }
+.empty-chat {
+  padding: 32px 20px; text-align: center; color: var(--text-sec); font-size: 14px;
+}
+footer {
+  padding: 14px 20px; border-top: 1px solid var(--border);
+  color: var(--text-sec); font-size: 12px; text-align: center;
+}
+@media (max-width: 520px) {
+  main { padding: 20px 16px; }
+  h1 { font-size: 18px; }
+  .solution-section { margin: -20px -16px -20px -16px; padding: 16px; }
+}
+</style>
+</head><body>
+<div class="shell">
+  <div class="card">
+    <header>
+      <a href="https://academia-tech.github.io/SupportBot" class="header-left">
+        <img src="/SupportBot/supportbot-logo-128.png" alt="SupportBot" class="logo">
+        <span class="brand">SupportBot</span>
+      </a>
+      <span class="status-recommendation status-badge">Рекомендація</span>
+    </header>
+    <main>
+      <h1>Налаштування орієнтації зовнішнього компаса в ArduPilot</h1>
+      <p class="meta">Case 3349b63397bf &middot; ua_ardupilot</p>
+      <div class='tags'><span class="tag">#compass</span><span class="tag">#orientation</span><span class="tag">#calibration</span><span class="tag">#ArduPilot</span><span class="tag">#COMPASS_ORIENT</span><span class="tag">#CAN</span><span class="tag">#GPS</span></div>
+      <div class="problem-section">
+        <h2 class="section-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/>
+            <line x1="12" y1="16" x2="12.01" y2="16"/>
+          </svg>
+          Проблема
+        </h2>
+        <p class="section-content">Користувач запитує, чи потрібно вручну встановлювати орієнтацію для зовнішнього компаса (наприклад, COMPASS_ORIENT), якщо він встановлений не за стрілкою (наприклад, розвернутий на 180 градусів для зручності прокладки кабелю).</p>
+      </div>
+      <div class="solution-section recommendation-solution">
+        <h2 class="section-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7c.6.4 1 1.1 1 1.8V17h6v-.5c0-.7.4-1.4 1-1.8A7 7 0 0 0 12 2z"/></svg>
+          Рекомендація (не підтверджено)
+        </h2>
+        <p class="section-content">В сучасних версіях ArduPilot ручне налаштування орієнтації зовнішнього компаса (COMPASS_ORIENT) більше не є обов&#x27;язковим, оскільки система автоматично визначає її під час калібрування. Це підтверджується офіційною документацією ArduPilot (посилання: https://ardupilot.org/copter/docs/common-compass-setup-advanced.html#orientation). Автоматичне визначення орієнтації працює за умови увімкненого параметра `COMPASS_AUTO_ROT` та наявності GPS.
+Однак, існують випадки, коли автоматичне визначення може бути некоректним, або користувач бажає встановити компас у нетрадиційній орієнтації (наприклад, стрілкою назад для зручності проводки). У таких ситуаціях важливо перевірити коректність орієнтації.
+**Методи перевірки та уточнення:**
+1.  **Візуальна перевірка:** Після калібрування, поставте дрон носом на північ (0 градусів) і перевірте, чи відповідає напрямок на карті в Mission Planner. При повороті дрона по осі Yaw, курс має впевнено змінюватися без &#x27;крутіння&#x27;. Можна використовувати справжній компас або компас телефону для звірки.
+2.  **Аналіз логів з MagFit:** Якщо є GPS, увімкніть логування, здійсніть політ, а потім завантажте лог у MagFit. Цей інструмент покаже всі зміщення, аномалії та калібрування компаса, допомагаючи виявити некоректну орієнтацію.
+3.  **Досвід користувачів:** Деякі користувачі відзначають, що навіть при автоматичному визначенні, в певних випадках (наприклад, з Foxeer GPS+компас), може знадобитися ручне встановлення `COMPASS_ORIENT` на `Yaw180`, якщо стрілка компаса вказує назад, щоб лінії на карті співпадали з напрямком польоту.
+4.  **Калібрування в полі:** Для правильної калібровки компаса рекомендується виїжджати в поле, подалі від джерел електромагнітних наводок (будинки, виробництво).
+5.  **Орієнтація стрілки:** Стрілка на компасі не завжди відповідає нульовій орієнтації мікросхеми компаса. Наприклад, для M9N стрілка може вказувати вперед, а компас детектиться як Yaw270. Важливо орієнтуватися на дані, а не лише на маркування.</p>
+      </div>
+    </main>
+  </div>
+  <div class="card">
+    <div class="chat-header"><h2><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Історія чату</h2></div><div class="messages"><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Таке питання<br>На ПК немає компасу<br>При підключенні КАН компасу до ПК<br>як зрозуміти, що Ардупілот бере дані саме з нього?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Чому тут компас, на першому рядку, а міняємо орієнтацію через:<br>COMPASS_ORIENT2 = 4 (Yaw180)<br>?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Чому тут компас, на першому рядку, а міняємо орієнтацію через: COMPASS_ORIENT2 = 4 (Yaw180) ?</div></div><p class="message-text">Арду сам визначає орієнтацію компаса при каліброваці. Цього робити не треба руками</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">І якщо ми змінюємо орієнтацію у другого компаса, то чи потрібно у розділі Compass, включати Use Compass2?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 2</div><div class="reply-text">Арду сам визначає орієнтацію компаса при каліброваці. Цього робити не треба руками</div></div><p class="message-text">Де це написано?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Гпт каже що обовʼязково треба</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><p class="message-text">Що значить «змінюємо орієнтацію»? Поставили, відкалібрували, все.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 2</div><div class="reply-text">Що значить «змінюємо орієнтацію»? Поставили, відкалібрували, все.</div></div><p class="message-text">Ні</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Гпт каже що обовʼязково треба</div></div><p class="message-text">Гпт галюцинірує про ардупайлот</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">На компасі є стрілка</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><p class="message-text">https://ardupilot.org/copter/docs/common-compass-setup-advanced.html#orientation</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><p class="message-text">The setting of the orientation of external compasses is no longer required. It’s determined automatically during Compass Calibration now.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Якщо вона вказує назад то тут треба виставити яв180</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Якщо вона вказує назад то тут треба виставити яв180</div></div><p class="message-text">Навіщо ви його ставите стрілкою назад?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Щоб проводу було зручно лежати</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Якщо вона вказує назад то тут треба виставити яв180</div></div><p class="message-text">Ні. При калібровці арду сам зрозуміє, що ви його не так поставили.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Щоб проводу було зручно лежати</div></div><p class="message-text">Я так і подумав)</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><p class="message-text">це за умови гпс і увімкненого compass_autodec</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 2</div><div class="reply-text">Ні. При калібровці арду сам зрозуміє, що ви його не так поставили.</div></div><p class="message-text">З якої версії?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">В мене був випадок, коли після калібровки лінії на карті не співпадали з напрямком польоту поки не розвернув компас</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">yaw180</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Фоксір гпс+компас</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Тому і спитав в про то як зрозуміти що Ардупілот бере дані з кан компасу а не фантазує дивлячись на іму</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Змінюємо оріентацію другого компаса, коли він один на борту<br>А магфіл цього компаса працює як Маг Фіелд 1</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Змінюємо оріентацію другого компаса, коли він один на борту А магфіл цього компаса працює як Маг Фіелд 1</div></div><p class="message-text">Я так розумію, що стрілка ще не значить орієнтацію компаса. наприклад, для INAV в доке для цього написано оце:</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><p class="message-text">для M9N, наприклад, стрілка вперед, а компас детектиться як yaw270. як на мене, це орієнтація самої мікросхеми компаса, яку ще треба пошукати. може я і не правий, яле я не бачив ще, щоб стрілка співпадала з нулевою орієнтацією</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">гпс каже що треба</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 2</div><div class="reply-text">для M9N, наприклад, стрілка вперед, а компас детектиться як yaw270. як на мене, це орієнтація самої мікросхеми компаса, </div></div><p class="message-text">Можна перевілити<br>Виставити за стрілкою <br>Поставити дрона носом на 0</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">І подивитись що в програмі на карті буде</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Але всеодно дивовижна якась історія з налаштуванням кан компаса</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Але всеодно дивовижна якась історія з налаштуванням кан компаса</div></div><p class="message-text">https://discuss.ardupilot.org/t/arduplane-multiple-compass-issue/67041/11 знайшов це. там є відео</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Якщо вона вказує назад то тут треба виставити яв180</div></div><p class="message-text">Автоматично визначає</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 2</div><div class="reply-text">Я так розумію, що стрілка ще не значить орієнтацію компаса. наприклад, для INAV в доке для цього написано оце:</div></div><p class="message-text">Якщо стрілка вперед то орієнтацію можна взяти з інструкції до магнітометра, але арду визначає сам. Треба тільки перевірити</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><p class="message-text">Я перевіряю або справжнім компасом або орієнтацією по карті, одразу після ввімкнення має показувати правильний курс і не крутитися, при повороті по яву має впевнено показувати правильний курс і не крутитися</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#0891b2">M5</div><div class="sender-info"><span class="sender-name">Учасник 5</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 4</div><div class="reply-text">Автоматично визначає</div></div><p class="message-text">Якщо COMPASS_AUTO_ROT<br>І не завжди правильно</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#9333ea">M6</div><div class="sender-info"><span class="sender-name">Учасник 6</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Тому і спитав в про то як зрозуміти що Ардупілот бере дані з кан компасу а не фантазує дивлячись на іму</div></div><p class="message-text">Показания компаса это не что-то абстрактное и индивидуальное, есть Север Юг итд, смотрите на ориентиры на карте и куда смотрит дрон, возьмите компас с телефона, иголку в конце концов киньте в воду на листочек. <br>В мишн планере очень удобно есть векторы направлений, направили дрон на лепку физически, в мишке включили карту спутник и смотрите чтоб вектор направления проходил через леп., ну и не забывайте что дома или на производстве дофига наводок, для правильной калибровки лучше выезжать в поле.<br>И да, когда-то раньше нужно было ставить направления компаса, в старых версиях. Сейчас если правильно выставлено положение полетника, при калибровке компаса, ардупилот сам его ориентирует правильно ( при включеном параметре автоопределения компаса)</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Дякую</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Тому і спитав в про то як зрозуміти що Ардупілот бере дані з кан компасу а не фантазує дивлячись на іму</div></div><p class="message-text">Якщо є gps можна включити лог і добренько політати, далі залити лог в магфіт, він поаже всі зміщення, аномалії і калібровки.</p></div></div>
+    <footer>Academia Tech &copy; 2026</footer>
+  </div>
+</div>
+</body></html>
