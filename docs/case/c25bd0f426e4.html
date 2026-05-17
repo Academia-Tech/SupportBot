@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html><head>
-<title>Mission Planner не бачить файли .params | SupportBot</title>
+<title>Оптимізація KV моторів для ефективного тротлу на розрядженій батареї | SupportBot</title>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta property="og:title" content="Mission Planner не бачить файли .params">
-<meta property="og:description" content="Mission Planner може не бачити файли .params, якщо вони мають приховане розширення .txt (наприклад, `filename.params.txt`) або якщо не обрано опцію &#x27;All Files&#x27; у діалоговому вікні відкриття файлу.">
+<meta property="og:title" content="Оптимізація KV моторів для ефективного тротлу на розрядженій батареї">
+<meta property="og:description" content="Користувач user_42a1723d92 рекомендує обирати KV моторів таким чином, щоб на майже розрядженій батареї дрон міг нести заплановане навантаження при 75-80% тротлу. Команда підтримки Dmytro Radomtsev (us">
 <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
 <style>
 :root {
@@ -104,9 +104,9 @@ footer {
       <span class="status-solved status-badge">Вирішено</span>
     </header>
     <main>
-      <h1>Mission Planner не бачить файли .params</h1>
-      <p class="meta">Case 068a1c11f9e0 &middot; ua_ardupilot</p>
-      <div class='tags'><span class="tag">#Mission Planner</span><span class="tag">#параметри</span><span class="tag">#.params</span><span class="tag">#файли</span><span class="tag">#налаштування</span></div>
+      <h1>Оптимізація KV моторів для ефективного тротлу на розрядженій батареї</h1>
+      <p class="meta">Case c25bd0f426e4 &middot; ua_ardupilot</p>
+      <div class='tags'><span class="tag">#мотори</span><span class="tag">#KV</span><span class="tag">#батарея</span><span class="tag">#тротл</span><span class="tag">#оптимізація</span><span class="tag">#камікадзе</span><span class="tag">#енергоефективність</span></div>
       <div class="problem-section">
         <h2 class="section-title">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -115,19 +115,19 @@ footer {
           </svg>
           Проблема
         </h2>
-        <p class="section-content">Користувач не може знайти файли з розширенням .params у Mission Planner.</p>
+        <p class="section-content">Користувач user_42a1723d92 ділиться своїми роздумами щодо вибору KV моторів, щоб забезпечити достатню тягу (75-80% тротлу) навіть на майже розрядженій батареї (2.6-2.8В на комірку), що особливо актуально для дронів-камікадзе.</p>
       </div>
       <div class="solution-section">
         <h2 class="section-title">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
           Рішення
         </h2>
-        <p class="section-content">Mission Planner може не бачити файли .params, якщо вони мають приховане розширення .txt (наприклад, `filename.params.txt`) або якщо не обрано опцію &#x27;All Files&#x27; у діалоговому вікні відкриття файлу.</p>
+        <p class="section-content">Користувач user_42a1723d92 рекомендує обирати KV моторів таким чином, щоб на майже розрядженій батареї дрон міг нести заплановане навантаження при 75-80% тротлу. Команда підтримки Dmytro Radomtsev (user_2c254dce42) підтвердив цей підхід, зазначивши, що він сам прагне, щоб на повністю зарядженій батареї тротл був не більше 60%, що забезпечує достатній запас на кінець розряду батареї.</p>
       </div>
     </main>
   </div>
   <div class="card">
-    <div class="chat-header"><h2><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Історія чату</h2></div><div class="messages"><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Вітаю<br>Підкажіть чому mission planner може не бачити файл з розширенням .params?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Вітаю Підкажіть чому mission planner може не бачити файл з розширенням .params?</div></div><p class="message-text">або там приховане .txt розширення або натисніть all files</p></div></div>
+    <div class="chat-header"><h2><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Історія чату</h2></div><div class="messages"><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Після роздумів прийшов до того, що Кв треба таке, щоб на майже сівшій батарейці він ніс те що йому задумано нести при хочаб 75-80% тротлу. Особливо якщо це камік та хочеться дожигати лііон до 2.6-2.8 вольт на комірку -)</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Після роздумів прийшов до того, що Кв треба таке, щоб на майже сівшій батарейці він ніс те що йому задумано нести при хо</div></div><p class="message-text">Так, я старався щоб на повністю зарядженій батці трьох був не більше 60%, тоді якраз стає на кінець батки. <br>Стосовно різного кВ, насправді не критично, головне щоб пропи були однакові.</p></div></div>
     <footer>Academia Tech &copy; 2026</footer>
   </div>
 </div>

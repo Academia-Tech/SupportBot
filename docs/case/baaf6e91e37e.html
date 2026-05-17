@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html><head>
-<title>Mission Planner не бачить файли .params | SupportBot</title>
+<title>How to Display Real-Time Variable Values in Tasmota Console | SupportBot</title>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta property="og:title" content="Mission Planner не бачить файли .params">
-<meta property="og:description" content="Mission Planner може не бачити файли .params, якщо вони мають приховане розширення .txt (наприклад, `filename.params.txt`) або якщо не обрано опцію &#x27;All Files&#x27; у діалоговому вікні відкриття файлу.">
+<meta property="og:title" content="How to Display Real-Time Variable Values in Tasmota Console">
+<meta property="og:description" content="A user suggested using Tasmota Rules to create a mechanism for displaying variable values. If a command like `AdcParam` can be used as a rule trigger, you can create a rule that executes a backlog of ">
 <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
 <style>
 :root {
@@ -104,9 +104,9 @@ footer {
       <span class="status-solved status-badge">Вирішено</span>
     </header>
     <main>
-      <h1>Mission Planner не бачить файли .params</h1>
-      <p class="meta">Case 068a1c11f9e0 &middot; ua_ardupilot</p>
-      <div class='tags'><span class="tag">#Mission Planner</span><span class="tag">#параметри</span><span class="tag">#.params</span><span class="tag">#файли</span><span class="tag">#налаштування</span></div>
+      <h1>How to Display Real-Time Variable Values in Tasmota Console</h1>
+      <p class="meta">Case baaf6e91e37e &middot; tasmota</p>
+      <div class='tags'><span class="tag">#rules</span><span class="tag">#console</span><span class="tag">#variable</span><span class="tag">#display</span><span class="tag">#adcparam</span><span class="tag">#real-time</span><span class="tag">#backlog</span></div>
       <div class="problem-section">
         <h2 class="section-title">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -115,19 +115,21 @@ footer {
           </svg>
           Проблема
         </h2>
-        <p class="section-content">Користувач не може знайти файли з розширенням .params у Mission Planner.</p>
+        <p class="section-content">A user wanted to know how to view the current value of a specific variable (e.g., from an analog sensor) in the Tasmota console on demand.</p>
       </div>
       <div class="solution-section">
         <h2 class="section-title">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
           Рішення
         </h2>
-        <p class="section-content">Mission Planner може не бачити файли .params, якщо вони мають приховане розширення .txt (наприклад, `filename.params.txt`) або якщо не обрано опцію &#x27;All Files&#x27; у діалоговому вікні відкриття файлу.</p>
+        <p class="section-content">A user suggested using Tasmota Rules to create a mechanism for displaying variable values. If a command like `AdcParam` can be used as a rule trigger, you can create a rule that executes a backlog of commands to show the desired variables. The suggested format was:
+`Rule1 on AdcParam#state do Backlog var1; var2; var3 endon`
+This rule, when enabled, would display the values of `var1`, `var2`, and `var3` in the console whenever the `AdcParam#state` trigger fires. The user acknowledged this solution.</p>
       </div>
     </main>
   </div>
   <div class="card">
-    <div class="chat-header"><h2><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Історія чату</h2></div><div class="messages"><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Вітаю<br>Підкажіть чому mission planner може не бачити файл з розширенням .params?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Вітаю Підкажіть чому mission planner може не бачити файл з розширенням .params?</div></div><p class="message-text">або там приховане .txt розширення або натисніть all files</p></div></div>
+    <div class="chat-header"><h2><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Історія чату</h2></div><div class="messages"><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">`Please, what code should I put in the console to see my variables in real time? For example, when I put AdcParam, the variables I determined appear, what should I do to show the value of a desired variable at that moment?`</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">`Please, what code should I put in the console to see my variables in real time? For example, when I put AdcParam, the v</div></div><p class="message-text">Help</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">`Please, what code should I put in the console to see my variables in real time? For example, when I put AdcParam, the v</div></div><p class="message-text">Can adcparam command used in ruletrigger ?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><p class="message-text">If yes then use rules<br>Rule1 on adcparam#state do Backlog var1;var2;var3 endon</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Yes, AdcParam + enter return  the variables in console</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 2</div><div class="reply-text">If yes then use rules Rule1 on adcparam#state do Backlog var1;var2;var3 endon</div></div><p class="message-text">Okay, tanks.</p></div></div>
     <footer>Academia Tech &copy; 2026</footer>
   </div>
 </div>

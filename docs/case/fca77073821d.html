@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html><head>
+<title>Нестабільність октокоптера на ArduPilot через різні прошивки ESC та обмеження польотного контролера | SupportBot</title>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta property="og:title" content="Нестабільність октокоптера на ArduPilot через різні прошивки ESC та обмеження польотного контролера">
+<meta property="og:description" content="Проблему було вирішено комплексним підходом. По-перше, уніфікація версій прошивки Bluejay на всіх восьми ESC до v21 дозволила дрону злетіти на ArduPilot, хоча і з вібраціями (&quot;трусить, але літає&quot;). По">
+<link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+<style>
+:root {
+  --signal-blue: #2c6bed;
+  --page-bg: #f6f7f9;
+  --card-bg: #ffffff;
+  --text: #0d0d0d;
+  --text-sec: #5c5c5c;
+  --border: #d8d8d8;
+  --radius: 12px;
+  --green: #16a34a;
+  --yellow: #ca8a04;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  background: var(--page-bg); color: var(--text);
+  min-height: 100vh; padding: 48px 20px;
+  -webkit-font-smoothing: antialiased;
+}
+@media (max-width: 520px) { body { padding: 24px 12px; } }
+.shell { max-width: 640px; margin: 0 auto; }
+.card {
+  background: var(--card-bg); border: 1px solid var(--border);
+  border-radius: var(--radius); overflow: hidden; margin-bottom: 16px;
+}
+header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 20px; border-bottom: 1px solid var(--border);
+}
+.header-left { display: flex; align-items: center; gap: 10px; text-decoration: none; color: inherit; }
+.logo { width: 28px; height: 28px; }
+.brand { font-size: 15px; font-weight: 600; letter-spacing: -0.02em; }
+.chat-header { padding: 14px 20px; border-bottom: 1px solid var(--border); background: var(--page-bg); }
+.chat-header h2 { font-size: 14px; font-weight: 600; color: var(--text); display: flex; align-items: center; gap: 8px; }
+.chat-header h2 svg { width: 16px; height: 16px; color: var(--signal-blue); }
+.messages { padding: 0; }
+.message { padding: 16px 20px; border-bottom: 1px solid var(--border); }
+.message:last-child { border-bottom: none; }
+.message-header { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+.avatar { width: 28px; height: 28px; border-radius: 50%; color: white; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 600; flex-shrink: 0; }
+.sender-info { flex: 1; min-width: 0; }
+.sender-name { font-size: 13px; font-weight: 600; color: var(--text); }
+.message-text { font-size: 15px; line-height: 1.55; color: var(--text); white-space: pre-wrap; margin-left: 38px; }
+.reply-bubble { margin-left: 38px; margin-bottom: 6px; padding: 6px 10px; background: #f0f2f5; border-left: 3px solid var(--signal-blue); border-radius: 4px; font-size: 13px; color: var(--text-sec); }
+.reply-sender { font-weight: 600; color: var(--signal-blue); font-size: 12px; margin-bottom: 2px; }
+.reply-text { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.status-badge {
+  padding: 4px 10px; font-size: 11px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.04em; border-radius: 4px;
+}
+.status-solved { background: #dcfce7; color: var(--green); }
+.status-recommendation { background: #fef3c7; color: #b45309; }
+main { padding: 24px 20px; }
+h1 { font-size: 20px; font-weight: 700; letter-spacing: -0.025em; margin-bottom: 12px; line-height: 1.3; }
+.meta { font-size: 12px; color: var(--text-sec); margin-bottom: 16px; }
+.tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 20px; }
+.tag {
+  background: rgba(44, 107, 237, 0.08); color: var(--signal-blue);
+  padding: 4px 10px; border-radius: 4px; font-size: 12px; font-weight: 500;
+}
+.section-title {
+  font-size: 11px; font-weight: 600; text-transform: uppercase;
+  letter-spacing: 0.06em; color: var(--text-sec); margin-bottom: 10px;
+  display: flex; align-items: center; gap: 6px;
+}
+.section-title svg { width: 14px; height: 14px; }
+.section-content { font-size: 15px; line-height: 1.6; color: var(--text); white-space: pre-wrap; }
+.problem-section { padding-bottom: 20px; border-bottom: 1px solid var(--border); margin-bottom: 20px; }
+.solution-section {
+  background: #f0fdf4; margin: -24px -20px -24px -20px; padding: 20px;
+  border-top: 1px solid #bbf7d0;
+}
+.solution-section .section-title { color: var(--green); }
+.recommendation-solution { background: #fffbeb; border-top-color: #fde68a; }
+.recommendation-solution .section-title { color: #b45309; }
+.empty-chat {
+  padding: 32px 20px; text-align: center; color: var(--text-sec); font-size: 14px;
+}
+footer {
+  padding: 14px 20px; border-top: 1px solid var(--border);
+  color: var(--text-sec); font-size: 12px; text-align: center;
+}
+@media (max-width: 520px) {
+  main { padding: 20px 16px; }
+  h1 { font-size: 18px; }
+  .solution-section { margin: -20px -16px -20px -16px; padding: 16px; }
+}
+</style>
+</head><body>
+<div class="shell">
+  <div class="card">
+    <header>
+      <a href="https://academia-tech.github.io/SupportBot" class="header-left">
+        <img src="/SupportBot/supportbot-logo-128.png" alt="SupportBot" class="logo">
+        <span class="brand">SupportBot</span>
+      </a>
+      <span class="status-solved status-badge">Вирішено</span>
+    </header>
+    <main>
+      <h1>Нестабільність октокоптера на ArduPilot через різні прошивки ESC та обмеження польотного контролера</h1>
+      <p class="meta">Case fca77073821d &middot; ua_ardupilot</p>
+      <div class='tags'><span class="tag">#октокоптер</span><span class="tag">#ArduPilot</span><span class="tag">#Bluejay</span><span class="tag">#прошивка ESC</span><span class="tag">#Stellar F4</span><span class="tag">#bdshot</span><span class="tag">#нестабільність</span><span class="tag">#hwdef</span></div>
+      <div class="problem-section">
+        <h2 class="section-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/>
+            <line x1="12" y1="16" x2="12.01" y2="16"/>
+          </svg>
+          Проблема
+        </h2>
+        <p class="section-content">Користувач зіткнувся з проблемою, коли октокоптер на польотному контролері Stellar F4 першої генерації був нестабільним і завалювався на бік при спробі зльоту на ArduPilot та iNav. Один з восьми регуляторів обертів (ESC) мав іншу версію прошивки Bluejay (v19 проти v21). Після оновлення всіх ESC до однієї версії, дрон зміг стабільно літати на Betaflight, але для основної задачі був потрібен ArduPilot.</p>
+      </div>
+      <div class="solution-section">
+        <h2 class="section-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          Рішення
+        </h2>
+        <p class="section-content">Проблему було вирішено комплексним підходом. По-перше, уніфікація версій прошивки Bluejay на всіх восьми ESC до v21 дозволила дрону злетіти на ArduPilot, хоча і з вібраціями (&quot;трусить, але літає&quot;). По-друге, інший учасник (user_2c254dce42) виявив ключове апаратне обмеження: згідно з файлом конфігурації, польотний контролер може керувати лише 6 моторами по DShot, що робить його непридатним для октокоптера. Після того, як дрон запрацював, було рекомендовано записати лог для налаштування фільтрів з метою усунення вібрацій.</p>
+      </div>
+    </main>
+  </div>
+  <div class="card">
+    <div class="chat-header"><h2><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Історія чату</h2></div><div class="messages"><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Друзі, питання.<br>Чи може дрон неадекватно літати, якщо регулятори оборотів прошиті різними версіями блуджей? <br>Тобто маю дрон, в якого всі регулі моторів на 21 версії, а один регуль був на 19 версії.<br>На Інав, ардупілоті летіти він на схотів - завалювався на бік постійно.<br>Після прошивки всіх регулів моторів на 21 весію блуджей - дрон полеиів на бетці. І полетів гарно.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Але мені він треба саме на Ардупілоті або Інав - бо це октокоптер бомбер😉</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><p class="message-text">Спустіть на версію нижче</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><p class="message-text">Всі чотири регулі</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><p class="message-text">Не три</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 2</div><div class="reply-text">Всі чотири регулі</div></div><p class="message-text">Їх 8)<br>Це октокоптер</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><p class="message-text">Всі)</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">+</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Друзі, питання. Чи може дрон неадекватно літати, якщо регулятори оборотів прошиті різними версіями блуджей?  Тобто маю д</div></div><p class="message-text">Сумнівно що версія це причина, пишіть лог.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Друзі, питання. Чи може дрон неадекватно літати, якщо регулятори оборотів прошиті різними версіями блуджей?  Тобто маю д</div></div><p class="message-text">Підозра що проблема в таймерах, який польотник?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 3</div><div class="reply-text">Підозра що проблема в таймерах, який польотник?</div></div><p class="message-text">Stellar f4 першої генерації</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Stellar f4 першої генерації</div></div><p class="message-text">То копія спідіка в3, яку прошивку шили? Який вивід messages? На окто рекомендував би щось потужніше.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 3</div><div class="reply-text">То копія спідіка в3, яку прошивку шили? Який вивід messages? На окто рекомендував би щось потужніше.</div></div><p class="message-text">Прошивка Stellar f4.<br>Зараз піду черговий раз літати пробувати.<br>Просто на бетці він без проблем літає. І літає чудово.<br>Є в мене підозра, що не хоче сам польотник адекватно працювати на арду🤷‍♂️</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Stellar f4 першої генерації</div></div><p class="message-text">Не мучайтесь зі стелар ф4, з нього і логи не зняти під арду, <br>H7V2 не настільки багато коштує щоб ковиряти той ф4</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Прошивка Stellar f4. Зараз піду черговий раз літати пробувати. Просто на бетці він без проблем літає. І літає чудово. Є </div></div><p class="message-text">https://github.com/ArduPilot/ardupilot/blob/master/libraries/AP_HAL_ChibiOS/hwdef/StellarF4/hwdef.dat каже що bdshot буде працювати тільки на перших 4х моторах</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 4</div><div class="reply-text">Не мучайтесь зі стелар ф4, з нього і логи не зняти під арду,  H7V2 не настільки багато коштує щоб ковиряти той ф4</div></div><p class="message-text">Так чого на бетці все працює?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Так чого на бетці все працює?</div></div><p class="message-text">ну бо то бетка.. а то арду )</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Ну то логічно🤣</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 4</div><div class="reply-text">Не мучайтесь зі стелар ф4, з нього і логи не зняти під арду,  H7V2 не настільки багато коштує щоб ковиряти той ф4</div></div><p class="message-text">Не схоже що бдшот буде працювати на окто і в h7v2</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Так чого на бетці все працює?</div></div><p class="message-text">Так виробник написав конфіг прошивки</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Прошивка Stellar f4. Зараз піду черговий раз літати пробувати. Просто на бетці він без проблем літає. І літає чудово. Є </div></div><p class="message-text">Можливо буде достатньо обертів тільки від 4х для фільтрації. Дайте вивід messages, можливо буде видно. Через тест моторів всі крутяться?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#0891b2">M5</div><div class="sender-info"><span class="sender-name">Учасник 5</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Так чого на бетці все працює?</div></div><p class="message-text">Бета легше( в плані використання ресурсів цп).<br>А ви мотори перевіряли? Може в Вас мотори не відповідно до картинки окти назначені?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 3</div><div class="reply-text">Можливо буде достатньо обертів тільки від 4х для фільтрації. Дайте вивід messages, можливо буде видно. Через тест моторі</div></div><p class="message-text">На арду не пробував. Через бетку всі крутились. Зараз перевірю)</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 5</div><div class="reply-text">Бета легше( в плані використання ресурсів цп). А ви мотори перевіряли? Може в Вас мотори не відповідно до картинки окти </div></div><p class="message-text">Перевірені🤷‍♂️</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#0891b2">M5</div><div class="sender-info"><span class="sender-name">Учасник 5</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Перевірені🤷‍♂️</div></div><p class="message-text">Щось не збігається, Ви вище кажете, що в арду мотори не крутили, але вони перевірени.<br><br>В мене це була перша проблема з арду- не відповідність моторів з мотор тесту до тих які крутяться.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 5</div><div class="reply-text">Щось не збігається, Ви вище кажете, що в арду мотори не крутили, але вони перевірени.  В мене це була перша проблема з а</div></div><p class="message-text">Перевірено.<br>Всі мотори крутяться у відповідеості до схеми Х-окто Бетафлай</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">По ходу, все таки, справа була в прошивці регуляторів оборотів. Трусить, але літає</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Треба фільтри/піди підналаштувати</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Треба фільтри/піди підналаштувати</div></div><p class="message-text">Пишіть лог для фільтрів, це найперше.</p></div></div>
+    <footer>Academia Tech &copy; 2026</footer>
+  </div>
+</div>
+</body></html>

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html><head>
+<title>Дрейф горизонту та перехід EKF у Failsafe після відключення GPS | SupportBot</title>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta property="og:title" content="Дрейф горизонту та перехід EKF у Failsafe після відключення GPS">
+<meta property="og:description" content="Проблема дрейфу горизонту та переходу EKF у Failsafe після відключення GPS, особливо в умовах сильного GPS-спуфінгу (наприклад, в районі Ліми), була вирішена комплексним підходом.
+*   **Вимкнення впли">
+<link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+<style>
+:root {
+  --signal-blue: #2c6bed;
+  --page-bg: #f6f7f9;
+  --card-bg: #ffffff;
+  --text: #0d0d0d;
+  --text-sec: #5c5c5c;
+  --border: #d8d8d8;
+  --radius: 12px;
+  --green: #16a34a;
+  --yellow: #ca8a04;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  background: var(--page-bg); color: var(--text);
+  min-height: 100vh; padding: 48px 20px;
+  -webkit-font-smoothing: antialiased;
+}
+@media (max-width: 520px) { body { padding: 24px 12px; } }
+.shell { max-width: 640px; margin: 0 auto; }
+.card {
+  background: var(--card-bg); border: 1px solid var(--border);
+  border-radius: var(--radius); overflow: hidden; margin-bottom: 16px;
+}
+header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 20px; border-bottom: 1px solid var(--border);
+}
+.header-left { display: flex; align-items: center; gap: 10px; text-decoration: none; color: inherit; }
+.logo { width: 28px; height: 28px; }
+.brand { font-size: 15px; font-weight: 600; letter-spacing: -0.02em; }
+.chat-header { padding: 14px 20px; border-bottom: 1px solid var(--border); background: var(--page-bg); }
+.chat-header h2 { font-size: 14px; font-weight: 600; color: var(--text); display: flex; align-items: center; gap: 8px; }
+.chat-header h2 svg { width: 16px; height: 16px; color: var(--signal-blue); }
+.messages { padding: 0; }
+.message { padding: 16px 20px; border-bottom: 1px solid var(--border); }
+.message:last-child { border-bottom: none; }
+.message-header { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+.avatar { width: 28px; height: 28px; border-radius: 50%; color: white; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 600; flex-shrink: 0; }
+.sender-info { flex: 1; min-width: 0; }
+.sender-name { font-size: 13px; font-weight: 600; color: var(--text); }
+.message-text { font-size: 15px; line-height: 1.55; color: var(--text); white-space: pre-wrap; margin-left: 38px; }
+.reply-bubble { margin-left: 38px; margin-bottom: 6px; padding: 6px 10px; background: #f0f2f5; border-left: 3px solid var(--signal-blue); border-radius: 4px; font-size: 13px; color: var(--text-sec); }
+.reply-sender { font-weight: 600; color: var(--signal-blue); font-size: 12px; margin-bottom: 2px; }
+.reply-text { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.status-badge {
+  padding: 4px 10px; font-size: 11px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.04em; border-radius: 4px;
+}
+.status-solved { background: #dcfce7; color: var(--green); }
+.status-recommendation { background: #fef3c7; color: #b45309; }
+main { padding: 24px 20px; }
+h1 { font-size: 20px; font-weight: 700; letter-spacing: -0.025em; margin-bottom: 12px; line-height: 1.3; }
+.meta { font-size: 12px; color: var(--text-sec); margin-bottom: 16px; }
+.tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 20px; }
+.tag {
+  background: rgba(44, 107, 237, 0.08); color: var(--signal-blue);
+  padding: 4px 10px; border-radius: 4px; font-size: 12px; font-weight: 500;
+}
+.section-title {
+  font-size: 11px; font-weight: 600; text-transform: uppercase;
+  letter-spacing: 0.06em; color: var(--text-sec); margin-bottom: 10px;
+  display: flex; align-items: center; gap: 6px;
+}
+.section-title svg { width: 14px; height: 14px; }
+.section-content { font-size: 15px; line-height: 1.6; color: var(--text); white-space: pre-wrap; }
+.problem-section { padding-bottom: 20px; border-bottom: 1px solid var(--border); margin-bottom: 20px; }
+.solution-section {
+  background: #f0fdf4; margin: -24px -20px -24px -20px; padding: 20px;
+  border-top: 1px solid #bbf7d0;
+}
+.solution-section .section-title { color: var(--green); }
+.recommendation-solution { background: #fffbeb; border-top-color: #fde68a; }
+.recommendation-solution .section-title { color: #b45309; }
+.empty-chat {
+  padding: 32px 20px; text-align: center; color: var(--text-sec); font-size: 14px;
+}
+footer {
+  padding: 14px 20px; border-top: 1px solid var(--border);
+  color: var(--text-sec); font-size: 12px; text-align: center;
+}
+@media (max-width: 520px) {
+  main { padding: 20px 16px; }
+  h1 { font-size: 18px; }
+  .solution-section { margin: -20px -16px -20px -16px; padding: 16px; }
+}
+</style>
+</head><body>
+<div class="shell">
+  <div class="card">
+    <header>
+      <a href="https://academia-tech.github.io/SupportBot" class="header-left">
+        <img src="/SupportBot/supportbot-logo-128.png" alt="SupportBot" class="logo">
+        <span class="brand">SupportBot</span>
+      </a>
+      <span class="status-solved status-badge">Вирішено</span>
+    </header>
+    <main>
+      <h1>Дрейф горизонту та перехід EKF у Failsafe після відключення GPS</h1>
+      <p class="meta">Case ef703eaf2bb6 &middot; ua_ardupilot</p>
+      <div class='tags'><span class="tag">#EKF</span><span class="tag">#AHRS</span><span class="tag">#GPS</span><span class="tag">#Failsafe</span><span class="tag">#горизонт</span><span class="tag">#компас</span><span class="tag">#дрейф</span><span class="tag">#навігація</span></div>
+      <div class="problem-section">
+        <h2 class="section-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/>
+            <line x1="12" y1="16" x2="12.01" y2="16"/>
+          </svg>
+          Проблема
+        </h2>
+        <p class="section-content">Користувач скаржиться, що EKF (Extended Kalman Filter) переходить у режим Failsafe, і штучний горизонт не повертається у правильне положення. Це відбувається після спроб налаштувати політ без GPS.</p>
+      </div>
+      <div class="solution-section">
+        <h2 class="section-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          Рішення
+        </h2>
+        <p class="section-content">Проблема дрейфу горизонту та переходу EKF у Failsafe після відключення GPS, особливо в умовах сильного GPS-спуфінгу (наприклад, в районі Ліми), була вирішена комплексним підходом.
+*   **Вимкнення впливу GPS:** Користувач user_c5b07ab326 та команда підтримки Dmytro Radomtsev рекомендували вимкнути вплив GPS на систему орієнтації (AHRS) та вручну задати зміщення компаса. Користувач user_68581aceb3 запропонував встановити параметр `AHRS_GPS_USE` на `0`.
+*   **Альтернативні сенсори:** Користувач user_67dcb5c492 дійшов висновку, що найпростішим рішенням є встановлення оптичного модуля. Команда підтримки Семён підтвердив це, порадивши &quot;прийняти, що GPS не працює, тільки оптика і компас&quot;.
+*   **Захист від спуфінгу:** Команда підтримки Dmytro Radomtsev також зазначив, що сучасні GPS-модулі, такі як u-blox NEO-M9L та ZED-F9P, підтримують Galileo OSNMA, що виключає підміну цього сузір&#x27;я. Інші виробники, як-от Septentrio Mosaic, також працюють над анти-джаммінг рішеннями. Однак, наразі ці рішення працюють лише в певних конфігураціях.</p>
+      </div>
+    </main>
+  </div>
+  <div class="card">
+    <div class="chat-header"><h2><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Історія чату</h2></div><div class="messages"><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Вже побував <br>Екф у фейлсейв уходить, й чітко назад не стає горизонт</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Вже побував  Екф у фейлсейв уходить, й чітко назад не стає горизонт</div></div><p class="message-text">Там ще в AHRS треба вимкнути вплив ГПС</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 2</div><div class="reply-text">Там ще в AHRS треба вимкнути вплив ГПС</div></div><p class="message-text">І зміщення компаса вручну задати</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Корисне навантаження на сам GPS?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 2</div><div class="reply-text">Там ще в AHRS треба вимкнути вплив ГПС</div></div><p class="message-text">це десь прям тут змінити ?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">це десь прям тут змінити ?</div></div><p class="message-text">Десь в цьому меню</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><p class="message-text">Киньте повний скрін</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Вже побував  Екф у фейлсейв уходить, й чітко назад не стає горизонт</div></div><p class="message-text">Та напевне окрім просто вимкнення gps немає варіантів, з його точки зору він нарізає круги над Лімою</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 3</div><div class="reply-text">Та напевне окрім просто вимкнення gps немає варіантів, з його точки зору він нарізає круги над Лімою</div></div><p class="message-text">саме так</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">але ж тут ціль типу за нормальних супутників літати в Loiter, але як тільки подавлення то Althold який слухається виключно IMU польотника та й все</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">але ж тут ціль типу за нормальних супутників літати в Loiter, але як тільки подавлення то Althold який слухається виключ</div></div><p class="message-text">Навіщо лоітер? Є ж оптичне утримування р2д2 чи стабХ</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 4</div><div class="reply-text">Навіщо лоітер? Є ж оптичне утримування р2д2 чи стабХ</div></div><p class="message-text">тут просто вже є GPS-и давно придбані, то думав по старому ще якось виїхати)) <br><br>PS оптичний модуль вже в дорозі на пошту</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">просто цікаво як це у того ж лакі страйка вийшло, хоча суттєвих різниць у параметрах я не знайшов. <br>Хіба що на лакі страйку стоїть Matek в якому є 2 IMU, можливо це й не дає здуріти керуванню під час подавлення</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#0891b2">M5</div><div class="sender-info"><span class="sender-name">Учасник 5</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 3</div><div class="reply-text">Та напевне окрім просто вимкнення gps немає варіантів, з його точки зору він нарізає круги над Лімою</div></div><p class="message-text">Може перекинути в DCM,  та AHRS_GPS_USE 0??</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">просто цікаво як це у того ж лакі страйка вийшло, хоча суттєвих різниць у параметрах я не знайшов.  Хіба що на лакі стра</div></div><p class="message-text">В лакі так само є тумблер вимкнення gps.<br>Одночасно все одно використовується тільки один ему</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#9333ea">M6</div><div class="sender-info"><span class="sender-name">Учасник 6</span></div></div><p class="message-text">А який це Стек?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#0891b2">M5</div><div class="sender-info"><span class="sender-name">Учасник 5</span></div></div><p class="message-text">Тублер то таке, треба автоматично, робив скриптом, але головна проблема, яшо взіт без GPS, для скріпта нема від чого рахувати</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 3</div><div class="reply-text">В лакі так само є тумблер вимкнення gps. Одночасно все одно використовується тільки один ему</div></div><p class="message-text">Можливо лакі ще робить якісь налаштування самого gps, там купа налаштувань всередині</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 3</div><div class="reply-text">Можливо лакі ще робить якісь налаштування самого gps, там купа налаштувань всередині</div></div><p class="message-text">хм, про це не думав до речі. Але це вже геть інше поле 🥲</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 5</div><div class="reply-text">Тублер то таке, треба автоматично, робив скриптом, але головна проблема, яшо взіт без GPS, для скріпта нема від чого рах</div></div><p class="message-text">мгм <br>Шо цікаво, то корчить борта починає конкретно після того як він ловить 3дФікс у Лімі. А останнім часом тут таке подавлення що у приміщенні на підлозі ловить 26 супутників і миттєвий фікс</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#0891b2">M5</div><div class="sender-info"><span class="sender-name">Учасник 5</span></div></div><p class="message-text">Так і повинно бути, дуже гарна підміна координат, при цьому він важа що мчить 200 км/год</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Короче я так розумію прям шоб легко вилікувати оцю дурку GPS реально хіба встановленням оптичного модуля 🥲</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Короче я так розумію прям шоб легко вилікувати оцю дурку GPS реально хіба встановленням оптичного модуля 🥲</div></div><p class="message-text">прийняти що гпс не працює, тільки оптіка і компас.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#dc2626">M7</div><div class="sender-info"><span class="sender-name">Учасник 7</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 3</div><div class="reply-text">В лакі так само є тумблер вимкнення gps. Одночасно все одно використовується тільки один ему</div></div><p class="message-text">Там нічого немає такого. Ви ж розумієте, що ви використовуєте цивільний gps у військових цілях?)</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#dc2626">M7</div><div class="sender-info"><span class="sender-name">Учасник 7</span></div></div><p class="message-text">Це до того, що налаштування gps модуля є. Я рився в u-center дуже довго і ті налаштування майже ніяк не покращують під час польоту коли б&#x27;ють модуль</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#dc2626">M7</div><div class="sender-info"><span class="sender-name">Учасник 7</span></div></div><p class="message-text">Хоче якісніше всього було перейти на nmea супутники, сигнал якісніший, але обмежена кількість приймаючих супутників самим gps модулем</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 7</div><div class="reply-text">Там нічого немає такого. Ви ж розумієте, що ви використовуєте цивільний gps у військових цілях?)</div></div><p class="message-text">Як в яких, скажімо в u-blox NEO-M9L i ZED-F9P є підтримка  Galileo OSNMA що виключає підміну саме цього сузір&#x27;я.<br>https://docs.holybro.com/gps-and-rtk-system/zed-f9p-h-rtk-series/galileo-osnma-support<br>А які сузір&#x27;я використовувати то вже можна  обирати. <br>Зараз спуфінг робиться легко і виробники пробують адаптуватися.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 3</div><div class="reply-text">Як в яких, скажімо в u-blox NEO-M9L i ZED-F9P є підтримка  Galileo OSNMA що виключає підміну саме цього сузір&#x27;я. https:/</div></div><p class="message-text">Всілякі mosaic теж шукають вирішення. https://www.foxtechuav.com/anti-jamming-rtk-gps-gnss-module-ardupilot-px4-nmea-sbf-septentrio-mosaic-h.html<br>https://www.gsc-europa.eu/support-todevelopers/galileo-compatible-devices/receivers-implementing-galileo-osnma</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 3</div><div class="reply-text">Всілякі mosaic теж шукають вирішення. https://www.foxtechuav.com/anti-jamming-rtk-gps-gnss-module-ardupilot-px4-nmea-sbf</div></div><p class="message-text">..але поки працює тільки в такому варіанті</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 4</div><div class="reply-text">..але поки працює тільки в такому варіанті</div></div><p class="message-text">Ну тут завдання видавати коректні координати попри будь-що, там просто не видавати якщо є спуф.</p></div></div>
+    <footer>Academia Tech &copy; 2026</footer>
+  </div>
+</div>
+</body></html>

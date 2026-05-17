@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html><head>
+<title>Як зручно налаштувати трими сервоприводів літака без перезавантаження? | SupportBot</title>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta property="og:title" content="Як зручно налаштувати трими сервоприводів літака без перезавантаження?">
+<meta property="og:description" content="Команда підтримки Dmytro Radomtsev пояснює, що зміни в налаштуваннях сервоприводів мають відпрацьовувати без перезавантаження. Він рекомендує спробувати змінювати параметри через &#x27;full parameters list">
+<link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+<style>
+:root {
+  --signal-blue: #2c6bed;
+  --page-bg: #f6f7f9;
+  --card-bg: #ffffff;
+  --text: #0d0d0d;
+  --text-sec: #5c5c5c;
+  --border: #d8d8d8;
+  --radius: 12px;
+  --green: #16a34a;
+  --yellow: #ca8a04;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  background: var(--page-bg); color: var(--text);
+  min-height: 100vh; padding: 48px 20px;
+  -webkit-font-smoothing: antialiased;
+}
+@media (max-width: 520px) { body { padding: 24px 12px; } }
+.shell { max-width: 640px; margin: 0 auto; }
+.card {
+  background: var(--card-bg); border: 1px solid var(--border);
+  border-radius: var(--radius); overflow: hidden; margin-bottom: 16px;
+}
+header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 20px; border-bottom: 1px solid var(--border);
+}
+.header-left { display: flex; align-items: center; gap: 10px; text-decoration: none; color: inherit; }
+.logo { width: 28px; height: 28px; }
+.brand { font-size: 15px; font-weight: 600; letter-spacing: -0.02em; }
+.chat-header { padding: 14px 20px; border-bottom: 1px solid var(--border); background: var(--page-bg); }
+.chat-header h2 { font-size: 14px; font-weight: 600; color: var(--text); display: flex; align-items: center; gap: 8px; }
+.chat-header h2 svg { width: 16px; height: 16px; color: var(--signal-blue); }
+.messages { padding: 0; }
+.message { padding: 16px 20px; border-bottom: 1px solid var(--border); }
+.message:last-child { border-bottom: none; }
+.message-header { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+.avatar { width: 28px; height: 28px; border-radius: 50%; color: white; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 600; flex-shrink: 0; }
+.sender-info { flex: 1; min-width: 0; }
+.sender-name { font-size: 13px; font-weight: 600; color: var(--text); }
+.message-text { font-size: 15px; line-height: 1.55; color: var(--text); white-space: pre-wrap; margin-left: 38px; }
+.reply-bubble { margin-left: 38px; margin-bottom: 6px; padding: 6px 10px; background: #f0f2f5; border-left: 3px solid var(--signal-blue); border-radius: 4px; font-size: 13px; color: var(--text-sec); }
+.reply-sender { font-weight: 600; color: var(--signal-blue); font-size: 12px; margin-bottom: 2px; }
+.reply-text { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.status-badge {
+  padding: 4px 10px; font-size: 11px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.04em; border-radius: 4px;
+}
+.status-solved { background: #dcfce7; color: var(--green); }
+.status-recommendation { background: #fef3c7; color: #b45309; }
+main { padding: 24px 20px; }
+h1 { font-size: 20px; font-weight: 700; letter-spacing: -0.025em; margin-bottom: 12px; line-height: 1.3; }
+.meta { font-size: 12px; color: var(--text-sec); margin-bottom: 16px; }
+.tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 20px; }
+.tag {
+  background: rgba(44, 107, 237, 0.08); color: var(--signal-blue);
+  padding: 4px 10px; border-radius: 4px; font-size: 12px; font-weight: 500;
+}
+.section-title {
+  font-size: 11px; font-weight: 600; text-transform: uppercase;
+  letter-spacing: 0.06em; color: var(--text-sec); margin-bottom: 10px;
+  display: flex; align-items: center; gap: 6px;
+}
+.section-title svg { width: 14px; height: 14px; }
+.section-content { font-size: 15px; line-height: 1.6; color: var(--text); white-space: pre-wrap; }
+.problem-section { padding-bottom: 20px; border-bottom: 1px solid var(--border); margin-bottom: 20px; }
+.solution-section {
+  background: #f0fdf4; margin: -24px -20px -24px -20px; padding: 20px;
+  border-top: 1px solid #bbf7d0;
+}
+.solution-section .section-title { color: var(--green); }
+.recommendation-solution { background: #fffbeb; border-top-color: #fde68a; }
+.recommendation-solution .section-title { color: #b45309; }
+.empty-chat {
+  padding: 32px 20px; text-align: center; color: var(--text-sec); font-size: 14px;
+}
+footer {
+  padding: 14px 20px; border-top: 1px solid var(--border);
+  color: var(--text-sec); font-size: 12px; text-align: center;
+}
+@media (max-width: 520px) {
+  main { padding: 20px 16px; }
+  h1 { font-size: 18px; }
+  .solution-section { margin: -20px -16px -20px -16px; padding: 16px; }
+}
+</style>
+</head><body>
+<div class="shell">
+  <div class="card">
+    <header>
+      <a href="https://academia-tech.github.io/SupportBot" class="header-left">
+        <img src="/SupportBot/supportbot-logo-128.png" alt="SupportBot" class="logo">
+        <span class="brand">SupportBot</span>
+      </a>
+      <span class="status-solved status-badge">Вирішено</span>
+    </header>
+    <main>
+      <h1>Як зручно налаштувати трими сервоприводів літака без перезавантаження?</h1>
+      <p class="meta">Case ec1bcd5631de &middot; ua_ardupilot</p>
+      <div class='tags'><span class="tag">#сервоприводи</span><span class="tag">#трим</span><span class="tag">#налаштування</span><span class="tag">#літак</span><span class="tag">#Mission Planner</span><span class="tag">#онлайн</span><span class="tag">#V-tail</span></div>
+      <div class="problem-section">
+        <h2 class="section-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/>
+            <line x1="12" y1="16" x2="12.01" y2="16"/>
+          </svg>
+          Проблема
+        </h2>
+        <p class="section-content">Користувач має літак з V-tail та 4 сервоприводами і шукає зручний спосіб виставити нейтральні та кінцеві положення серво без необхідності армити дрон або використовувати радіо. Він зазначає, що зміни в Servo Output вимагають перезавантаження, що є незручним.</p>
+      </div>
+      <div class="solution-section">
+        <h2 class="section-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          Рішення
+        </h2>
+        <p class="section-content">Команда підтримки Dmytro Radomtsev пояснює, що зміни в налаштуваннях сервоприводів мають відпрацьовувати без перезавантаження. Він рекомендує спробувати змінювати параметри через &#x27;full parameters list&#x27; і демонструє у відео, як це робиться в Mission Planner в реальному часі. Інший користувач user_9f310c85c1 додає, що серво працюють навіть на не заармленій поверхні, і можна увімкнути мануальний режим, виставити серво в 0, потім увімкнути FBWA та перевірити поведінку.</p>
+      </div>
+    </main>
+  </div>
+  <div class="card">
+    <div class="chat-header"><h2><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Історія чату</h2></div><div class="messages"><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Літак v-tail. 4 серви. 2 на aileron, одна з інверсією, й по одній vtail left, vtail right. Начебто все ок. Запитання. Як відтримувати все це. Я маю на увазі як виставити нейтральні й кінцеві положення так щоб це зручно було робити? Є якийсь спосіб щоб не армитись й без радіо?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Літак v-tail. 4 серви. 2 на aileron, одна з інверсією, й по одній vtail left, vtail right. Начебто все ок. Запитання. Як</div></div><p class="message-text">Ну тобі все одно в мануал потрібно налаштовувати модель</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Літак v-tail. 4 серви. 2 на aileron, одна з інверсією, й по одній vtail left, vtail right. Начебто все ок. Запитання. Як</div></div><p class="message-text">в чому проблема заармитися без пропа? Чи взагалі немає апаратури?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 3</div><div class="reply-text">в чому проблема заармитися без пропа? Чи взагалі немає апаратури?</div></div><p class="message-text">Навіть не на за армлену поверхності працюють. Взагалі не бачу проблем</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Літак v-tail. 4 серви. 2 на aileron, одна з інверсією, й по одній vtail left, vtail right. Начебто все ок. Запитання. Як</div></div><p class="message-text">Якщо немає апаратури підключити через MP і поставити якийсь віртуальний джойстик, передавати значення каналів через MP. Але звучить як збочення.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 3</div><div class="reply-text">Якщо немає апаратури підключити через MP і поставити якийсь віртуальний джойстик, передавати значення каналів через MP. </div></div><p class="message-text">Та блін, воно все одно видає пвм, включили мануал, виставили в 0 серви, включили фбва, перевірили правильність поведінки серв</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><p class="message-text">Всьо</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 2</div><div class="reply-text">Ну тобі все одно в мануал потрібно налаштовувати модель</div></div><p class="message-text">Я з айнаву тількт почав розбиратись у АР.Якщо можна, поясніть для чайника  удь ласка, або дайте посилання, як проводиьься тримування керуючих площин у АР, я не зміш знайти</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Я з айнаву тількт почав розбиратись у АР.Якщо можна, поясніть для чайника  удь ласка, або дайте посилання, як проводиььс</div></div><p class="message-text">https://ardupilot.org/plane/docs/arduplane-setup.html#arduplane-setup</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><p class="message-text">Порівнюючи з айнавом тут дофіга доків, де все розжовувано і куча гайдів на ютубі</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#0891b2">M5</div><div class="sender-info"><span class="sender-name">Учасник 5</span></div></div><p class="message-text">Та все дуже просто, підключаете літак до миссионпрленер, конектитесь, ставите режим  мануал, та налаштовувати 0 положення, в серво аутах перевірте трім повинно бути 1500, якщо не зрозуміло, в приват</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 3</div><div class="reply-text">в чому проблема заармитися без пропа? Чи взагалі немає апаратури?</div></div><p class="message-text">Апаратура є, але літак не передбачає керування з неї. Й взагалі питання про інше. Я у серво оут ставлю якесь значення, але воно відпрацьовує лише після перезавпнтаження. Припустимо, я помилився, я знов коннект- сетап-сервооут, знов ставлю якесь значення, знов перезавантажую. Роблю заміри кутів відхилу... й я заїбавсь. Можливо є спосіб решулювання онлайн? щоб я задав значення, й він відпрацював одразу?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Апаратура є, але літак не передбачає керування з неї. Й взагалі питання про інше. Я у серво оут ставлю якесь значення, а</div></div><p class="message-text">Має відпрацьовувати без перезавантаження. Можливо змінюйте через full parameters list.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#9333ea">M6</div><div class="sender-info"><span class="sender-name">Учасник 6</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Апаратура є, але літак не передбачає керування з неї. Й взагалі питання про інше. Я у серво оут ставлю якесь значення, а</div></div><p class="message-text">Може якимось сервотестером поганяти серву і записати значення мікросекунд макс/мін?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Апаратура є, але літак не передбачає керування з неї. Й взагалі питання про інше. Я у серво оут ставлю якесь значення, а</div></div><p class="message-text">у вас не так?<br><br>[Відео: 9518.mp4 — The video displays a graphical user interface (GUI) on a screen, likely for configuration software. The interface is dark-themed with white text and grey input fields.<br><br>**Visible Text and Elements:**<br>- Top left: A monitor icon and the text &quot;HELP&quot;.<br>- Column headers: &quot;Reverse&quot; (with checkboxes), &quot;Function&quot; (with dropdowns), &quot;Min&quot; (with numerical input fields and up/down arrows), &quot;Trim&quot; (with numerical input fields and up/down arrows).<br>- Visible functions and their initial parameters:<br>    - Aileron: Min=1100, Trim=1500<br>    - Elevator: Min=1100, Trim=1500<br>    - Throttle: Min=1000, Trim=1000<br>    - Rudder: Min=1100, Trim=1500<br>    - Disabled: Min=1100, Trim=1500<br><br>**Events Over Time:**<br>- From 0:00-0:06, the user&#x27;s cursor interacts with the &quot;Rudder&quot; row&#x27;s &quot;Trim&quot; field, changing its value sequentially from 1500 to 1, then 300, 1300, and finally 1700.<br>- At 0:07-0:08, the cursor briefly hovers over the &quot;Min&quot; value for &quot;Rudder&quot; (1100) without changing it.<br>- At 0:09-0:10, the cursor clicks the &quot;Reverse&quot; checkbox for the &quot;Disabled&quot; function, toggling its state from unchecked (grey) to checked (green).<br>- From 0:11-0:14, the cursor returns to the &quot;Rudder&quot; row&#x27;s &quot;Trim&quot; field, and the value briefly highlights at 1700.<br>- From 0:15-0:17, the cursor interacts with the up/down arrows next to the &quot;Min&quot; field for &quot;Rudder&quot;.<br>- At 0:18-0:19, the &quot;Rudder&quot; &quot;Trim&quot; value is changed back to 1500.<br><br>**Problems/Anomalies:**<br>- The rapid, sequential changes to the &quot;Rudder&quot; &quot;Trim&quot; value (1500 -&gt; 1 -&gt; 300 -&gt; 1300 -&gt; 1700 -&gt; 1500) within a short period may indicate testing of input boundaries or a user struggling to achieve a desired value.<br>- The interaction with the &quot;Disabled&quot; function&#x27;s &quot;Reverse&quot; checkbox is a single state change (off to on). No other issues are immediately apparent.]</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 3</div><div class="reply-text">у вас не так?  [Відео: 9518.mp4 — The video displays a graphical user interface (GUI) on a screen, likely for configurat</div></div><p class="message-text">так</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">так</div></div><p class="message-text">Тоді я не розумію що у вас не виходить, коли треба перезавантажувати?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 3</div><div class="reply-text">Тоді я не розумію що у вас не виходить, коли треба перезавантажувати?</div></div><p class="message-text">я теж))) серви не рухаються. З апаратури, коли функцію серви рс ставлю рухаються. Розбираюсь)</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">я теж))) серви не рухаються. З апаратури, коли функцію серви рс ставлю рухаються. Розбираюсь)</div></div><p class="message-text">Якщо зелена position рухається то і сигнал має йти.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#dc2626">M7</div><div class="sender-info"><span class="sender-name">Учасник 7</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">я теж))) серви не рухаються. З апаратури, коли функцію серви рс ставлю рухаються. Розбираюсь)</div></div><p class="message-text">Кнопка &quot;safe&quot; є на борту? Чи може в параметрах включена?</p></div></div>
+    <footer>Academia Tech &copy; 2026</footer>
+  </div>
+</div>
+</body></html>

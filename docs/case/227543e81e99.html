@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html><head>
+<title>Using Tasmota with Timers in an Offline Environment Without Wi-Fi | SupportBot</title>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta property="og:title" content="Using Tasmota with Timers in an Offline Environment Without Wi-Fi">
+<meta property="og:description" content="It was explained that Tasmota&#x27;s timers are not suitable for this use case because they rely on a network connection to an NTP server to get the correct time after a reboot. Without a network, the devi">
+<link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+<style>
+:root {
+  --signal-blue: #2c6bed;
+  --page-bg: #f6f7f9;
+  --card-bg: #ffffff;
+  --text: #0d0d0d;
+  --text-sec: #5c5c5c;
+  --border: #d8d8d8;
+  --radius: 12px;
+  --green: #16a34a;
+  --yellow: #ca8a04;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  background: var(--page-bg); color: var(--text);
+  min-height: 100vh; padding: 48px 20px;
+  -webkit-font-smoothing: antialiased;
+}
+@media (max-width: 520px) { body { padding: 24px 12px; } }
+.shell { max-width: 640px; margin: 0 auto; }
+.card {
+  background: var(--card-bg); border: 1px solid var(--border);
+  border-radius: var(--radius); overflow: hidden; margin-bottom: 16px;
+}
+header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 20px; border-bottom: 1px solid var(--border);
+}
+.header-left { display: flex; align-items: center; gap: 10px; text-decoration: none; color: inherit; }
+.logo { width: 28px; height: 28px; }
+.brand { font-size: 15px; font-weight: 600; letter-spacing: -0.02em; }
+.chat-header { padding: 14px 20px; border-bottom: 1px solid var(--border); background: var(--page-bg); }
+.chat-header h2 { font-size: 14px; font-weight: 600; color: var(--text); display: flex; align-items: center; gap: 8px; }
+.chat-header h2 svg { width: 16px; height: 16px; color: var(--signal-blue); }
+.messages { padding: 0; }
+.message { padding: 16px 20px; border-bottom: 1px solid var(--border); }
+.message:last-child { border-bottom: none; }
+.message-header { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+.avatar { width: 28px; height: 28px; border-radius: 50%; color: white; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 600; flex-shrink: 0; }
+.sender-info { flex: 1; min-width: 0; }
+.sender-name { font-size: 13px; font-weight: 600; color: var(--text); }
+.message-text { font-size: 15px; line-height: 1.55; color: var(--text); white-space: pre-wrap; margin-left: 38px; }
+.reply-bubble { margin-left: 38px; margin-bottom: 6px; padding: 6px 10px; background: #f0f2f5; border-left: 3px solid var(--signal-blue); border-radius: 4px; font-size: 13px; color: var(--text-sec); }
+.reply-sender { font-weight: 600; color: var(--signal-blue); font-size: 12px; margin-bottom: 2px; }
+.reply-text { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.status-badge {
+  padding: 4px 10px; font-size: 11px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.04em; border-radius: 4px;
+}
+.status-solved { background: #dcfce7; color: var(--green); }
+.status-recommendation { background: #fef3c7; color: #b45309; }
+main { padding: 24px 20px; }
+h1 { font-size: 20px; font-weight: 700; letter-spacing: -0.025em; margin-bottom: 12px; line-height: 1.3; }
+.meta { font-size: 12px; color: var(--text-sec); margin-bottom: 16px; }
+.tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 20px; }
+.tag {
+  background: rgba(44, 107, 237, 0.08); color: var(--signal-blue);
+  padding: 4px 10px; border-radius: 4px; font-size: 12px; font-weight: 500;
+}
+.section-title {
+  font-size: 11px; font-weight: 600; text-transform: uppercase;
+  letter-spacing: 0.06em; color: var(--text-sec); margin-bottom: 10px;
+  display: flex; align-items: center; gap: 6px;
+}
+.section-title svg { width: 14px; height: 14px; }
+.section-content { font-size: 15px; line-height: 1.6; color: var(--text); white-space: pre-wrap; }
+.problem-section { padding-bottom: 20px; border-bottom: 1px solid var(--border); margin-bottom: 20px; }
+.solution-section {
+  background: #f0fdf4; margin: -24px -20px -24px -20px; padding: 20px;
+  border-top: 1px solid #bbf7d0;
+}
+.solution-section .section-title { color: var(--green); }
+.recommendation-solution { background: #fffbeb; border-top-color: #fde68a; }
+.recommendation-solution .section-title { color: #b45309; }
+.empty-chat {
+  padding: 32px 20px; text-align: center; color: var(--text-sec); font-size: 14px;
+}
+footer {
+  padding: 14px 20px; border-top: 1px solid var(--border);
+  color: var(--text-sec); font-size: 12px; text-align: center;
+}
+@media (max-width: 520px) {
+  main { padding: 20px 16px; }
+  h1 { font-size: 18px; }
+  .solution-section { margin: -20px -16px -20px -16px; padding: 16px; }
+}
+</style>
+</head><body>
+<div class="shell">
+  <div class="card">
+    <header>
+      <a href="https://academia-tech.github.io/SupportBot" class="header-left">
+        <img src="/SupportBot/supportbot-logo-128.png" alt="SupportBot" class="logo">
+        <span class="brand">SupportBot</span>
+      </a>
+      <span class="status-solved status-badge">Вирішено</span>
+    </header>
+    <main>
+      <h1>Using Tasmota with Timers in an Offline Environment Without Wi-Fi</h1>
+      <p class="meta">Case 227543e81e99 &middot; tasmota</p>
+      <div class='tags'><span class="tag">#offline</span><span class="tag">#no wifi</span><span class="tag">#timer</span><span class="tag">#rtc</span><span class="tag">#real-time clock</span><span class="tag">#ntp</span><span class="tag">#access point</span><span class="tag">#esp8266</span></div>
+      <div class="problem-section">
+        <h2 class="section-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/>
+            <line x1="12" y1="16" x2="12.01" y2="16"/>
+          </svg>
+          Проблема
+        </h2>
+        <p class="section-content">A user wants to use an ESP8266 with Tasmota in a garage with no network connection. The goal is to use the web interface to control an inverter with a timer, but they need to prevent Tasmota from entering Wi-Fi configuration mode.</p>
+      </div>
+      <div class="solution-section">
+        <h2 class="section-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          Рішення
+        </h2>
+        <p class="section-content">It was explained that Tasmota&#x27;s timers are not suitable for this use case because they rely on a network connection to an NTP server to get the correct time after a reboot. Without a network, the device&#x27;s clock will reset to 00:00, making timers unreliable. The definitive solution is to use an external Real-Time Clock (RTC) module with the ESP8266. For managing the device without a constant Wi-Fi connection, it was suggested to either pre-configure the credentials at home and then use a phone&#x27;s hotspot with the same SSID/password for occasional access, or to set up a dedicated old router as a local-only access point in the garage. A link to a GitHub discussion on Tasmota&#x27;s AP mode was also shared: https://github.com/arendst/Tasmota/discussions/13362.</p>
+      </div>
+    </main>
+  </div>
+  <div class="card">
+    <div class="chat-header"><h2><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Історія чату</h2></div><div class="messages"><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Hi all, I should use tasmota on a mini esp8266 in a garage where there is no network. So I would like to eliminate the access point that asks you for wifi configuration. I found a precompiled firmware (but in German). Can someone help me create one in Italian? Thanks</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><p class="message-text">This might help you. Install Tasmotizer and select the Italian BIN file.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Hi all, I should use tasmota on a mini esp8266 in a garage where there is no network. So I would like to eliminate the a</div></div><p class="message-text">I don&#x27;t understand the question:<br>- you need an italian translated firmware (you can donwload it on http://ota.tasmota.com/tasmota/release/ ) or<br>- you need a firmware that on first boot won&#x27;t ask you the wifi configuration?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 3</div><div class="reply-text">I don&#x27;t understand the question: - you need an italian translated firmware (you can donwload it on http://ota.tasmota.co</div></div><p class="message-text">Yes I need a firmware that on first boot won&#x27;t ask you the wifi configuration.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><p class="message-text">The simpliest solution is configure the first boot where you have a wifi connection (in your house) and then put the module in the garage... so if you need debug you can use your phone with same SSID and password of your house wifi to access to the module console...</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><p class="message-text">or... you can compile a firmware with embedded wifi credentials (the same on your phone tethering ones for debug maybe)</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 3</div><div class="reply-text">or... you can compile a firmware with embedded wifi credentials (the same on your phone tethering ones for debug maybe)</div></div><p class="message-text">when tasmota does not see wifi, after a few minutes it prompts for network configuration.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><p class="message-text">I never used a tasmota device without wifi connection...</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Yes I need a firmware that on first boot won&#x27;t ask you the wifi configuration.</div></div><p class="message-text">And then? How will you configure WiFi when it&#x27;ll be useful?<br><br>Is not clear the whole management/use process</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#0891b2">M5</div><div class="sender-info"><span class="sender-name">Учасник 5</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 3</div><div class="reply-text">or... you can compile a firmware with embedded wifi credentials (the same on your phone tethering ones for debug maybe)</div></div><p class="message-text">Take care that you can not use timers. Because after restart every esp is without correct time and date<br>This will pulled from an ntp server</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 4</div><div class="reply-text">And then? How will you configure WiFi when it&#x27;ll be useful?  Is not clear the whole management/use process</div></div><p class="message-text">Sorry if I was not clear.<br>I will try to explain myself better. I need to create a &quot;button,&quot; controllable from the browser, that thanks to a timer at a certain time turns on an inverter and at another time turns it off. I would like to use an esp8266 as hardware and tasmota as software, because it handles both the outputs of the eps8266 and because it has a timer inside. The garage where the eps8266 should be installed has no network of any kind. So I was wondering how to use tasmota&#x27;s web iterface without tasmota, through the access point, constantly asking for wifi credentials.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#0891b2">M5</div><div class="sender-info"><span class="sender-name">Учасник 5</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Sorry if I was not clear. I will try to explain myself better. I need to create a &quot;button,&quot; controllable from the browse</div></div><p class="message-text">You need timers..<br>That is not possible Le to use without network... After restart time is 00:00.<br>So in this case you need an adittion clock board I think..<br>I am not very sure, but perhaps someone else can confirm</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#9333ea">M6</div><div class="sender-info"><span class="sender-name">Учасник 6</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Sorry if I was not clear. I will try to explain myself better. I need to create a &quot;button,&quot; controllable from the browse</div></div><p class="message-text">you may have to put an old router as access point</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 6</div><div class="reply-text">you may have to put an old router as access point</div></div><p class="message-text">Isn&#x27;t possibile to put tasmota in AP mode with web control interface active?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><p class="message-text">ok from forum:</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><p class="message-text">https://github.com/arendst/Tasmota/discussions/13362</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Sorry if I was not clear. I will try to explain myself better. I need to create a &quot;button,&quot; controllable from the browse</div></div><p class="message-text">Antonio in the forum comments you can find that manaing the time  needs ntp (so a internet connection) or an RTC. Your use case (switch on/off something using a cron like job) is not supported. Generally speacking, your use case needs a RTC even with other firmware because a clock based only on sw could drift.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#0891b2">M5</div><div class="sender-info"><span class="sender-name">Учасник 5</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 4</div><div class="reply-text">Isn&#x27;t possibile to put tasmota in AP mode with web control interface active?</div></div><p class="message-text">Search for wificonfig at this page.<br>https://tasmota.github.io/docs/Commands/#wi-fi</p></div></div>
+    <footer>Academia Tech &copy; 2026</footer>
+  </div>
+</div>
+</body></html>

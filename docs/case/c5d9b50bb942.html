@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html><head>
+<title>Можливість місій без GPS та Terrain Data в ArduPilot | SupportBot</title>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta property="og:title" content="Можливість місій без GPS та Terrain Data в ArduPilot">
+<meta property="og:description" content="Користувач user_ff7e10b9dc самостійно припускає, що в ArduPilot 4.6.3 це неможливо, окрім варіанту із заздалегідь прописаними координатами. Користувач user_a773dc1863 зазначає, що теоретично це можлив">
+<link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+<style>
+:root {
+  --signal-blue: #2c6bed;
+  --page-bg: #f6f7f9;
+  --card-bg: #ffffff;
+  --text: #0d0d0d;
+  --text-sec: #5c5c5c;
+  --border: #d8d8d8;
+  --radius: 12px;
+  --green: #16a34a;
+  --yellow: #ca8a04;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  background: var(--page-bg); color: var(--text);
+  min-height: 100vh; padding: 48px 20px;
+  -webkit-font-smoothing: antialiased;
+}
+@media (max-width: 520px) { body { padding: 24px 12px; } }
+.shell { max-width: 640px; margin: 0 auto; }
+.card {
+  background: var(--card-bg); border: 1px solid var(--border);
+  border-radius: var(--radius); overflow: hidden; margin-bottom: 16px;
+}
+header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 20px; border-bottom: 1px solid var(--border);
+}
+.header-left { display: flex; align-items: center; gap: 10px; text-decoration: none; color: inherit; }
+.logo { width: 28px; height: 28px; }
+.brand { font-size: 15px; font-weight: 600; letter-spacing: -0.02em; }
+.chat-header { padding: 14px 20px; border-bottom: 1px solid var(--border); background: var(--page-bg); }
+.chat-header h2 { font-size: 14px; font-weight: 600; color: var(--text); display: flex; align-items: center; gap: 8px; }
+.chat-header h2 svg { width: 16px; height: 16px; color: var(--signal-blue); }
+.messages { padding: 0; }
+.message { padding: 16px 20px; border-bottom: 1px solid var(--border); }
+.message:last-child { border-bottom: none; }
+.message-header { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+.avatar { width: 28px; height: 28px; border-radius: 50%; color: white; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 600; flex-shrink: 0; }
+.sender-info { flex: 1; min-width: 0; }
+.sender-name { font-size: 13px; font-weight: 600; color: var(--text); }
+.message-text { font-size: 15px; line-height: 1.55; color: var(--text); white-space: pre-wrap; margin-left: 38px; }
+.reply-bubble { margin-left: 38px; margin-bottom: 6px; padding: 6px 10px; background: #f0f2f5; border-left: 3px solid var(--signal-blue); border-radius: 4px; font-size: 13px; color: var(--text-sec); }
+.reply-sender { font-weight: 600; color: var(--signal-blue); font-size: 12px; margin-bottom: 2px; }
+.reply-text { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.status-badge {
+  padding: 4px 10px; font-size: 11px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.04em; border-radius: 4px;
+}
+.status-solved { background: #dcfce7; color: var(--green); }
+.status-recommendation { background: #fef3c7; color: #b45309; }
+main { padding: 24px 20px; }
+h1 { font-size: 20px; font-weight: 700; letter-spacing: -0.025em; margin-bottom: 12px; line-height: 1.3; }
+.meta { font-size: 12px; color: var(--text-sec); margin-bottom: 16px; }
+.tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 20px; }
+.tag {
+  background: rgba(44, 107, 237, 0.08); color: var(--signal-blue);
+  padding: 4px 10px; border-radius: 4px; font-size: 12px; font-weight: 500;
+}
+.section-title {
+  font-size: 11px; font-weight: 600; text-transform: uppercase;
+  letter-spacing: 0.06em; color: var(--text-sec); margin-bottom: 10px;
+  display: flex; align-items: center; gap: 6px;
+}
+.section-title svg { width: 14px; height: 14px; }
+.section-content { font-size: 15px; line-height: 1.6; color: var(--text); white-space: pre-wrap; }
+.problem-section { padding-bottom: 20px; border-bottom: 1px solid var(--border); margin-bottom: 20px; }
+.solution-section {
+  background: #f0fdf4; margin: -24px -20px -24px -20px; padding: 20px;
+  border-top: 1px solid #bbf7d0;
+}
+.solution-section .section-title { color: var(--green); }
+.recommendation-solution { background: #fffbeb; border-top-color: #fde68a; }
+.recommendation-solution .section-title { color: #b45309; }
+.empty-chat {
+  padding: 32px 20px; text-align: center; color: var(--text-sec); font-size: 14px;
+}
+footer {
+  padding: 14px 20px; border-top: 1px solid var(--border);
+  color: var(--text-sec); font-size: 12px; text-align: center;
+}
+@media (max-width: 520px) {
+  main { padding: 20px 16px; }
+  h1 { font-size: 18px; }
+  .solution-section { margin: -20px -16px -20px -16px; padding: 16px; }
+}
+</style>
+</head><body>
+<div class="shell">
+  <div class="card">
+    <header>
+      <a href="https://academia-tech.github.io/SupportBot" class="header-left">
+        <img src="/SupportBot/supportbot-logo-128.png" alt="SupportBot" class="logo">
+        <span class="brand">SupportBot</span>
+      </a>
+      <span class="status-recommendation status-badge">Рекомендація</span>
+    </header>
+    <main>
+      <h1>Можливість місій без GPS та Terrain Data в ArduPilot</h1>
+      <p class="meta">Case c5d9b50bb942 &middot; ua_ardupilot</p>
+      <div class='tags'><span class="tag">#GPS</span><span class="tag">#місії</span><span class="tag">#Terrain data</span><span class="tag">#автономний політ</span><span class="tag">#ArduPilot</span><span class="tag">#навігація</span><span class="tag">#без GPS</span></div>
+      <div class="problem-section">
+        <h2 class="section-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/>
+            <line x1="12" y1="16" x2="12.01" y2="16"/>
+          </svg>
+          Проблема
+        </h2>
+        <p class="section-content">Користувач запитує, чи є можливість працювати з Terrain та виконувати місії без GPS, використовуючи лише компас, акселерометр, гіроскоп, барометр та, можливо, трубку Піто. Точність виконання місії не важлива, домашню точку можна задати вручну.</p>
+      </div>
+      <div class="solution-section recommendation-solution">
+        <h2 class="section-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7c.6.4 1 1.1 1 1.8V17h6v-.5c0-.7.4-1.4 1-1.8A7 7 0 0 0 12 2z"/></svg>
+          Рекомендація (не підтверджено)
+        </h2>
+        <p class="section-content">Користувач user_ff7e10b9dc самостійно припускає, що в ArduPilot 4.6.3 це неможливо, окрім варіанту із заздалегідь прописаними координатами. Користувач user_a773dc1863 зазначає, що теоретично це можливо за допомогою маяків, але ArduPilot &#x27;заточений&#x27; під GPS. Адміністратор Andrii 🇺🇦 (user_3cc6b8d440) саркастично зауважує, що навігація &#x27;по зіркам&#x27; є складною та вимагає специфічних умов і обладнання, що робить її непрактичною. Користувач user_a5c0b52566 додає, що це неможливо з &#x27;ванільним&#x27; Mission Planner, і для такого функціоналу доводиться переробляти половину прошивки.</p>
+      </div>
+    </main>
+  </div>
+  <div class="card">
+    <div class="chat-header"><h2><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Історія чату</h2></div><div class="messages"><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Наступний шаг - чи є можливість працювати із терріан та міссіями без GPS, тільки по компасу, акселерометру з гіроскопом, та барометром. Ну, можливо трубкою Піто. Без GPS<br>Точність виконання місії не важлива. Задати домашню точку вручну</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Наступний шаг - чи є можливість працювати із терріан та міссіями без GPS, тільки по компасу, акселерометру з гіроскопом,</div></div><p class="message-text">сам собs - cхоже у АР4,6,3 ніяк. Є тільки варіант із завантаженням на місці старту місії з заздалегідь прописаною координатою (</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><p class="message-text">Теоритично це можливо використовуючи маяки</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><p class="message-text">арду без жпс то взагалі щось дивне там же все заточено під жпс, якого немає ніде....</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><p class="message-text">тому або ковиряти прошивку та писати кастомну а тут хто на шо здібний нажаль тут немає нормального комьюніті щоб ділитися знаннями тут як з єбалами.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Наступний шаг - чи є можливість працювати із терріан та міссіями без GPS, тільки по компасу, акселерометру з гіроскопом,</div></div><p class="message-text">Місії без GPS.  Звучить як фантастика.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 3</div><div class="reply-text">Місії без GPS.  Звучить як фантастика.</div></div><p class="message-text">це тільки здається )))</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">це тільки здається )))</div></div><p class="message-text">Нажаль не з ванільним мішн пленером, ми під себе перебрали половини прошивки і постійно від цього ловимо баги</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#0891b2">M5</div><div class="sender-info"><span class="sender-name">Учасник 5</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">це тільки здається )))</div></div><p class="message-text">Це пише людина яка сьогодні з сервами пів дня розбиралась і не могла терейн фоловінг вимкнути😂😂😂</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 5</div><div class="reply-text">Це пише людина яка сьогодні з сервами пів дня розбиралась і не могла терейн фоловінг вимкнути😂😂😂</div></div><p class="message-text">Я щиро вдячний за поради й допомогу усім, хто знайшов час дати можливість мені чомусь навчитись. Дякую і Ввм, що уважно стежите за моїм навчанням. Може й Ви колись комусь дасте корисну пораду, це робить усіх нас разом сильнішими)</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#0891b2">M5</div><div class="sender-info"><span class="sender-name">Учасник 5</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Я щиро вдячний за поради й допомогу усім, хто знайшов час дати можливість мені чомусь навчитись. Дякую і Ввм, що уважно </div></div><p class="message-text">Я давав вам сьогодні поради, і вони цілком справедливі для всіх користувачів мр</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#9333ea">M6</div><div class="sender-info"><span class="sender-name">Учасник 6</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Наступний шаг - чи є можливість працювати із терріан та міссіями без GPS, тільки по компасу, акселерометру з гіроскопом,</div></div><p class="message-text">Якщо точність виконання не важлива, то: <br>В теорії: По зіркам<br>На практиці: складно, тре літати вище хмар, мати мапу зоряного неба, два бубна та одного шамана…</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 6</div><div class="reply-text">Якщо точність виконання не важлива, то:  В теорії: По зіркам На практиці: складно, тре літати вище хмар, мати мапу зорян</div></div><p class="message-text">І потім твою вундервафлю анігілірує зрк</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#9333ea">M6</div><div class="sender-info"><span class="sender-name">Учасник 6</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 4</div><div class="reply-text">І потім твою вундервафлю анігілірує зрк</div></div><p class="message-text">Протидія зрк - на плечах шамана з бубнами))</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#dc2626">M7</div><div class="sender-info"><span class="sender-name">Учасник 7</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 6</div><div class="reply-text">Якщо точність виконання не важлива, то:  В теорії: По зіркам На практиці: складно, тре літати вище хмар, мати мапу зорян</div></div><p class="message-text">Модуль астрокоррекции, весом с бтр)))</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#0d9488">M8</div><div class="sender-info"><span class="sender-name">Учасник 8</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 6</div><div class="reply-text">Якщо точність виконання не важлива, то:  В теорії: По зіркам На практиці: складно, тре літати вище хмар, мати мапу зорян</div></div><p class="message-text">caddx infra дуже добре бачить зоряне небо насправді</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#0d9488">M8</div><div class="sender-info"><span class="sender-name">Учасник 8</span></div></div><p class="message-text">але на малих відстанях астропозиціонування не буде надто точним</p></div></div>
+    <footer>Academia Tech &copy; 2026</footer>
+  </div>
+</div>
+</body></html>

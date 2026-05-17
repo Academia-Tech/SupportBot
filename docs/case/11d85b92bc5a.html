@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html><head>
-<title>Mission Planner не бачить файли .params | SupportBot</title>
+<title>Sonoff 4Ch R3 PRO incorrectly detected as Sonoff Basic after flashing | SupportBot</title>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta property="og:title" content="Mission Planner не бачить файли .params">
-<meta property="og:description" content="Mission Planner може не бачити файли .params, якщо вони мають приховане розширення .txt (наприклад, `filename.params.txt`) або якщо не обрано опцію &#x27;All Files&#x27; у діалоговому вікні відкриття файлу.">
+<meta property="og:title" content="Sonoff 4Ch R3 PRO incorrectly detected as Sonoff Basic after flashing">
+<meta property="og:description" content="The issue is resolved by manually selecting the correct device template in the Tasmota web UI. A user provided the correct steps: go to &quot;Configuration&quot; -&gt; &quot;Configure Module&quot; and select the &quot;Sonoff 4CH">
 <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
 <style>
 :root {
@@ -104,9 +104,9 @@ footer {
       <span class="status-solved status-badge">Вирішено</span>
     </header>
     <main>
-      <h1>Mission Planner не бачить файли .params</h1>
-      <p class="meta">Case 068a1c11f9e0 &middot; ua_ardupilot</p>
-      <div class='tags'><span class="tag">#Mission Planner</span><span class="tag">#параметри</span><span class="tag">#.params</span><span class="tag">#файли</span><span class="tag">#налаштування</span></div>
+      <h1>Sonoff 4Ch R3 PRO incorrectly detected as Sonoff Basic after flashing</h1>
+      <p class="meta">Case 11d85b92bc5a &middot; tasmota</p>
+      <div class='tags'><span class="tag">#Sonoff 4CH R3 PRO</span><span class="tag">#template</span><span class="tag">#Sonoff Basic</span><span class="tag">#wrong device</span><span class="tag">#configure module</span><span class="tag">#Tasmotizer</span><span class="tag">#multi-channel</span></div>
       <div class="problem-section">
         <h2 class="section-title">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -115,19 +115,19 @@ footer {
           </svg>
           Проблема
         </h2>
-        <p class="section-content">Користувач не може знайти файли з розширенням .params у Mission Planner.</p>
+        <p class="section-content">A user flashed a Sonoff 4Ch R3 PRO with Tasmota using Tasmotizer, but the device was identified as a Sonoff Basic in the web UI, allowing control of only one channel. The user asked what they did wrong and how to fix it.</p>
       </div>
       <div class="solution-section">
         <h2 class="section-title">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
           Рішення
         </h2>
-        <p class="section-content">Mission Planner може не бачити файли .params, якщо вони мають приховане розширення .txt (наприклад, `filename.params.txt`) або якщо не обрано опцію &#x27;All Files&#x27; у діалоговому вікні відкриття файлу.</p>
+        <p class="section-content">The issue is resolved by manually selecting the correct device template in the Tasmota web UI. A user provided the correct steps: go to &quot;Configuration&quot; -&gt; &quot;Configure Module&quot; and select the &quot;Sonoff 4CH&quot; (or similar, like module type 7) from the list. Another user also provided a direct link to the Blakadder template page for the Sonoff 4CHPROR3 for reference. The original poster confirmed this solution worked by replying &quot;Did the job, thank you!&quot;.</p>
       </div>
     </main>
   </div>
   <div class="card">
-    <div class="chat-header"><h2><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Історія чату</h2></div><div class="messages"><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Вітаю<br>Підкажіть чому mission planner може не бачити файл з розширенням .params?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Вітаю Підкажіть чому mission planner може не бачити файл з розширенням .params?</div></div><p class="message-text">або там приховане .txt розширення або натисніть all files</p></div></div>
+    <div class="chat-header"><h2><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Історія чату</h2></div><div class="messages"><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Hello people! Newbie question: I&#x27;ve tasmotizer to flash my Sonof 4Ch R3 PRO but now on the UI tasmota claims its Sonoff Basic and I only can controll one channel. Since this is my first time with: tasmota, sonoff, flashing anything, and ESP, might you guys suggest what have I done wrong and how to fix? Should i re-flash and hope for better outcome? 😁</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><p class="message-text">https://templates.blakadder.com/sonoff_4CHPROR3.html</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Hello people! Newbie question: I&#x27;ve tasmotizer to flash my Sonof 4Ch R3 PRO but now on the UI tasmota claims its Sonoff </div></div><p class="message-text">Click on configuration then configure module then select sonoff 4ch ( i think 7), hope this will do</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 3</div><div class="reply-text">Click on configuration then configure module then select sonoff 4ch ( i think 7), hope this will do</div></div><p class="message-text">I&#x27;m embarsed I havent seen this earlier... Did the job, thank you!</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><p class="message-text">🙏</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">I&#x27;m embarsed I havent seen this earlier... Did the job, thank you!</div></div><p class="message-text">well,we are happy we can solve __some__ questions at least</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Im more than happy with providing you with some easy-to-answer newbie questions</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">😄</p></div></div>
     <footer>Academia Tech &copy; 2026</footer>
   </div>
 </div>

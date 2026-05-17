@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html><head>
-<title>Mission Planner не бачить файли .params | SupportBot</title>
+<title>Configure Sonoff Basic R2 for Momentary Action (Relay Follows Button) | SupportBot</title>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta property="og:title" content="Mission Planner не бачить файли .params">
-<meta property="og:description" content="Mission Planner може не бачити файли .params, якщо вони мають приховане розширення .txt (наприклад, `filename.params.txt`) або якщо не обрано опцію &#x27;All Files&#x27; у діалоговому вікні відкриття файлу.">
+<meta property="og:title" content="Configure Sonoff Basic R2 for Momentary Action (Relay Follows Button)">
+<meta property="og:description" content="The solution involves reconfiguring the button&#x27;s GPIO as a &#x27;Switch&#x27; instead of a &#x27;Button&#x27;. After this change, the command `SwitchMode 1` will make the relay follow the state of the switch. A user prov">
 <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
 <style>
 :root {
@@ -104,9 +104,9 @@ footer {
       <span class="status-solved status-badge">Вирішено</span>
     </header>
     <main>
-      <h1>Mission Planner не бачить файли .params</h1>
-      <p class="meta">Case 068a1c11f9e0 &middot; ua_ardupilot</p>
-      <div class='tags'><span class="tag">#Mission Planner</span><span class="tag">#параметри</span><span class="tag">#.params</span><span class="tag">#файли</span><span class="tag">#налаштування</span></div>
+      <h1>Configure Sonoff Basic R2 for Momentary Action (Relay Follows Button)</h1>
+      <p class="meta">Case 9f2eb6b2ed3c &middot; tasmota</p>
+      <div class='tags'><span class="tag">#momentary switch</span><span class="tag">#button</span><span class="tag">#switch</span><span class="tag">#switchmode</span><span class="tag">#Sonoff Basic</span><span class="tag">#relay control</span><span class="tag">#template</span></div>
       <div class="problem-section">
         <h2 class="section-title">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -115,19 +115,19 @@ footer {
           </svg>
           Проблема
         </h2>
-        <p class="section-content">Користувач не може знайти файли з розширенням .params у Mission Planner.</p>
+        <p class="section-content">A user wanted to configure a Sonoff Basic R2 so that the relay is ON only while the physical button is being held down, and turns OFF when the button is released.</p>
       </div>
       <div class="solution-section">
         <h2 class="section-title">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
           Рішення
         </h2>
-        <p class="section-content">Mission Planner може не бачити файли .params, якщо вони мають приховане розширення .txt (наприклад, `filename.params.txt`) або якщо не обрано опцію &#x27;All Files&#x27; у діалоговому вікні відкриття файлу.</p>
+        <p class="section-content">The solution involves reconfiguring the button&#x27;s GPIO as a &#x27;Switch&#x27; instead of a &#x27;Button&#x27;. After this change, the command `SwitchMode 1` will make the relay follow the state of the switch. A user provided a specific template to apply this change: `{&quot;NAME&quot;:&quot;Sonoff BASICR2_SWITCH&quot;,&quot;GPIO&quot;:[9,255,255,255,0,0,0,0,21,56,0,0,0],&quot;FLAG&quot;:0,&quot;BASE&quot;:1}`. The original poster confirmed this worked well.</p>
       </div>
     </main>
   </div>
   <div class="card">
-    <div class="chat-header"><h2><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Історія чату</h2></div><div class="messages"><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Вітаю<br>Підкажіть чому mission planner може не бачити файл з розширенням .params?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Вітаю Підкажіть чому mission planner може не бачити файл з розширенням .params?</div></div><p class="message-text">або там приховане .txt розширення або натисніть all files</p></div></div>
+    <div class="chat-header"><h2><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Історія чату</h2></div><div class="messages"><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Hi all<br>I&#x27;m playing with sonoff basic R2 and I just want to control the relay like this:<br>pushing and maintaining the button = relay on<br>release the button = relay off<br>behavior: the relay follows the button!<br>I tried switchmode and buttontopic but I missed something... if someone can help me thanks</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Hi all I&#x27;m playing with sonoff basic R2 and I just want to control the relay like this: pushing and maintaining the butt</div></div><p class="message-text">IIRC it&#x27;s the switchmode 1 but i think you should set the button as switch in order for it to work 🤔</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><p class="message-text">here <br><br>https://tasmota.github.io/docs/Buttons-and-Switches/#switchmode</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">strange I used these options without succes</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><p class="message-text">did you set the button gpio as the switch 1?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><p class="message-text">you should put this as your template<br>`{&quot;NAME&quot;:&quot;Sonoff BASICR2_SWITCH&quot;,&quot;GPIO&quot;:[9,255,255,255,0,0,0,0,21,56,0,0,0],&quot;FLAG&quot;:0,&quot;BASE&quot;:1}`</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 2</div><div class="reply-text">did you set the button gpio as the switch 1?</div></div><p class="message-text">I set up my sonoff with generic template setup my gpio as switch ad olso after the switch option had work well</p></div></div>
     <footer>Academia Tech &copy; 2026</footer>
   </div>
 </div>

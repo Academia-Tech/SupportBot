@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html><head>
+<title>MCP9808 I2C Temperature Sensor Not Showing Readings in Tasmota | SupportBot</title>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta property="og:title" content="MCP9808 I2C Temperature Sensor Not Showing Readings in Tasmota">
+<meta property="og:description" content="The advice was confirmed to be correct. User &#x27;blakadder&#x27; clarified that for supported I2C sensors like the MCP9808, Tasmota performs automatic detection on boot without needing special commands. The k">
+<link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+<style>
+:root {
+  --signal-blue: #2c6bed;
+  --page-bg: #f6f7f9;
+  --card-bg: #ffffff;
+  --text: #0d0d0d;
+  --text-sec: #5c5c5c;
+  --border: #d8d8d8;
+  --radius: 12px;
+  --green: #16a34a;
+  --yellow: #ca8a04;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  background: var(--page-bg); color: var(--text);
+  min-height: 100vh; padding: 48px 20px;
+  -webkit-font-smoothing: antialiased;
+}
+@media (max-width: 520px) { body { padding: 24px 12px; } }
+.shell { max-width: 640px; margin: 0 auto; }
+.card {
+  background: var(--card-bg); border: 1px solid var(--border);
+  border-radius: var(--radius); overflow: hidden; margin-bottom: 16px;
+}
+header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 20px; border-bottom: 1px solid var(--border);
+}
+.header-left { display: flex; align-items: center; gap: 10px; text-decoration: none; color: inherit; }
+.logo { width: 28px; height: 28px; }
+.brand { font-size: 15px; font-weight: 600; letter-spacing: -0.02em; }
+.chat-header { padding: 14px 20px; border-bottom: 1px solid var(--border); background: var(--page-bg); }
+.chat-header h2 { font-size: 14px; font-weight: 600; color: var(--text); display: flex; align-items: center; gap: 8px; }
+.chat-header h2 svg { width: 16px; height: 16px; color: var(--signal-blue); }
+.messages { padding: 0; }
+.message { padding: 16px 20px; border-bottom: 1px solid var(--border); }
+.message:last-child { border-bottom: none; }
+.message-header { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+.avatar { width: 28px; height: 28px; border-radius: 50%; color: white; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 600; flex-shrink: 0; }
+.sender-info { flex: 1; min-width: 0; }
+.sender-name { font-size: 13px; font-weight: 600; color: var(--text); }
+.message-text { font-size: 15px; line-height: 1.55; color: var(--text); white-space: pre-wrap; margin-left: 38px; }
+.reply-bubble { margin-left: 38px; margin-bottom: 6px; padding: 6px 10px; background: #f0f2f5; border-left: 3px solid var(--signal-blue); border-radius: 4px; font-size: 13px; color: var(--text-sec); }
+.reply-sender { font-weight: 600; color: var(--signal-blue); font-size: 12px; margin-bottom: 2px; }
+.reply-text { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.status-badge {
+  padding: 4px 10px; font-size: 11px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.04em; border-radius: 4px;
+}
+.status-solved { background: #dcfce7; color: var(--green); }
+.status-recommendation { background: #fef3c7; color: #b45309; }
+main { padding: 24px 20px; }
+h1 { font-size: 20px; font-weight: 700; letter-spacing: -0.025em; margin-bottom: 12px; line-height: 1.3; }
+.meta { font-size: 12px; color: var(--text-sec); margin-bottom: 16px; }
+.tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 20px; }
+.tag {
+  background: rgba(44, 107, 237, 0.08); color: var(--signal-blue);
+  padding: 4px 10px; border-radius: 4px; font-size: 12px; font-weight: 500;
+}
+.section-title {
+  font-size: 11px; font-weight: 600; text-transform: uppercase;
+  letter-spacing: 0.06em; color: var(--text-sec); margin-bottom: 10px;
+  display: flex; align-items: center; gap: 6px;
+}
+.section-title svg { width: 14px; height: 14px; }
+.section-content { font-size: 15px; line-height: 1.6; color: var(--text); white-space: pre-wrap; }
+.problem-section { padding-bottom: 20px; border-bottom: 1px solid var(--border); margin-bottom: 20px; }
+.solution-section {
+  background: #f0fdf4; margin: -24px -20px -24px -20px; padding: 20px;
+  border-top: 1px solid #bbf7d0;
+}
+.solution-section .section-title { color: var(--green); }
+.recommendation-solution { background: #fffbeb; border-top-color: #fde68a; }
+.recommendation-solution .section-title { color: #b45309; }
+.empty-chat {
+  padding: 32px 20px; text-align: center; color: var(--text-sec); font-size: 14px;
+}
+footer {
+  padding: 14px 20px; border-top: 1px solid var(--border);
+  color: var(--text-sec); font-size: 12px; text-align: center;
+}
+@media (max-width: 520px) {
+  main { padding: 20px 16px; }
+  h1 { font-size: 18px; }
+  .solution-section { margin: -20px -16px -20px -16px; padding: 16px; }
+}
+</style>
+</head><body>
+<div class="shell">
+  <div class="card">
+    <header>
+      <a href="https://academia-tech.github.io/SupportBot" class="header-left">
+        <img src="/SupportBot/supportbot-logo-128.png" alt="SupportBot" class="logo">
+        <span class="brand">SupportBot</span>
+      </a>
+      <span class="status-solved status-badge">Вирішено</span>
+    </header>
+    <main>
+      <h1>MCP9808 I2C Temperature Sensor Not Showing Readings in Tasmota</h1>
+      <p class="meta">Case cd1928317f74 &middot; tasmota</p>
+      <div class='tags'><span class="tag">#mcp9808</span><span class="tag">#i2c</span><span class="tag">#sensor</span><span class="tag">#nodemcu</span><span class="tag">#troubleshooting</span><span class="tag">#gpio</span><span class="tag">#auto-detect</span><span class="tag">#configuration</span></div>
+      <div class="problem-section">
+        <h2 class="section-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/>
+            <line x1="12" y1="16" x2="12.01" y2="16"/>
+          </svg>
+          Проблема
+        </h2>
+        <p class="section-content">A user connected an MCP9808 sensor to a NodeMCU using D1 for SCL and D2 for SDA. After configuring these GPIOs as I2C in Tasmota, the sensor was not detected and no temperature readings appeared in the web UI. The user was unsure if additional commands were needed and had consulted ChatGPT, which provided incorrect information.</p>
+      </div>
+      <div class="solution-section">
+        <h2 class="section-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          Рішення
+        </h2>
+        <p class="section-content">The advice was confirmed to be correct. User &#x27;blakadder&#x27; clarified that for supported I2C sensors like the MCP9808, Tasmota performs automatic detection on boot without needing special commands. The key is correct wiring and using a binary that supports the sensor. The user later confirmed this by checking their wiring and successfully detecting the sensor using the `i2cscan` command, which found the device at address 0x18.</p>
+      </div>
+    </main>
+  </div>
+  <div class="card">
+    <div class="chat-header"><h2><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Історія чату</h2></div><div class="messages"><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Good evening, could someone give me some assistance in connecting a nodemcu with a MCP9808 sensor.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">I have used the settings. Is that correct?<br>Pin SCL is connected to d1 and SDA is connected to d2.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><p class="message-text">**blakadder**: Maybe if those are the gpios you connected SDA and SCL pins to</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">yes, all pins are connected</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><p class="message-text">**blakadder**: There you go then</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Is it possible that i have an error with the i2c</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><p class="message-text">**blakadder**: What type of error? You&#x27;ve given almost no context to what your issued is</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">The main problem is, that i cannot see the sensor readings</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">I have written the problem in chatgpt.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">That was the result.<br><br><br>    Flashing Tasmota: If you haven&#x27;t already, flash the Tasmota firmware onto your device following the official documentation for your specific hardware.<br><br>    Accessing the Tasmota web interface: Connect your device to your local network and find its IP address. Enter the IP address in a web browser to access the Tasmota web interface.<br><br>    Configuration: On the Tasmota web interface, go to the &quot;Configuration&quot; section.<br><br>    Configure Module: In the &quot;Module&quot; dropdown, select &quot;Generic&quot; or &quot;MCP9808&quot; if available. If you don&#x27;t see MCP9808, select &quot;Generic&quot; for now.<br><br>    Configure GPIO: In the &quot;GPIO&quot; section, assign the appropriate GPIO pins for I2C communication. The MCP9808 typically uses the SDA (Data) and SCL (Clock) pins. Choose the GPIO numbers based on your hardware&#x27;s pinout.<br><br>    Configure I2C: In the &quot;I2C Configuration&quot; section, set the I2C address of the MCP9808. The default address is 0x18, but it can be changed by modifying the sensor&#x27;s A2, A1, and A0 pins. Set the appropriate address based on your sensor&#x27;s configuration.<br><br>    Save Configuration: Scroll to the bottom of the page and click on the &quot;Save&quot; button to save the configuration.<br><br>    Restart: After saving the configuration, Tasmota will restart with the new settings.<br><br>    Verify Sensor Readings: Once Tasmota has restarted, go to the &quot;Console&quot; section of the web interface.<br><br>    Enable I2C: In the console, enter the following command to enable I2C communication: i2cdriver 1.<br><br>    Read Temperature: Use the command I2CRead,0x18,0,2 to read the temperature from the MCP9808 sensor. The response will include the temperature value in Celsius.<br><br>    Automate: If you want to automate the temperature reading, you can create rules or use MQTT to send the data to external systems.<br><br>Remember that the steps provided here are a general guideline for configuring the MCP9808 sensor with Tasmota firmware. It&#x27;s essential to refer to the specific documentation and resources provided by the Tasmota project and your hardware manufacturer for detailed and accurate instructions.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">the commands i have sent to the console</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">19:43:12.935 HTP: Information<br>19:43:17.463 HTP: Main Menu<br>19:43:18.583 HTP: Information<br>19:43:20.285 HTP: Main Menu<br>19:43:20.670 WIF: Checking connection...<br>19:43:21.129 HTP: Console<br>19:43:28.427 MQT: tele/tasmota_92D50F/STATE = {&quot;Time&quot;:&quot;2023-07-15T19:43:28&quot;,&quot;Uptime&quot;:&quot;0T00:11:37&quot;,&quot;UptimeSec&quot;:697,&quot;Heap&quot;:24,&quot;SleepMode&quot;:&quot;Dynamic&quot;,&quot;Sleep&quot;:50,&quot;LoadAvg&quot;:19,&quot;MqttCount&quot;:1,&quot;Wifi&quot;:{&quot;AP&quot;:1,&quot;SSId&quot;:&quot;FRITZ!Box 7560 TX&quot;,&quot;BSSId&quot;:&quot;E8:DF:70:57:36:57&quot;,&quot;Channel&quot;:11,&quot;Mode&quot;:&quot;11n&quot;,&quot;RSSI&quot;:62,&quot;Signal&quot;:-69,&quot;LinkCount&quot;:1,&quot;Downtime&quot;:&quot;0T00:00:05&quot;}}<br>19:43:40.659 WIF: Checking connection...<br>19:43:48.442 MQT: tele/tasmota_92D50F/STATE = {&quot;Time&quot;:&quot;2023-07-15T19:43:48&quot;,&quot;Uptime&quot;:&quot;0T00:11:57&quot;,&quot;UptimeSec&quot;:717,&quot;Heap&quot;:24,&quot;SleepMode&quot;:&quot;Dynamic&quot;,&quot;Sleep&quot;:50,&quot;LoadAvg&quot;:19,&quot;MqttCount&quot;:1,&quot;Wifi&quot;:{&quot;AP&quot;:1,&quot;SSId&quot;:&quot;FRITZ!Box 7560 TX&quot;,&quot;BSSId&quot;:&quot;E8:DF:70:57:36:57&quot;,&quot;Channel&quot;:11,&quot;Mode&quot;:&quot;11n&quot;,&quot;RSSI&quot;:56,&quot;Signal&quot;:-72,&quot;LinkCount&quot;:1,&quot;Downtime&quot;:&quot;0T00:00:05&quot;}}<br>19:43:52.407 WIF: Sending Gratuitous ARP</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><p class="message-text">**blakadder**: ChatGPT huh</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><p class="message-text">**blakadder**: Well it tends to be wrong when Tasmota is the topic</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 2</div><div class="reply-text">**blakadder**: ChatGPT huh</div></div><p class="message-text">I only used it to get an idea)</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><p class="message-text">**blakadder**: Why don&#x27;t you consult the human written official documentation instead?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">i did.<br><br>https://tasmota.github.io/docs/MCP9808/</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><p class="message-text">**blakadder**: An idea on how to do it wrong</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Tasmota Settings~<br><br>In the Configuration -&gt; Configure Module page assign:<br><br>    GPIOx to I2C SDA<br>    GPIOy to I2C SCL<br><br>After a reboot the driver will detect automatically up to 8 MCP9808 and display sensor readings.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">gpiox shold be d1 and gpioy the other i think correct</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><p class="message-text">**blakadder**: It should be the gpios you wired your sensor to as already established</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">and i should see the sensor readings in the console right?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><p class="message-text">**blakadder**: Yes if you wired it correctly</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">I have to enter a separate command?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">to see the readings?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><p class="message-text">**blakadder**: No</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><p class="message-text">**blakadder**: All you have to do is wire it correctly, use a binary that supports the sensor and it will detect it on boot</p></div></div>
+    <footer>Academia Tech &copy; 2026</footer>
+  </div>
+</div>
+</body></html>

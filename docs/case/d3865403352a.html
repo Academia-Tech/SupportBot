@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html><head>
+<title>Особливості калібрування трубки Піто без доступу до GPS | SupportBot</title>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta property="og:title" content="Особливості калібрування трубки Піто без доступу до GPS">
+<meta property="og:description" content="Для калібрування датчика повітряної швидкості (трубки Піто) без GPS обговорювалося кілька методів. Стандартний метод автокалібрування в польоті (`ARSPD_AUTOCAL`) вимагає наявності GPS. Наземне калібру">
+<link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+<style>
+:root {
+  --signal-blue: #2c6bed;
+  --page-bg: #f6f7f9;
+  --card-bg: #ffffff;
+  --text: #0d0d0d;
+  --text-sec: #5c5c5c;
+  --border: #d8d8d8;
+  --radius: 12px;
+  --green: #16a34a;
+  --yellow: #ca8a04;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  background: var(--page-bg); color: var(--text);
+  min-height: 100vh; padding: 48px 20px;
+  -webkit-font-smoothing: antialiased;
+}
+@media (max-width: 520px) { body { padding: 24px 12px; } }
+.shell { max-width: 640px; margin: 0 auto; }
+.card {
+  background: var(--card-bg); border: 1px solid var(--border);
+  border-radius: var(--radius); overflow: hidden; margin-bottom: 16px;
+}
+header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 20px; border-bottom: 1px solid var(--border);
+}
+.header-left { display: flex; align-items: center; gap: 10px; text-decoration: none; color: inherit; }
+.logo { width: 28px; height: 28px; }
+.brand { font-size: 15px; font-weight: 600; letter-spacing: -0.02em; }
+.chat-header { padding: 14px 20px; border-bottom: 1px solid var(--border); background: var(--page-bg); }
+.chat-header h2 { font-size: 14px; font-weight: 600; color: var(--text); display: flex; align-items: center; gap: 8px; }
+.chat-header h2 svg { width: 16px; height: 16px; color: var(--signal-blue); }
+.messages { padding: 0; }
+.message { padding: 16px 20px; border-bottom: 1px solid var(--border); }
+.message:last-child { border-bottom: none; }
+.message-header { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+.avatar { width: 28px; height: 28px; border-radius: 50%; color: white; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 600; flex-shrink: 0; }
+.sender-info { flex: 1; min-width: 0; }
+.sender-name { font-size: 13px; font-weight: 600; color: var(--text); }
+.message-text { font-size: 15px; line-height: 1.55; color: var(--text); white-space: pre-wrap; margin-left: 38px; }
+.reply-bubble { margin-left: 38px; margin-bottom: 6px; padding: 6px 10px; background: #f0f2f5; border-left: 3px solid var(--signal-blue); border-radius: 4px; font-size: 13px; color: var(--text-sec); }
+.reply-sender { font-weight: 600; color: var(--signal-blue); font-size: 12px; margin-bottom: 2px; }
+.reply-text { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.status-badge {
+  padding: 4px 10px; font-size: 11px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.04em; border-radius: 4px;
+}
+.status-solved { background: #dcfce7; color: var(--green); }
+.status-recommendation { background: #fef3c7; color: #b45309; }
+main { padding: 24px 20px; }
+h1 { font-size: 20px; font-weight: 700; letter-spacing: -0.025em; margin-bottom: 12px; line-height: 1.3; }
+.meta { font-size: 12px; color: var(--text-sec); margin-bottom: 16px; }
+.tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 20px; }
+.tag {
+  background: rgba(44, 107, 237, 0.08); color: var(--signal-blue);
+  padding: 4px 10px; border-radius: 4px; font-size: 12px; font-weight: 500;
+}
+.section-title {
+  font-size: 11px; font-weight: 600; text-transform: uppercase;
+  letter-spacing: 0.06em; color: var(--text-sec); margin-bottom: 10px;
+  display: flex; align-items: center; gap: 6px;
+}
+.section-title svg { width: 14px; height: 14px; }
+.section-content { font-size: 15px; line-height: 1.6; color: var(--text); white-space: pre-wrap; }
+.problem-section { padding-bottom: 20px; border-bottom: 1px solid var(--border); margin-bottom: 20px; }
+.solution-section {
+  background: #f0fdf4; margin: -24px -20px -24px -20px; padding: 20px;
+  border-top: 1px solid #bbf7d0;
+}
+.solution-section .section-title { color: var(--green); }
+.recommendation-solution { background: #fffbeb; border-top-color: #fde68a; }
+.recommendation-solution .section-title { color: #b45309; }
+.empty-chat {
+  padding: 32px 20px; text-align: center; color: var(--text-sec); font-size: 14px;
+}
+footer {
+  padding: 14px 20px; border-top: 1px solid var(--border);
+  color: var(--text-sec); font-size: 12px; text-align: center;
+}
+@media (max-width: 520px) {
+  main { padding: 20px 16px; }
+  h1 { font-size: 18px; }
+  .solution-section { margin: -20px -16px -20px -16px; padding: 16px; }
+}
+</style>
+</head><body>
+<div class="shell">
+  <div class="card">
+    <header>
+      <a href="https://academia-tech.github.io/SupportBot" class="header-left">
+        <img src="/SupportBot/supportbot-logo-128.png" alt="SupportBot" class="logo">
+        <span class="brand">SupportBot</span>
+      </a>
+      <span class="status-recommendation status-badge">Рекомендація</span>
+    </header>
+    <main>
+      <h1>Особливості калібрування трубки Піто без доступу до GPS</h1>
+      <p class="meta">Case d3865403352a &middot; ua_ardupilot</p>
+      <div class='tags'><span class="tag">#трубка піто</span><span class="tag">#калібрування</span><span class="tag">#airspeed</span><span class="tag">#gps</span><span class="tag">#ardupilot</span><span class="tag">#без gps</span></div>
+      <div class="problem-section">
+        <h2 class="section-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/>
+            <line x1="12" y1="16" x2="12.01" y2="16"/>
+          </svg>
+          Проблема
+        </h2>
+        <p class="section-content">Користувач запитує про особливості калібрування трубки Піто без використання GPS, оскільки спроби відкалібрувати її з GPS у певній місцевості (&quot;в Бразилії&quot;) були невдалими. Виникає питання, чи можна довіряти мануалу для калібрування без GPS.</p>
+      </div>
+      <div class="solution-section recommendation-solution">
+        <h2 class="section-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7c.6.4 1 1.1 1 1.8V17h6v-.5c0-.7.4-1.4 1-1.8A7 7 0 0 0 12 2z"/></svg>
+          Рекомендація (не підтверджено)
+        </h2>
+        <p class="section-content">Для калібрування датчика повітряної швидкості (трубки Піто) без GPS обговорювалося кілька методів. Стандартний метод автокалібрування в польоті (`ARSPD_AUTOCAL`) вимагає наявності GPS. Наземне калібрування є складним, оскільки параметр `ARSPD_RATIO` компенсує не тільки сам сенсор, а й його положення. Також важливо мати кришку для трубки Піто та лейбу &#x27;Remove before flight&#x27;, оскільки ArduPilot калібрує нуль Піто при кожному старті, і набігаючі потоки повітря на землі можуть збивати цю калібровку.</p>
+      </div>
+    </main>
+  </div>
+  <div class="card">
+    <div class="chat-header"><h2><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Історія чату</h2></div><div class="messages"><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Які особливості калібрування трубки піто без гпса? Чи достатньо сліпо довіряти мануалу?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Які особливості калібрування трубки піто без гпса? Чи достатньо сліпо довіряти мануалу?</div></div><p class="message-text">Чому не відкалібрувати один раз з gps і використовувати її в майбутньому якщо залізо незмінне?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 2</div><div class="reply-text">Чому не відкалібрувати один раз з gps і використовувати її в майбутньому якщо залізо незмінне?</div></div><p class="message-text">Бо вже двічі намагались відкалібрувати в Бразилії</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Бо вже двічі намагались відкалібрувати в Бразилії</div></div><p class="message-text">Ну ще до Ліми далеко. Хіба спробуйте втретє або відїдьте подалі.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Бо вже двічі намагались відкалібрувати в Бразилії</div></div><p class="message-text">Виставте ввімкнення калібрування на окремий стік опція 91<br>Airspeed Ratio Calibration<br>і дочекайтеся відсутності спуфа.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 2</div><div class="reply-text">Виставте ввімкнення калібрування на окремий стік опція 91 Airspeed Ratio Calibration і дочекайтеся відсутності спуфа.</div></div><p class="message-text">А як пов&#x27;язане калібрування піто з датчиком гпс?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 3</div><div class="reply-text">А як пов&#x27;язане калібрування піто з датчиком гпс?</div></div><p class="message-text">Найпростіше відкалібрувати в реальному польоті</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><p class="message-text">А чому не наземлі?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 3</div><div class="reply-text">А як пов&#x27;язане калібрування піто з датчиком гпс?</div></div><p class="message-text">Для визначення ARSPD_RATIO потрібен https://ardupilot.org/plane/docs/calibrating-an-airspeed-sensor.html#calibrating-the-airspeed-sensor-gain</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Бо вже двічі намагались відкалібрувати в Бразилії</div></div><p class="message-text">Може в Перу чи у вас елітний спуф, а не як у всіх простих смертних)</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Для визначення ARSPD_RATIO потрібен https://ardupilot.org/plane/docs/calibrating-an-airspeed-sensor.html#calibrating-the</div></div><p class="message-text">Можна спробувати з вимкненим GPS, хоча якість буде звісно так собі, але принаймні грубу помилку прибере.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 4</div><div class="reply-text">Можна спробувати з вимкненим GPS, хоча якість буде звісно так собі, але принаймні грубу помилку прибере.</div></div><p class="message-text">Собсна я і питаю як правильно це зробити, та які є відмінності від мануала.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Собсна я і питаю як правильно це зробити, та які є відмінності від мануала.</div></div><p class="message-text">Який мануал ви маєте на увазі?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 2</div><div class="reply-text">Який мануал ви маєте на увазі?</div></div><p class="message-text">оцей https://ardupilot.org/plane/docs/calibrating-an-airspeed-sensor.html#calibrating-the-airspeed-sensor-gain</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">оцей https://ardupilot.org/plane/docs/calibrating-an-airspeed-sensor.html#calibrating-the-airspeed-sensor-gain</div></div><p class="message-text">Є наступна ідея, в безвітряну погоду ставите літак на дах пікапу, їдете з відомою швидкістю, знімаєте лог, вносите поправку, але можлива похибка через вплив пікапу на тиск повітря.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#0891b2">M5</div><div class="sender-info"><span class="sender-name">Учасник 5</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 2</div><div class="reply-text">Є наступна ідея, в безвітряну погоду ставите літак на дах пікапу, їдете з відомою швидкістю, знімаєте лог, вносите попра</div></div><p class="message-text">По кругу, на круговом треке ехать :) а чтоб пикап не вносил корректировки борт на ниточку привязать, как воздушный змей</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><p class="message-text"><br><br>[Відео: 8558.mp4 — EMPTY00:00]</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Собсна я і питаю як правильно це зробити, та які є відмінності від мануала.</div></div><p class="message-text">Ну правильно з GPS <br><br>Не певен чи авто зможе працювати без GPS, треба по коду дивитися<br><br>Але в нормі це 10 хв політати</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#9333ea">M6</div><div class="sender-info"><span class="sender-name">Учасник 6</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 4</div><div class="reply-text">Ну правильно з GPS   Не певен чи авто зможе працювати без GPS, треба по коду дивитися  Але в нормі це 10 хв політати</div></div><p class="message-text">З мого досвіду не працюе, треба gps, якщо конвер, відлетуемо комплект арспд, та полетник, робимо стенд, та калібруемо на землі, до збірки, працює, перевіряв</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 6</div><div class="reply-text">З мого досвіду не працюе, треба gps, якщо конвер, відлетуемо комплект арспд, та полетник, робимо стенд, та калібруемо на</div></div><p class="message-text">На землі?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#dc2626">M7</div><div class="sender-info"><span class="sender-name">Учасник 7</span></div></div><p class="message-text">З анемометром нормальним і нормальним вітром не відкалібрувати?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 7</div><div class="reply-text">З анемометром нормальним і нормальним вітром не відкалібрувати?</div></div><p class="message-text">Ні, це фігова ідея. Калібрується положення сенсору насамперед. Дуйчик треба буде поставити ідеально так як іде потік повітря під правильним кутом атаки що дуже складно зробити акуратно. Не неможливо , але дуже дуже геморно. <br><br>Особливо незрозуміло нащо це робити після польоту.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 4</div><div class="reply-text">Ні, це фігова ідея. Калібрується положення сенсору насамперед. Дуйчик треба буде поставити ідеально так як іде потік пов</div></div><p class="message-text">В сенсі потік має бути умовно ламінарний так щоб кут атаки зберігався на всій площі зіткнення і зокрема на вході піто. Тобто дуйчик має бути площею як літак або треба попасти рівно в кут, а ще б непогано при цьому бути в трімі по пітчу.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#9333ea">M6</div><div class="sender-info"><span class="sender-name">Учасник 6</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 4</div><div class="reply-text">На землі?</div></div><p class="message-text">Так, прямо в приміщенні</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 6</div><div class="reply-text">Так, прямо в приміщенні</div></div><p class="message-text">А ви впевнені що ви калібруєте те що ви думаєте?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#9333ea">M6</div><div class="sender-info"><span class="sender-name">Учасник 6</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 4</div><div class="reply-text">А ви впевнені що ви калібруєте те що ви думаєте?</div></div><p class="message-text">Не зрозумів</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#9333ea">M6</div><div class="sender-info"><span class="sender-name">Учасник 6</span></div></div><p class="message-text">В мене, можна сказати аеродинамічна труба, там дві трубки піто, одна облетана і полетник, друга до полетника, з яким буде працювати, по першій бачу швидкість, та подгоняю другу через ratio</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 6</div><div class="reply-text">Не зрозумів</div></div><p class="message-text">Сенс `ARSPD_RATIO` в перетворенні IAS у CAS (насправді одразу в EAS бо на наших швидкостях CAS = EAS)<br>Ми калібруємо не стільки сенсор, скільки положення трубки <br>Відповідно вам у вашій конструкції треба відтворити точно такі кути потоку набігаючого повітря, як в польоті</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#9333ea">M6</div><div class="sender-info"><span class="sender-name">Учасник 6</span></div></div><p class="message-text">Може і є невелика похибка, но на 1..  бортів облетувати</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><p class="message-text">Наскільки я розумію цю кухню — 1 борт облітати, а потім просто ставити такі ж трубки в таке ж положення. Цього має бути достатньо.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#9333ea">M6</div><div class="sender-info"><span class="sender-name">Учасник 6</span></div></div><p class="message-text">Знаю, що літають з значенням 2.0 і не переживають</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#9333ea">M6</div><div class="sender-info"><span class="sender-name">Учасник 6</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 4</div><div class="reply-text">Наскільки я розумію цю кухню — 1 борт облітати, а потім просто ставити такі ж трубки в таке ж положення. Цього має бути </div></div><p class="message-text">Десь так</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#9333ea">M6</div><div class="sender-info"><span class="sender-name">Учасник 6</span></div></div><p class="message-text">Ще, з досвіду, як що на борту пару разів зробити 2-3 калібровки в повітрі, результати не завжди  співпадають</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 6</div><div class="reply-text">Знаю, що літають з значенням 2.0 і не переживають</div></div><p class="message-text">2.0 це ідеальне значення коли трубка рівно по потоку напрямлена.<br><br>Автокалібровка може плавати залежно від тонкощів погодних умов тощо, те що воно уточнюється туда сюда це артефакт алгоритма калібрування.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#9333ea">M6</div><div class="sender-info"><span class="sender-name">Учасник 6</span></div></div><p class="message-text">Згоден!!!</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><p class="message-text">Якщо ви літаєте на 4.5 не забудьте виставити `BARO_GND_TEMP` інакше це все до лампочки</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 4</div><div class="reply-text">Якщо ви літаєте на 4.5 не забудьте виставити `BARO_GND_TEMP` інакше це все до лампочки</div></div><p class="message-text">Це ж взагалі до барометра відноситься?<br>Ну мою думку піто потрібна в першу чергу для посадки, щоб не перейти швидкість звалювання при різному вітрі, далі для ефективного польоту, щоб не летіти на тротлі більшому ніж потрібен.<br>Також не треба забувати що арду калібрує 0  піто при кожному старті, тому варто мати кришку і лейбу Remove before flight.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 2</div><div class="reply-text">Це ж взагалі до барометра відноситься? Ну мою думку піто потрібна в першу чергу для посадки, щоб не перейти швидкість зв</div></div><p class="message-text">1. Температура навколишнього середовища використовується в формулі EAS ⇒ TAS. Якщо є можливість ставити (принаймні до 4.6) це варто робити щоб потім не вигрібати проблеми через підігрів трубки чи шось подібне.<br>2. TAS використовується в TECS-контролері відповідно з поганими значеннями борт буде дельфінити. Також TAS заходить в EKF, якщо з нею щось систематично не так, то фільтр буде погіршеним.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#0d9488">M8</div><div class="sender-info"><span class="sender-name">Учасник 8</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 2</div><div class="reply-text">Це ж взагалі до барометра відноситься? Ну мою думку піто потрібна в першу чергу для посадки, щоб не перейти швидкість зв</div></div><p class="message-text">А я думав все нащо на трубку піто то вішають на літачках)) Виявляється щоб при підключені батки набігаючі потоки на землі на піто не збивали її калібровку</p></div></div>
+    <footer>Academia Tech &copy; 2026</footer>
+  </div>
+</div>
+</body></html>

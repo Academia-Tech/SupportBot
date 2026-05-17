@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html><head>
-<title>Mission Planner не бачить файли .params | SupportBot</title>
+<title>How to Temporarily Override a Default Timer in Tasmota from Home Assistant | SupportBot</title>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta property="og:title" content="Mission Planner не бачить файли .params">
-<meta property="og:description" content="Mission Planner може не бачити файли .params, якщо вони мають приховане розширення .txt (наприклад, `filename.params.txt`) або якщо не обрано опцію &#x27;All Files&#x27; у діалоговому вікні відкриття файлу.">
+<meta property="og:title" content="How to Temporarily Override a Default Timer in Tasmota from Home Assistant">
+<meta property="og:description" content="Another user recommended using the `PulseTime` command. This command allows setting a temporary auto-off timer for a relay. It can be sent from Home Assistant to override the default timer for a singl">
 <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
 <style>
 :root {
@@ -101,12 +101,12 @@ footer {
         <img src="/SupportBot/supportbot-logo-128.png" alt="SupportBot" class="logo">
         <span class="brand">SupportBot</span>
       </a>
-      <span class="status-solved status-badge">Вирішено</span>
+      <span class="status-recommendation status-badge">Рекомендація</span>
     </header>
     <main>
-      <h1>Mission Planner не бачить файли .params</h1>
-      <p class="meta">Case 068a1c11f9e0 &middot; ua_ardupilot</p>
-      <div class='tags'><span class="tag">#Mission Planner</span><span class="tag">#параметри</span><span class="tag">#.params</span><span class="tag">#файли</span><span class="tag">#налаштування</span></div>
+      <h1>How to Temporarily Override a Default Timer in Tasmota from Home Assistant</h1>
+      <p class="meta">Case 2ab38c6e2fc5 &middot; tasmota</p>
+      <div class='tags'><span class="tag">#tasmota</span><span class="tag">#home assistant</span><span class="tag">#timer</span><span class="tag">#pulsetime</span><span class="tag">#automation</span><span class="tag">#override</span><span class="tag">#command</span></div>
       <div class="problem-section">
         <h2 class="section-title">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -115,19 +115,19 @@ footer {
           </svg>
           Проблема
         </h2>
-        <p class="section-content">Користувач не може знайти файли з розширенням .params у Mission Planner.</p>
+        <p class="section-content">A user has a Tasmota device configured with a default 30-minute timer. They are looking for a way to send a one-time command from Home Assistant to turn the device on for a different duration, like 5 minutes, without permanently altering the default setting.</p>
       </div>
-      <div class="solution-section">
+      <div class="solution-section recommendation-solution">
         <h2 class="section-title">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-          Рішення
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7c.6.4 1 1.1 1 1.8V17h6v-.5c0-.7.4-1.4 1-1.8A7 7 0 0 0 12 2z"/></svg>
+          Рекомендація (не підтверджено)
         </h2>
-        <p class="section-content">Mission Planner може не бачити файли .params, якщо вони мають приховане розширення .txt (наприклад, `filename.params.txt`) або якщо не обрано опцію &#x27;All Files&#x27; у діалоговому вікні відкриття файлу.</p>
+        <p class="section-content">Another user recommended using the `PulseTime` command. This command allows setting a temporary auto-off timer for a relay. It can be sent from Home Assistant to override the default timer for a single operation. The user was advised to consult the Tasmota documentation for detailed usage of the `PulseTime` command. The original poster later followed up with the message &#x27;idem as config in consolle&#x27;, indicating the command is used via the console.</p>
       </div>
     </main>
   </div>
   <div class="card">
-    <div class="chat-header"><h2><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Історія чату</h2></div><div class="messages"><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Вітаю<br>Підкажіть чому mission planner може не бачити файл з розширенням .params?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Вітаю Підкажіть чому mission planner може не бачити файл з розширенням .params?</div></div><p class="message-text">або там приховане .txt розширення або натисніть all files</p></div></div>
+    <div class="chat-header"><h2><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Історія чату</h2></div><div class="messages"><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">I have several devices with tasmota but one is set in timer mode 30 min..<br>I turn it on both by hand from the physical button<br>who as a home assistant..<br>I would like to know if it is possible to send a home assistant once to tasmota<br>like turn on only 5 min for this time!<br>how can i proceed?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">I have several devices with tasmota but one is set in timer mode 30 min.. I turn it on both by hand from the physical bu</div></div><p class="message-text">You can use pulsetime<br>Check tasmota documemtation</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 2</div><div class="reply-text">You can use pulsetime Check tasmota documemtation</div></div><p class="message-text">idem as config in consolle</p></div></div>
     <footer>Academia Tech &copy; 2026</footer>
   </div>
 </div>

@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html><head>
-<title>Mission Planner не бачить файли .params | SupportBot</title>
+<title>Cannot Revert Tasmota Web UI from User to Admin Mode | SupportBot</title>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta property="og:title" content="Mission Planner не бачить файли .params">
-<meta property="og:description" content="Mission Planner може не бачити файли .params, якщо вони мають приховане розширення .txt (наприклад, `filename.params.txt`) або якщо не обрано опцію &#x27;All Files&#x27; у діалоговому вікні відкриття файлу.">
+<meta property="og:title" content="Cannot Revert Tasmota Web UI from User to Admin Mode">
+<meta property="og:description" content="If the Tasmota web interface is in user mode and lacks admin rights, commands to change its configuration (like reverting to admin mode) must be sent via an alternative method, such as serial connecti">
 <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
 <style>
 :root {
@@ -104,9 +104,9 @@ footer {
       <span class="status-solved status-badge">Вирішено</span>
     </header>
     <main>
-      <h1>Mission Planner не бачить файли .params</h1>
-      <p class="meta">Case 068a1c11f9e0 &middot; ua_ardupilot</p>
-      <div class='tags'><span class="tag">#Mission Planner</span><span class="tag">#параметри</span><span class="tag">#.params</span><span class="tag">#файли</span><span class="tag">#налаштування</span></div>
+      <h1>Cannot Revert Tasmota Web UI from User to Admin Mode</h1>
+      <p class="meta">Case 4c89a740d239 &middot; tasmota</p>
+      <div class='tags'><span class="tag">#Tasmota web UI</span><span class="tag">#admin mode</span><span class="tag">#user mode</span><span class="tag">#console commands</span><span class="tag">#MQTT</span><span class="tag">#serial control</span><span class="tag">#security</span></div>
       <div class="problem-section">
         <h2 class="section-title">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -115,19 +115,19 @@ footer {
           </svg>
           Проблема
         </h2>
-        <p class="section-content">Користувач не може знайти файли з розширенням .params у Mission Planner.</p>
+        <p class="section-content">A user changed their Tasmota device&#x27;s web interface to user mode via the console and subsequently could not revert it to admin mode using an HTTP command.</p>
       </div>
       <div class="solution-section">
         <h2 class="section-title">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
           Рішення
         </h2>
-        <p class="section-content">Mission Planner може не бачити файли .params, якщо вони мають приховане розширення .txt (наприклад, `filename.params.txt`) або якщо не обрано опцію &#x27;All Files&#x27; у діалоговому вікні відкриття файлу.</p>
+        <p class="section-content">If the Tasmota web interface is in user mode and lacks admin rights, commands to change its configuration (like reverting to admin mode) must be sent via an alternative method, such as serial connection or MQTT, rather than through the web interface itself. The user confirmed this solution worked and added that setting a password for browser access is crucial for security, especially when using the device for critical functions like car locking/unlocking.</p>
       </div>
     </main>
   </div>
   <div class="card">
-    <div class="chat-header"><h2><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Історія чату</h2></div><div class="messages"><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Вітаю<br>Підкажіть чому mission planner може не бачити файл з розширенням .params?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Вітаю Підкажіть чому mission planner може не бачити файл з розширенням .params?</div></div><p class="message-text">або там приховане .txt розширення або натисніть all files</p></div></div>
+    <div class="chat-header"><h2><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Історія чату</h2></div><div class="messages"><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Guys I need some help, I changed the web interface to user mode via the console, now I can&#x27;t get it back to admin mode via http command.  I am trying the following command, 10.0.0.15/cm?cmnd=Webserver2</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Guys I need some help, I changed the web interface to user mode via the console, now I can&#x27;t get it back to admin mode v</div></div><p class="message-text">If the web interface no longer have admin wrights You need to send the cmnd by other router, serial or mqtt</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">thank you very much</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">I got it guys.  need to set a password to access the module via browser, then you can change the configuration between admin and users, I&#x27;m going to use the esp8266 in my car to lock and unlock the doors and turn on the alarm, the password is for relay security.  I will use via browser.</p></div></div>
     <footer>Academia Tech &copy; 2026</footer>
   </div>
 </div>

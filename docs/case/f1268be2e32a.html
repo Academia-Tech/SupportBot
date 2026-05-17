@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html><head>
-<title>Mission Planner не бачить файли .params | SupportBot</title>
+<title>Adding Servos and Using SD Card on an ESP32-CAM with Tasmota | SupportBot</title>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta property="og:title" content="Mission Planner не бачить файли .params">
-<meta property="og:description" content="Mission Planner може не бачити файли .params, якщо вони мають приховане розширення .txt (наприклад, `filename.params.txt`) або якщо не обрано опцію &#x27;All Files&#x27; у діалоговому вікні відкриття файлу.">
+<meta property="og:title" content="Adding Servos and Using SD Card on an ESP32-CAM with Tasmota">
+<meta property="og:description" content="A user, &#x27;user_70d4e26e86&#x27;, advised that from their experience, the only usable pins on the ESP32-CAM are GPIO 4 and 5, which would be just enough to drive two servos via PWM. Another user, &#x27;user_18927">
 <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
 <style>
 :root {
@@ -101,12 +101,12 @@ footer {
         <img src="/SupportBot/supportbot-logo-128.png" alt="SupportBot" class="logo">
         <span class="brand">SupportBot</span>
       </a>
-      <span class="status-solved status-badge">Вирішено</span>
+      <span class="status-recommendation status-badge">Рекомендація</span>
     </header>
     <main>
-      <h1>Mission Planner не бачить файли .params</h1>
-      <p class="meta">Case 068a1c11f9e0 &middot; ua_ardupilot</p>
-      <div class='tags'><span class="tag">#Mission Planner</span><span class="tag">#параметри</span><span class="tag">#.params</span><span class="tag">#файли</span><span class="tag">#налаштування</span></div>
+      <h1>Adding Servos and Using SD Card on an ESP32-CAM with Tasmota</h1>
+      <p class="meta">Case f1268be2e32a &middot; tasmota</p>
+      <div class='tags'><span class="tag">#esp32-cam</span><span class="tag">#servo</span><span class="tag">#pwm</span><span class="tag">#gpio</span><span class="tag">#pan-tilt</span><span class="tag">#sd card</span><span class="tag">#resource usage</span></div>
       <div class="problem-section">
         <h2 class="section-title">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -115,19 +115,19 @@ footer {
           </svg>
           Проблема
         </h2>
-        <p class="section-content">Користувач не може знайти файли з розширенням .params у Mission Planner.</p>
+        <p class="section-content">A user asks for information on how to add two servos to an ESP32-CAM board running Tasmota, and also how to make it record video or pictures to the SD card. They plan to build a pan-and-tilt camera.</p>
       </div>
-      <div class="solution-section">
+      <div class="solution-section recommendation-solution">
         <h2 class="section-title">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-          Рішення
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7c.6.4 1 1.1 1 1.8V17h6v-.5c0-.7.4-1.4 1-1.8A7 7 0 0 0 12 2z"/></svg>
+          Рекомендація (не підтверджено)
         </h2>
-        <p class="section-content">Mission Planner може не бачити файли .params, якщо вони мають приховане розширення .txt (наприклад, `filename.params.txt`) або якщо не обрано опцію &#x27;All Files&#x27; у діалоговому вікні відкриття файлу.</p>
+        <p class="section-content">A user, &#x27;user_70d4e26e86&#x27;, advised that from their experience, the only usable pins on the ESP32-CAM are GPIO 4 and 5, which would be just enough to drive two servos via PWM. Another user, &#x27;user_18927ecb51&#x27;, warned that ESP32-CAMs are very resource and power-hungry, often requiring heatsinks and external antennas to achieve decent performance (e.g., 5fps), and suggested disabling the web UI to free up resources. The question about using the SD card was not directly answered.</p>
       </div>
     </main>
   </div>
   <div class="card">
-    <div class="chat-header"><h2><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Історія чату</h2></div><div class="messages"><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Вітаю<br>Підкажіть чому mission planner може не бачити файл з розширенням .params?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Вітаю Підкажіть чому mission planner може не бачити файл з розширенням .params?</div></div><p class="message-text">або там приховане .txt розширення або натисніть all files</p></div></div>
+    <div class="chat-header"><h2><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Історія чату</h2></div><div class="messages"><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">does anybody have information to add two servos to a esp32Cam, and make it record video or pictures on SD too?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">does anybody have information to add two servos to a esp32Cam, and make it record video or pictures on SD too?</div></div><p class="message-text">Not with servos, but to my experience the only usable pins are pins 4 and 5, so just enough for driving 2 servo motors via PWM</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Ok, thanks</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">And what about to use the SD card?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">does anybody have information to add two servos to a esp32Cam, and make it record video or pictures on SD too?</div></div><p class="message-text">I&#x27;ve never done something like that, however from experience, esp32cam&#x27;s are very resource and power hungry, I have several in muy house and in other for them to work decently, meaning at least 5fps I had to put heatsinks on them and external antena, and also I try to disable web UI to free up mor resources and they can barely make it</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Thanks Ricardo and Alex, but my idea is to mount the camera in a pan and tilt device, to control what the camera is focused on, and once we have an SD card, why not to use it?, as a first step I&#x27;ll try to control the servos, and then I&#x27;ll see</p></div></div>
     <footer>Academia Tech &copy; 2026</footer>
   </div>
 </div>

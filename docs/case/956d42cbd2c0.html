@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html><head>
-<title>Mission Planner не бачить файли .params | SupportBot</title>
+<title>Налаштування рівнів потужності для VTX з протоколом IRC Tramp в ArduPilot | SupportBot</title>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta property="og:title" content="Mission Planner не бачить файли .params">
-<meta property="og:description" content="Mission Planner може не бачити файли .params, якщо вони мають приховане розширення .txt (наприклад, `filename.params.txt`) або якщо не обрано опцію &#x27;All Files&#x27; у діалоговому вікні відкриття файлу.">
+<meta property="og:title" content="Налаштування рівнів потужності для VTX з протоколом IRC Tramp в ArduPilot">
+<meta property="og:description" content="Досвідчений користувач user_3aef7c1432 надав детальну таблицю відповідності значень, які потрібно встановлювати в параметрах ArduPilot, до реальної потужності VTX для протоколу Tramp. Наприклад, для о">
 <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
 <style>
 :root {
@@ -104,9 +104,9 @@ footer {
       <span class="status-solved status-badge">Вирішено</span>
     </header>
     <main>
-      <h1>Mission Planner не бачить файли .params</h1>
-      <p class="meta">Case 068a1c11f9e0 &middot; ua_ardupilot</p>
-      <div class='tags'><span class="tag">#Mission Planner</span><span class="tag">#параметри</span><span class="tag">#.params</span><span class="tag">#файли</span><span class="tag">#налаштування</span></div>
+      <h1>Налаштування рівнів потужності для VTX з протоколом IRC Tramp в ArduPilot</h1>
+      <p class="meta">Case 956d42cbd2c0 &middot; ua_ardupilot</p>
+      <div class='tags'><span class="tag">#VTX</span><span class="tag">#IRC Tramp</span><span class="tag">#потужність VTX</span><span class="tag">#SmartAudio</span><span class="tag">#налаштування VTX</span><span class="tag">#ArduPilot</span><span class="tag">#VTX_POWER</span></div>
       <div class="problem-section">
         <h2 class="section-title">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -115,19 +115,26 @@ footer {
           </svg>
           Проблема
         </h2>
-        <p class="section-content">Користувач не може знайти файли з розширенням .params у Mission Planner.</p>
+        <p class="section-content">Користувач запитує, як співвідносяться значення потужності, що встановлюються в параметрах ArduPilot, з реальною вихідною потужністю на відеопередавачі iFlight 2.5W, що працює за протоколом IRC Tramp. Зокрема, виникло питання, чи обмежується потужність 1 Вт, якщо в параметрах вказано 1000.</p>
       </div>
       <div class="solution-section">
         <h2 class="section-title">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
           Рішення
         </h2>
-        <p class="section-content">Mission Planner може не бачити файли .params, якщо вони мають приховане розширення .txt (наприклад, `filename.params.txt`) або якщо не обрано опцію &#x27;All Files&#x27; у діалоговому вікні відкриття файлу.</p>
+        <p class="section-content">Досвідчений користувач user_3aef7c1432 надав детальну таблицю відповідності значень, які потрібно встановлювати в параметрах ArduPilot, до реальної потужності VTX для протоколу Tramp. Наприклад, для отримання 2500mW (2.5W) необхідно встановити значення 600.
+
+Таблиця відповідності (значення в параметрі -&gt; потужність VTX):
+- 25 -&gt; 25mW
+- 100 -&gt; 200mW
+- 200 -&gt; 600mW
+- 400 -&gt; 1600mW
+- 600 -&gt; 2500mW</p>
       </div>
     </main>
   </div>
   <div class="card">
-    <div class="chat-header"><h2><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Історія чату</h2></div><div class="messages"><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Вітаю<br>Підкажіть чому mission planner може не бачити файл з розширенням .params?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Вітаю Підкажіть чому mission planner може не бачити файл з розширенням .params?</div></div><p class="message-text">або там приховане .txt розширення або натисніть all files</p></div></div>
+    <div class="chat-header"><h2><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Історія чату</h2></div><div class="messages"><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Доброго усім. vtx iFlight 2.5 із IRC Trump. Чи вірно я розумію, що налаштувати перемикання потужності можливе у АР до 6 діапазонів але не більше 1 Вт? Й це при тому що vtx_pwr_max встановлено 1000.<br>Чому запитую. Хтось заміряв потужнвсть vtx при перемиканні на МАХ?  Чи дійсно вона 1вт?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Доброго усім. vtx iFlight 2.5 із IRC Trump. Чи вірно я розумію, що налаштувати перемикання потужності можливе у АР до 6 </div></div><p class="message-text">у трампа макс це коли в втх вкидається значення 600<br>поставте і по індікації перевірте просто</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><p class="message-text">значення - потужність втх<br>25 25mW<br>100 200mW<br>200 600mW<br>400 1600mW<br>600 2500mW</p></div></div>
     <footer>Academia Tech &copy; 2026</footer>
   </div>
 </div>

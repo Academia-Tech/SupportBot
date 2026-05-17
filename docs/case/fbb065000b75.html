@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html><head>
-<title>Mission Planner не бачить файли .params | SupportBot</title>
+<title>Unstable Input Signal on Wemos D1 from a Commercial Relay&#x27;s Auxiliary Contact | SupportBot</title>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta property="og:title" content="Mission Planner не бачить файли .params">
-<meta property="og:description" content="Mission Planner може не бачити файли .params, якщо вони мають приховане розширення .txt (наприклад, `filename.params.txt`) або якщо не обрано опцію &#x27;All Files&#x27; у діалоговому вікні відкриття файлу.">
+<meta property="og:title" content="Unstable Input Signal on Wemos D1 from a Commercial Relay&#x27;s Auxiliary Contact">
+<meta property="og:description" content="The issue of an unstable input signal from a relay&#x27;s auxiliary contact, likely caused by 50/60Hz electrical noise, was resolved after the user received several suggestions and confirmed their helpfuln">
 <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
 <style>
 :root {
@@ -104,9 +104,9 @@ footer {
       <span class="status-solved status-badge">Вирішено</span>
     </header>
     <main>
-      <h1>Mission Planner не бачить файли .params</h1>
-      <p class="meta">Case 068a1c11f9e0 &middot; ua_ardupilot</p>
-      <div class='tags'><span class="tag">#Mission Planner</span><span class="tag">#параметри</span><span class="tag">#.params</span><span class="tag">#файли</span><span class="tag">#налаштування</span></div>
+      <h1>Unstable Input Signal on Wemos D1 from a Commercial Relay&#x27;s Auxiliary Contact</h1>
+      <p class="meta">Case fbb065000b75 &middot; tasmota</p>
+      <div class='tags'><span class="tag">#tasmota</span><span class="tag">#wemos d1</span><span class="tag">#gpio</span><span class="tag">#input</span><span class="tag">#noise</span><span class="tag">#debounce</span><span class="tag">#capacitor</span><span class="tag">#ghost switching</span><span class="tag">#relay feedback</span></div>
       <div class="problem-section">
         <h2 class="section-title">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -115,19 +115,22 @@ footer {
           </svg>
           Проблема
         </h2>
-        <p class="section-content">Користувач не може знайти файли з розширенням .params у Mission Planner.</p>
+        <p class="section-content">A user is trying to get feedback from a commercial relay&#x27;s auxiliary contact, which is connected to an input on a Wemos D1 running Tasmota. The input signal is very unstable, rapidly toggling on and off. The user provided a wiring diagram and asked if the connections are correct.</p>
       </div>
       <div class="solution-section">
         <h2 class="section-title">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
           Рішення
         </h2>
-        <p class="section-content">Mission Planner може не бачити файли .params, якщо вони мають приховане розширення .txt (наприклад, `filename.params.txt`) або якщо не обрано опцію &#x27;All Files&#x27; у діалоговому вікні відкриття файлу.</p>
+        <p class="section-content">The issue of an unstable input signal from a relay&#x27;s auxiliary contact, likely caused by 50/60Hz electrical noise, was resolved after the user received several suggestions and confirmed their helpfulness. The recommended solutions include:
+1.  **Hardware Filtering:** Add a 10µF capacitor between the input pin and ground. A 10kΩ pull-up resistor from the input pin to the 3.3V line was also suggested.
+2.  **Software Debouncing:** Increase the debounce timer in Tasmota, referencing the documentation on &#x27;ghost switching&#x27; for guidance.
+3.  **Software Pull-up:** While `pinMode(D1,INPUT_PULLUP);` was mentioned, it was noted this might not be supported in Tasmota.</p>
       </div>
     </main>
   </div>
   <div class="card">
-    <div class="chat-header"><h2><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Історія чату</h2></div><div class="messages"><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Вітаю<br>Підкажіть чому mission planner може не бачити файл з розширенням .params?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Вітаю Підкажіть чому mission planner може не бачити файл з розширенням .params?</div></div><p class="message-text">або там приховане .txt розширення або натисніть all files</p></div></div>
+    <div class="chat-header"><h2><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Історія чату</h2></div><div class="messages"><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">HI . i want to get feedback using this commercial relay when i activate a light. in practice the auxiliary contact of the relay closes and arrives at the input of my wemos with tasmota. the problem is that the information is very unstable. I see it turns on and off quickly. Do you think the connections are correct?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Sorry for diagram fast..</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><p class="message-text">**ouinouin**: @Dobermann10: what is the model of the relay, are you sure the two throws of the relay are isolated?, otherwise schematics looks correct if you re sure not to input live or neutral on the board, what you got from the relay is the 50hz noise coming in the input of your board</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><p class="message-text">**ouinouin**: you have to decouple it by putting a 10uf capacitor between the input and the ground</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><p class="message-text">**ouinouin**: another way to solve this is to increase the debounce timer, i think there are some commands to do that in tasmota.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><p class="message-text">**ouinouin**: look for tasmota debounce</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><p class="message-text">**ouinouin**: https://tasmota.github.io/docs/devices/Shelly-2.5/#ghost-switching</p></div></div>
     <footer>Academia Tech &copy; 2026</footer>
   </div>
 </div>

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html><head>
+<title>How to Read PWM Duty Cycle from an Input Signal on ESP32 with Tasmota | SupportBot</title>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta property="og:title" content="How to Read PWM Duty Cycle from an Input Signal on ESP32 with Tasmota">
+<meta property="og:description" content="The discussion concluded that Tasmota does not have a built-in sensor or function to directly measure the duty cycle of an external PWM signal. However, several solutions and workarounds were provided">
+<link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+<style>
+:root {
+  --signal-blue: #2c6bed;
+  --page-bg: #f6f7f9;
+  --card-bg: #ffffff;
+  --text: #0d0d0d;
+  --text-sec: #5c5c5c;
+  --border: #d8d8d8;
+  --radius: 12px;
+  --green: #16a34a;
+  --yellow: #ca8a04;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  background: var(--page-bg); color: var(--text);
+  min-height: 100vh; padding: 48px 20px;
+  -webkit-font-smoothing: antialiased;
+}
+@media (max-width: 520px) { body { padding: 24px 12px; } }
+.shell { max-width: 640px; margin: 0 auto; }
+.card {
+  background: var(--card-bg); border: 1px solid var(--border);
+  border-radius: var(--radius); overflow: hidden; margin-bottom: 16px;
+}
+header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 20px; border-bottom: 1px solid var(--border);
+}
+.header-left { display: flex; align-items: center; gap: 10px; text-decoration: none; color: inherit; }
+.logo { width: 28px; height: 28px; }
+.brand { font-size: 15px; font-weight: 600; letter-spacing: -0.02em; }
+.chat-header { padding: 14px 20px; border-bottom: 1px solid var(--border); background: var(--page-bg); }
+.chat-header h2 { font-size: 14px; font-weight: 600; color: var(--text); display: flex; align-items: center; gap: 8px; }
+.chat-header h2 svg { width: 16px; height: 16px; color: var(--signal-blue); }
+.messages { padding: 0; }
+.message { padding: 16px 20px; border-bottom: 1px solid var(--border); }
+.message:last-child { border-bottom: none; }
+.message-header { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+.avatar { width: 28px; height: 28px; border-radius: 50%; color: white; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 600; flex-shrink: 0; }
+.sender-info { flex: 1; min-width: 0; }
+.sender-name { font-size: 13px; font-weight: 600; color: var(--text); }
+.message-text { font-size: 15px; line-height: 1.55; color: var(--text); white-space: pre-wrap; margin-left: 38px; }
+.reply-bubble { margin-left: 38px; margin-bottom: 6px; padding: 6px 10px; background: #f0f2f5; border-left: 3px solid var(--signal-blue); border-radius: 4px; font-size: 13px; color: var(--text-sec); }
+.reply-sender { font-weight: 600; color: var(--signal-blue); font-size: 12px; margin-bottom: 2px; }
+.reply-text { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.status-badge {
+  padding: 4px 10px; font-size: 11px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.04em; border-radius: 4px;
+}
+.status-solved { background: #dcfce7; color: var(--green); }
+.status-recommendation { background: #fef3c7; color: #b45309; }
+main { padding: 24px 20px; }
+h1 { font-size: 20px; font-weight: 700; letter-spacing: -0.025em; margin-bottom: 12px; line-height: 1.3; }
+.meta { font-size: 12px; color: var(--text-sec); margin-bottom: 16px; }
+.tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 20px; }
+.tag {
+  background: rgba(44, 107, 237, 0.08); color: var(--signal-blue);
+  padding: 4px 10px; border-radius: 4px; font-size: 12px; font-weight: 500;
+}
+.section-title {
+  font-size: 11px; font-weight: 600; text-transform: uppercase;
+  letter-spacing: 0.06em; color: var(--text-sec); margin-bottom: 10px;
+  display: flex; align-items: center; gap: 6px;
+}
+.section-title svg { width: 14px; height: 14px; }
+.section-content { font-size: 15px; line-height: 1.6; color: var(--text); white-space: pre-wrap; }
+.problem-section { padding-bottom: 20px; border-bottom: 1px solid var(--border); margin-bottom: 20px; }
+.solution-section {
+  background: #f0fdf4; margin: -24px -20px -24px -20px; padding: 20px;
+  border-top: 1px solid #bbf7d0;
+}
+.solution-section .section-title { color: var(--green); }
+.recommendation-solution { background: #fffbeb; border-top-color: #fde68a; }
+.recommendation-solution .section-title { color: #b45309; }
+.empty-chat {
+  padding: 32px 20px; text-align: center; color: var(--text-sec); font-size: 14px;
+}
+footer {
+  padding: 14px 20px; border-top: 1px solid var(--border);
+  color: var(--text-sec); font-size: 12px; text-align: center;
+}
+@media (max-width: 520px) {
+  main { padding: 20px 16px; }
+  h1 { font-size: 18px; }
+  .solution-section { margin: -20px -16px -20px -16px; padding: 16px; }
+}
+</style>
+</head><body>
+<div class="shell">
+  <div class="card">
+    <header>
+      <a href="https://academia-tech.github.io/SupportBot" class="header-left">
+        <img src="/SupportBot/supportbot-logo-128.png" alt="SupportBot" class="logo">
+        <span class="brand">SupportBot</span>
+      </a>
+      <span class="status-solved status-badge">Вирішено</span>
+    </header>
+    <main>
+      <h1>How to Read PWM Duty Cycle from an Input Signal on ESP32 with Tasmota</h1>
+      <p class="meta">Case 3ae1ed26220d &middot; tasmota</p>
+      <div class='tags'><span class="tag">#pwm</span><span class="tag">#duty cycle</span><span class="tag">#input</span><span class="tag">#esp32</span><span class="tag">#sensor</span><span class="tag">#arduino</span><span class="tag">#pulsein</span><span class="tag">#rc filter</span><span class="tag">#adc</span></div>
+      <div class="problem-section">
+        <h2 class="section-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/>
+            <line x1="12" y1="16" x2="12.01" y2="16"/>
+          </svg>
+          Проблема
+        </h2>
+        <p class="section-content">A user inquired if it&#x27;s possible to read the duty cycle from a PWM signal on an ESP32S3 using Tasmota. They noted that while programming this in Arduino is feasible, they were looking for a Tasmota-native solution or a way to integrate Arduino code.</p>
+      </div>
+      <div class="solution-section">
+        <h2 class="section-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          Рішення
+        </h2>
+        <p class="section-content">The discussion concluded that Tasmota does not have a built-in sensor or function to directly measure the duty cycle of an external PWM signal. However, several solutions and workarounds were provided:
+1. **Hardware Method:** A user suggested a simple hardware solution using a resistor-capacitor (RC) low-pass filter to convert the PWM signal into an analog voltage. This voltage, which is proportional to the duty cycle, can then be read by the ESP&#x27;s ADC input.
+2. **Software Method (Arduino):** For a software-only solution, it was explained that this is challenging within the standard Tasmota loop due to timing constraints. The recommended approach, if custom coding is an option, is to use the Arduino `pulseIn()` function, which is designed for this purpose. Another user confirmed this function works reliably for them. An alternative using interrupts was also discussed and a code example was provided, but `pulseIn()` was highlighted as a simpler solution. It was noted that the Tasmota team might look into implementing this functionality in the future.</p>
+      </div>
+    </main>
+  </div>
+  <div class="card">
+    <div class="chat-header"><h2><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Історія чату</h2></div><div class="messages"><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Hello! I&#x27;m new with Tasmota, I&#x27;m wondering if there is any implementation where I could read duty cycle from a PWM signal in a ESP32S3</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Hello! I&#x27;m new with Tasmota, I&#x27;m wondering if there is any implementation where I could read duty cycle from a PWM signa</div></div><p class="message-text">**ouinouin**: not to my knowledge, tasmota knows to drive output as pwm, but there is no input to determine pwm duty cycle, it would be a nice one, to be able to interact wit some systems giving pwm outputs.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 2</div><div class="reply-text">**ouinouin**: not to my knowledge, tasmota knows to drive output as pwm, but there is no input to determine pwm duty cyc</div></div><p class="message-text">Do that while programming Arduino is not a great deal but I&#x27;m having some problems getting started by changing the code there</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><p class="message-text">If you make it in Arduino environment, you can do it in the same way as you do in Arduino</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 2</div><div class="reply-text">**ouinouin**: not to my knowledge, tasmota knows to drive output as pwm, but there is no input to determine pwm duty cyc</div></div><p class="message-text">You can do this electrical with a capacitor and a resistor and use the ADC input to get the duty. This should be quite linear.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 4</div><div class="reply-text">You can do this electrical with a capacitor and a resistor and use the ADC input to get the duty. This should be quite l</div></div><p class="message-text">Is not the ideal solution, I should use less hardware for it</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Is not the ideal solution, I should use less hardware for it</div></div><p class="message-text">In this case tasmota is not the right choice. You have to create your own high frequency interrupt to measure the dutytime on a pulse. Be aware that even this can be easily impossible if the pwm frequency is 1kHz or above. Just keep in mind with 80Mhz CPU frequency there are limits. Electrical is much easier.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 4</div><div class="reply-text">In this case tasmota is not the right choice. You have to create your own high frequency interrupt to measure the dutyti</div></div><p class="message-text">Why can&#x27;t I use Arduino code in ESP integrated in the Tasmota project to read duty cycle?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><p class="message-text">I assume you get the PWM signal from outside on one of the GPIO. Correct?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Yes</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><p class="message-text">In this case you need to measure the rise and the falling edge of the signal to calculate the duty cycle</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Yes</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><p class="message-text">And here we have the timing problem. On 1kHz. There is 1ms for the complete pulse. The resolution of the measurement must be somewhere in 10microseconds……</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><p class="message-text">At tasmota normal time slices are about 50ms minimum. This is 50 complete pulses. Just to give you an idea</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><p class="message-text">I wrote the zero-cross dimmer on the 50Hz main signal. Even this was very complicated. And this is beside the zero cross signal inside out</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><p class="message-text">I do not see a chance to get the duty cycle on an external pwm signal with software only</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 4</div><div class="reply-text">I do not see a chance to get the duty cycle on an external pwm signal with software only</div></div><p class="message-text">Thanks for the answer</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 4</div><div class="reply-text">In this case tasmota is not the right choice. You have to create your own high frequency interrupt to measure the dutyti</div></div><p class="message-text">Once again, if you do it from Arduino environment you don&#x27;t need interrupts at all</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 3</div><div class="reply-text">Once again, if you do it from Arduino environment you don&#x27;t need interrupts at all</div></div><p class="message-text">What GPIO function you use. I do not understand how it should work. DigitalRead does not provide any PWM capabilities afaik.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><p class="message-text">const int pwmPin = 2;  // GPIO-Pin, an dem das PWM-Signal anliegt<br>volatile unsigned long startTime;<br>volatile unsigned long endTime;<br>volatile bool pulseStarted = false;<br><br>void ICACHE_RAM_ATTR onInputChange()<br>{<br>  if (digitalRead(pwmPin) == HIGH)<br>  {<br>    startTime = micros();<br>    pulseStarted = true;<br>  }<br>  else<br>  {<br>    if (pulseStarted)<br>    {<br>      endTime = micros();<br>      pulseStarted = false;<br>    }<br>  }<br>}<br><br>void setup()<br>{<br>  pinMode(pwmPin, INPUT);<br><br>  attachInterrupt(digitalPinToInterrupt(pwmPin), onInputChange, CHANGE);<br><br>  Serial.begin(9600);<br>}<br><br>void loop()<br>{<br>  if (!pulseStarted)<br>  {<br>    float dutyCycle = (endTime - startTime) * 100.0 / (endTime - startTime + 200);  // 200 ist die Periode des PWM-Signals in Mikrosekunden<br>    Serial.print(&quot;Duty Cycle: &quot;);<br>    Serial.print(dutyCycle);<br>    Serial.println(&quot;%&quot;);<br>  }<br><br>  delay(1000);<br>}</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 4</div><div class="reply-text">What GPIO function you use. I do not understand how it should work. DigitalRead does not provide any PWM capabilities af</div></div><p class="message-text">Pulsein</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><p class="message-text">This is really interesting. And it is not part of Tasmota now. But it really looks like this could solve your request of the duty cycle. I will Check with the team if and where we can implement this.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><p class="message-text">This absolutely works,it&#x27;s working in all my radio controlled boats, even with 8 channels versions</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><p class="message-text">Thanks</p></div></div>
+    <footer>Academia Tech &copy; 2026</footer>
+  </div>
+</div>
+</body></html>

@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html><head>
-<title>Mission Planner не бачить файли .params | SupportBot</title>
+<title>Understanding Tasmota Memory Allocation on 4MB ESP8266 Devices | SupportBot</title>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta property="og:title" content="Mission Planner не бачить файли .params">
-<meta property="og:description" content="Mission Planner може не бачити файли .params, якщо вони мають приховане розширення .txt (наприклад, `filename.params.txt`) або якщо не обрано опцію &#x27;All Files&#x27; у діалоговому вікні відкриття файлу.">
+<meta property="og:title" content="Understanding Tasmota Memory Allocation on 4MB ESP8266 Devices">
+<meta property="og:description" content="Another user provided a clear explanation. The ESP8266 can only execute code from a 1MB partition. The remaining flash memory (e.g., 3MB on a 4MB chip) is allocated as a file system (like LittleFS). T">
 <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
 <style>
 :root {
@@ -104,9 +104,9 @@ footer {
       <span class="status-solved status-badge">Вирішено</span>
     </header>
     <main>
-      <h1>Mission Planner не бачить файли .params</h1>
-      <p class="meta">Case 068a1c11f9e0 &middot; ua_ardupilot</p>
-      <div class='tags'><span class="tag">#Mission Planner</span><span class="tag">#параметри</span><span class="tag">#.params</span><span class="tag">#файли</span><span class="tag">#налаштування</span></div>
+      <h1>Understanding Tasmota Memory Allocation on 4MB ESP8266 Devices</h1>
+      <p class="meta">Case d7052c3c7eef &middot; tasmota</p>
+      <div class='tags'><span class="tag">#tasmota</span><span class="tag">#esp8266</span><span class="tag">#memory management</span><span class="tag">#flash</span><span class="tag">#filesystem</span><span class="tag">#wemos d1 mini</span><span class="tag">#firmware</span><span class="tag">#variables</span></div>
       <div class="problem-section">
         <h2 class="section-title">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -115,19 +115,19 @@ footer {
           </svg>
           Проблема
         </h2>
-        <p class="section-content">Користувач не може знайти файли з розширенням .params у Mission Planner.</p>
+        <p class="section-content">A user was curious about how flash memory is utilized on a 4MB ESP8266 device like the Wemos D1 mini, questioning why the firmware binary is limited to ~1MB and what the remaining space is used for. They also asked about the storage of `var` and `mem` variables.</p>
       </div>
       <div class="solution-section">
         <h2 class="section-title">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
           Рішення
         </h2>
-        <p class="section-content">Mission Planner може не бачити файли .params, якщо вони мають приховане розширення .txt (наприклад, `filename.params.txt`) або якщо не обрано опцію &#x27;All Files&#x27; у діалоговому вікні відкриття файлу.</p>
+        <p class="section-content">Another user provided a clear explanation. The ESP8266 can only execute code from a 1MB partition. The remaining flash memory (e.g., 3MB on a 4MB chip) is allocated as a file system (like LittleFS). This file system is used to store the Tasmota web UI, configuration files, and user rules. It was also clarified that persistent `mem` variables are stored in a reserved area of flash (emulated EEPROM), while temporary `var` variables exist only in the device&#x27;s RAM.</p>
       </div>
     </main>
   </div>
   <div class="card">
-    <div class="chat-header"><h2><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Історія чату</h2></div><div class="messages"><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Вітаю<br>Підкажіть чому mission planner може не бачити файл з розширенням .params?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Вітаю Підкажіть чому mission planner може не бачити файл з розширенням .params?</div></div><p class="message-text">або там приховане .txt розширення або натисніть all files</p></div></div>
+    <div class="chat-header"><h2><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Історія чату</h2></div><div class="messages"><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Hi guys<br>My question may sounds little odd but I will ask😅<br>In wemos d1 mini 4M bytes flash one<br><br>Max bin file that can be flashed I guess is 1M byte . So I was thinking what is happening to remaining memory?<br><br>Do anyone know how tasmota is allocatimg memory or any link for that would be greatly appreciated 😊</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><p class="message-text">A far as I know, ESP8266 family chips can only execute code from 1MB of RAM, so the rest is used as File system. I guess this is used to store configuration and rules.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 2</div><div class="reply-text">A far as I know, ESP8266 family chips can only execute code from 1MB of RAM, so the rest is used as File system. I guess</div></div><p class="message-text">Does web page code and sensor drivers code also included in this 1MB ?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Does web page code and sensor drivers code also included in this 1MB ?</div></div><p class="message-text">I guess the web page is just files located in the file system that are served to a client. The drivers are code that must be executable, so I guess they must be part of the max. 1MB executable code</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">So if new rules are written is it written in flash memory  right ?<br><br>Also I have one more doubt regarding 32 variables tasmota provides<br>Mem1 to mem16 are persistent to power , so they needs to be stored in flash I guess<br><br>Then where does var1 to var16 variables are stored<br><br>And does this 32 variables are defined  in the 1 MB code space<br><br><br>Sorry for too many questions<br>Just trying to keep in a single message 😅</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">So if new rules are written is it written in flash memory  right ?  Also I have one more doubt regarding 32 variables ta</div></div><p class="message-text">There is more than only the flash, afaik, some eeprom as well</p></div></div>
     <footer>Academia Tech &copy; 2026</footer>
   </div>
 </div>

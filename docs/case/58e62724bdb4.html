@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html><head>
+<title>Resetting Unresponsive Athom Tasmota Light Bulbs (LB01-15W-E27) | SupportBot</title>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta property="og:title" content="Resetting Unresponsive Athom Tasmota Light Bulbs (LB01-15W-E27)">
+<meta property="og:description" content="Another user suggested trying a slower power cycling sequence. The original user confirmed this worked. The successful procedure was to turn the power off and on between 5 to 7 times, with a longer in">
+<link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+<style>
+:root {
+  --signal-blue: #2c6bed;
+  --page-bg: #f6f7f9;
+  --card-bg: #ffffff;
+  --text: #0d0d0d;
+  --text-sec: #5c5c5c;
+  --border: #d8d8d8;
+  --radius: 12px;
+  --green: #16a34a;
+  --yellow: #ca8a04;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  background: var(--page-bg); color: var(--text);
+  min-height: 100vh; padding: 48px 20px;
+  -webkit-font-smoothing: antialiased;
+}
+@media (max-width: 520px) { body { padding: 24px 12px; } }
+.shell { max-width: 640px; margin: 0 auto; }
+.card {
+  background: var(--card-bg); border: 1px solid var(--border);
+  border-radius: var(--radius); overflow: hidden; margin-bottom: 16px;
+}
+header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 20px; border-bottom: 1px solid var(--border);
+}
+.header-left { display: flex; align-items: center; gap: 10px; text-decoration: none; color: inherit; }
+.logo { width: 28px; height: 28px; }
+.brand { font-size: 15px; font-weight: 600; letter-spacing: -0.02em; }
+.chat-header { padding: 14px 20px; border-bottom: 1px solid var(--border); background: var(--page-bg); }
+.chat-header h2 { font-size: 14px; font-weight: 600; color: var(--text); display: flex; align-items: center; gap: 8px; }
+.chat-header h2 svg { width: 16px; height: 16px; color: var(--signal-blue); }
+.messages { padding: 0; }
+.message { padding: 16px 20px; border-bottom: 1px solid var(--border); }
+.message:last-child { border-bottom: none; }
+.message-header { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+.avatar { width: 28px; height: 28px; border-radius: 50%; color: white; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 600; flex-shrink: 0; }
+.sender-info { flex: 1; min-width: 0; }
+.sender-name { font-size: 13px; font-weight: 600; color: var(--text); }
+.message-text { font-size: 15px; line-height: 1.55; color: var(--text); white-space: pre-wrap; margin-left: 38px; }
+.reply-bubble { margin-left: 38px; margin-bottom: 6px; padding: 6px 10px; background: #f0f2f5; border-left: 3px solid var(--signal-blue); border-radius: 4px; font-size: 13px; color: var(--text-sec); }
+.reply-sender { font-weight: 600; color: var(--signal-blue); font-size: 12px; margin-bottom: 2px; }
+.reply-text { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.status-badge {
+  padding: 4px 10px; font-size: 11px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.04em; border-radius: 4px;
+}
+.status-solved { background: #dcfce7; color: var(--green); }
+.status-recommendation { background: #fef3c7; color: #b45309; }
+main { padding: 24px 20px; }
+h1 { font-size: 20px; font-weight: 700; letter-spacing: -0.025em; margin-bottom: 12px; line-height: 1.3; }
+.meta { font-size: 12px; color: var(--text-sec); margin-bottom: 16px; }
+.tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 20px; }
+.tag {
+  background: rgba(44, 107, 237, 0.08); color: var(--signal-blue);
+  padding: 4px 10px; border-radius: 4px; font-size: 12px; font-weight: 500;
+}
+.section-title {
+  font-size: 11px; font-weight: 600; text-transform: uppercase;
+  letter-spacing: 0.06em; color: var(--text-sec); margin-bottom: 10px;
+  display: flex; align-items: center; gap: 6px;
+}
+.section-title svg { width: 14px; height: 14px; }
+.section-content { font-size: 15px; line-height: 1.6; color: var(--text); white-space: pre-wrap; }
+.problem-section { padding-bottom: 20px; border-bottom: 1px solid var(--border); margin-bottom: 20px; }
+.solution-section {
+  background: #f0fdf4; margin: -24px -20px -24px -20px; padding: 20px;
+  border-top: 1px solid #bbf7d0;
+}
+.solution-section .section-title { color: var(--green); }
+.recommendation-solution { background: #fffbeb; border-top-color: #fde68a; }
+.recommendation-solution .section-title { color: #b45309; }
+.empty-chat {
+  padding: 32px 20px; text-align: center; color: var(--text-sec); font-size: 14px;
+}
+footer {
+  padding: 14px 20px; border-top: 1px solid var(--border);
+  color: var(--text-sec); font-size: 12px; text-align: center;
+}
+@media (max-width: 520px) {
+  main { padding: 20px 16px; }
+  h1 { font-size: 18px; }
+  .solution-section { margin: -20px -16px -20px -16px; padding: 16px; }
+}
+</style>
+</head><body>
+<div class="shell">
+  <div class="card">
+    <header>
+      <a href="https://academia-tech.github.io/SupportBot" class="header-left">
+        <img src="/SupportBot/supportbot-logo-128.png" alt="SupportBot" class="logo">
+        <span class="brand">SupportBot</span>
+      </a>
+      <span class="status-solved status-badge">Вирішено</span>
+    </header>
+    <main>
+      <h1>Resetting Unresponsive Athom Tasmota Light Bulbs (LB01-15W-E27)</h1>
+      <p class="meta">Case 58e62724bdb4 &middot; tasmota</p>
+      <div class='tags'><span class="tag">#athom</span><span class="tag">#bulb</span><span class="tag">#LB01-15W-E27</span><span class="tag">#reset</span><span class="tag">#unresponsive</span><span class="tag">#recovery</span><span class="tag">#wifi</span><span class="tag">#power cycle</span></div>
+      <div class="problem-section">
+        <h2 class="section-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/>
+            <line x1="12" y1="16" x2="12.01" y2="16"/>
+          </svg>
+          Проблема
+        </h2>
+        <p class="section-content">A user reported that 3 out of 4 Athom LB01-15W-E27 bulbs pre-flashed with Tasmota became unresponsive. The standard reset procedure of turning them on and off quickly (e.g., 6 times) did not work, and the bulbs showed no signs of life (did not light up).</p>
+      </div>
+      <div class="solution-section">
+        <h2 class="section-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          Рішення
+        </h2>
+        <p class="section-content">Another user suggested trying a slower power cycling sequence. The original user confirmed this worked. The successful procedure was to turn the power off and on between 5 to 7 times, with a longer interval of about 2 to 5 seconds for both the &#x27;on&#x27; and &#x27;off&#x27; states. 
+
+It was also noted that after a successful reset, the bulb might not light up but will start broadcasting its Wi-Fi access point. One must check for the new Wi-Fi network to confirm the reset. The user also shared the official Tasmota documentation for device recovery: https://tasmota.github.io/docs/Device-Recovery/#recovery-techniques</p>
+      </div>
+    </main>
+  </div>
+  <div class="card">
+    <div class="chat-header"><h2><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Історія чату</h2></div><div class="messages"><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Hello there!<br><br>I&#x27;m sorry in advance if this is not the right place to ask this question, just let me know.<br><br>I have purchased 4 light bulbs by Athom (LB01-15W-E27) pre-flashed with Tasmota. Now on already 3 out of 4, I can&#x27;t get them to work anymore, because of, I assume, misconfigured wifi. Resetting them by turning them on and off 5 times doesn&#x27;t reset them. They just don&#x27;t light up anymore. They did lit up before, so they are no DOA&#x27;s. Any way to reset them? Do I need to open them up?<br><br>Thanks for helping me out!</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><p class="message-text">I heard of 7 x on/off ?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">I tried 10 times as well, no luck... :(</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><p class="message-text">Uuuh. Too fast ? Maybe it needs a 5-second-intervall .<br> 5 sec on, 5 sec off<br>After reset, you look for new WiFi sent by 💡?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><p class="message-text">The bulbs are odd.  I couldn&#x27;t get one to reset either but the device I used for a chicken door would randomly reset on me and I had no idea what was going on.  Finally found sometimes the linear actuator would make the power supply chatter so I added a battery to buffer the voltage.  I suspect a cap or something is doing the same thing in the bulb.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><p class="message-text">I didn&#x27;t know it was a feature until I saw it on the website once and put two and two together on what was happening with the chicken door.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Thanks for the replies, both of you 😊</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 2</div><div class="reply-text">Uuuh. Too fast ? Maybe it needs a 5-second-intervall .  5 sec on, 5 sec off After reset, you look for new WiFi sent by 💡</div></div><p class="message-text">I&#x27;m gonna try this variation as well</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><p class="message-text">Let me know if slower works.  I put it in a three way switch lamp and I think that might have been part of my problem.  If you get it I&#x27;ll pull the bulb back out and see if I can get it to reset.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">But I doubt if it even registers. The light doesn&#x27;t turn on AT ALL when I power it. So there is no sign of life. An hour ago, I had 1 working bulb I never used since I bought it. This Athom LB01 bulb starts up with white, red, green, blue, etc, untill you connect to it&#x27;s access point.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Unbelieveable, I got 1 back...</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">turned it off 5 times with 5 seconds off, 5 seconds on</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 2</div><div class="reply-text">Uuuh. Too fast ? Maybe it needs a 5-second-intervall .  5 sec on, 5 sec off After reset, you look for new WiFi sent by 💡</div></div><p class="message-text">Thank you!</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><p class="message-text">🌻<br>🍻</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Still really strange though, because I did reset 2 others I have with like 1 second between on/off. Also very strange, that after I reset it eventually, I would only know it was there by checking the wifi. The light never turned on...</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Also found this one on a few websites:</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><p class="message-text">Maybe the bulb remembers it&#x27;s last state? Or it starts &#x27;off&#x27; - both possible. And configurable. (Even &#x27;on&#x27; is possible)<br>Changing colours is set by configuration &quot;schemeX&quot; with X= 1, 2, 3 or 4 (even more?)</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Yes, it seemed to have remembered the last state. So resetting it with on-off method is not fully a reset?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Second one restored. Was also toggled OFF after reset, so I was just checking the wifi networks constantly.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">I did about 7 times on-off for 2 seconds</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Yes, it seemed to have remembered the last state. So resetting it with on-off method is not fully a reset?</div></div><p class="message-text">Yea<br>Looks like it only resets WiFi, so You can get it in Your new network without knowing the old-one.<br>I don&#x27;t know very much about tasmota but luckily I could help You 😊</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Yes, thanks alot! :)</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Still really strange though, because I did reset 2 others I have with like 1 second between on/off. Also very strange, t</div></div><p class="message-text">It won&#x27;t trigger the relay on a reset as it goes back to stock.  That would be like turning on any newly flashed unit and the relay turns on.  Glad you got it.  I&#x27;ll dig mine out and try again.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Athom fairly quickly after filling in a form on their website (I thought it didn&#x27;t work, because their website seemed kinda buggy to me.):<br><br>https://tasmota.github.io/docs/Device-Recovery/#recovery-techniques<br><br>This is the way!</p></div></div>
+    <footer>Academia Tech &copy; 2026</footer>
+  </div>
+</div>
+</body></html>

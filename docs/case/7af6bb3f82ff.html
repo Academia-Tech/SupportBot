@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html><head>
+<title>Проблеми з прошивкою ArduPilot на Speedybee F405 v3 та підключенням до Mission Planner | SupportBot</title>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta property="og:title" content="Проблеми з прошивкою ArduPilot на Speedybee F405 v3 та підключенням до Mission Planner">
+<meta property="og:description" content="Було запропоновано кілька рішень: 1. Перепрошити через Inav Configurator. 2. Використати STM32CubeProgrammer для прошивки та повного стирання флешу. 3. Спробувати зібрати прошивку 4.7.0 через custom.a">
+<link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+<style>
+:root {
+  --signal-blue: #2c6bed;
+  --page-bg: #f6f7f9;
+  --card-bg: #ffffff;
+  --text: #0d0d0d;
+  --text-sec: #5c5c5c;
+  --border: #d8d8d8;
+  --radius: 12px;
+  --green: #16a34a;
+  --yellow: #ca8a04;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  background: var(--page-bg); color: var(--text);
+  min-height: 100vh; padding: 48px 20px;
+  -webkit-font-smoothing: antialiased;
+}
+@media (max-width: 520px) { body { padding: 24px 12px; } }
+.shell { max-width: 640px; margin: 0 auto; }
+.card {
+  background: var(--card-bg); border: 1px solid var(--border);
+  border-radius: var(--radius); overflow: hidden; margin-bottom: 16px;
+}
+header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 20px; border-bottom: 1px solid var(--border);
+}
+.header-left { display: flex; align-items: center; gap: 10px; text-decoration: none; color: inherit; }
+.logo { width: 28px; height: 28px; }
+.brand { font-size: 15px; font-weight: 600; letter-spacing: -0.02em; }
+.chat-header { padding: 14px 20px; border-bottom: 1px solid var(--border); background: var(--page-bg); }
+.chat-header h2 { font-size: 14px; font-weight: 600; color: var(--text); display: flex; align-items: center; gap: 8px; }
+.chat-header h2 svg { width: 16px; height: 16px; color: var(--signal-blue); }
+.messages { padding: 0; }
+.message { padding: 16px 20px; border-bottom: 1px solid var(--border); }
+.message:last-child { border-bottom: none; }
+.message-header { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+.avatar { width: 28px; height: 28px; border-radius: 50%; color: white; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 600; flex-shrink: 0; }
+.sender-info { flex: 1; min-width: 0; }
+.sender-name { font-size: 13px; font-weight: 600; color: var(--text); }
+.message-text { font-size: 15px; line-height: 1.55; color: var(--text); white-space: pre-wrap; margin-left: 38px; }
+.reply-bubble { margin-left: 38px; margin-bottom: 6px; padding: 6px 10px; background: #f0f2f5; border-left: 3px solid var(--signal-blue); border-radius: 4px; font-size: 13px; color: var(--text-sec); }
+.reply-sender { font-weight: 600; color: var(--signal-blue); font-size: 12px; margin-bottom: 2px; }
+.reply-text { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.status-badge {
+  padding: 4px 10px; font-size: 11px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.04em; border-radius: 4px;
+}
+.status-solved { background: #dcfce7; color: var(--green); }
+.status-recommendation { background: #fef3c7; color: #b45309; }
+main { padding: 24px 20px; }
+h1 { font-size: 20px; font-weight: 700; letter-spacing: -0.025em; margin-bottom: 12px; line-height: 1.3; }
+.meta { font-size: 12px; color: var(--text-sec); margin-bottom: 16px; }
+.tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 20px; }
+.tag {
+  background: rgba(44, 107, 237, 0.08); color: var(--signal-blue);
+  padding: 4px 10px; border-radius: 4px; font-size: 12px; font-weight: 500;
+}
+.section-title {
+  font-size: 11px; font-weight: 600; text-transform: uppercase;
+  letter-spacing: 0.06em; color: var(--text-sec); margin-bottom: 10px;
+  display: flex; align-items: center; gap: 6px;
+}
+.section-title svg { width: 14px; height: 14px; }
+.section-content { font-size: 15px; line-height: 1.6; color: var(--text); white-space: pre-wrap; }
+.problem-section { padding-bottom: 20px; border-bottom: 1px solid var(--border); margin-bottom: 20px; }
+.solution-section {
+  background: #f0fdf4; margin: -24px -20px -24px -20px; padding: 20px;
+  border-top: 1px solid #bbf7d0;
+}
+.solution-section .section-title { color: var(--green); }
+.recommendation-solution { background: #fffbeb; border-top-color: #fde68a; }
+.recommendation-solution .section-title { color: #b45309; }
+.empty-chat {
+  padding: 32px 20px; text-align: center; color: var(--text-sec); font-size: 14px;
+}
+footer {
+  padding: 14px 20px; border-top: 1px solid var(--border);
+  color: var(--text-sec); font-size: 12px; text-align: center;
+}
+@media (max-width: 520px) {
+  main { padding: 20px 16px; }
+  h1 { font-size: 18px; }
+  .solution-section { margin: -20px -16px -20px -16px; padding: 16px; }
+}
+</style>
+</head><body>
+<div class="shell">
+  <div class="card">
+    <header>
+      <a href="https://academia-tech.github.io/SupportBot" class="header-left">
+        <img src="/SupportBot/supportbot-logo-128.png" alt="SupportBot" class="logo">
+        <span class="brand">SupportBot</span>
+      </a>
+      <span class="status-recommendation status-badge">Рекомендація</span>
+    </header>
+    <main>
+      <h1>Проблеми з прошивкою ArduPilot на Speedybee F405 v3 та підключенням до Mission Planner</h1>
+      <p class="meta">Case 7af6bb3f82ff &middot; ua_ardupilot</p>
+      <div class='tags'><span class="tag">#ArduPilot</span><span class="tag">#Speedybee F405 v3</span><span class="tag">#прошивка</span><span class="tag">#Mission Planner</span><span class="tag">#ESC</span><span class="tag">#DFU</span><span class="tag">#STM32CubeProgrammer</span><span class="tag">#Inav</span><span class="tag">#COM-порт</span><span class="tag">#бутлоадер</span></div>
+      <div class="problem-section">
+        <h2 class="section-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/>
+            <line x1="12" y1="16" x2="12.01" y2="16"/>
+          </svg>
+          Проблема
+        </h2>
+        <p class="section-content">Користувач, який переходить з Betaflight, прошив Speedybee F405 v3 файлом arducopter_with_bl.hex з офіційного сайту ArduPilot. Mission Planner читає дані, але при підключенні батареї звук видають лише ESC, налаштування не зберігаються, і з&#x27;являється помилка &quot;зняти пропи&quot;. Спроби прошивки через Inav Configurator та STM32CubeProgrammer, а також повне стирання флешу, не вирішили проблему. Після прошивки ArduPilot Mission Planner не підключає польотник.</p>
+      </div>
+      <div class="solution-section recommendation-solution">
+        <h2 class="section-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7c.6.4 1 1.1 1 1.8V17h6v-.5c0-.7.4-1.4 1-1.8A7 7 0 0 0 12 2z"/></svg>
+          Рекомендація (не підтверджено)
+        </h2>
+        <p class="section-content">Було запропоновано кілька рішень: 1. Перепрошити через Inav Configurator. 2. Використати STM32CubeProgrammer для прошивки та повного стирання флешу. 3. Спробувати зібрати прошивку 4.7.0 через custom.ardupilot.org/add_build. 4. Перевірити, чи не змінився COM-порт після прошивки. 5. Зазначено, що _bl.hex містить бутлоадер, що дозволяє подальші оновлення через Mission Planner. 6. Пояснено, що польотний контролер сам не видає звуків, а ESC не пілікають вдруге, якщо FC не знає про їхнє розташування (потрібно заливати пресет через Mission Planner без батареї). Незважаючи на спроби, проблема з коректною роботою ArduPilot та підключенням до Mission Planner залишається невирішеною.</p>
+      </div>
+    </main>
+  </div>
+  <div class="card">
+    <div class="chat-header"><h2><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Історія чату</h2></div><div class="messages"><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Вітаю! Лиш вникаю у прошивку ArduPilot, до цього лиш з Betaflight працював. Підкажіть в чому може бути проблема<br>Маю польотник speedybee f405 v3, прошив його файлом arducopter_with_bl.hex із офіційного сайту, в главі stable ну і вибрав FCC SB F405 V3. Прошив через DFU режим у Betaflight. Mision Planer читає його, виводить інформацію у вкладці &quot;Дані для польоту&quot;. Але при підключенні батареї, звук видає лиш ESC, також при зміні якихось налаштувань у Mision Planer жодних збережень нема і постійно виводить дану помилку, щоб зняти пропи. Підкажіть, що роблю не так?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Вітаю! Лиш вникаю у прошивку ArduPilot, до цього лиш з Betaflight працював. Підкажіть в чому може бути проблема Маю поль</div></div><p class="message-text">Арду можна прошивати через бетафлай ?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Вітаю! Лиш вникаю у прошивку ArduPilot, до цього лиш з Betaflight працював. Підкажіть в чому може бути проблема Маю поль</div></div><p class="message-text">Може через Івана?)</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 2</div><div class="reply-text">Арду можна прошивати через бетафлай ?</div></div><p class="message-text">прочитав на сайті Ardu, шо файли з розширенням .hex можна шити через DFU режим, а він нічим не відрізняється у бетки чи у того ж самого івана)<br><br>чи щось не так зрозумів, можете виправити раптом шось не то</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">прочитав на сайті Ardu, шо файли з розширенням .hex можна шити через DFU режим, а він нічим не відрізняється у бетки чи </div></div><p class="message-text">Перепрошийте через Inav Configurator і все  запрацює</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><p class="message-text">А я все через stm32 шию і не маю проблем</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 4</div><div class="reply-text">Перепрошийте через Inav Configurator і все  запрацює</div></div><p class="message-text">Скинув назад до прошивки Betaflight. Далі прошив через Inav 8.0.1, але проблема нікуди не зникла. Все те ж саме</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#0891b2">M5</div><div class="sender-info"><span class="sender-name">Учасник 5</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Скинув назад до прошивки Betaflight. Далі прошив через Inav 8.0.1, але проблема нікуди не зникла. Все те ж саме</div></div><p class="message-text">Чому не встановити STM32CubeProgrammer і зняти питання прошивки?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 5</div><div class="reply-text">Чому не встановити STM32CubeProgrammer і зняти питання прошивки?</div></div><p class="message-text">вже і через нього спробував, результат не змінний</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#0891b2">M5</div><div class="sender-info"><span class="sender-name">Учасник 5</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">вже і через нього спробував, результат не змінний</div></div><p class="message-text">прошивка точно Firmware site, path: /Copter/stable-4.6.2/speedybeef4v3 ?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 5</div><div class="reply-text">прошивка точно Firmware site, path: /Copter/stable-4.6.2/speedybeef4v3 ?</div></div><p class="message-text">path: /Copter/stable/speedybeef4v3</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">файл <br>arducopter_with_bl.hex</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#0891b2">M5</div><div class="sender-info"><span class="sender-name">Учасник 5</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">path: /Copter/stable/speedybeef4v3</div></div><p class="message-text">зберіть тут 4.7.0<br>https://custom.ardupilot.org/add_build</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#9333ea">M6</div><div class="sender-info"><span class="sender-name">Учасник 6</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">файл  arducopter_with_bl.hex</div></div><p class="message-text">_bl.hex — це прошивка з бутлоадером. Якщо ви її прошили то далі можна шити нові версії напряму з мішн-планера.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 5</div><div class="reply-text">зберіть тут 4.7.0 https://custom.ardupilot.org/add_build</div></div><p class="message-text">4.7.0 не було, спробував на 4.6.2 і 4.6.3, шив файли через STM32, але Mission Planer не підключає польотника тепер</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#0891b2">M5</div><div class="sender-info"><span class="sender-name">Учасник 5</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">4.7.0 не було, спробував на 4.6.2 і 4.6.3, шив файли через STM32, але Mission Planer не підключає польотника тепер</div></div><p class="message-text">4.7.0 - Latest підписано</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#dc2626">M7</div><div class="sender-info"><span class="sender-name">Учасник 7</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">4.7.0 не було, спробував на 4.6.2 і 4.6.3, шив файли через STM32, але Mission Planer не підключає польотника тепер</div></div><p class="message-text">а в STM32CubeProgrammer пробували робити повну очистку флеші?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 7</div><div class="reply-text">а в STM32CubeProgrammer пробували робити повну очистку флеші?</div></div><p class="message-text">та, спробував стерти, нічого не змінюється<br>можна б ставити під питання справність FC, але як тільки шию на Betaflight, все працює справно. А як лиш зашиваю різні версії Mision Planer, польотник не видає звуку під час підключення батареї, лиш ESC видає і не зберігає інформацію при налаштуваннях</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#0891b2">M5</div><div class="sender-info"><span class="sender-name">Учасник 5</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">та, спробував стерти, нічого не змінюється можна б ставити під питання справність FC, але як тільки шию на Betaflight, в</div></div><p class="message-text">На польотніку нема чим звуки видавать</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#0d9488">M8</div><div class="sender-info"><span class="sender-name">Учасник 8</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">4.7.0 не було, спробував на 4.6.2 і 4.6.3, шив файли через STM32, але Mission Planer не підключає польотника тепер</div></div><p class="message-text">А ком порт не помінявся? Гляньте в списку</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#0d9488">M8</div><div class="sender-info"><span class="sender-name">Учасник 8</span></div></div><p class="message-text">Бува після прошивки - був сом4 став сом6, при цьому сом4 продовжує в мр світитись</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#0d9488">M8</div><div class="sender-info"><span class="sender-name">Учасник 8</span></div></div><p class="message-text">*номер в прикладі умовний</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 8</div><div class="reply-text">А ком порт не помінявся? Гляньте в списку</div></div><p class="message-text">як був 4, так і лишився</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#9333ea">M6</div><div class="sender-info"><span class="sender-name">Учасник 6</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">та, спробував стерти, нічого не змінюється можна б ставити під питання справність FC, але як тільки шию на Betaflight, в</div></div><p class="message-text">А пресет заливаєте через мішн-планер ? Для цього батарею не треба підключати. Достатньо usb</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#9333ea">M6</div><div class="sender-info"><span class="sender-name">Учасник 6</span></div></div><p class="message-text">Бо якщо польотний не знає, що за та де реулятори обертів стоять, то він і не пілікне вдруге ними</p></div></div>
+    <footer>Academia Tech &copy; 2026</footer>
+  </div>
+</div>
+</body></html>

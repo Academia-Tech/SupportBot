@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html><head>
-<title>Mission Planner не бачить файли .params | SupportBot</title>
+<title>Incorrect power readings on second clamp of Shelly EM1 after calibration | SupportBot</title>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta property="og:title" content="Mission Planner не бачить файли .params">
-<meta property="og:description" content="Mission Planner може не бачити файли .params, якщо вони мають приховане розширення .txt (наприклад, `filename.params.txt`) або якщо не обрано опцію &#x27;All Files&#x27; у діалоговому вікні відкриття файлу.">
+<meta property="og:title" content="Incorrect power readings on second clamp of Shelly EM1 after calibration">
+<meta property="og:description" content="The solution is to perform calibration for each clamp individually using indexed commands. Instead of `PowerSet`, `VoltageSet`, and `CurrentSet`, the commands should be suffixed with the clamp number ">
 <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
 <style>
 :root {
@@ -104,9 +104,9 @@ footer {
       <span class="status-solved status-badge">Вирішено</span>
     </header>
     <main>
-      <h1>Mission Planner не бачить файли .params</h1>
-      <p class="meta">Case 068a1c11f9e0 &middot; ua_ardupilot</p>
-      <div class='tags'><span class="tag">#Mission Planner</span><span class="tag">#параметри</span><span class="tag">#.params</span><span class="tag">#файли</span><span class="tag">#налаштування</span></div>
+      <h1>Incorrect power readings on second clamp of Shelly EM1 after calibration</h1>
+      <p class="meta">Case 9e409668fb98 &middot; tasmota</p>
+      <div class='tags'><span class="tag">#Tasmota</span><span class="tag">#Shelly EM</span><span class="tag">#Power Monitoring</span><span class="tag">#Calibration</span><span class="tag">#PowerSet</span><span class="tag">#CurrentSet</span><span class="tag">#Multi-channel</span></div>
       <div class="problem-section">
         <h2 class="section-title">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -115,19 +115,19 @@ footer {
           </svg>
           Проблема
         </h2>
-        <p class="section-content">Користувач не може знайти файли з розширенням .params у Mission Planner.</p>
+        <p class="section-content">A user flashed a Shelly EM1 with Tasmota. After calibrating the first power monitoring clamp, the second clamp started reporting unrealistic values (e.g., 1200 Amperes). The user asked if the calibration procedure needs to be performed for both clamps.</p>
       </div>
       <div class="solution-section">
         <h2 class="section-title">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
           Рішення
         </h2>
-        <p class="section-content">Mission Planner може не бачити файли .params, якщо вони мають приховане розширення .txt (наприклад, `filename.params.txt`) або якщо не обрано опцію &#x27;All Files&#x27; у діалоговому вікні відкриття файлу.</p>
+        <p class="section-content">The solution is to perform calibration for each clamp individually using indexed commands. Instead of `PowerSet`, `VoltageSet`, and `CurrentSet`, the commands should be suffixed with the clamp number (e.g., `PowerSet1`, `CurrentSet1`). If issues persist, as the user reported incorrect readings on the second clamp even after this, the `PowerSetCal` command should be used for more direct calibration adjustments. The user confirmed this advice was helpful by saying &#x27;Thank you!&#x27;.</p>
       </div>
     </main>
   </div>
   <div class="card">
-    <div class="chat-header"><h2><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Історія чату</h2></div><div class="messages"><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Вітаю<br>Підкажіть чому mission planner може не бачити файл з розширенням .params?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Вітаю Підкажіть чому mission planner може не бачити файл з розширенням .params?</div></div><p class="message-text">або там приховане .txt розширення або натисніть all files</p></div></div>
+    <div class="chat-header"><h2><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Історія чату</h2></div><div class="messages"><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Good morning everyone.I transformed Shelly EM1 firwmware with tasmota (12.5.0).<br>Noting that the values indicated for the two calipers were unreal, I performed the calibration procedure (https://tasmota.github.io/docs/Power-Monitoring-Calibration/#setup).I connected the tasmota with a single clamp and I connected a load (105W incandescent lamp).<br>With a multimeter I measured Volts and Amperes and I gave the commands on the tasmota. The values were perfect. By changing the bulb with one with less Watt, the tasmota reported perfect values.I reconnected the two clamps to the real system, but I notice that the data for the second clamp are unreal (1200 Ampere...).<br>Do I have to do the calibration with both clamps connected?Thanks for your help</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Good morning everyone.I transformed Shelly EM1 firwmware with tasmota (12.5.0). Noting that the values indicated for the</div></div><p class="message-text">I think so.<br>Use powerset1 e. G. Powerset1.....i Don&#x27;t remember to the correct command, but it was with 1 or 2 at the end</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Stephan,<br>thank you.<br>Yes, the commands indicated are:<br>PowerSet xx.x<br>VoltageSet &lt;voltage&gt;<br>CurrentSet &lt;current&gt;<br><br>Tomorrow I&#x27;ll try the commands adding the suffix 1 (for the firt clamp) and 2 (for the second one)</p></div></div>
     <footer>Academia Tech &copy; 2026</footer>
   </div>
 </div>

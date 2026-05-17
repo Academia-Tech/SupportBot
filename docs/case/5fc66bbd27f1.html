@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html><head>
+<title>Відображення назв міст та сіл на карті Mission Planner | SupportBot</title>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta property="og:title" content="Відображення назв міст та сіл на карті Mission Planner">
+<meta property="og:description" content="Для відображення назв міст та сіл на карті Mission Planner необхідно змінити тип карти. Користувач `user_68581aceb3` порадив вибрати іншу карту, а `user_42224195ff` уточнив, що підійде тип &#x27;Hybrid&#x27;. А">
+<link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+<style>
+:root {
+  --signal-blue: #2c6bed;
+  --page-bg: #f6f7f9;
+  --card-bg: #ffffff;
+  --text: #0d0d0d;
+  --text-sec: #5c5c5c;
+  --border: #d8d8d8;
+  --radius: 12px;
+  --green: #16a34a;
+  --yellow: #ca8a04;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  background: var(--page-bg); color: var(--text);
+  min-height: 100vh; padding: 48px 20px;
+  -webkit-font-smoothing: antialiased;
+}
+@media (max-width: 520px) { body { padding: 24px 12px; } }
+.shell { max-width: 640px; margin: 0 auto; }
+.card {
+  background: var(--card-bg); border: 1px solid var(--border);
+  border-radius: var(--radius); overflow: hidden; margin-bottom: 16px;
+}
+header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 20px; border-bottom: 1px solid var(--border);
+}
+.header-left { display: flex; align-items: center; gap: 10px; text-decoration: none; color: inherit; }
+.logo { width: 28px; height: 28px; }
+.brand { font-size: 15px; font-weight: 600; letter-spacing: -0.02em; }
+.chat-header { padding: 14px 20px; border-bottom: 1px solid var(--border); background: var(--page-bg); }
+.chat-header h2 { font-size: 14px; font-weight: 600; color: var(--text); display: flex; align-items: center; gap: 8px; }
+.chat-header h2 svg { width: 16px; height: 16px; color: var(--signal-blue); }
+.messages { padding: 0; }
+.message { padding: 16px 20px; border-bottom: 1px solid var(--border); }
+.message:last-child { border-bottom: none; }
+.message-header { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+.avatar { width: 28px; height: 28px; border-radius: 50%; color: white; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 600; flex-shrink: 0; }
+.sender-info { flex: 1; min-width: 0; }
+.sender-name { font-size: 13px; font-weight: 600; color: var(--text); }
+.message-text { font-size: 15px; line-height: 1.55; color: var(--text); white-space: pre-wrap; margin-left: 38px; }
+.reply-bubble { margin-left: 38px; margin-bottom: 6px; padding: 6px 10px; background: #f0f2f5; border-left: 3px solid var(--signal-blue); border-radius: 4px; font-size: 13px; color: var(--text-sec); }
+.reply-sender { font-weight: 600; color: var(--signal-blue); font-size: 12px; margin-bottom: 2px; }
+.reply-text { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.status-badge {
+  padding: 4px 10px; font-size: 11px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.04em; border-radius: 4px;
+}
+.status-solved { background: #dcfce7; color: var(--green); }
+.status-recommendation { background: #fef3c7; color: #b45309; }
+main { padding: 24px 20px; }
+h1 { font-size: 20px; font-weight: 700; letter-spacing: -0.025em; margin-bottom: 12px; line-height: 1.3; }
+.meta { font-size: 12px; color: var(--text-sec); margin-bottom: 16px; }
+.tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 20px; }
+.tag {
+  background: rgba(44, 107, 237, 0.08); color: var(--signal-blue);
+  padding: 4px 10px; border-radius: 4px; font-size: 12px; font-weight: 500;
+}
+.section-title {
+  font-size: 11px; font-weight: 600; text-transform: uppercase;
+  letter-spacing: 0.06em; color: var(--text-sec); margin-bottom: 10px;
+  display: flex; align-items: center; gap: 6px;
+}
+.section-title svg { width: 14px; height: 14px; }
+.section-content { font-size: 15px; line-height: 1.6; color: var(--text); white-space: pre-wrap; }
+.problem-section { padding-bottom: 20px; border-bottom: 1px solid var(--border); margin-bottom: 20px; }
+.solution-section {
+  background: #f0fdf4; margin: -24px -20px -24px -20px; padding: 20px;
+  border-top: 1px solid #bbf7d0;
+}
+.solution-section .section-title { color: var(--green); }
+.recommendation-solution { background: #fffbeb; border-top-color: #fde68a; }
+.recommendation-solution .section-title { color: #b45309; }
+.empty-chat {
+  padding: 32px 20px; text-align: center; color: var(--text-sec); font-size: 14px;
+}
+footer {
+  padding: 14px 20px; border-top: 1px solid var(--border);
+  color: var(--text-sec); font-size: 12px; text-align: center;
+}
+@media (max-width: 520px) {
+  main { padding: 20px 16px; }
+  h1 { font-size: 18px; }
+  .solution-section { margin: -20px -16px -20px -16px; padding: 16px; }
+}
+</style>
+</head><body>
+<div class="shell">
+  <div class="card">
+    <header>
+      <a href="https://academia-tech.github.io/SupportBot" class="header-left">
+        <img src="/SupportBot/supportbot-logo-128.png" alt="SupportBot" class="logo">
+        <span class="brand">SupportBot</span>
+      </a>
+      <span class="status-solved status-badge">Вирішено</span>
+    </header>
+    <main>
+      <h1>Відображення назв міст та сіл на карті Mission Planner</h1>
+      <p class="meta">Case 5fc66bbd27f1 &middot; ua_ardupilot</p>
+      <div class='tags'><span class="tag">#Mission Planner</span><span class="tag">#карта</span><span class="tag">#відображення</span><span class="tag">#назви міст</span><span class="tag">#Hybrid Map</span><span class="tag">#Flight Planner</span></div>
+      <div class="problem-section">
+        <h2 class="section-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/>
+            <line x1="12" y1="16" x2="12.01" y2="16"/>
+          </svg>
+          Проблема
+        </h2>
+        <p class="section-content">Користувач запитує, як налаштувати Mission Planner, щоб на карті відображалися назви міст та сіл, оскільки стандартний вигляд їх не показує.</p>
+      </div>
+      <div class="solution-section">
+        <h2 class="section-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          Рішення
+        </h2>
+        <p class="section-content">Для відображення назв міст та сіл на карті Mission Planner необхідно змінити тип карти. Користувач `user_68581aceb3` порадив вибрати іншу карту, а `user_42224195ff` уточнив, що підійде тип &#x27;Hybrid&#x27;. Автор питання підтвердив, що спробує це рішення і подякував. Користувач `user_68581aceb3` також надав відео-демонстрацію (msg_id=tg_ua_ardupilot_8190), яка показує, що вибір карти доступний у режимі &#x27;Flight Planner&#x27; у правому куті екрана, де можна вибрати &#x27;Google HybridMap&#x27; або інші варіанти, які підтримують відображення назв населених пунктів. Автор питання `user_9d8654b627` підтвердив, що інформація дуже корисна.</p>
+      </div>
+    </main>
+  </div>
+  <div class="card">
+    <div class="chat-header"><h2><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Історія чату</h2></div><div class="messages"><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Бажаю здоров&#x27;я підкажіть як зробити щоб на карті показувало назви міст і сел</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><p class="message-text">З права, виберіть іншу карту</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><p class="message-text">Дякую за правильну відповідь, [Dereck](tg://user?id=464886139)! 🇺🇦<br>Обмеження будуть знять протягом 1 хвилини.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 2</div><div class="reply-text">З права, виберіть іншу карту</div></div><p class="message-text">Підкажіть яку саме?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#0891b2">M5</div><div class="sender-info"><span class="sender-name">Учасник 5</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 4</div><div class="reply-text">Підкажіть яку саме?</div></div><p class="message-text">Hybrid</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 5</div><div class="reply-text">Hybrid</div></div><p class="message-text">Зараз спробую дякую</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><p class="message-text">Так гібрид, або на Ваш смак</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><p class="message-text"><br><br>[Відео: 8190.mp4 — The video displays the ArduPilot Mission Planner software interface on a computer screen.<br><br>**1. What is shown (screens, devices, indicators, error messages):**<br>The primary display is the ArduPilot Mission Planner.<br>*   **Left Panel:** Contains telemetry/status indicators:<br>    *   &quot;ARMED&quot; (red background, white text)<br>    *   Altitude: &quot;0 m&quot;<br>    *   Speed: &quot;Unknown 0m/s&quot;<br>    *   Status: &quot;NOT Ready to Arm&quot; (red background, white text)<br>    *   Sensor Status: &quot;EKF Vibe: 0% GPS: No GPS&quot;<br>    *   Channel Output: &quot;ch1out 0.00&quot;<br>    *   Radio Signal: &quot;Sik Radio rssi 0.00&quot;<br>    *   Additional tabs: &quot;Transponder&quot;, &quot;Статус&quot; (Status), &quot;Servos&quot;.<br>*   **Main Map Area:** Initially displays a satellite map of Europe. Later, in Flight Planner mode, it shows a map of Africa.<br>*   **Bottom Overlay (Main Map Area):** A persistent message: &quot;You need to sign into Altitude Angel. Click here to sign in.&quot;<br>*   **Top Banner:** &quot;ARDUPILOT&quot;, &quot;TCP&quot; connection type, &quot;115200&quot; baud rate, &quot;CONNECT&quot; button.<br>*   **Right Panel:**<br>    *   &quot;Vgen 3.0&quot;, &quot;Ysen 0.0&quot;.<br>    *   In Flight Planner mode: &quot;GEO 8.4071682 53.9648430&quot;, &quot;Invalid 0.00m&quot;. Contains &quot;Grid&quot; checkbox, &quot;View KML&quot; button, a map type dropdown, &quot;Status: loading tiles&quot; / &quot;Status: loaded tiles&quot; indicator, &quot;Inject Custom Map&quot; button, and waypoint (WP) related buttons (Load, Save, Read, Write).<br>*   **Bottom Panel (Flight Planner mode):** Waypoint parameters including &quot;Радиус WP 50.0&quot;, &quot;Рад.Кружения Высота 100&quot;, &quot;Relative&quot; dropdown, &quot;Verify Height&quot; checkbox, &quot;Добавить WP&quot; (Add WP) button, &quot;Alt Warn&quot; dropdown, &quot;MAV FTP&quot; dropdown. Also &quot;Коор. Базы&quot; (Base Coords) with &quot;Шир: 49.079748&quot; (Lat) and &quot;Долг: 30.543689&quot; (Long).<br><br>**2. Any text visible on screen (OCR):**<br>As described above: &quot;ARMED&quot;, &quot;Unknown 0m/s&quot;, &quot;NOT Ready to Arm&quot;, &quot;EKF Vibe: 0% GPS: No GPS&quot;, &quot;ch1out 0.00&quot;, &quot;Sik Radio rssi 0.00&quot;, &quot;ter_space&quot;, &quot;Transponder&quot;, &quot;Статус&quot;, &quot;Servos&quot;, &quot;You need to sign into Altitude Angel. Click here to sign in.&quot;, &quot;hdop 0.0&quot;, &quot;Current Heading&quot;, &quot;Direct to current WP&quot;, &quot;GPS Track (black)&quot;, &quot;ARDUPILOT&quot;, &quot;TCP&quot;, &quot;115200&quot;, &quot;CONNECT&quot;, &quot;Vgen 3.0&quot;, &quot;Ysen 0.0&quot;.<br>Context menu (partially visible): &quot;Fly To Here Alt&quot;, &quot;Fly To Coords&quot;, &quot;Add Poi&quot;, &quot;Point Camera Here&quot;, &quot;Point Camera Coords&quot;, &quot;Trigger Camera NOW&quot;, &quot;Flight Planner&quot;, &quot;Set Home Here&quot;, &quot;TakeOff&quot;, &quot;Altitude Angel Settings&quot;, etc.<br>In Flight Planner mode: &quot;Расстояние: 0.0000 km&quot;, &quot;Пред. База&quot;, &quot;Close&quot;, &quot;MISSION&quot;, &quot;Grid&quot;, &quot;View KML&quot;, &quot;Google HybridMap&quot;, &quot;Status: loading tiles&quot;, &quot;Inject Custom Map&quot;, &quot;Загрузить WP-файл&quot;, &quot;Save File&quot;, &quot;Считать WP&quot;, &quot;Записать WP&quot;, &quot;Write Fast&quot;, &quot;Радиус WP&quot;, &quot;Рад.Кружения Высота&quot;, &quot;Relative&quot;, &quot;Verify Height&quot;, &quot;Добавить WP&quot;, &quot;Alt Warn&quot;, &quot;MAV FTP&quot;, &quot;Коор. Базы&quot;, &quot;Шир: 49.079748&quot;, &quot;Долг: 30.543689&quot;, &quot;Абс. Выс.: 34.31&quot;. Map type dropdown shows numerous options (Google Terrain, Google China, Yandex, OpenStreetMap, etc.).<br><br>**3. What happens over time:**<br>*   **0:00-0:08:** The software starts in a main viewing mode with a map of Europe. The user notes that the map selection option, previously in the top-right of the map panel, is now missing.<br>*   **0:08-0:12:** The user right-clicks on the main map area, opening a context menu. They select &quot;Flight Planner&quot;.<br>*   **0:12-0:14:** The main map area briefly goes white/blank during the transition.<br>*   **0:14-0:36:** The interface changes to the &quot;Flight Planner&quot; mode. A map of Africa is displayed. Crucially, the map type selection dropdown (with &quot;Google HybridMap&quot; selected) is now visible in the right panel. The user demonstrates changing the map type using this dropdown, observing the &quot;Status: loading tiles&quot; message and subsequent map update. The map area temporarily blanks as different map types load.<br><br>**4. Any problems or anomalies visible:**<br>The primary anomaly is the **absence of the map selection dropdown in the main ArduPilot Mission Planner interface** (0:00-0:08). This functionality only becomes available after navigating to the &quot;Flight Planner&quot; sub-mode (0:14 onwards). The user explicitly states this is an unexpected change from previous behavior. The &quot;NOT Ready to Arm&quot; and &quot;GPS: No GPS&quot; messages indicate the system is not flight-ready, but this is likely expected given the context of demonstrating a map display issue.]<br>[Транскрипт відео: І так, дивимось, запустив мишку. Раніше у цьому прямокуглу був вибір карти. Зараз бачу його нема. Трошки поковирявся, що я знайшов. Заходимо. Нажимаємо ось цю кнопочку. І от тут з&#x27;являється у нас вибір карт, карти. Бачите? Ось правий уголок. Ось я беру, вибираю іншу карту. Повертаю назад з надписами, як ви хотіли. Зараз підгружається. Потім, коли ми виходимо з мишки, ми впадаємо в стандартний режим, як було до цього.]</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 2</div><div class="reply-text">  [Відео: 8190.mp4 — The video displays the ArduPilot Mission Planner software interface on a computer screen.  **1. Wha</div></div><p class="message-text">Дякую дуже інформативно 👍</p></div></div>
+    <footer>Academia Tech &copy; 2026</footer>
+  </div>
+</div>
+</body></html>

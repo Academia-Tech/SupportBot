@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html><head>
-<title>Mission Planner не бачить файли .params | SupportBot</title>
+<title>Can Tasmota read the duty cycle of a PWM input signal on an ESP32? | SupportBot</title>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta property="og:title" content="Mission Planner не бачить файли .params">
-<meta property="og:description" content="Mission Planner може не бачити файли .params, якщо вони мають приховане розширення .txt (наприклад, `filename.params.txt`) або якщо не обрано опцію &#x27;All Files&#x27; у діалоговому вікні відкриття файлу.">
+<meta property="og:title" content="Can Tasmota read the duty cycle of a PWM input signal on an ESP32?">
+<meta property="og:description" content="Another user (&#x27;ouinouin&#x27;) clarified that, to their knowledge, this feature is not available in Tasmota. While Tasmota is capable of generating PWM signals as an output, it does not have a built-in fun">
 <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
 <style>
 :root {
@@ -101,12 +101,12 @@ footer {
         <img src="/SupportBot/supportbot-logo-128.png" alt="SupportBot" class="logo">
         <span class="brand">SupportBot</span>
       </a>
-      <span class="status-solved status-badge">Вирішено</span>
+      <span class="status-recommendation status-badge">Рекомендація</span>
     </header>
     <main>
-      <h1>Mission Planner не бачить файли .params</h1>
-      <p class="meta">Case 068a1c11f9e0 &middot; ua_ardupilot</p>
-      <div class='tags'><span class="tag">#Mission Planner</span><span class="tag">#параметри</span><span class="tag">#.params</span><span class="tag">#файли</span><span class="tag">#налаштування</span></div>
+      <h1>Can Tasmota read the duty cycle of a PWM input signal on an ESP32?</h1>
+      <p class="meta">Case 9c26260ee080 &middot; tasmota</p>
+      <div class='tags'><span class="tag">#PWM</span><span class="tag">#duty cycle</span><span class="tag">#input</span><span class="tag">#ESP32</span><span class="tag">#feature request</span><span class="tag">#sensor</span><span class="tag">#unsupported</span></div>
       <div class="problem-section">
         <h2 class="section-title">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -115,19 +115,19 @@ footer {
           </svg>
           Проблема
         </h2>
-        <p class="section-content">Користувач не може знайти файли з розширенням .params у Mission Planner.</p>
+        <p class="section-content">A user wanted to know if there is an implementation in Tasmota to read the duty cycle from a PWM signal using an ESP32S3, as they need to interact with a system that provides a PWM output.</p>
       </div>
-      <div class="solution-section">
+      <div class="solution-section recommendation-solution">
         <h2 class="section-title">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-          Рішення
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7c.6.4 1 1.1 1 1.8V17h6v-.5c0-.7.4-1.4 1-1.8A7 7 0 0 0 12 2z"/></svg>
+          Рекомендація (не підтверджено)
         </h2>
-        <p class="section-content">Mission Planner може не бачити файли .params, якщо вони мають приховане розширення .txt (наприклад, `filename.params.txt`) або якщо не обрано опцію &#x27;All Files&#x27; у діалоговому вікні відкриття файлу.</p>
+        <p class="section-content">Another user (&#x27;ouinouin&#x27;) clarified that, to their knowledge, this feature is not available in Tasmota. While Tasmota is capable of generating PWM signals as an output, it does not have a built-in function or sensor type to measure the duty cycle of an incoming PWM signal. The user acknowledged it would be a nice feature to have.</p>
       </div>
     </main>
   </div>
   <div class="card">
-    <div class="chat-header"><h2><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Історія чату</h2></div><div class="messages"><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Вітаю<br>Підкажіть чому mission planner може не бачити файл з розширенням .params?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Вітаю Підкажіть чому mission planner може не бачити файл з розширенням .params?</div></div><p class="message-text">або там приховане .txt розширення або натисніть all files</p></div></div>
+    <div class="chat-header"><h2><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Історія чату</h2></div><div class="messages"><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Hello! I&#x27;m new with Tasmota, I&#x27;m wondering if there is any implementation where I could read duty cycle from a PWM signal in a ESP32S3</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Hello! I&#x27;m new with Tasmota, I&#x27;m wondering if there is any implementation where I could read duty cycle from a PWM signa</div></div><p class="message-text">**ouinouin**: not to my knowledge, tasmota knows to drive output as pwm, but there is no input to determine pwm duty cycle, it would be a nice one, to be able to interact wit some systems giving pwm outputs.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 2</div><div class="reply-text">**ouinouin**: not to my knowledge, tasmota knows to drive output as pwm, but there is no input to determine pwm duty cyc</div></div><p class="message-text">Do that while programming Arduino is not a great deal but I&#x27;m having some problems getting started by changing the code there</p></div></div>
     <footer>Academia Tech &copy; 2026</footer>
   </div>
 </div>

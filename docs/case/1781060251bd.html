@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html><head>
+<title>Подовження підключення DJI Goggles 2 та передача відео | SupportBot</title>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta property="og:title" content="Подовження підключення DJI Goggles 2 та передача відео">
+<meta property="og:description" content="Було запропоновано кілька рішень для подовження підключення DJI Goggles 2 та передачі відео: 1. Використання Cosmostreamer (cosmostreamer.com/products/gd1/), що було прийнято користувачем як гарна іде">
+<link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+<style>
+:root {
+  --signal-blue: #2c6bed;
+  --page-bg: #f6f7f9;
+  --card-bg: #ffffff;
+  --text: #0d0d0d;
+  --text-sec: #5c5c5c;
+  --border: #d8d8d8;
+  --radius: 12px;
+  --green: #16a34a;
+  --yellow: #ca8a04;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  background: var(--page-bg); color: var(--text);
+  min-height: 100vh; padding: 48px 20px;
+  -webkit-font-smoothing: antialiased;
+}
+@media (max-width: 520px) { body { padding: 24px 12px; } }
+.shell { max-width: 640px; margin: 0 auto; }
+.card {
+  background: var(--card-bg); border: 1px solid var(--border);
+  border-radius: var(--radius); overflow: hidden; margin-bottom: 16px;
+}
+header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 20px; border-bottom: 1px solid var(--border);
+}
+.header-left { display: flex; align-items: center; gap: 10px; text-decoration: none; color: inherit; }
+.logo { width: 28px; height: 28px; }
+.brand { font-size: 15px; font-weight: 600; letter-spacing: -0.02em; }
+.chat-header { padding: 14px 20px; border-bottom: 1px solid var(--border); background: var(--page-bg); }
+.chat-header h2 { font-size: 14px; font-weight: 600; color: var(--text); display: flex; align-items: center; gap: 8px; }
+.chat-header h2 svg { width: 16px; height: 16px; color: var(--signal-blue); }
+.messages { padding: 0; }
+.message { padding: 16px 20px; border-bottom: 1px solid var(--border); }
+.message:last-child { border-bottom: none; }
+.message-header { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+.avatar { width: 28px; height: 28px; border-radius: 50%; color: white; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 600; flex-shrink: 0; }
+.sender-info { flex: 1; min-width: 0; }
+.sender-name { font-size: 13px; font-weight: 600; color: var(--text); }
+.message-text { font-size: 15px; line-height: 1.55; color: var(--text); white-space: pre-wrap; margin-left: 38px; }
+.reply-bubble { margin-left: 38px; margin-bottom: 6px; padding: 6px 10px; background: #f0f2f5; border-left: 3px solid var(--signal-blue); border-radius: 4px; font-size: 13px; color: var(--text-sec); }
+.reply-sender { font-weight: 600; color: var(--signal-blue); font-size: 12px; margin-bottom: 2px; }
+.reply-text { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.status-badge {
+  padding: 4px 10px; font-size: 11px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.04em; border-radius: 4px;
+}
+.status-solved { background: #dcfce7; color: var(--green); }
+.status-recommendation { background: #fef3c7; color: #b45309; }
+main { padding: 24px 20px; }
+h1 { font-size: 20px; font-weight: 700; letter-spacing: -0.025em; margin-bottom: 12px; line-height: 1.3; }
+.meta { font-size: 12px; color: var(--text-sec); margin-bottom: 16px; }
+.tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 20px; }
+.tag {
+  background: rgba(44, 107, 237, 0.08); color: var(--signal-blue);
+  padding: 4px 10px; border-radius: 4px; font-size: 12px; font-weight: 500;
+}
+.section-title {
+  font-size: 11px; font-weight: 600; text-transform: uppercase;
+  letter-spacing: 0.06em; color: var(--text-sec); margin-bottom: 10px;
+  display: flex; align-items: center; gap: 6px;
+}
+.section-title svg { width: 14px; height: 14px; }
+.section-content { font-size: 15px; line-height: 1.6; color: var(--text); white-space: pre-wrap; }
+.problem-section { padding-bottom: 20px; border-bottom: 1px solid var(--border); margin-bottom: 20px; }
+.solution-section {
+  background: #f0fdf4; margin: -24px -20px -24px -20px; padding: 20px;
+  border-top: 1px solid #bbf7d0;
+}
+.solution-section .section-title { color: var(--green); }
+.recommendation-solution { background: #fffbeb; border-top-color: #fde68a; }
+.recommendation-solution .section-title { color: #b45309; }
+.empty-chat {
+  padding: 32px 20px; text-align: center; color: var(--text-sec); font-size: 14px;
+}
+footer {
+  padding: 14px 20px; border-top: 1px solid var(--border);
+  color: var(--text-sec); font-size: 12px; text-align: center;
+}
+@media (max-width: 520px) {
+  main { padding: 20px 16px; }
+  h1 { font-size: 18px; }
+  .solution-section { margin: -20px -16px -20px -16px; padding: 16px; }
+}
+</style>
+</head><body>
+<div class="shell">
+  <div class="card">
+    <header>
+      <a href="https://academia-tech.github.io/SupportBot" class="header-left">
+        <img src="/SupportBot/supportbot-logo-128.png" alt="SupportBot" class="logo">
+        <span class="brand">SupportBot</span>
+      </a>
+      <span class="status-solved status-badge">Вирішено</span>
+    </header>
+    <main>
+      <h1>Подовження підключення DJI Goggles 2 та передача відео</h1>
+      <p class="meta">Case 1781060251bd &middot; ua_ardupilot</p>
+      <div class='tags'><span class="tag">#DJI Goggles 2</span><span class="tag">#Herelink</span><span class="tag">#Cosmostreamer</span><span class="tag">#HDMI</span><span class="tag">#Ethernet</span><span class="tag">#USB-C</span><span class="tag">#подовжувач</span><span class="tag">#відеопередача</span><span class="tag">#FPV</span></div>
+      <div class="problem-section">
+        <h2 class="section-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/>
+            <line x1="12" y1="16" x2="12.01" y2="16"/>
+          </svg>
+          Проблема
+        </h2>
+        <p class="section-content">Користувач шукає рішення для подовження Type-C підключення DJI Goggles 2 та передачі відеосигналу на значну відстань, відкидаючи варіант розміщення пульта на щоглі через незручність та швидкий розряд батареї.</p>
+      </div>
+      <div class="solution-section">
+        <h2 class="section-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          Рішення
+        </h2>
+        <p class="section-content">Було запропоновано кілька рішень для подовження підключення DJI Goggles 2 та передачі відео: 1. Використання Cosmostreamer (cosmostreamer.com/products/gd1/), що було прийнято користувачем як гарна ідея. Користувач user_39d0b3fa6b описав детальний реалізований сетап: антена Phoenix, окуляри з виведеними SMA-виходами підключаються до антени, антена живиться від окремої батки. Окуляри під&#x27;єднуються до Cosmostreamer (з додатково розпаяним BEC для живлення окулярів), оптичний HDMI кабель потрібної довжини йде до підвалу, де підключається до цифрової плати відеозахвату, від неї USB до ноутбука для запису/трансляцій та HDMI до монітора. Управління йде по витій парі з антени до пульта окремо. 2. Застосування USB-подовжувачів по витій парі (наприклад, Digitus USB 2.0 - UTP Cat5), з можливістю пошуку USB-C версій або використання перехідників. 3. Розглядався варіант використання одноплатника з Android та відповідною версією DJI Fly замість Cosmostreamer. Користувач user_c5b07ab326 зазначив, що адекватно працює тільки Raspberry Pi 5, але для навігації інтерфейсом потрібна мишка, що вимагає додаткової лінії на мачту, хоча існують подовжувачі HDMI + USB по одному кабелю. Обговорювалося питання живлення пульта через Type-C: хоча один порт використовується для зарядки та виводу, можливо створити &quot;хитрий&quot; кабель або припаятися безпосередньо до батарей пульта, але це складно.</p>
+      </div>
+    </main>
+  </div>
+  <div class="card">
+    <div class="chat-header"><h2><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Історія чату</h2></div><div class="messages"><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Потрібно допомога хто на цьому знається , або знає хто підкаже.<br>(Такою связклою ми ефективно літаємо до 25км і завалили більше 50 цілей )</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Потрібно допомога хто на цьому знається , або знає хто підкаже. (Такою связклою ми ефективно літаємо до 25км і завалили </div></div><p class="message-text">https://cosmostreamer.com/products/gd1/</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><p class="message-text">Космострімер і кабель оптичний hdmi скільки треба метрів</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Потрібно допомога хто на цьому знається , або знає хто підкаже. (Такою связклою ми ефективно літаємо до 25км і завалили </div></div><p class="message-text">Є подовжувачі юсб по витій парі<br>Цей кажуть непоганий, ним роблять винос окулярів на щоглу<br>https://brain.com.ua/ukr/Adapter_USB_20_-_UTP_Cat5_50m_Digitus_DA-70141-p835555.html</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 4</div><div class="reply-text">Є подовжувачі юсб по витій парі Цей кажуть непоганий, ним роблять винос окулярів на щоглу https://brain.com.ua/ukr/Adapt</div></div><p class="message-text">Так мені треба подовжувач сам type-c не usb</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 3</div><div class="reply-text">Космострімер і кабель оптичний hdmi скільки треба метрів</div></div><p class="message-text">Робили так?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Так мені треба подовжувач сам type-c не usb</div></div><p class="message-text">Ну пошукайте з usb-c замість usb-a, або через перехідник підключіть</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 4</div><div class="reply-text">Ну пошукайте з usb-c замість usb-a, або через перехідник підключіть</div></div><p class="message-text">Такі є?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#0891b2">M5</div><div class="sender-info"><span class="sender-name">Учасник 5</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Потрібно допомога хто на цьому знається , або знає хто підкаже. (Такою связклою ми ефективно літаємо до 25км і завалили </div></div><p class="message-text">А чого не закинути пульт на мачту?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#0891b2">M5</div><div class="sender-info"><span class="sender-name">Учасник 5</span></div></div><p class="message-text">Тоді виймаємо відео з hdmi пульта, далі hdmi to eth конвертор і по eth кабелю до 100м можна в бліндаж передати картинку</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#0891b2">M5</div><div class="sender-info"><span class="sender-name">Учасник 5</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 5</div><div class="reply-text">Тоді виймаємо відео з hdmi пульта, далі hdmi to eth конвертор і по eth кабелю до 100м можна в бліндаж передати картинку</div></div><p class="message-text">В білндажі стоїть зворотній конвертор eth to hdmi</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#0891b2">M5</div><div class="sender-info"><span class="sender-name">Учасник 5</span></div></div><p class="message-text">З приводу живлення на мачті беремо стандартну фпвішну батку та dc-dc з контролем струму та напруги</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#0891b2">M5</div><div class="sender-info"><span class="sender-name">Учасник 5</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 5</div><div class="reply-text">З приводу живлення на мачті беремо стандартну фпвішну батку та dc-dc з контролем струму та напруги</div></div><p class="message-text">Тоді ця батка буде заряджати пульт та окуляри</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#0891b2">M5</div><div class="sender-info"><span class="sender-name">Учасник 5</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 5</div><div class="reply-text">Тоді виймаємо відео з hdmi пульта, далі hdmi to eth конвертор і по eth кабелю до 100м можна в бліндаж передати картинку</div></div><p class="message-text">https://brain.com.ua/ukr/Kontroler_Cablexpert_HDMI_extender_up_to_60_m_DEX-HDMI-03-p799342.html?utm_content=shopping&amp;gad_source=1&amp;gad_campaignid=17336023386&amp;gbraid=0AAAAADeyRd5iG-f-p7ldwuXC4AZH1Tohq&amp;gclid=Cj0KCQiA5abIBhCaARIsAM3-zFVE1a46hkLcv9YV5mqi1tdrCFsXYXIZV0AWrHI5HJZS-Dq3cnH18gcaAgjjEALw_wcB <br><br>От наприклад такий перетворювач. Особисто саме його не використовував. Показую лише для прикладу</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#0891b2">M5</div><div class="sender-info"><span class="sender-name">Учасник 5</span></div></div><p class="message-text">Ну або взагалі просто взяти космострімер і все. Мені військовий один казав, що цей софт можна якось безкоштовно вибити, якщо військовий</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 5</div><div class="reply-text">Ну або взагалі просто взяти космострімер і все. Мені військовий один казав, що цей софт можна якось безкоштовно вибити, </div></div><p class="message-text">Космострімер гарна ідея зараз це і буду робити колись уже робив, а ось пульт на святі не дуже рішення тому що треба кожний раз його включати при виліті, + батка сяде швидко  це вже все пройдений єтап</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#0891b2">M5</div><div class="sender-info"><span class="sender-name">Учасник 5</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Космострімер гарна ідея зараз це і буду робити колись уже робив, а ось пульт на святі не дуже рішення тому що треба кожн</div></div><p class="message-text">Ні, я маю на увазі постійно заряджати батку від пульта від фпв батки</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#0891b2">M5</div><div class="sender-info"><span class="sender-name">Учасник 5</span></div></div><p class="message-text">Але чесно кажучи космострімер все одно простіше)</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 5</div><div class="reply-text">Ні, я маю на увазі постійно заряджати батку від пульта від фпв батки</div></div><p class="message-text">Ні, там type - c один і на зарядку і на вивід. Заряджати і працювати одночасно не вийде</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#0891b2">M5</div><div class="sender-info"><span class="sender-name">Учасник 5</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Ні, там type - c один і на зарядку і на вивід. Заряджати і працювати одночасно не вийде</div></div><p class="message-text">Вийде. Просто треба хитрий кабель паяти. Грубо кажучи штани</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#0891b2">M5</div><div class="sender-info"><span class="sender-name">Учасник 5</span></div></div><p class="message-text">Або розбирати пульт і припаюватися безпосередньо туди де стоять батки</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#0891b2">M5</div><div class="sender-info"><span class="sender-name">Учасник 5</span></div></div><p class="message-text">Короче це можна, але гемор</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><p class="message-text">По ідеї можна ще одноплатник з андроїдом і на нього dji fly правильну версію замість космострімера.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 4</div><div class="reply-text">По ідеї можна ще одноплатник з андроїдом і на нього dji fly правильну версію замість космострімера.</div></div><p class="message-text">Оце зараз шукаю хто може дати спробувати це цеалізувати</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Оце зараз шукаю хто може дати спробувати це цеалізувати</div></div><p class="message-text">У мене пока що закінчилось тим що на orange pi андроїд не запустився з eMMC))<br>Буду пробувать домучати як руки дійдуть</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><p class="message-text">Ну і апку стару треба шукати, бо нові не працюють</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#0891b2">M5</div><div class="sender-info"><span class="sender-name">Учасник 5</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 4</div><div class="reply-text">По ідеї можна ще одноплатник з андроїдом і на нього dji fly правильну версію замість космострімера.</div></div><p class="message-text">Пробував такий варіант</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#0891b2">M5</div><div class="sender-info"><span class="sender-name">Учасник 5</span></div></div><p class="message-text">Працює адекватно тільки з Разбері 5</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#0891b2">M5</div><div class="sender-info"><span class="sender-name">Учасник 5</span></div></div><p class="message-text">Але проблема в тому, що треба бігати по інтерфейсу, а для цього треба мишку</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#0891b2">M5</div><div class="sender-info"><span class="sender-name">Учасник 5</span></div></div><p class="message-text">А це кидати окрему лінію на мачту</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#ea580c">M4</div><div class="sender-info"><span class="sender-name">Учасник 4</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 5</div><div class="reply-text">А це кидати окрему лінію на мачту</div></div><p class="message-text">Є подовжувачі hdmi + usb по одному кабелю</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#0891b2">M5</div><div class="sender-info"><span class="sender-name">Учасник 5</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 4</div><div class="reply-text">Є подовжувачі hdmi + usb по одному кабелю</div></div><p class="message-text">А тоді без питань</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#0891b2">M5</div><div class="sender-info"><span class="sender-name">Учасник 5</span></div></div><p class="message-text">Не знав про такі</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><p class="message-text">Ми робили так - антена фенікс, під щоглою лежать окуляри з виведеними виходами сма, туди підключаємо антену. Окремо антена заживлюється від батки звичайної по кабелю. Окуляри підєднуються до космострімеру і батка теж до нього, у ньому було додаткового розпаяно бек для живлення окулярів. І потім оптичний hdmi потрібної довжини заходить у підвал, де під&#x27;єднується до цифрової плати відеозахвату, від неї юсб в ноутбук для запису і трансляцій і hdmi в монітор. Управління по витій парі йшло з антени в пульт окремо</p></div></div>
+    <footer>Academia Tech &copy; 2026</footer>
+  </div>
+</div>
+</body></html>

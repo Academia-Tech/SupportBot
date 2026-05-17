@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html><head>
-<title>Mission Planner не бачить файли .params | SupportBot</title>
+<title>Проблема з підключенням Sinelink до Matek H743 Wing V3 | SupportBot</title>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta property="og:title" content="Mission Planner не бачить файли .params">
-<meta property="og:description" content="Mission Planner може не бачити файли .params, якщо вони мають приховане розширення .txt (наприклад, `filename.params.txt`) або якщо не обрано опцію &#x27;All Files&#x27; у діалоговому вікні відкриття файлу.">
+<meta property="og:title" content="Проблема з підключенням Sinelink до Matek H743 Wing V3">
+<meta property="og:description" content="Проблема була вирішена користувачем user_8438cc58d3. Причиною виявилася некоректна або «криво встановлена» прошивка. Після виправлення прошивки всі функції почали працювати. У процесі діагностики кори">
 <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
 <style>
 :root {
@@ -104,9 +104,9 @@ footer {
       <span class="status-solved status-badge">Вирішено</span>
     </header>
     <main>
-      <h1>Mission Planner не бачить файли .params</h1>
-      <p class="meta">Case 068a1c11f9e0 &middot; ua_ardupilot</p>
-      <div class='tags'><span class="tag">#Mission Planner</span><span class="tag">#параметри</span><span class="tag">#.params</span><span class="tag">#файли</span><span class="tag">#налаштування</span></div>
+      <h1>Проблема з підключенням Sinelink до Matek H743 Wing V3</h1>
+      <p class="meta">Case 5c4bfaf1d8d5 &middot; ua_ardupilot</p>
+      <div class='tags'><span class="tag">#sinelink</span><span class="tag">#matek h743</span><span class="tag">#sbus</span><span class="tag">#mavlink</span><span class="tag">#прошивка</span><span class="tag">#firmware</span><span class="tag">#підключення</span><span class="tag">#uart</span><span class="tag">#brd_alt_config</span></div>
       <div class="problem-section">
         <h2 class="section-title">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -115,19 +115,19 @@ footer {
           </svg>
           Проблема
         </h2>
-        <p class="section-content">Користувач не може знайти файли з розширенням .params у Mission Planner.</p>
+        <p class="section-content">Користувач зіткнувся з проблемою підключення Sinelink до польотного контролера Matek H743 Wing V3. Підключення було виконано до TX6/RX6 по SBUS, параметр BRD_ALT_CONFIG встановлено на 1, але керування не працювало. Також MAVLink не працював на TX7/RX7/CTS7/RTS7.</p>
       </div>
       <div class="solution-section">
         <h2 class="section-title">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
           Рішення
         </h2>
-        <p class="section-content">Mission Planner може не бачити файли .params, якщо вони мають приховане розширення .txt (наприклад, `filename.params.txt`) або якщо не обрано опцію &#x27;All Files&#x27; у діалоговому вікні відкриття файлу.</p>
+        <p class="section-content">Проблема була вирішена користувачем user_8438cc58d3. Причиною виявилася некоректна або «криво встановлена» прошивка. Після виправлення прошивки всі функції почали працювати. У процесі діагностики користувачі user_1d9e185c06 та user_a773dc1863 пропонували перевірити параметр BRD_SER1_RTSCTS, налаштування RTS+CTS у програмному забезпеченні Sinelink та протокол керування на пульті, а також зазначали, що для SBUS, можливо, не потрібно вмикати альтернативну конфігурацію.</p>
       </div>
     </main>
   </div>
   <div class="card">
-    <div class="chat-header"><h2><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Історія чату</h2></div><div class="messages"><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Вітаю<br>Підкажіть чому mission planner може не бачити файл з розширенням .params?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Вітаю Підкажіть чому mission planner може не бачити файл з розширенням .params?</div></div><p class="message-text">або там приховане .txt розширення або натисніть all files</p></div></div>
+    <div class="chat-header"><h2><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Історія чату</h2></div><div class="messages"><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Доброго дня, маю проблему з підключенням sinelink до matek h743 wing v3 підпаявся до tx6 rx6 по сбас, brd_alt_config встановив на 1 все зробив як пише на сайті виробника але все одно не має керування мавлінк теж не працює на tx7 rx7 cts7 rts7</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Доброго дня, маю проблему з підключенням sinelink до matek h743 wing v3 підпаявся до tx6 rx6 по сбас, brd_alt_config вст</div></div><p class="message-text">BRD_SER1_RTSCTS<br>Що стоїть?<br><br>В сайні вкл rts+cts?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Доброго дня, маю проблему з підключенням sinelink до matek h743 wing v3 підпаявся до tx6 rx6 по сбас, brd_alt_config вст</div></div><p class="message-text">У сайнів це написано для протоколу crsf. Мені здається для сбас не треба вмикати альтернативну конфігурацію. І який протокол на пульті керування? Має бути теж сбас.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 3</div><div class="reply-text">У сайнів це написано для протоколу crsf. Мені здається для сбас не треба вмикати альтернативну конфігурацію. І який прот</div></div><p class="message-text">Дякую за допомогу проблему щойно вирішив, була проблема з прошивкою «криво встала» тепер все працює</p></div></div>
     <footer>Academia Tech &copy; 2026</footer>
   </div>
 </div>

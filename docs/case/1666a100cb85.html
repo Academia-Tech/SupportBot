@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html><head>
-<title>Mission Planner не бачить файли .params | SupportBot</title>
+<title>Publishing ESP32-CAM Pictures to MQTT Broker with Tasmota | SupportBot</title>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta property="og:title" content="Mission Planner не бачить файли .params">
-<meta property="og:description" content="Mission Planner може не бачити файли .params, якщо вони мають приховане розширення .txt (наприклад, `filename.params.txt`) або якщо не обрано опцію &#x27;All Files&#x27; у діалоговому вікні відкриття файлу.">
+<meta property="og:title" content="Publishing ESP32-CAM Pictures to MQTT Broker with Tasmota">
+<meta property="og:description" content="While the MQTT specification allows for messages up to 256 MB, making it technically possible to send ESP32-CAM JPEG images (around 60 KB), user `user_6401e7c54e` advised against it from a performance">
 <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
 <style>
 :root {
@@ -101,12 +101,12 @@ footer {
         <img src="/SupportBot/supportbot-logo-128.png" alt="SupportBot" class="logo">
         <span class="brand">SupportBot</span>
       </a>
-      <span class="status-solved status-badge">Вирішено</span>
+      <span class="status-recommendation status-badge">Рекомендація</span>
     </header>
     <main>
-      <h1>Mission Planner не бачить файли .params</h1>
-      <p class="meta">Case 068a1c11f9e0 &middot; ua_ardupilot</p>
-      <div class='tags'><span class="tag">#Mission Planner</span><span class="tag">#параметри</span><span class="tag">#.params</span><span class="tag">#файли</span><span class="tag">#налаштування</span></div>
+      <h1>Publishing ESP32-CAM Pictures to MQTT Broker with Tasmota</h1>
+      <p class="meta">Case 1666a100cb85 &middot; tasmota</p>
+      <div class='tags'><span class="tag">#ESP32-CAM</span><span class="tag">#Tasmota</span><span class="tag">#MQTT</span><span class="tag">#image publishing</span><span class="tag">#performance</span><span class="tag">#TCP</span><span class="tag">#camera</span><span class="tag">#binary data</span></div>
       <div class="problem-section">
         <h2 class="section-title">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -115,19 +115,19 @@ footer {
           </svg>
           Проблема
         </h2>
-        <p class="section-content">Користувач не може знайти файли з розширенням .params у Mission Planner.</p>
+        <p class="section-content">A user inquired if Tasmota could be configured to publish captured pictures from an ESP32-CAM to an MQTT broker.</p>
       </div>
-      <div class="solution-section">
+      <div class="solution-section recommendation-solution">
         <h2 class="section-title">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-          Рішення
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7c.6.4 1 1.1 1 1.8V17h6v-.5c0-.7.4-1.4 1-1.8A7 7 0 0 0 12 2z"/></svg>
+          Рекомендація (не підтверджено)
         </h2>
-        <p class="section-content">Mission Planner може не бачити файли .params, якщо вони мають приховане розширення .txt (наприклад, `filename.params.txt`) або якщо не обрано опцію &#x27;All Files&#x27; у діалоговому вікні відкриття файлу.</p>
+        <p class="section-content">While the MQTT specification allows for messages up to 256 MB, making it technically possible to send ESP32-CAM JPEG images (around 60 KB), user `user_6401e7c54e` advised against it from a performance perspective. MQTT brokers are designed to be responsive and fast, and sending large binary files can hinder this. TCP was suggested as a more suitable protocol for such data due to less overhead, non-blocking device operation, and better connection control. The analogy used was &quot;you can drive with a car to visit your neighbor but you should walk.&quot;</p>
       </div>
     </main>
   </div>
   <div class="card">
-    <div class="chat-header"><h2><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Історія чату</h2></div><div class="messages"><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Вітаю<br>Підкажіть чому mission planner може не бачити файл з розширенням .params?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Вітаю Підкажіть чому mission planner може не бачити файл з розширенням .params?</div></div><p class="message-text">або там приховане .txt розширення або натисніть all files</p></div></div>
+    <div class="chat-header"><h2><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Історія чату</h2></div><div class="messages"><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Hi All, does anybody know if there is a way to configure Tasmota to publish captured pictures from camera to mqtt broker to some topic?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Hi All, does anybody know if there is a way to configure Tasmota to publish captured pictures from camera to mqtt broker</div></div><p class="message-text">EspCam? Why not grab them directly with broker as jpg? Mqtt is not made for big binary files.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 2</div><div class="reply-text">EspCam? Why not grab them directly with broker as jpg? Mqtt is not made for big binary files.</div></div><p class="message-text">EspCam. But that is not true, mqtt spec defines that a size of messages can be up to 256 MB and full resolution pictures from espcam in jpeg format have only about 60 KB.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">EspCam. But that is not true, mqtt spec defines that a size of messages can be up to 256 MB and full resolution pictures</div></div><p class="message-text">It can be don by MQTT but does not make any sense from performance perspective. While you want to keep a mqtt broker responsive and fast you should not do this. TCP is made for this: less overhead, non blocking MQTT devices, better control over connections.  you can drive with a car to visit your neighbor but you should walk.</p></div></div>
     <footer>Academia Tech &copy; 2026</footer>
   </div>
 </div>

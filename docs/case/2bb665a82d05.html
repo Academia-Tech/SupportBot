@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html><head>
+<title>Tasmota Deep Sleep for Battery-Powered Sensors | SupportBot</title>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta property="og:title" content="Tasmota Deep Sleep for Battery-Powered Sensors">
+<meta property="og:description" content="Tasmota supports deep sleep functionality using the `DeepSleepTime` command. This command allows devices to wake up at fixed intervals (e.g., `DeepSleepTime 3600` for hourly wake-ups, `DeepSleepTime 8">
+<link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+<style>
+:root {
+  --signal-blue: #2c6bed;
+  --page-bg: #f6f7f9;
+  --card-bg: #ffffff;
+  --text: #0d0d0d;
+  --text-sec: #5c5c5c;
+  --border: #d8d8d8;
+  --radius: 12px;
+  --green: #16a34a;
+  --yellow: #ca8a04;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  background: var(--page-bg); color: var(--text);
+  min-height: 100vh; padding: 48px 20px;
+  -webkit-font-smoothing: antialiased;
+}
+@media (max-width: 520px) { body { padding: 24px 12px; } }
+.shell { max-width: 640px; margin: 0 auto; }
+.card {
+  background: var(--card-bg); border: 1px solid var(--border);
+  border-radius: var(--radius); overflow: hidden; margin-bottom: 16px;
+}
+header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 20px; border-bottom: 1px solid var(--border);
+}
+.header-left { display: flex; align-items: center; gap: 10px; text-decoration: none; color: inherit; }
+.logo { width: 28px; height: 28px; }
+.brand { font-size: 15px; font-weight: 600; letter-spacing: -0.02em; }
+.chat-header { padding: 14px 20px; border-bottom: 1px solid var(--border); background: var(--page-bg); }
+.chat-header h2 { font-size: 14px; font-weight: 600; color: var(--text); display: flex; align-items: center; gap: 8px; }
+.chat-header h2 svg { width: 16px; height: 16px; color: var(--signal-blue); }
+.messages { padding: 0; }
+.message { padding: 16px 20px; border-bottom: 1px solid var(--border); }
+.message:last-child { border-bottom: none; }
+.message-header { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+.avatar { width: 28px; height: 28px; border-radius: 50%; color: white; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 600; flex-shrink: 0; }
+.sender-info { flex: 1; min-width: 0; }
+.sender-name { font-size: 13px; font-weight: 600; color: var(--text); }
+.message-text { font-size: 15px; line-height: 1.55; color: var(--text); white-space: pre-wrap; margin-left: 38px; }
+.reply-bubble { margin-left: 38px; margin-bottom: 6px; padding: 6px 10px; background: #f0f2f5; border-left: 3px solid var(--signal-blue); border-radius: 4px; font-size: 13px; color: var(--text-sec); }
+.reply-sender { font-weight: 600; color: var(--signal-blue); font-size: 12px; margin-bottom: 2px; }
+.reply-text { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.status-badge {
+  padding: 4px 10px; font-size: 11px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.04em; border-radius: 4px;
+}
+.status-solved { background: #dcfce7; color: var(--green); }
+.status-recommendation { background: #fef3c7; color: #b45309; }
+main { padding: 24px 20px; }
+h1 { font-size: 20px; font-weight: 700; letter-spacing: -0.025em; margin-bottom: 12px; line-height: 1.3; }
+.meta { font-size: 12px; color: var(--text-sec); margin-bottom: 16px; }
+.tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 20px; }
+.tag {
+  background: rgba(44, 107, 237, 0.08); color: var(--signal-blue);
+  padding: 4px 10px; border-radius: 4px; font-size: 12px; font-weight: 500;
+}
+.section-title {
+  font-size: 11px; font-weight: 600; text-transform: uppercase;
+  letter-spacing: 0.06em; color: var(--text-sec); margin-bottom: 10px;
+  display: flex; align-items: center; gap: 6px;
+}
+.section-title svg { width: 14px; height: 14px; }
+.section-content { font-size: 15px; line-height: 1.6; color: var(--text); white-space: pre-wrap; }
+.problem-section { padding-bottom: 20px; border-bottom: 1px solid var(--border); margin-bottom: 20px; }
+.solution-section {
+  background: #f0fdf4; margin: -24px -20px -24px -20px; padding: 20px;
+  border-top: 1px solid #bbf7d0;
+}
+.solution-section .section-title { color: var(--green); }
+.recommendation-solution { background: #fffbeb; border-top-color: #fde68a; }
+.recommendation-solution .section-title { color: #b45309; }
+.empty-chat {
+  padding: 32px 20px; text-align: center; color: var(--text-sec); font-size: 14px;
+}
+footer {
+  padding: 14px 20px; border-top: 1px solid var(--border);
+  color: var(--text-sec); font-size: 12px; text-align: center;
+}
+@media (max-width: 520px) {
+  main { padding: 20px 16px; }
+  h1 { font-size: 18px; }
+  .solution-section { margin: -20px -16px -20px -16px; padding: 16px; }
+}
+</style>
+</head><body>
+<div class="shell">
+  <div class="card">
+    <header>
+      <a href="https://academia-tech.github.io/SupportBot" class="header-left">
+        <img src="/SupportBot/supportbot-logo-128.png" alt="SupportBot" class="logo">
+        <span class="brand">SupportBot</span>
+      </a>
+      <span class="status-recommendation status-badge">Рекомендація</span>
+    </header>
+    <main>
+      <h1>Tasmota Deep Sleep for Battery-Powered Sensors</h1>
+      <p class="meta">Case 2bb665a82d05 &middot; tasmota</p>
+      <div class='tags'><span class="tag">#Tasmota</span><span class="tag">#Deep Sleep</span><span class="tag">#Battery</span><span class="tag">#Sensors</span><span class="tag">#ESP8266</span><span class="tag">#ESPHome</span><span class="tag">#Power Management</span><span class="tag">#Automation</span></div>
+      <div class="problem-section">
+        <h2 class="section-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/>
+            <line x1="12" y1="16" x2="12.01" y2="16"/>
+          </svg>
+          Проблема
+        </h2>
+        <p class="section-content">A user is inquiring about the feasibility of using Tasmota with battery-powered sensors that utilize deep sleep for applications like dash buttons, water flood sensors, and door/window sensors. They are also considering ESPHome for this purpose, noting that ESP32 is frequently used.</p>
+      </div>
+      <div class="solution-section recommendation-solution">
+        <h2 class="section-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7c.6.4 1 1.1 1 1.8V17h6v-.5c0-.7.4-1.4 1-1.8A7 7 0 0 0 12 2z"/></svg>
+          Рекомендація (не підтверджено)
+        </h2>
+        <p class="section-content">Tasmota supports deep sleep functionality using the `DeepSleepTime` command. This command allows devices to wake up at fixed intervals (e.g., `DeepSleepTime 3600` for hourly wake-ups, `DeepSleepTime 86400` for daily wake-ups at 0:00 local time). However, there is no option to shift the wake-up time without changing the timezone. To interrupt deep sleep for immediate events, the ESP&#x27;s reset pin can be triggered. If `DeepSleepTime` is used with a timer, the reset pin needs to be connected to the D0 pin to trigger the wake-up. User `user_5553d45141` clarified that Tasmota on ESP8266 cannot externally trigger wake-up without a hardware bridge. For ultra-low power consumption and external wake-up, a custom hardware solution was described: using a Pololu 2808 switch to completely cut power to the ESP, allowing it to draw almost no current (&lt;= 0.01µA) when off, and then restarting it via a GPIO. User `user_6401e7c54e` also shared their approach of using an Arduino Tiny13a for waking up door contact ESPs with ESP NOW for faster response times (around 100ms).</p>
+      </div>
+    </main>
+  </div>
+  <div class="card">
+    <div class="chat-header"><h2><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Історія чату</h2></div><div class="messages"><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Is it possible to use Tasmota with sensors on battery with some kind of deep sleep?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Is it possible to use Tasmota with sensors on battery with some kind of deep sleep?</div></div><p class="message-text">With DeepSleepTime 3600, the device will wake up exactly every hour (e.g., 8:00am, 9:00am, ...). If you define DeepSleepTime 86400 (i.e., 60*60*24), it will wake-up exactly at 0:00 local time. There is no option to shift the wakeup time; except changing the timezone. If you define DeepSleepTime 600, it will wake-up every 10 minutes (e.g., 8:00, 8:10, 8:20, ...).</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><p class="message-text">if it makes sense is a question of what you want to do. - &gt; the wake up process (At least for full release / dont know light version) takes some time and for pir switching light or something will cause delays of some seconds. I personally coded my pir sensors using ESP NOW to get faster switch rates (like 100ms)</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">I&#x27;m thinking of dash buttons. Water flood sensors. Door/Window sensors.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">I&#x27;m also thinking of ESP Home to use with it but I&#x27;m still at start. <br>I&#x27;m trying to figure out if it is possible with ESP8266 because in a lot of causes I see ESP32</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><p class="message-text">https://youtu.be/ecXa5lTNmvA</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><p class="message-text">search for tutorials on YT maybe you find stuff thats usefull and dont need to start by zero</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">ok so now i understand  that is sleeps and wakes up only after the internal couner tells it to. but how do i enterrupt it like whaen i set the timer to 15minutes and i want to send a buttonpress or water starts flooding the sensor and i dont want to have that info after the tasmota wakes up, but at the time it happens.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">I found like super seepsleep thingy for button but i guess it is not possible with tasmota on board  https://www.youtube.com/watch?v=n_A_8Y4xNx8</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">maybe with ESP home it could be possible?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">ok so now i understand  that is sleeps and wakes up only after the internal couner tells it to. but how do i enterrupt i</div></div><p class="message-text">you can interrupt deep sleep of ESP by triggering the reset pin ... this can be done however you want (Sensor... manual ...etc) if the deep sleep is used with an timer you need to connect reset to D0 pin which will trigger it</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 2</div><div class="reply-text">you can interrupt deep sleep of ESP by triggering the reset pin ... this can be done however you want (Sensor... manual </div></div><p class="message-text">With tasmota you can not trigger the esp external to wakeup on esp8266. Without making this bridge.<br>In esp32 it should be possible to trigger external, but I never testet</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><p class="message-text">https://images.app.goo.gl/zYRxm9jbUuqsVKrQ7</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 3</div><div class="reply-text">With tasmota you can not trigger the esp external to wakeup on esp8266. Without making this bridge. In esp32 it should b</div></div><p class="message-text">thx, didn t know that. <br>I only use tasmota for flashing switches. I thing coding is a must if using ESP s more advanced</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 2</div><div class="reply-text">thx, didn t know that.  I only use tasmota for flashing switches. I thing coding is a must if using ESP s more advanced</div></div><p class="message-text">With Tasmota you need not to learn the basics of Arduino Coding. There are the most things already aviliable by compiling the Binary with the components you need!<br>I tried to use deepsleep with esp8266 with external wakeup, but it is not realy working. After wakup the ESP is checking if the SleepTime is at the end. If not it is going back to sleep. for this reason I used a Pololu 2808 &quot;Switch, to start the esp. After it is startet, a script is doing all I want, then I switch the Pololu_2808 off by using a GPIO.<br>in this case the ESP does not draw any current and the curret of the 2808 is only &lt;= 0.01µA</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 3</div><div class="reply-text">With Tasmota you need not to learn the basics of Arduino Coding. There are the most things already aviliable by compilin</div></div><p class="message-text">nice, I use arduino tiny13a for waking up my door contact ESPs. Everything self coded and ESP NOW for less delays.</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 2</div><div class="reply-text">nice, I use arduino tiny13a for waking up my door contact ESPs. Everything self coded and ESP NOW for less delays.</div></div><p class="message-text">Sure. If you only code exactly what you need it is much more faster</p></div></div>
+    <footer>Academia Tech &copy; 2026</footer>
+  </div>
+</div>
+</body></html>

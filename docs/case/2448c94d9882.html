@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html><head>
-<title>Mission Planner не бачить файли .params | SupportBot</title>
+<title>Preventing Home Assistant from Classifying a Tasmota-Controlled Fan as a Light | SupportBot</title>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta property="og:title" content="Mission Planner не бачить файли .params">
-<meta property="og:description" content="Mission Planner може не бачити файли .params, якщо вони мають приховане розширення .txt (наприклад, `filename.params.txt`) або якщо не обрано опцію &#x27;All Files&#x27; у діалоговому вікні відкриття файлу.">
+<meta property="og:title" content="Preventing Home Assistant from Classifying a Tasmota-Controlled Fan as a Light">
+<meta property="og:description" content="Another user clarified that this is a Home Assistant configuration issue, not a Tasmota one. Tasmota&#x27;s role is to provide the on/off switch functionality. The correct solution is to customize the enti">
 <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
 <style>
 :root {
@@ -104,9 +104,9 @@ footer {
       <span class="status-solved status-badge">Вирішено</span>
     </header>
     <main>
-      <h1>Mission Planner не бачить файли .params</h1>
-      <p class="meta">Case 068a1c11f9e0 &middot; ua_ardupilot</p>
-      <div class='tags'><span class="tag">#Mission Planner</span><span class="tag">#параметри</span><span class="tag">#.params</span><span class="tag">#файли</span><span class="tag">#налаштування</span></div>
+      <h1>Preventing Home Assistant from Classifying a Tasmota-Controlled Fan as a Light</h1>
+      <p class="meta">Case 2448c94d9882 &middot; tasmota</p>
+      <div class='tags'><span class="tag">#home assistant</span><span class="tag">#tasmota</span><span class="tag">#integration</span><span class="tag">#fan</span><span class="tag">#light</span><span class="tag">#entity customization</span><span class="tag">#voice command</span></div>
       <div class="problem-section">
         <h2 class="section-title">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -115,19 +115,19 @@ footer {
           </svg>
           Проблема
         </h2>
-        <p class="section-content">Користувач не може знайти файли з розширенням .params у Mission Planner.</p>
+        <p class="section-content">A user has a 3-output Tasmota switch, with two outputs for lights and one for a fan. In Home Assistant, all three are detected as lights. This causes voice commands like &quot;turn off the light&quot; to also turn off the fan. The user asked if the device type could be changed from within Tasmota.</p>
       </div>
       <div class="solution-section">
         <h2 class="section-title">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
           Рішення
         </h2>
-        <p class="section-content">Mission Planner може не бачити файли .params, якщо вони мають приховане розширення .txt (наприклад, `filename.params.txt`) або якщо не обрано опцію &#x27;All Files&#x27; у діалоговому вікні відкриття файлу.</p>
+        <p class="section-content">Another user clarified that this is a Home Assistant configuration issue, not a Tasmota one. Tasmota&#x27;s role is to provide the on/off switch functionality. The correct solution is to customize the entity within Home Assistant to change its domain from &#x27;light&#x27; to &#x27;fan&#x27; or &#x27;switch&#x27;. This prevents it from being included in broad commands targeting lights. A link to the official Home Assistant documentation on customizing devices was provided: `https://www.home-assistant.io/docs/configuration/customizing-devices/`.</p>
       </div>
     </main>
   </div>
   <div class="card">
-    <div class="chat-header"><h2><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Історія чату</h2></div><div class="messages"><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Вітаю<br>Підкажіть чому mission planner може не бачити файл з розширенням .params?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Вітаю Підкажіть чому mission planner може не бачити файл з розширенням .params?</div></div><p class="message-text">або там приховане .txt розширення або натисніть all files</p></div></div>
+    <div class="chat-header"><h2><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Історія чату</h2></div><div class="messages"><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">good time, tell me please, there is a switch for 3 outputs - 2 of them are light, and 3 are a fan, can somehow be configured so that the home assistant sees the fan NOT as a light bulb?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">I know that you can change everything to NOT light bulbs</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">good time, tell me please, there is a switch for 3 outputs - 2 of them are light, and 3 are a fan, can somehow be config</div></div><p class="message-text">https://www.home-assistant.io/docs/configuration/customizing-devices/</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 2</div><div class="reply-text">https://www.home-assistant.io/docs/configuration/customizing-devices/</div></div><p class="message-text">how to do it in home assistant it&#x27;s all clear, but is it fashionable to do it from tasmota&#x27;s side</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">how to do it in home assistant it&#x27;s all clear, but is it fashionable to do it from tasmota&#x27;s side</div></div><p class="message-text">Where else are you viewing the tasmota device? Is from the HA where you can change the icon. Quite simple. At the end of the day, the switch will turn on/off the light or the fan. If you want to regulate the speed then I believe you need a dimmer, not a switch</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 2</div><div class="reply-text">Where else are you viewing the tasmota device? Is from the HA where you can change the icon. Quite simple. At the end of</div></div><p class="message-text">voice command &quot;turn off the light&quot; turns off the fan</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><p class="message-text">play smart</p></div></div>
     <footer>Academia Tech &copy; 2026</footer>
   </div>
 </div>

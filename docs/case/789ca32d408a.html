@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html><head>
-<title>Mission Planner не бачить файли .params | SupportBot</title>
+<title>Як вивести повідомлення про ініціацію на OSD в ArduPilot | SupportBot</title>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta property="og:title" content="Mission Planner не бачить файли .params">
-<meta property="og:description" content="Mission Planner може не бачити файли .params, якщо вони мають приховане розширення .txt (наприклад, `filename.params.txt`) або якщо не обрано опцію &#x27;All Files&#x27; у діалоговому вікні відкриття файлу.">
+<meta property="og:title" content="Як вивести повідомлення про ініціацію на OSD в ArduPilot">
+<meta property="og:description" content="Користувач user_ded6ab3798 пояснив, що для цього потрібно написати Lua-скрипт. Спочатку необхідно активувати підтримку скриптів параметром `SCR_ENABLE = 1`. Потім створити файл, наприклад `boom_osd_me">
 <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
 <style>
 :root {
@@ -104,9 +104,9 @@ footer {
       <span class="status-solved status-badge">Вирішено</span>
     </header>
     <main>
-      <h1>Mission Planner не бачить файли .params</h1>
-      <p class="meta">Case 068a1c11f9e0 &middot; ua_ardupilot</p>
-      <div class='tags'><span class="tag">#Mission Planner</span><span class="tag">#параметри</span><span class="tag">#.params</span><span class="tag">#файли</span><span class="tag">#налаштування</span></div>
+      <h1>Як вивести повідомлення про ініціацію на OSD в ArduPilot</h1>
+      <p class="meta">Case 789ca32d408a &middot; ua_ardupilot</p>
+      <div class='tags'><span class="tag">#Lua</span><span class="tag">#scripting</span><span class="tag">#OSD</span><span class="tag">#повідомлення</span><span class="tag">#SCR_ENABLE</span><span class="tag">#кастомізація</span><span class="tag">#Mission Planner</span></div>
       <div class="problem-section">
         <h2 class="section-title">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -115,19 +115,19 @@ footer {
           </svg>
           Проблема
         </h2>
-        <p class="section-content">Користувач не може знайти файли з розширенням .params у Mission Planner.</p>
+        <p class="section-content">Користувач хоче, щоб при активації плати ініціації, яка підключена до RC каналу, на OSD з&#x27;являлося відповідне повідомлення.</p>
       </div>
       <div class="solution-section">
         <h2 class="section-title">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
           Рішення
         </h2>
-        <p class="section-content">Mission Planner може не бачити файли .params, якщо вони мають приховане розширення .txt (наприклад, `filename.params.txt`) або якщо не обрано опцію &#x27;All Files&#x27; у діалоговому вікні відкриття файлу.</p>
+        <p class="section-content">Користувач user_ded6ab3798 пояснив, що для цього потрібно написати Lua-скрипт. Спочатку необхідно активувати підтримку скриптів параметром `SCR_ENABLE = 1`. Потім створити файл, наприклад `boom_osd_message.lua`, і завантажити його на SD-карту в папку `/APM/scripts`. Було надано посилання на офіційну документацію ArduPilot по скриптингу. Інший користувач додав, що при використанні ChatGPT для написання скриптів варто бути уважним, оскільки він іноді генерує команди, яких немає в поточній збірці прошивки.</p>
       </div>
     </main>
   </div>
   <div class="card">
-    <div class="chat-header"><h2><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Історія чату</h2></div><div class="messages"><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Вітаю<br>Підкажіть чому mission planner може не бачити файл з розширенням .params?</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Вітаю Підкажіть чому mission planner може не бачити файл з розширенням .params?</div></div><p class="message-text">або там приховане .txt розширення або натисніть all files</p></div></div>
+    <div class="chat-header"><h2><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Історія чату</h2></div><div class="messages"><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Допоможіть з ардупілотом , як зробити щоб коли на пульті наприклад зводиш плату ініціації писало це  на osd</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#db2777">M2</div><div class="sender-info"><span class="sender-name">Учасник 2</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 1</div><div class="reply-text">Допоможіть з ардупілотом , як зробити щоб коли на пульті наприклад зводиш плату ініціації писало це  на osd</div></div><p class="message-text">Я гадаю що у вас активація ініціатора на якомусь каналі RC, на тумблері наприклад. <br><br>Вам треба написати Lua скрипт, але спершу треба активувати цю функцію SCR_ENABLE = 1<br><br>Створити файл наприклад boom_osd_message.lua і покласти в папку /APM/scripts на SD-карті якщо не помиляюсь, або якщо є внутрішня флеш память закинути туди файлик. <br><br>Писати луа скрипти чат гпт допомагає доволі не погано. <br><br>https://ardupilot.org/copter/docs/common-scripting-step-by-step.html</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#7c3aed">M1</div><div class="sender-info"><span class="sender-name">Учасник 1</span></div></div><p class="message-text">Дякую буду пробувати</p></div><div class="message"><div class="message-header"><div class="avatar" style="background:#16a34a">M3</div><div class="sender-info"><span class="sender-name">Учасник 3</span></div></div><div class="reply-bubble"><div class="reply-sender">Учасник 2</div><div class="reply-text">Я гадаю що у вас активація ініціатора на якомусь каналі RC, на тумблері наприклад.   Вам треба написати Lua скрипт, але </div></div><p class="message-text">Тільки деколи половини команд які він пише немає в білді</p></div></div>
     <footer>Academia Tech &copy; 2026</footer>
   </div>
 </div>
